@@ -1,0 +1,10 @@
+# AWS Serverless Application Model (SAM)
+.aws-sam
+samconfig.toml
+
+# Deployable uni artifacts
+registration.json
+init-state.json
+
+# Python
+venv

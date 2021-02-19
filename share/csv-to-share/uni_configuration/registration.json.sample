@@ -1,0 +1,16 @@
+{
+  "name": "test-csv-to-share",
+  "schema": "schema.json",
+  "nodes": [
+        {
+            "name": "ParentalUnit1",
+            "userId": "me@vendia.net",
+            "region": "us-west-2"
+        },
+        {
+            "name": "ParentalUnit2",
+            "userId": "me@vendia.net",
+            "region": "us-west-2"
+        }
+    ]
+}
