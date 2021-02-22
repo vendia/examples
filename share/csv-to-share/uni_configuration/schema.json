@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://vendia.net/schemas/demos/shopping-list.json",
+    "title": "Shopping List",
+    "description": "Store shopping list data",
+    "type": "object",
+    "properties": {
+      "ShoppingList": {
+        "description": "Items on the shopping list",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "description": "What to buy",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "How much to buy",
+              "type": "string"
+            },
+            "recommendedLocation": {
+              "description": "Where I should buy",
+              "type": "string"
+            },
+            "bought": {
+              "description": "Whether it has been bought",
+              "type": "boolean"
+            },
+            "timestampAdded": {
+              "description": "When the item was added",
+              "type": "string",
+              "format": "date-time"
+            },
+            "timestampPurchased": {
+              "description": "When the item was purchased",
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": ["item"]
+        }
+      }
+    }
+  }

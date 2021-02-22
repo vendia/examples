@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Publish scalar data in a CSV to a Vendia Share node
+
+Parameters:
+
+  ShareNodeUrl:
+    Type: String
+  
+  ShareNodeApiKey:
+    Type: String
+    NoEcho: true
+
+Globals:
+  Function:
+    Runtime: python3.8
+    Timeout: 60
+    Handler: index.handler
+    MemorySize: 256
+
+Resources:
+  # AWS S3 bucket users will upload CSV data for processing
+  CsvBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-csv-bucket
+  
+  # AWS SNS Topic that will receive failures
+  # NotificationTopic:
+  #   Type: AWS::SNS::Topic
+
+  
+  # AWS Lambda Function that processes CSV data
+  CsvProcessingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Take scalar data in a CSV and publish it to Vendia Share
+      CodeUri: ./src/csv_processing
+      Environment:
+        Variables:
+          SHARE_NODE_URL: !Ref ShareNodeUrl
+          SHARE_NODE_API_KEY: !Ref ShareNodeApiKey
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-csv-bucket
+      Events:
+        CsvBucketEvent:
+          Type: S3
+          Properties:
+            Bucket: !Ref CsvBucket
+            Events: 's3:ObjectCreated:*'
+
+Outputs:
+  CsvBucket:
+    Description: S3 Bucket Storing CSVs
+    Value: !Sub s3://${CsvBucket}
