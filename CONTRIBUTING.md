@@ -60,7 +60,7 @@ GitHub provides additional document on [forking a repository](https://help.githu
 
 ## Finding Contributions to Work On
 
-Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels ((enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any ['help wanted'](https://github.com/vendia/examples/labels/help%20wanted) issues is a great place to start.
+Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any ['help wanted'](https://github.com/vendia/examples/labels/help%20wanted) issues is a great place to start.
 
 ## Code of Conduct
 
