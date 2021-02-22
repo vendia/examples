@@ -64,8 +64,14 @@ Looking at the existing issues is a great way to find something to contribute on
 
 ## Code of Conduct
 
-Vendia has adopted the [Kind Humans Only](https://vendia.net/kind-humans) policy.  Remember to be kind to other contributors.  Please contact info@vendia.net with any additional questions or comments.
+Please refer to our [Code of Conduct](CODE_OF_CONDUCT.md)
+
+## Security issue notifications
+
+If you discover a potential security issue in this project we ask that you notify us directly - brian@vendia.net. Please do **not** create a public github issue.
 
 ## Licensing
 
 See the [LICENSE](https://github.com/vendia/examples/blob/master/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+
+We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.
