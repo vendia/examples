@@ -64,8 +64,6 @@ Looking at the existing issues is a great way to find something to contribute on
 
 ## Code of Conduct
 
-Vendia has adopted the [Kind Humans Only](https://vendia.net/kind-humans) policy.  Remember to be kind to other contributors.
-
 Please refer to our [Code of Conduct](CODE_OF_CONDUCT.md) for more details.
 
 ## Security issue notifications
