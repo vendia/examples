@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vendia.net/">
-    <img src="https://raw.githubusercontent.com/vendia/examples/mainline/vendia-logo.png" alt="vendia logo" width="100px">
+    <img src="https://raw.githubusercontent.com/vendia/examples/main/vendia-logo.png" alt="vendia logo" width="100px">
   </a>
 </p>
 
