@@ -38,6 +38,8 @@ Switch to the [Advanced Editor View](https://docs.microsoft.com/en-us/power-bi/t
 
 Replace the query text using the [example_inventory_item_query Example](example_inventory_item_query.pqfl) as a template. This template defines a query for InventoryItems that are defined in the [Example Schema](example_schema.json) as shown
 
+> **Note** You must replace the sample GraphQL URL and API Key with those from your Uni Node. These values are retrievable from the [Uni Dashboard](https://share.vendia.net)
+
 ![img/advanced_inventory_items.png](img/advanced_inventory_items.png)
 
 If prompted by a message indicating "Please Specify How To Connect" press the Edit Credentials button and choose Anonymous (which should be the default setting). Anonymous authentication is used as the x-api-key header in the script carries the identification for the request.
