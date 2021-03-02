@@ -1,0 +1,33 @@
+// This script shows how to use M language (Power Query Formula Language) 
+// to read data from a Vendia Share Uni Node
+
+let
+    //Your Node's GraphQL URL
+    UniEndpoint = "https://9zy28qtzzf.execute-api.us-east-2.amazonaws.com/graphql/",             
+    Headers =[
+
+            //GraphQL Always uses POST for Queries and Mutations
+			#"Method"="POST",                                   
+            //JSON Content is expected
+			#"Content-Type"="application/json",
+            //Your Node's GraphQL API Key
+			#"X-API-Key"="5z4hKFuf8AvcL9DsG70g4DdZS6IYt_QJzQgPNts3"    
+		],
+
+    //The Query JSON is escaped with double quotes and presented as a single line.
+    Query=Text.ToBinary("{""query"": ""query ListItems { listInventoryItems { InventoryItems { id itemName itemNumber quantity}}}""}"),
+    //Execute the Query
+    Source = Web.Contents(UniEndpoint,	[Headers=Headers, Content=Query]),
+    //Store the Resulting DataSet
+    JSON = Json.Document(Source),
+    data = JSON[data],
+    listInventoryItems=data[listInventoryItems],
+    InventoryItems=listInventoryItems[InventoryItems],
+
+    
+    //Store the Resulting DataSet as a table
+    #"Converted to Table" = Table.FromList(InventoryItems, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    #"Expanded Data" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"id", "itemName", "itemNumber","quantity"}, {"Column1.id", "Column1.itemName", "Column1.itemNumber","Column1.quantity"})
+   
+in
+    #"Expanded Data"
