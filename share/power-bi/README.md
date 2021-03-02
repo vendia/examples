@@ -36,7 +36,7 @@ With the Power Query Editor window open, you can rename the query by right-click
 
 Switch to the [Advanced Editor View](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-query-overview#advanced-editor) by clicking the View menu and selecting the Advanced Editor toolbar button.
 
-Replace the query text using the [example_inventory_item_query Example](example_inventory_item_query.pqfl) as a template. This template defines a query for InventoryItems that are defined in the [Example Schama](example_schema.json) as shown
+Replace the query text using the [example_inventory_item_query Example](example_inventory_item_query.pqfl) as a template. This template defines a query for InventoryItems that are defined in the [Example Schema](example_schema.json) as shown
 
 ![img/advanced_inventory_items.png](img/advanced_inventory_items.png)
 
