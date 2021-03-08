@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Inventory System",
+    "description": "Store inventory data",
+    "type": "object",
+    "properties": {
+      "InventoryItem": {
+        "description": "Inventory items",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "itemName": {
+              "description": "Item name",
+              "type": "string"
+            },
+            "itemNumber": {
+              "description": "Item number",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "Available quantity of item",
+              "type": "integer"
+            },
+            "tags": {
+              "description": "Tags associated with item",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Order": {
+        "description": "Order items",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "itemNumber": {
+              "description": "Item number",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "quantity of item",
+              "type": "integer"
+            },
+            "complete": {
+              "description": "is order complete?",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  }
