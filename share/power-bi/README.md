@@ -5,7 +5,7 @@
 </p>
 
 # Reading from a Uni with Microsoft Power BI
-Vendia Share makes sharing data easy and provides a platform upon which applications can be built using a zero-code GraphQL API.  The power and flexibility of an API based on your data model is amazing, but what if you haven't used graphql before? What if you don't have access to software developers to build atop of the API? Fortunately there are a number of data visualization and reporting applications that work very well with Uni data. This example demonstrate how to use Microsoft Power BI with a Vendia Share Uni to create reports and visualizations of data read from the Uni's GraphQL API.
+Vendia Share makes sharing data easy and provides a platform upon which applications can be built using a zero-code GraphQL API.  The power and flexibility of an API based on your data model is amazing, but what if you haven't used GraphQL before? What if you don't have access to software developers to build atop of the API? Fortunately there are a number of data visualization and reporting applications that work very well with Uni data. This example demonstrate how to use Microsoft Power BI with a Vendia Share Uni to create reports and visualizations of data read from the Uni's GraphQL API.
 
 ## How It Works
 Data visualization and reporting tools leverage common interfaces, like APIs, to retrieve data. These applications often provide mechanisms to transform data and familiar reporting controls like charts and tables.  In this example, Power BI is connected to a Uni using  M language (Power Query Formula Language) to query the Uni's GraphQL API.  Additional M language functions then transform the JSON data returned by the API into a data table.  Once in table form, Power BI tools can be used to create tables, charts, and more for visualizing and sharing Uni data with the Power BI Platform.
@@ -71,7 +71,6 @@ Update the table by selecting the new aggregate field and clicking the "fix this
 ## Conclusions
 
 Congrats! At this point, you have created a Uni with data, queried it using the GraphQL API, and then interpreted the results in Power BI. Next, try exploring other visualizations and extending the example with new data from the Orders data also present in the schema.
-
 
 
 
