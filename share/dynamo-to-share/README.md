@@ -153,7 +153,11 @@ query listInventory {
 Let's go ahead and publish data to our DynamoDB table.  The script `populate_dynamo.py` will add a specified number of random products to our `InventoryTable`.  Use the `InventoryTable` from our `sam deploy` **Outputs**.  The example below will add *40* items to the `InventoryTable`.
 
 ```bash
-INVENTORY_TABLE=dynamo-to-share-InventoryTable-123456789 AWS_PROFILE=your_aws_profile AWS_REGION=region_you_deployed_to python populate_dynamo.py 40 # Update the INVENTORY_TABLE appropriately
+# Update the INVENTORY_TABLE appropriately
+INVENTORY_TABLE=dynamo-to-share-InventoryTable-123456789 \
+AWS_PROFILE=your_aws_iam_profile \
+AWS_REGION=region_you_deployed_to \
+python populate_dynamo.py 40
 ```
 
 After the data has been uploaded, you should see the resulting scalar data in both your and `InventoryTable` and your Uni. You can also view the CloudWatch logs for the `StreamProcessingFunction` function in order to see the execution details.
@@ -191,7 +195,7 @@ Let's go ahead and update one of the records in the DynamoDB table.  One of of t
 You can confirm the value in your Uni by running the following query:
 
 ```graphql
-query listApproachSix {
+query listItem {
   listInventoryItems(
     filter: {
       itemNumber: {
@@ -220,7 +224,7 @@ I can go back to my DynamoDB table and update the `itemName` to `Approach Seven`
 The update will be reflected in the Uni as well.  Run the following query - filtered using the same `itemNumber` - and confirm the `itemName` has been updated to `Approach Seven`.
 
 ```graphql
-query listApproachSix {
+query listItem {
   listInventoryItems(
     filter: {
       itemNumber: {
@@ -252,7 +256,7 @@ Let's go ahead and remove one of the records in the DynamoDB table.  I will remo
 Once the record has been deleted from DynamoDB I can run the following query to confirm it has been removed from my Uni as well.
 
 ```graphql
-query listApproachSix {
+query listItem {
   listInventoryItems(
     filter: {
       itemNumber: {
@@ -280,5 +284,7 @@ query listApproachSix {
 Run the `cleanup.sh` script to remove all artifacts related to the solution, including the Vendia Share uni.
 
 ```bash
-bash cleanup.sh test-dynamo-to-share --profile AWS_IAM_PROFILE --region AWS_REGION # Replace with proper values
+# Replace with proper values
+./cleanup.sh test-dynamo-to-share \
+--profile your_aws_iam_profile --region region_you_deployed_to
 ```

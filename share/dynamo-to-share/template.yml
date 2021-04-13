@@ -6,9 +6,11 @@ Parameters:
 
   ShareNodeUrl:
     Type: String
+    Description: Enter the GraphQL URL value for the DistributionCenter Uni node
   
   ShareNodeApiKey:
     Type: String
+    Description: Enter the GraphQL API Key value for the DistributionCenter Uni node
     NoEcho: true
 
 Globals:
@@ -23,6 +25,7 @@ Resources:
   InventoryTable:
     Type: AWS::DynamoDB::Table
     Properties:
+      BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: item_number
           AttributeType: "S"
@@ -31,9 +34,14 @@ Resources:
           KeyType: HASH
       StreamSpecification:
         StreamViewType: NEW_IMAGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
+
+  # AWS CloudWatch Log Group to persist Function logs for
+  # a 2 week period
+  StreamProcessingLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${StreamProcessingFunction}
+      RetentionInDays: 14
 
   # AWS Lambda Function that processes DynamoDB Stream data
   StreamProcessingFunction:
