@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Publish data from a Amazon DynamoDB Stream to a Vendia Share node
+
+Parameters:
+
+  ShareNodeUrl:
+    Type: String
+    Description: Enter the GraphQL URL value for the DistributionCenter Uni node
+  
+  ShareNodeApiKey:
+    Type: String
+    Description: Enter the GraphQL API Key value for the DistributionCenter Uni node
+    NoEcho: true
+
+Globals:
+  Function:
+    Runtime: python3.8
+    Timeout: 60
+    Handler: index.handler
+    MemorySize: 256
+
+Resources:
+  # Amazon DynamoDB Table to store inventory data
+  InventoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: item_number
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: item_number
+          KeyType: HASH
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
+
+  # AWS CloudWatch Log Group to persist Function logs for
+  # a 2 week period
+  StreamProcessingLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${StreamProcessingFunction}
+      RetentionInDays: 14
+
+  # AWS Lambda Function that processes DynamoDB Stream data
+  StreamProcessingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Take DynamoDB Stream data and publish it to Vendia Share
+      CodeUri: ./src/stream_to_uni
+      Environment:
+        Variables:
+          SHARE_NODE_URL: !Ref ShareNodeUrl
+          SHARE_NODE_API_KEY: !Ref ShareNodeApiKey
+      Policies:
+        - DynamoDBStreamReadPolicy:
+            TableName: !Ref InventoryTable
+            StreamName: !GetAtt InventoryTable.StreamArn
+      Events:
+        InventoryTable:
+          Type: DynamoDB
+          Properties:
+            Stream: !GetAtt InventoryTable.StreamArn
+            StartingPosition: TRIM_HORIZON
+            BatchSize: 100
+
+Outputs:
+  InventoryTable:
+    Description: Inventory DynamoDB Table
+    Value: !Ref InventoryTable
