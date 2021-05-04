@@ -1,0 +1,453 @@
+---
+- name: Ensure apt cache is up to date
+  apt: 
+    update_cache: yes
+
+- name: Ensure OS packages are installed
+  apt: 
+    name: "{{ item }}"
+  loop:
+    - software-properties-common
+    - acl
+    - libpq-dev
+    - postgresql
+    - postgresql-plpython3
+    - python3-pip
+
+- name: Ensure pip packages are installed
+  pip:
+    name: "{{ item }}"
+  loop:
+    - gql
+    - psycopg2
+
+- name: Ensure Postgres service is running
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: Ensure database is created
+  become_user: postgres
+  postgresql_db:
+    name: "{{ dbname }}"
+    encoding: 'UTF-8'
+    lc_collate: 'en_US.UTF-8'
+    lc_ctype: 'en_US.UTF-8'
+    template: 'template0'
+    state: present
+
+- name: Enable plpython3u extension
+  become_user: postgres
+  postgresql_ext:
+    name: plpython3u
+    db: "{{ dbname }}"
+
+- name: Make plpython3u lantrusted
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: UPDATE pg_language SET lanpltrusted = true WHERE lanname = 'plpython3u'
+
+- name: Create item table
+  become_user: postgres
+  postgresql_table:
+    db: "{{ dbname }}"
+    table: "{{ dbtable }}"
+    columns:
+    - name text
+    - sku text primary key
+    - quantity int
+    - last_updated timestamp
+
+- name: Ensure database user exists
+  become_user: postgres
+  postgresql_user:
+    db: "{{ dbname }}"
+    name: "{{ dbuser }}"
+    password: "{{ dbpassword }}"
+    state: present
+    priv: "ALL/item:ALL"
+
+- name: Ensure user does not have unnecessary privileges
+  become_user: postgres
+  postgresql_user:
+    name: "{{ dbuser }}"
+    role_attr_flags: NOSUPERUSER,NOCREATEDB
+    state: present
+
+- name: Create function add_to_share
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE OR REPLACE FUNCTION add_to_share()
+      RETURNS trigger AS '
+        import urllib3
+
+        from gql import gql, Client
+        from gql.transport.requests import RequestsHTTPTransport
+
+        urllib3.disable_warnings()
+
+        
+        share_node_url = "{{ share_node_url }}"
+        share_node_api_key = "{{ share_node_api_key }}"
+
+        transport=RequestsHTTPTransport(
+          url=share_node_url,
+          use_json=True,
+          headers={
+            "Content-type": "application/json",
+            "x-api-key": share_node_api_key
+          },
+          verify=False,
+          retries=3,
+        )
+
+        gql_client = Client(
+            transport=transport,
+            fetch_schema_from_transport=True,
+        )
+
+        # Manipulate last_protected to adhere to
+        # JSON Schema date-time format
+        last_updated = TD["new"]["last_updated"].replace(" ", "T")
+        last_updated = last_updated.split(".")[0] + "Z"
+        
+        params = {
+          "name": TD["new"]["name"],
+          "sku": TD["new"]["sku"],
+          "quantity": TD["new"]["quantity"],
+          "lastUpdated": last_updated
+        }
+
+        query = gql(
+          """
+          mutation addItem(
+            $name: String!,
+            $sku: String!,
+            $quantity: Int!,
+            $lastUpdated: String!
+          ) {
+              addInventoryItem_async(
+                input: {
+                  name: $name,
+                  sku: $sku,
+                  quantity: $quantity,
+                  lastUpdated: $lastUpdated
+                }
+              ) {
+                error
+                result {
+                  id
+                }
+              }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            query,
+            variable_values=params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+
+      ' LANGUAGE plpython3u;
+
+- name: Drop trigger for item inserts if it already exists
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      DROP TRIGGER IF EXISTS add_to_share on {{ dbtable }};
+
+- name: Create trigger for item inserts
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE TRIGGER add_to_share
+        AFTER INSERT ON {{ dbtable }}
+        FOR EACH ROW
+        EXECUTE FUNCTION add_to_share();
+
+- name: Create function update_in_share
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE OR REPLACE FUNCTION update_in_share()
+      RETURNS trigger AS '
+        import urllib3
+
+        from gql import gql, Client
+        from gql.transport.requests import RequestsHTTPTransport
+
+        urllib3.disable_warnings()
+
+        
+        share_node_url = "{{ share_node_url }}"
+        share_node_api_key = "{{ share_node_api_key }}"
+
+        transport=RequestsHTTPTransport(
+          url=share_node_url,
+          use_json=True,
+          headers={
+            "Content-type": "application/json",
+            "x-api-key": share_node_api_key
+          },
+          verify=False,
+          retries=3,
+        )
+
+        gql_client = Client(
+            transport=transport,
+            fetch_schema_from_transport=True,
+        )
+
+        # Manipulate last_protected to adhere to
+        # JSON Schema date-time format
+        last_updated = TD["new"]["last_updated"].replace(" ", "T")
+        last_updated = last_updated.split(".")[0] + "Z"
+
+        search_params = {
+          "sku": TD["new"]["sku"]
+        }
+
+        search_query = gql(
+          """
+          query listItem(
+            $sku: String!
+          ) {
+              listInventoryItems(
+                filter: {
+                  sku: {
+                    eq: $sku
+                  }
+                }
+              ) {
+                InventoryItems {
+                  id
+                }
+              }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            search_query,
+            variable_values=search_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+        
+        item_id = result["listInventoryItems"]["InventoryItems"][0]["id"]
+
+        # Update the item in Vendia Share
+        update_params = {
+          "id": item_id,
+          "name": TD["new"]["name"],
+          "sku": TD["new"]["sku"],
+          "quantity": TD["new"]["quantity"],
+          "lastUpdated": last_updated
+        }
+
+        update_query = gql(
+          """
+          mutation updateItem(
+            $id: ID!,
+            $name: String!,
+            $sku: String!,
+            $quantity: Int!,
+            $lastUpdated: String!
+          ) {
+            putInventoryItem_async(
+              id: $id,
+              input: {
+                name: $name,
+                sku: $sku,
+                quantity: $quantity,
+                lastUpdated: $lastUpdated
+              }
+            ) {
+              error
+              result {
+                id
+              }
+            }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            update_query,
+            variable_values=update_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+
+      ' LANGUAGE plpython3u;
+
+- name: Drop trigger for item updates if it already exists
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      DROP TRIGGER IF EXISTS update_in_share on {{ dbtable }};
+
+- name: Create trigger for item updates
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE TRIGGER update_in_share
+        BEFORE UPDATE ON {{ dbtable }}
+        FOR EACH ROW
+        EXECUTE FUNCTION update_in_share();
+
+- name: Create function remove_from_share
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE OR REPLACE FUNCTION remove_from_share()
+      RETURNS trigger AS '
+        import urllib3
+
+        from gql import gql, Client
+        from gql.transport.requests import RequestsHTTPTransport
+
+        urllib3.disable_warnings()
+
+        
+        share_node_url = "{{ share_node_url }}"
+        share_node_api_key = "{{ share_node_api_key }}"
+
+        transport=RequestsHTTPTransport(
+          url=share_node_url,
+          use_json=True,
+          headers={
+            "Content-type": "application/json",
+            "x-api-key": share_node_api_key
+          },
+          verify=False,
+          retries=3,
+        )
+
+        gql_client = Client(
+            transport=transport,
+            fetch_schema_from_transport=True,
+        )
+
+        search_params = {
+          "sku": TD["old"]["sku"]
+        }
+
+        search_query = gql(
+          """
+          query listItem(
+            $sku: String!
+          ) {
+              listInventoryItems(
+                filter: {
+                  sku: {
+                    eq: $sku
+                  }
+                }
+              ) {
+                InventoryItems {
+                  id
+                }
+              }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            search_query,
+            variable_values=search_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+        
+        item_id = result["listInventoryItems"]["InventoryItems"][0]["id"]
+
+        # Remove the item from Vendia Share
+        delete_params = {
+          "id": item_id
+        }
+
+        delete_query = gql(
+          """
+          mutation removeItem(
+            $id: ID!
+          ) {
+            removeInventoryItem_async(
+              id: $id
+            ) {
+              error
+              result {
+                id
+              }
+            }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            delete_query,
+            variable_values=delete_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+
+      ' LANGUAGE plpython3u;
+
+- name: Drop trigger for item deletions if it already exists
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      DROP TRIGGER IF EXISTS remove_from_share on {{ dbtable }};
+
+- name: Create trigger for item deletions
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE TRIGGER remove_from_share
+        BEFORE DELETE ON {{ dbtable }}
+        FOR EACH ROW
+        EXECUTE FUNCTION remove_from_share();
+
+- name: Copy item insert script to virtual machine
+  copy:
+    src: 01-insert-items.sql
+    dest:  /home/vagrant/01-insert-items.sql
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+
+- name: Copy item update script to virtual machine
+  copy:
+    src: 02-update-items.sql
+    dest:  /home/vagrant/02-update-items.sql
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+
+- name: Copy item remove script to virtual machine
+  copy:
+    src: 03-remove-items.sql
+    dest:  /home/vagrant/03-remove-items.sql
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+  

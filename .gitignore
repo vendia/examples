@@ -8,3 +8,12 @@ init-state.json
 
 # Python
 venv
+
+# VisualStudio Code
+.vscode
+
+# Ansible vars file
+**/roles/postgres/vars/main.yml
+
+# Vagrant files
+**/.vagrant/*

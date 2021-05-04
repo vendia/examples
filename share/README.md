@@ -20,4 +20,5 @@ Each example is self-contained and has a `README.md` file for deploying and usin
 |:---------|:--------|:--------|
 | [Using a CSV to write data to a Uni](./csv-to-share/README.md) | Amazon Web Services | AWS Lambda + Amazon S3 + Vendia Share |
 | [Capturing DynamoDB change data to write data to a Uni](./dynamo-to-share/README.md) | Amazon Web Services | AWS Lambda + Amazon DynamoDB + Vendia Share |
+| [Capturing Postgres change data to write data to a Uni](./postgres-to-share/README.md) | N/A | Postgres + Vendia Share |
 
