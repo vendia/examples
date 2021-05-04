@@ -140,10 +140,9 @@ We used Ansible and Vagrant to:
 
 * Add the `plpython3u` database extension
 
-* Create PostgreSQL triggers and functions so that when data is added to the `item` table it is reflected in your Vendia Share Uni
+* Create PostgreSQL triggers and functions so that GraphQL queries against your Vendia Share **DistributionCenter** node are run when data is added, updated, or deleted in the `item` table
 
 * Added 3 SQL scripts to make our data changes easy to run
-
 
 ## Viewing Database Information
 
