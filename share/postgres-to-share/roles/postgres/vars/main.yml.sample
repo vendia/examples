@@ -1,0 +1,10 @@
+---
+dbname: vagrant
+dbtable: item
+dbuser: vagrant
+dbpassword: vagrant
+ansible_python_interpreter: "/usr/bin/python3"
+# DistributionCenter GraphQL URL
+share_node_url: ""
+# DistribtuionCenter GraphQL API Key
+share_node_api_key: ""

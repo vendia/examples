@@ -1,0 +1,21 @@
+{
+    "name": "test-postgres-to-share",
+    "schema": "schema.json",
+    "nodes": [
+        {
+            "name": "DistributionCenter",
+            "userId": "me@domain.com",
+            "region": "us-east-2"
+        },
+        {
+            "name": "Retailer1",
+            "userId": "me@domain.com",
+            "region": "us-west-2"
+        },
+        {
+            "name": "Retailer2",
+            "userId": "me@domain.com",
+            "region": "us-west-2"
+        }
+    ]
+}
