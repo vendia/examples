@@ -471,12 +471,11 @@ You can continue to use your existing data stores, like PostgreSQL, without need
 
 # Cleaning Up the Solution
 
-Run the `cleanup.sh` script to remove all artifacts related to the solution, including the Vendia Share uni.
+Run the `cleanup.sh` script to destroy the `postgres` virtual machine and the Vendia Share Uni.
 
 ```bash
-# Replace with proper values
-./cleanup.sh test-dynamo-to-share \
---profile your_aws_iam_profile --region region_you_deployed_to
+# Replace test-postgres-to-share with the name of your Uni
+./cleanup.sh test-postgres-to-share
 ```
 
 # References
