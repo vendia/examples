@@ -17,3 +17,6 @@ venv
 
 # Vagrant files
 **/.vagrant/*
+
+#Node
+node_modules
