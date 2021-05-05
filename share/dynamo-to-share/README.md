@@ -104,7 +104,7 @@ Once the Uni is deployed we can deploy our serverless application.
 ## Build
 
 ```bash
-cd .. # If you're not already in the root of the csv-to-share example
+cd .. # If you're not already in the root of the dynamo-to-share example
 sam build --use-container
 ```
 
