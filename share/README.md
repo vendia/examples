@@ -18,7 +18,8 @@ Each example is self-contained and has a `README.md` file for deploying and usin
 
 | Example | Cloud Service Provider (CSP) | Service(s) |
 |:---------|:--------|:--------|
-| [Using a CSV to write data to a Uni](./csv-to-share/README.md) | Amazon Web Services | AWS Lambda + Amazon S3 + Vendia Share |
-| [Capturing DynamoDB change data to write data to a Uni](./dynamo-to-share/README.md) | Amazon Web Services | AWS Lambda + Amazon DynamoDB + Vendia Share |
-| [Capturing Postgres change data to write data to a Uni](./postgres-to-share/README.md) | N/A | Postgres + Vendia Share |
+| [Using a CSV to write data to a Uni](./csv-to-share) | Amazon Web Services | AWS Lambda + Amazon S3 + Vendia Share |
+| [Capturing DynamoDB change data to write data to a Uni](./dynamo-to-share) | Amazon Web Services | AWS Lambda + Amazon DynamoDB + Vendia Share |
+| [Capturing Postgres change data to write data to a Uni](./postgres-to-share) | N/A | Postgres + Vendia Share |
+| [Writing email attachment data to a Uni](./email-to-share) | Amazon Web Services | AWS Lambda + Amazon S3 + AWS Simple Email Service + Vendia Share |
 

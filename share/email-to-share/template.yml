@@ -1,0 +1,181 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Push email attachment data to Vendia Share
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.8
+    Tracing: Active
+
+Parameters:
+  EmailAddress:
+    Type: String
+    Description: Email address configured to receive email in Amazon SES
+
+  ShareGraphqlUrl:
+    Type: String
+    Description: The Vendia Share GraphQL URL used to store email data on-chain.
+  
+  ShareGraphqlApiKey:
+    Type: String
+    Description: The API key associated with the Vendia Share GraphQL URL.
+
+Resources:
+  EmailBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub email-to-share-${AWS::AccountId}
+
+  # The next several resources are dedicated to having SES send data to the
+  # raw_message keyspace of the EmailBucket and extract the attachment.
+  # The attachment is sent to the attachments keyspace of the EmailBucket
+  EmailBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref EmailBucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - s3:PutObject
+            Effect: Allow
+            Resource: !Sub "arn:aws:s3:::${EmailBucket}/*"
+            Principal: 
+              Service: ses.amazonaws.com
+            Condition:
+                StringEquals:
+                    "aws:Referer": !Sub ${AWS::AccountId}
+  
+  ProcessRawEmailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/process_email/
+      Handler: index.lambda_handler
+      Environment:
+        Variables:
+          POWERTOOLS_SERVICE_NAME: email-to-share-process-raw-email
+          ATTACHMENT_KEYSPACE: attachments
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:GetObjectAcl
+                - s3:GetObjectVersion
+                - s3:PutObject
+              Resource: 
+                - !Sub 'arn:aws:s3:::email-to-share-${AWS::AccountId}/*'
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - xray:PutTraceSegments
+                - xray:PutTelemetryRecords
+                - xray:GetSamplingRules
+                - xray:GetSamplingTargets
+                - xray:GetSamplingStatisticSummaries
+              Resource: '*'
+      Events:
+        EmailToS3:
+          Type: S3 # More info about S3 Event Source: https://github.com/aws/serverless-application-model/blob/develop/versions/2016-10-31.md#s3
+          Properties:
+            Bucket: !Ref EmailBucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: raw_message
+
+  ProcessRawEmailLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ProcessRawEmailFunction}
+      RetentionInDays: 14
+
+  ProcessRawEmailFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ProcessRawEmailFunction
+      Principal: ses.amazonaws.com
+      SourceAccount: !Ref AWS::AccountId
+
+  EmailRuleSet:
+    Type: AWS::SES::ReceiptRuleSet
+    Properties:
+      RuleSetName: email-to-share
+
+  EmailRecieptRule:
+    Type: AWS::SES::ReceiptRule
+    Properties:
+      RuleSetName: !Ref EmailRuleSet
+      Rule:
+        Name: send-email-to-s3
+        Actions:
+          - S3Action:
+              BucketName: !Ref EmailBucket
+              ObjectKeyPrefix: raw_message
+        Enabled: true
+        Recipients:
+          - !Ref EmailAddress
+
+  # The next several resources are dedicated to having Lambda parse the
+  # attachment and upload them to the Vendia Share Uni
+  ProcessAttachmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/process_attachments/
+      Handler: index.lambda_handler
+      Environment:
+        Variables:
+          POWERTOOLS_SERVICE_NAME: email-to-share-upload-attachments
+          ATTACHMENT_KEYSPACE: attachments
+          SHARE_NODE_URL: !Ref ShareGraphqlUrl
+          SHARE_NODE_API_KEY: !Ref ShareGraphqlApiKey
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:GetObjectAcl
+                - s3:GetObjectVersion
+                - s3:PutObject
+              Resource: 
+                - !Sub 'arn:aws:s3:::email-to-share-${AWS::AccountId}/*'
+            - Effect: Allow
+              Action:
+                - s3:ListBucket
+              Resource: 
+                - !Sub 'arn:aws:s3:::email-to-share-${AWS::AccountId}'
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - xray:PutTraceSegments
+                - xray:PutTelemetryRecords
+                - xray:GetSamplingRules
+                - xray:GetSamplingTargets
+                - xray:GetSamplingStatisticSummaries
+              Resource: '*'
+      Events:
+        ProcessAttachment:
+          Type: S3 # More info about S3 Event Source: https://github.com/aws/serverless-application-model/blob/develop/versions/2016-10-31.md#s3
+          Properties:
+            Bucket: !Ref EmailBucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: attachments
+
+  ProcessAttachmentLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ProcessAttachmentFunction}
+      RetentionInDays: 14
