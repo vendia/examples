@@ -7,7 +7,7 @@ The Share control plane API requires [Amazon Signature Version 4 (Sigv4)](https:
 
 Follow these steps to run the sample
 
-*   1: install dependencies
+*   1: Install dependencies
 ```
 npm install
 ```
