@@ -96,7 +96,7 @@ sam deploy --guided
 
 You will be prompted to enter several pieces of data:
 
-* *sftp-to-share* as the stack name
+* *sftp-to-share* as the stack name.  If you use a different name you will need to update the `STACK_NAME` variable in the [cleanup.sh](./cleanup.sh) script.
 
 * *AWS Region* should match the same region as the **Shipper** Vendia Share node
 
