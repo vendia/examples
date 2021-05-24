@@ -1,7 +1,7 @@
 # Using the Share Graphql API
 This example demonstrates using the GraphQL API to work with the Share Control Plane. This is useful when automating activities such as Uni Creation.
 
-The API requires Sigv4 signed requests. Sigv4 signing is performed using AWS credentials as provided by the AWS Congito service. This example uses email and password combinations to authenticate with Cognito, obtain AWS credentials, and then sign a request. This example specificaly signs a request to List Unis for the given username.
+The Share control plane API requires [Amazon Signature Version 4 (Sigv4)](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) signed requests. Sigv4 signing is performed using AWS credentials as provided by the AWS Congnito service. This example uses email and password combinations to authenticate with Cognito, obtain AWS credentials, and then sign a request. This example specifically signs a request to list Unis for the given username.
 
 ## Running the sample  
 
