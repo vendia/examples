@@ -12,7 +12,7 @@ Follow these steps to run the sample
 npm install
 ```
 
-*   2: run the example (replace the values for username and password)
+*   2: Run the example (replace the values for username and password)
 ```
 ./vendiaapiauth --username me@vendia.com --password superSecretPassword
 ```
