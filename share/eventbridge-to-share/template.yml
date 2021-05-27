@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Push data to Vendia Share from Amazon EventBridge
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.8
+    Tracing: Active
+
+Parameters:
+  ShareGraphqlUrl:
+    Type: String
+    Description: Enter the GraphQL URL value for the Consignee Uni node
+  
+  ShareGraphqlApiKey:
+    Type: String
+    Description: Enter the GraphQL API Key value for the Consignee Uni node
+
+Resources:
+  OrderBus:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: eb-to-share-order-bus
+
+  # The next several resources are dedicated to having Lambda parse
+  # events and upload them to the Vendia Share Uni
+  NewOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/new_shipment/
+      Handler: index.lambda_handler
+      Environment:
+        Variables:
+          POWERTOOLS_SERVICE_NAME: eventbridge-to-share
+          SHARE_NODE_URL: !Ref ShareGraphqlUrl
+          SHARE_NODE_API_KEY: !Ref ShareGraphqlApiKey
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - xray:PutTraceSegments
+                - xray:PutTelemetryRecords
+                - xray:GetSamplingRules
+                - xray:GetSamplingTargets
+                - xray:GetSamplingStatisticSummaries
+              Resource: '*'
+      Events:
+        ProcessEvent:
+          Type: EventBridgeRule # More info about EventBridge Event Source: https://github.com/aws/serverless-application-model/blob/develop/versions/2016-10-31.md#eventbridgerule
+          Properties:
+            EventBusName: !Ref OrderBus
+            Pattern:
+              source:
+                - consignee.orderapp
+              detail-type:
+                - "new order"
+
+  NewOrderEventFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${NewOrderFunction}
+      RetentionInDays: 14

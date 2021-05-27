@@ -22,4 +22,6 @@ Each example is self-contained and has a `README.md` file for deploying and usin
 | [Capturing DynamoDB change data to write data to a Uni](./dynamo-to-share) | Amazon Web Services | AWS Lambda + Amazon DynamoDB + Vendia Share |
 | [Capturing Postgres change data to write data to a Uni](./postgres-to-share) | N/A | Postgres + Vendia Share |
 | [Writing email attachment data to a Uni](./email-to-share) | Amazon Web Services | AWS Lambda + Amazon S3 + AWS Simple Email Service + Vendia Share |
+| [Writing SFTP file data to a Uni](./sftp-to-share) | Amazon Web Services | AWS Transfer Family (SFTP) + AWS Lambda + Amazon S3 + Vendia Share |
+| [Publishing EventBridge events to a Uni](./sftp-to-share) | Amazon Web Services | Amazon EventBridge + AWS Lambda + Vendia Share |
 
