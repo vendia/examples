@@ -1,0 +1,9 @@
+[
+    {
+        "Time": "2021-05-26T10:15:07Z",
+        "Source": "consignee.orderapp",
+        "EventBusName": "eb-to-share-order-bus",
+        "DetailType": "new order",
+        "Detail": "{ \"orderDate\": \"2021-05-26T10:15:07Z\", \"dueDate\": \"2021-05-26T10:15:07Z\", \"shipmentStatus\": \"pending\", \"shipperName\": \"Acme Manufacturing\", \"shipperAddress\": \"389 Pittstown Rd\", \"shipperCity\": \"Pittstown\", \"shipperState\": \"NJ\", \"shipperPostalCode\": \"08867\", \"shipperPhone\": \"+19087139655\", \"shipperEmail\": \"info@acme-manufacturing.com\", \"consigneeName\": \"Target - Store 916\", \"consigneeAddress\": \"1919 Fulton Ave\", \"consigneeCity\": \"Sacramento\", \"consigneeState\": \"CA\", \"consigneePostalCode\": \"95825\", \"consigneePhone\": \"+19164836093\", \"consigneeEmail\": \"store-916@target.com\", \"purchaseOrder\": \"T12345\" }"
+    }
+]
