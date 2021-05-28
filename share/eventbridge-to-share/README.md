@@ -77,9 +77,7 @@ Once the Uni is deployed we can deploy our serverless application to parse the u
 
 # Deploying the Serverless Application
 
-The default serverless application deploys a [AWS EventBridge](https://aws.amazon.com/eventbridge/) bus with a rule to .
-
-You will need to provide a SSH public key when deploying the application.  If you do not have a SSH keypair, or would like to create one specifically for this example, please use the [ssh-keygen command](https://man7.org/linux/man-pages/man1/ssh-keygen.1.html) to create it.
+The default serverless application deploys a [AWS EventBridge](https://aws.amazon.com/eventbridge/) bus with a rule to trigger a Lambda function when a new order is added from a fictitious source application, consignee.orderapp.
 
 ## Build
 
