@@ -113,6 +113,8 @@ You will be prompted to enter several pieces of data:
 
 Subsequent deployments can use the command `sam deploy`.  The values stored in *samconfig.toml* will be used.
 
+Please make note of the `OrderStream` output from the `sam deploy` command. We will need it to test our solution.
+
 # Testing the Solution
 
 ## Verify There Is No Data in the Uni
@@ -152,10 +154,10 @@ query listShipments {
 
 ## Publish Events to our Order Stream
 
-You can publish a sample event to our **Order stream** using a Python3 script [generator.py](./generator.py).
+You can publish a sample event to our **Order stream** using a Python3 script [generator.py](./generator.py).  Please replace `kinesis-to-share-OrderStream-random-value` with the output returned from `sam deploy`.
 
 ```bash
-AWS_PROFILE=your_profile_name AWS_REGION=region_of_kinesis_stream python3 generator.py 
+AWS_PROFILE=your_profile_name AWS_REGION=region_of_kinesis_stream python3 generator.py kinesis-to-share-OrderStream-random-value
 ```
 
 This script will publish data to our **Order stream** every 5 seconds.  It will trigger a AWS Lambda function to be invoked.  The function will parse the order data and POST it to the **Consignee** GraphQL endpoint.
