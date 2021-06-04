@@ -24,15 +24,6 @@ We will deploy the example using the [Vendia Share Command Line Interface (CLI)]
 
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
 
-## Installing Python3 Dependencies
-
-```bash
-python3 -m venv venv
-. ./venv/bin/activate
-pip install pip --upgrade
-pip install -r requirements.txt
-```
-
 ## Clone the Repository
 
 In order to use this example, you'll first need to clone the respository.
@@ -53,6 +44,15 @@ git clone https://github.com/vendia/examples.git
 
 ```bash
 cd examples/share/kinesis-to-share
+```
+
+## Installing Python3 Dependencies
+
+```bash
+python3 -m venv venv
+. ./venv/bin/activate
+pip install pip --upgrade
+pip install -r requirements.txt
 ```
 
 # Deploying the Example Uni
