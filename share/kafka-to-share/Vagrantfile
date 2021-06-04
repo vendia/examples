@@ -1,13 +1,30 @@
 Vagrant.configure("2") do |config|
+
+        #Setup Networking and Security
+        config.ssh.remote_user='vagrant'
+        config.ssh.host='localhost'
+        config.ssh.password='vagrant'
+        config.vm.network "private_network", type:"dhcp"     
+
     config.vm.define "kafka" do |kafka|
-        kafka.vm.provider :virtualbox do |v|
-          v.customize ["modifyvm", :id, "--memory", "2048"]
+
+        #Docker image provisioning
+        kafka.vm.provider "docker" do |docker, override|
+          override.vm.box=nil
+          docker.create_args = ['--memory=2g']
+          docker.create_args = ['--cpuset-cpus=3']
+          docker.build_dir='.'
+          override.ssh.insert_key=true
+          docker.has_ssh=true
+          docker.privileged=true    
         end
 
-        kafka.vm.box = "ubuntu/focal64"
         kafka.vm.hostname = "kafka-to-share"
 
+
+        #Ansible bootstrap
         config.vm.provision "ansible" do |ansible|
+          ansible.force_remote_user=true
           ansible.verbose = "v"
           ansible.playbook = "kafka.yml"
           ansible.groups = {
