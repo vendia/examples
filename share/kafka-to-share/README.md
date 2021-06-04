@@ -35,14 +35,6 @@ For this example, we will use a virtual machine that can be deployed to a local 
 * Ansible (Installed via Pip in the next section automatically)
 
 
-## Installing Python3 Dependencies
-
-```bash
-python3 -m venv venv
-. ./venv/bin/activate
-pip install pip --upgrade
-pip install -r requirements.txt
-```
 
 ## Clone the Repository
 
@@ -64,6 +56,15 @@ git clone https://github.com/vendia/examples.git
 
 ```bash
 cd examples/share/kafka-to-share
+```
+
+## Installing Python3 Dependencies
+
+```bash
+python3 -m venv venv
+. ./venv/bin/activate
+pip install pip --upgrade
+pip install -r requirements.txt
 ```
 
 # Deploying the Example Uni
