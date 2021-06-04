@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Publish data from a Amazon Kinesis Stream to a Vendia Share node
+
+Parameters:
+
+  ShareNodeUrl:
+    Type: String
+    Description: Enter the GraphQL URL value for the Consignee Uni node
+  
+  ShareNodeApiKey:
+    Type: String
+    Description: Enter the GraphQL API Key value for the Consignee Uni node
+
+Globals:
+  Function:
+    Runtime: python3.8
+    Timeout: 60
+    Handler: index.handler
+    MemorySize: 256
+
+Resources:
+  # Define an AWS Kinesis Data Stream to capture orders
+  OrderStream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      ShardCount: 1
+
+  # Process orders in the OrderStream
+  NewOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/new_shipment/
+      Handler: index.lambda_handler
+      Environment:
+        Variables:
+          POWERTOOLS_SERVICE_NAME: kinesis-to-share
+          SHARE_NODE_URL: !Ref ShareNodeUrl
+          SHARE_NODE_API_KEY: !Ref ShareNodeApiKey
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - xray:PutTraceSegments
+                - xray:PutTelemetryRecords
+                - xray:GetSamplingRules
+                - xray:GetSamplingTargets
+                - xray:GetSamplingStatisticSummaries
+              Resource: '*'
+      Events:
+        Stream:
+          Type: Kinesis
+          Properties:
+            Stream: !GetAtt OrderStream.Arn
+            StartingPosition: LATEST
+            BatchSize: 100
+
+  NewOrderEventFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${NewOrderFunction}
+      RetentionInDays: 14
+
+Outputs:
+  OrderStream:
+    Description: Kinesis Order Data Stream
+    Value: !Ref OrderStream

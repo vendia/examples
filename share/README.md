@@ -24,4 +24,4 @@ Each example is self-contained and has a `README.md` file for deploying and usin
 | [Writing email attachment data to a Uni](./email-to-share) | Amazon Web Services | AWS Lambda + Amazon S3 + AWS Simple Email Service + Vendia Share |
 | [Writing SFTP file data to a Uni](./sftp-to-share) | Amazon Web Services | AWS Transfer Family (SFTP) + AWS Lambda + Amazon S3 + Vendia Share |
 | [Publishing EventBridge events to a Uni](./eventbridge-to-share) | Amazon Web Services | Amazon EventBridge + AWS Lambda + Vendia Share |
-
+| [Publishing Kinesis Data Streams data to a Uni](./kinesis-to-share) | Amazon Web Services | Amazon Kinesis Data Streams+ AWS Lambda + Vendia Share |
