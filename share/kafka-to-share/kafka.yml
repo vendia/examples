@@ -1,0 +1,7 @@
+---
+- name: Create a standalone Kafka server
+  hosts: kafka_servers
+  become: true
+  gather_facts: no
+  roles:
+    - kafka

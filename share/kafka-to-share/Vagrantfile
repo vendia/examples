@@ -1,0 +1,19 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "kafka" do |kafka|
+        kafka.vm.provider :virtualbox do |v|
+          v.customize ["modifyvm", :id, "--memory", "2048"]
+        end
+
+        kafka.vm.box = "ubuntu/focal64"
+        kafka.vm.hostname = "kafka-to-share"
+
+        config.vm.provision "ansible" do |ansible|
+          ansible.verbose = "v"
+          ansible.playbook = "kafka.yml"
+          ansible.groups = {
+            "kafka_servers" => [ "kafka" ]
+          }
+        end
+    end
+  end
+  
