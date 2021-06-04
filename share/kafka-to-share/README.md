@@ -173,14 +173,14 @@ query listShipments {
 
 ## Publish and Consume Orders on our Kafka Server
 
-We will connect to our `kafka` virtual machine and run our [consumer.py](./consumer.py) script.  This script will collect orders that are published to our **orders** Kafka topic and publish them to our Uni.
+We will connect to our `kafka` virtual machine and run our *consumer.py* script.  This script will collect orders that are published to our **orders** Kafka topic and publish them to our Uni.
 
 ```bash
 vagrant ssh kafka # From our workstation
 python3 consumer.py # From our kafka virtual server
 ```
 
-In a second shell, we will connect to  our `kafka` virtual machine and run our [producer.py](./producer.py) script.  This script will generate fake order data.
+In a second shell, we will connect to  our `kafka` virtual machine and run our *producer.py* script.  This script will generate fake order data.
 
 ```bash
 vagrant ssh kafka # From our workstation
