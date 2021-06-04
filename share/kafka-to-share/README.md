@@ -26,13 +26,13 @@ For this example, we will use a virtual machine that can be deployed to a local 
 
 * [Python3](https://www.python.org/download)
 
-* [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Docker](https://www.docker.com/products/docker-desktop)
 
 * [Hashicorp Vagrant](https://www.vagrantup.com/downloads)
 
-* [Ansible](https://www.ansible.com/)
-
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
+
+* Ansible (Installed via Pip in the next section automatically)
 
 
 ## Installing Python3 Dependencies
@@ -176,15 +176,21 @@ query listShipments {
 We will connect to our `kafka` virtual machine and run our *consumer.py* script.  This script will collect orders that are published to our **orders** Kafka topic and publish them to our Uni.
 
 ```bash
-vagrant ssh kafka # From our workstation
-python3 consumer.py # From our kafka virtual server
+# From our workstation
+vagrant ssh kafka 
+
+# From our kafka virtual server
+python3 consumer.py 
 ```
 
 In a second shell, we will connect to  our `kafka` virtual machine and run our *producer.py* script.  This script will generate fake order data.
 
 ```bash
-vagrant ssh kafka # From our workstation
-python3 producer.py # From our kafka virtual server
+# From our workstation
+vagrant ssh kafka 
+
+# From our kafka virtual server
+python3 producer.py 
 ```
 
 We should be able to see output in our `consumer` window indicating that data is being published to our Uni.
