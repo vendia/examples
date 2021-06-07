@@ -1,0 +1,110 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://vendia.net/schemas/solutions/eventbridge-to-share.json",
+    "title": "email-to-share",
+    "description": "Example for submitting data to a Uni via Amazon EventBridge",
+    "type": "object",
+    "properties": {
+        "Shipment": {
+            "description": "Shipment information",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "orderDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "shipDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "daysUntilDue": {
+                        "type": "number"
+                    },
+                    "shipmentStatus": {
+                        "type": "string",
+                        "enum": [
+                            "pending", "out for delivery", "delivered"
+                        ]
+                    },
+                    "shipperName": {
+                        "type": "string"
+                    },
+                    "shipperAddress": {
+                        "type": "string"
+                    },
+                    "shipperCity": {
+                        "type": "string"
+                    },
+                    "shipperState": {
+                        "type": "string"
+                    },
+                    "shipperPostalCode": {
+                        "type": "string"
+                    },
+                    "shipperPhone": {
+                        "type": "string"
+                    },
+                    "shipperEmail": {
+                        "type": "string"
+                    },
+                    "shipperReferenceNumber": {
+                        "type": "string"
+                    },
+                    "carrierName": {
+                        "type": "string"
+                    },
+                    "carrierPhone": {
+                        "type": "string"
+                    },
+                    "carrierEmail": {
+                        "type": "string"
+                    },
+                    "carrierReferenceNumber": {
+                        "type": "string"
+                    },
+                    "consigneeName": {
+                        "type": "string"
+                    },
+                    "consigneeAddress": {
+                        "type": "string"
+                    },
+                    "consigneeCity": {
+                        "type": "string"
+                    },
+                    "consigneeState": {
+                        "type": "string"
+                    },
+                    "consigneePostalCode": {
+                        "type": "string"
+                    },
+                    "consigneePhone": {
+                        "type": "string"
+                    },
+                    "consigneeEmail": {
+                        "type": "string"
+                    },
+                    "consigneeSpecialInstructions": {
+                        "type": "string"
+                    },
+                    "purchaseOrder": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                    }
+                }
+            }
+        }
+    }
+}

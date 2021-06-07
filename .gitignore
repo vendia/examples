@@ -14,9 +14,13 @@ venv
 
 # Ansible vars file
 **/roles/postgres/vars/main.yml
+**/roles/kafka/vars/main.yml
 
 # Vagrant files
 **/.vagrant/*
 
 #Node
 node_modules
+
+#OS X
+.DS_Store

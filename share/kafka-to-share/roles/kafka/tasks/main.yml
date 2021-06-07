@@ -1,0 +1,91 @@
+---
+- name: Add apt-key for confluent
+  apt_key:
+    url: "https://packages.confluent.io/deb/6.1/archive.key"
+    state: present
+
+- name: Add confluent repository
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.confluent.io/deb/6.1 stable main
+    state: present
+
+- name: Ensure apt cache is up to date
+  apt: 
+    update_cache: yes
+
+- name: Ensure OS packages are installed
+  apt: 
+    name: "{{ item }}"
+  loop:
+    - openjdk-8-jdk
+    - software-properties-common
+    - confluent-community-2.13
+    - python3-pip
+
+- name: Create cp-kafka user
+  user:
+    name: cp-kafka
+    comment: Confluent user
+    group: confluent
+
+- name: Ensure pip packages are installed
+  pip:
+    name: "{{ item }}"
+  loop:
+    - faker
+    - gql
+    - kafka-python
+    - pymongo
+    - urllib3
+
+- name: Create zookeeper data directory
+  file:
+    path: /var/lib/zookeeper
+    state: directory
+    owner: cp-kafka
+    group: confluent
+
+- name: Create kafka data directory
+  file:
+    path: /var/lib/kafka
+    state: directory
+    owner: cp-kafka
+    group: confluent
+
+- name: Ensure confluent-zookeeper service is running
+  service:
+    name: confluent-zookeeper
+    state: started
+    enabled: yes
+
+- name: Ensure confluent-kafka service is running
+  service:
+    name: confluent-kafka
+    state: started
+    enabled: yes
+
+- name: Get list of kafka topics
+  command: kafka-topics --list --zookeeper localhost:2181
+  register: kafka_topics
+  ignore_errors: yes
+
+- name: Create orders topic if it does not already exist
+  command: kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic orders
+  when: '"orders" not in kafka_topics.stdout_lines'
+  ignore_errors: yes
+
+- name: Copy over producer script
+  copy:
+    src: producer.py
+    dest: /home/vagrant/producer.py
+    owner: vagrant
+    group: vagrant
+    mode: 0755
+
+- name: Copy over consumer template
+  template:
+    src: consumer.j2
+    dest: /home/vagrant/consumer.py
+    owner: vagrant
+    group: vagrant
+    mode: 0755
