@@ -1,5 +1,5 @@
 {
-    "name": "test-eventbridge-to-share",
+    "name": "test-kafka-to-share",
     "schema": "schema.json",
     "nodes": [
         {
