@@ -7,9 +7,6 @@ from gql.transport.requests import RequestsHTTPTransport
 
 urllib3.disable_warnings()
 
-share_node_url = os.getenv('SHARE_NODE_URL')
-share_node_api_key = os.getenv('SHARE_NODE_API_KEY')
-
 # Vendia Share node data
 share_node_url = os.getenv('SHARE_NODE_URL')
 share_node_api_key = os.getenv('SHARE_NODE_API_KEY')
