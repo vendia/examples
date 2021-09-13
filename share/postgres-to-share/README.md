@@ -74,7 +74,7 @@ cd examples/share/postgres-to-share
 
 # Deploying the Example Uni
 
-This example will create a shared inventory, not unlike the Vendia Share [Inventory Management Quickstart](https://www.vendia.net/docs/share/quickstart/inventory-management).  We will not populate our Uni with `initialState` and will, instead, populate our Uni with data from the [populate_dynamo.py](populate_dynamo.py).
+This example will create a shared inventory, not unlike the Vendia Share [Inventory Management Quickstart](https://www.vendia.net/docs/share/quickstart/inventory-management).  We will not populate our Uni with `initialState` and will, instead, populate our Uni with data from data inserted to our PostgreSQL database.
 
 If you are not already logged in to the share service you do so by running [`share login`](https://vendia.net/docs/share/cli/commands/login):
 
