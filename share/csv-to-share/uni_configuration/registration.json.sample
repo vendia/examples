@@ -5,12 +5,26 @@
         {
             "name": "ParentalUnit1",
             "userId": "me@vendia.net",
-            "region": "us-west-2"
+            "region": "us-west-2",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
         },
         {
             "name": "ParentalUnit2",
             "userId": "me@vendia.net",
-            "region": "us-west-2"
+            "region": "us-west-2",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
         }
     ]
 }

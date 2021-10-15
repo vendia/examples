@@ -5,17 +5,38 @@
         {
             "name": "Shipper",
             "userId": "me@domain.com",
-            "region": "us-west-2"
+            "region": "us-west-2",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
         },
         {
             "name": "Carrier",
             "userId": "me@domain.com",
-            "region": "us-west-2"
+            "region": "us-west-2",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
         },
         {
             "name": "Consignee",
             "userId": "me@domain.com",
-            "region": "us-west-2"
+            "region": "us-west-2",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
         }
     ]
 }
