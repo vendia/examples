@@ -77,7 +77,7 @@ def add_to_share(
             ) {
                 error
                 result {
-                    id
+                    _id
                 }
             }
         }
@@ -127,7 +127,7 @@ def remove_from_share(
                 }
             ) {
                 InventoryItems {
-                    id
+                    _id
                 }
             }
         }
@@ -142,24 +142,24 @@ def remove_from_share(
     except Exception as e:
         raise Exception(f'Error: {str(e)}')
     
-    item_id = result['listInventoryItems']['InventoryItems'][0]['id']
+    item_id = result['listInventoryItems']['InventoryItems'][0]['_id']
 
     # Remove the item from Vendia Share
     params = {
-        "id": item_id
+        "_id": item_id
     }
 
     remove_query = gql(
         """
         mutation removeItem(
-            $id: ID!
+            $_id: ID!
         ) {
             removeInventoryItem_async(
-                id: $id
+                _id: $_id
             ) {
                 error
                 result {
-                    id
+                    _id
                 }
             }
         }
@@ -217,7 +217,7 @@ def update_in_share(
                 }
             ) {
                 InventoryItems {
-                    id
+                    _id
                 }
             }
         }
@@ -232,11 +232,11 @@ def update_in_share(
     except Exception as e:
         raise Exception(f'Error: {str(e)}')
     
-    item_id = result['listInventoryItems']['InventoryItems'][0]['id']
+    item_id = result['listInventoryItems']['InventoryItems'][0]['_id']
 
     # Update the item in Vendia Share
     params = {
-        "id": item_id,
+        "_id": item_id,
         "itemName": item_name,
         "itemNumber": item_number,
         "quantity": quantity,
@@ -247,7 +247,7 @@ def update_in_share(
     update_query = gql(
         """
         mutation updateItem(
-            $id: ID!,
+            $_id: ID!,
             $itemName: String!,
             $itemNumber: String!,
             $quantity: Int!,
@@ -255,7 +255,7 @@ def update_in_share(
             $tags: [String!]
         ) {
             putInventoryItem_async(
-                id: $id,
+                _id: $_id,
                 input: {
                     itemName: $itemName,
                     itemNumber: $itemNumber,
@@ -266,7 +266,7 @@ def update_in_share(
             ) {
                 error
                 result {
-                    id
+                    _id
                 }
             }
         }

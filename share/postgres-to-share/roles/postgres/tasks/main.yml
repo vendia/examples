@@ -140,7 +140,7 @@
               ) {
                 error
                 result {
-                  id
+                  _id
                 }
               }
           }
@@ -230,7 +230,7 @@
                 }
               ) {
                 InventoryItems {
-                  id
+                  _id
                 }
               }
           }
@@ -245,11 +245,11 @@
         except Exception as e:
           raise Exception(str(e))
         
-        item_id = result["listInventoryItems"]["InventoryItems"][0]["id"]
+        item_id = result["listInventoryItems"]["InventoryItems"][0]["_id"]
 
         # Update the item in Vendia Share
         update_params = {
-          "id": item_id,
+          "_id": item_id,
           "name": TD["new"]["name"],
           "sku": TD["new"]["sku"],
           "quantity": TD["new"]["quantity"],
@@ -259,14 +259,14 @@
         update_query = gql(
           """
           mutation updateItem(
-            $id: ID!,
+            $_id: ID!,
             $name: String!,
             $sku: String!,
             $quantity: Int!,
             $lastUpdated: String!
           ) {
             putInventoryItem_async(
-              id: $id,
+              id: $_id,
               input: {
                 name: $name,
                 sku: $sku,
@@ -276,7 +276,7 @@
             ) {
               error
               result {
-                id
+                _id
               }
             }
           }
@@ -361,7 +361,7 @@
                 }
               ) {
                 InventoryItems {
-                  id
+                  _id
                 }
               }
           }
@@ -376,24 +376,24 @@
         except Exception as e:
           raise Exception(str(e))
         
-        item_id = result["listInventoryItems"]["InventoryItems"][0]["id"]
+        item_id = result["listInventoryItems"]["InventoryItems"][0]["_id"]
 
         # Remove the item from Vendia Share
         delete_params = {
-          "id": item_id
+          "_id": item_id
         }
 
         delete_query = gql(
           """
           mutation removeItem(
-            $id: ID!
+            $_id: ID!
           ) {
             removeInventoryItem_async(
-              id: $id
+              id: $_id
             ) {
               error
               result {
-                id
+                _id
               }
             }
           }

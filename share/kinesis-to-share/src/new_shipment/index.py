@@ -114,7 +114,7 @@ def add_shipment(order_date, due_date,
             ) {
                 error
                 result {
-                    id
+                    _id
                 }
             }
 }

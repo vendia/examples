@@ -206,7 +206,7 @@ Execute the following query from the **DistributionCenter** GraphQL Explorer in 
 query listItems {
   listInventoryItems {
     InventoryItems {
-      id
+      _id
       name
       sku
       quantity
@@ -266,7 +266,7 @@ Let's go ahead and run the same GraphQL query we ran earlier to list inventory i
 query listItems {
   listInventoryItems {
     InventoryItems {
-      id
+      _id
       name
       sku
       quantity
@@ -276,7 +276,7 @@ query listItems {
 }
 ```
 
-This time, we should have data in our Uni as well.  The **name**, **sku**, **quantity**, and **lastUpdated** values should match the data we put into our `item` PostgreSQL table.  The **id** attribute is automatically created by Vendia Share.
+This time, we should have data in our Uni as well.  The **name**, **sku**, **quantity**, and **lastUpdated** values should match the data we put into our `item` PostgreSQL table.  The **_id** attribute is automatically created by Vendia Share.
 
 ```json
 {
@@ -284,21 +284,21 @@ This time, we should have data in our Uni as well.  The **name**, **sku**, **qua
     "listInventoryItems": {
       "InventoryItems": [
         {
-          "id": "017937a4-5f58-44cc-af38-3e4d5e4f8a04",
+          "_id": "017937a4-5f58-44cc-af38-3e4d5e4f8a04",
           "name": "Awesome Item 1",
           "sku": "aa1",
           "quantity": 100,
           "lastUpdated": "2021-05-04T13:49:48Z"
         },
         {
-          "id": "017937a4-6233-587b-9e97-0b85393f852c",
+          "_id": "017937a4-6233-587b-9e97-0b85393f852c",
           "name": "Awesome Item 2",
           "sku": "aa2",
           "quantity": 200,
           "lastUpdated": "2021-05-04T13:49:49Z"
         },
         {
-          "id": "017937a4-6438-d114-9b61-17f5f7eb6839",
+          "_id": "017937a4-6438-d114-9b61-17f5f7eb6839",
           "name": "Awesome Item 3",
           "sku": "aa3",
           "quantity": 300,
@@ -347,7 +347,7 @@ Let's go ahead and run the same GraphQL query we ran earlier to list inventory i
 query listItems {
   listInventoryItems {
     InventoryItems {
-      id
+      _id
       name
       sku
       quantity
@@ -365,21 +365,21 @@ The data update is reflected in our Uni as well.  The **quantity** for each item
     "listInventoryItems": {
       "InventoryItems": [
         {
-          "id": "017937ee-fa49-411a-cb3f-5c6b1f25c2e1",
+          "_id": "017937ee-fa49-411a-cb3f-5c6b1f25c2e1",
           "name": "Awesome Item 1",
           "sku": "aa1",
           "quantity": 1000,
           "lastUpdated": "2021-05-04T15:15:52Z"
         },
         {
-          "id": "017937ee-fd61-8f2b-99c2-94feada6e8c5",
+          "_id": "017937ee-fd61-8f2b-99c2-94feada6e8c5",
           "name": "Awesome Item 2",
           "sku": "aa2",
           "quantity": 2000,
           "lastUpdated": "2021-05-04T15:15:53Z"
         },
         {
-          "id": "017937ee-ffd6-58d4-5ca0-15c13e8592c4",
+          "_id": "017937ee-ffd6-58d4-5ca0-15c13e8592c4",
           "name": "Awesome Item 3",
           "sku": "aa3",
           "quantity": 3000,
@@ -426,7 +426,7 @@ Let's go ahead and run the same GraphQL query we ran earlier to list inventory i
 query listItems {
   listInventoryItems {
     InventoryItems {
-      id
+      _id
       name
       sku
       quantity
@@ -444,14 +444,14 @@ The data update is reflected in our Uni as well.  The item with the **name** `Aw
     "listInventoryItems": {
       "InventoryItems": [
         {
-          "id": "017937a4-6233-587b-9e97-0b85393f852c",
+          "_id": "017937a4-6233-587b-9e97-0b85393f852c",
           "name": "Awesome Item 2",
           "sku": "aa2",
           "quantity": 2000,
           "lastUpdated": "2021-05-04 14:18:50.116449"
         },
         {
-          "id": "017937a4-6438-d114-9b61-17f5f7eb6839",
+          "_id": "017937a4-6438-d114-9b61-17f5f7eb6839",
           "name": "Awesome Item 3",
           "sku": "aa3",
           "quantity": 3000,
