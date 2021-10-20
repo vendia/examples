@@ -173,7 +173,7 @@ def post_to_share(csv_file):
                             ) {
                                 error
                                 result {
-                                    id
+                                    _id
                                 }
                             }
                         }
