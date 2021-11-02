@@ -8,7 +8,7 @@
 
 This example will demonstrate how to authenticate requests to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis) using a SAML identity provider (IdP). The point is to illustrate that partners to a Uni can take advantage of existing IT investments like [Okta](https://www.okta.com/), [Ping Identity](https://www.pingidentity.com/), or [Active Directory Federation Services](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services) without needing to upset existing practices.
 
-AWS Single Sign-On will function as our SAML IdP in this example. We will demonstrate how Amazon Cognito can be configured to federate SAML and issue JWT tokens that are used to authenticate requests to Vendia Share.
+[Auth0](https://www.auth0.com) will function as our SAML IdP in this example. We will demonstrate how Amazon Cognito can be configured to federate SAML and issue JWT tokens that are used to authenticate requests to Vendia Share.
 
 ![saml-example Architecture](img/saml-example.png)
 
@@ -41,13 +41,6 @@ cd examples/share/saml-example
 ```
 
 Now that we've cloned the repository, [let's set up Auth0 as a SAML identity provider with an Amazon Cognito user pool](create-cup.md).
-
-# Configuring AWS Single Sign-On
-
-We will need to go through Step 1 and Step 2 identified in the [Amazon Single Sign-On User Guide](https://docs.aws.amazon.com/singlesignon/latest/userguide/step1.html). We will [manage identities in AWS SSO in our example](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-sso.html) for simplicity.
-
-**NOTE:** AWS SSO can federate with other directories like Microsoft AD. This example is 
-
 
 
 # Creating a 
