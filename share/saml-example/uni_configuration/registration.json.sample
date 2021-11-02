@@ -1,0 +1,19 @@
+{
+  "name": "test-saml-example",
+  "schema": "schema.json",
+  "nodes": [
+    {
+      "name": "DistributionCenter",
+      "userId": "me@domain.com",
+      "region": "us-east-2",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "COGNITO",
+            "authorizerArn": "arn:aws:cognito-idp:aws_region:123456789012:userpool/aws_region_someid"
+          }
+        }
+      }
+    }
+  ]
+}
