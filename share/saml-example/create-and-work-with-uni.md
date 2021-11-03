@@ -34,9 +34,9 @@ Make note of the `httpsUrl` of the **DistributionCenter** when the Uni gets to a
 Let's go ahead and set shell variables we'll be using to read and write data.
 
 ```bash
-% export GRAPHQL_URL="your-graphql-url"
+export GRAPHQL_URL="your-graphql-url"
 
-% export AUTHORIZATION_HEADER="id_token_from_previous_step"
+export AUTHORIZATION="id_token_from_previous_step"
 ```
 
 If the `id_token` has expired you will receive the error `{"message":"The incoming token has expired"}` when running GraphQL operations. 
@@ -48,10 +48,10 @@ If the `Authorization` header is not present you will receive the error `{"messa
 We have the ability to determine the properties of `InventoryItems` using GraphQL introspection.
 
 ```bash
-% curl ${GRAPHQL_URL} \
+curl ${GRAPHQL_URL} \
 -H 'Content-Type: application/json' \
 -H "Authorization: ${AUTHORIZATION}" \
---data-binary '{"query":"query InventoryItem {\n  __type(name: \"InventoryItem\") {\n    name\n    fields {\n      name\n      type {\n        name\n        kind\n      }\n    }\n  }\n}","variables":{}}' \
+--data-binary '{"query":"query InventoryItem {\n  __type(name: \"Self_InventoryItem\") {\n    name\n    fields {\n      name\n      type {\n        name\n        kind\n      }\n    }\n  }\n}","variables":{}}' \
 --compressed 
 ```
 
@@ -60,11 +60,11 @@ We have the ability to determine the properties of `InventoryItems` using GraphQ
 Our Uni will not have any `InventoryItems` in it since we did not populate it with `initState` data. However, we can still issue a valid GraphQL query to confirm authentication works as expected. We will need to make a request of our **DistributionCenter** `httpsUrl` GraphQL endpoint. This can be done using a GUI like the [Altair GraphQL Client](https://altair.sirmuel.design/) or even a command line utility like [curl](https://man7.org/linux/man-pages/man1/curl.1.html). The `Authorization` header must be present regardless of the utility used to make the GraphQL query.
 
 ```bash
-% curl ${GRAPHQL_URL} \
+curl ${GRAPHQL_URL} \
 -H 'Content-Type: application/json' \
 -H "Authorization: ${AUTHORIZATION}" \
---data-binary '{"query": "query listAllProducts {\n  listInventoryItems {\n    InventoryItems {\n      _id\n      itemName\n      itemNumber\n      quantity\n    }\n  }\n}","variables":{}}' \
---compressed  
+--data-binary '{"query":"query q {\n  list_InventoryItemItems {\n    _InventoryItemItems {\n      _id\n      itemName\n      itemNumber\n      quantity\n    }\n  }\n}","variables":{}}' \
+--compressed
 ```
 
 ## Writing Data to Our DistributionCenter Node
@@ -75,7 +75,8 @@ We can issue a mutation to write data to our Uni using a similar curl command.
 curl ${GRAPHQL_URL} \
 -H 'Content-Type: application/json' \
 -H "Authorization: ${AUTHORIZATION}" \
---data-binary '{"query":"mutation newItem($itemName: String!, $itemNumber: String!, $quantity: Int!) {\n  addInventoryItem_async(input: {itemName: $itemName, itemNumber: $itemNumber,  quantity: $quantity}) {\n    result {\n      _id\n    }\n  }\n}","variables":{"itemName":"foo bar","itemNumber":"abc123","quantity":100}}' \ --compressed
+--data-binary '{"query":"mutation newItem($itemName: String!, $itemNumber: String!, $quantity: Int!) {\n  add_InventoryItem_async(input: {itemName: $itemName, itemNumber: $itemNumber,  quantity: $quantity}) {\n    result {\n      _id\n    }\n  }\n}","variables":{"itemName":"foo bar","itemNumber":"abc123","quantity":100}}' \
+--compressed
 ```
 
 We should see an `_id` value, indicating the write was successful. A subsequent `listAllProducts` query should show our new item.
@@ -84,7 +85,7 @@ We should see an `_id` value, indicating the write was successful. A subsequent 
 curl ${GRAPHQL_URL} \
 -H 'Content-Type: application/json' \
 -H "Authorization: ${AUTHORIZATION}" \
---data-binary '{"query": "query listAllProducts {\n  listInventoryItems {\n    InventoryItems {\n      _id\n      itemName\n      itemNumber\n      quantity\n    }\n  }\n}","variables":{}}' \
+--data-binary '{"query":"query q {\n  list_InventoryItemItems {\n    _InventoryItemItems {\n      _id\n      itemName\n      itemNumber\n      quantity\n    }\n  }\n}","variables":{}}' \
 --compressed
 ```
 
