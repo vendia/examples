@@ -40,4 +40,4 @@ git clone https://github.com/vendia/examples.git
 cd examples/share/saml-example
 ```
 
-Now that we've cloned the repository, [let's set up Auth0 as a SAML identity provider with an Amazon Cognito user pool](create-cup.md).
+Now that we've cloned the repository, [let's set up Auth0 as a SAML identity provider with an Amazon Cognito user pool](./auth0-saml-provider-amazon-cup.md).
