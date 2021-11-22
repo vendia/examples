@@ -13,7 +13,7 @@ Parameters:
 
 Globals:
   Function:
-    Runtime: python3.8
+    Runtime: python3.9
     Timeout: 60
     Handler: index.handler
     MemorySize: 256
@@ -24,11 +24,12 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-csv-bucket
-  
-  # AWS SNS Topic that will receive failures
-  # NotificationTopic:
-  #   Type: AWS::SNS::Topic
-
+ 
+  CsvProcessingLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${CsvProcessingFunction}
+      RetentionInDays: 14
   
   # AWS Lambda Function that processes CSV data
   CsvProcessingFunction:

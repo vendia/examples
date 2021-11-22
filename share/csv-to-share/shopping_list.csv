@@ -1,5 +1,5 @@
-item,quantity,recommendedLocation,bought,timestampAdded,timestampPurchased
-"Cherries","1 lb","Green Grocer",false,"2021-01-01T00:00:00Z",""
-"Apples","1 lb","Green Grocer",false,"2021-01-01T00:00:00Z",""
-"Ice Cream","2 pints","Dairy Depot",false,"2021-01-02T00:00:00Z",""
-"Ice Pops","1 box","Ice House",false,"2021-01-03T00:00:00Z",""
+item,quantity,recommendedLocation,bought,timestampAdded
+"Cherries","1 lb","Green Grocer",false,"2021-01-01T00:00:00Z"
+"Apples","1 lb","Green Grocer",false,"2021-01-01T00:00:00Z"
+"Ice Cream","2 pints","Dairy Depot",false,"2021-01-02T00:00:00Z"
+"Ice Pops","1 box","Ice House",false,"2021-01-03T00:00:00Z"
