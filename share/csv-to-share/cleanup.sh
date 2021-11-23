@@ -29,11 +29,5 @@ echo
 echo "Deleting CloudFormation stack..." && aws cloudformation delete-stack \
   --stack-name ${STACK_NAME} --region ${REGION} --profile ${PROFILE}
 
-echo "Clearing out CloudWatch Log Groups..." && for LOG_GROUP in $(aws logs describe-log-groups --log-group-name-prefix '/aws/lambda/csv-to-share-' --query "logGroups[*].logGroupName" --output text --region ${REGION} --profile ${PROFILE}); do
-  echo "Removing log group ${LOG_GROUP}..."
-  aws logs delete-log-group --log-group-name ${LOG_GROUP} --region ${REGION} --profile ${PROFILE}
-  echo
-done
-
 echo "Removing Vendia Share uni ${UNI_NAME}"
 share uni delete --uni ${UNI_NAME} --force

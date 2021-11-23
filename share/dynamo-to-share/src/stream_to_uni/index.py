@@ -66,7 +66,7 @@ def add_to_share(
             $unitPrice: Float!,
             $tags: [String!]
         ) {
-            addInventoryItem_async(
+            add_Inventory_async(
                 input: {
                     itemName: $itemName,
                     itemNumber: $itemNumber,
@@ -119,14 +119,14 @@ def remove_from_share(
         query listItem(
             $itemNumber: String!
         ) {
-            listInventoryItems(
+            list_InventoryItems(
                 filter: {
                     itemNumber: {
                         eq: $itemNumber
                     }
                 }
             ) {
-                InventoryItems {
+                _InventoryItems {
                     _id
                 }
             }
@@ -142,7 +142,7 @@ def remove_from_share(
     except Exception as e:
         raise Exception(f'Error: {str(e)}')
     
-    item_id = result['listInventoryItems']['InventoryItems'][0]['_id']
+    item_id = result['list_InventoryItems']['_InventoryItems'][0]['_id']
 
     # Remove the item from Vendia Share
     params = {
@@ -154,8 +154,8 @@ def remove_from_share(
         mutation removeItem(
             $_id: ID!
         ) {
-            removeInventoryItem_async(
-                _id: $_id
+            remove_Inventory_async(
+                id: $_id
             ) {
                 error
                 result {
@@ -209,14 +209,14 @@ def update_in_share(
         query listItem(
             $itemNumber: String!
         ) {
-            listInventoryItems(
+            list_InventoryItems(
                 filter: {
                     itemNumber: {
                         eq: $itemNumber
                     }
                 }
             ) {
-                InventoryItems {
+                _InventoryItems {
                     _id
                 }
             }
@@ -232,7 +232,7 @@ def update_in_share(
     except Exception as e:
         raise Exception(f'Error: {str(e)}')
     
-    item_id = result['listInventoryItems']['InventoryItems'][0]['_id']
+    item_id = result['list_InventoryItems']['_InventoryItems'][0]['_id']
 
     # Update the item in Vendia Share
     params = {
@@ -254,8 +254,8 @@ def update_in_share(
             $unitPrice: Float!,
             $tags: [String!]
         ) {
-            putInventoryItem_async(
-                _id: $_id,
+            put_Inventory_async(
+                id: $_id,
                 input: {
                     itemName: $itemName,
                     itemNumber: $itemNumber,
