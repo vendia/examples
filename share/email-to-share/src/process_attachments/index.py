@@ -128,7 +128,7 @@ def post_to_share(csv_file):
                         """
                         mutation addShipment(
                             $orderDate: String!,
-                            $status: String!,
+                            $status: Self_Shipment_statusEnum!,
                             $shipperName: String!,
                             $shipperAddress: String!,
                             $shipperCity: String!,
@@ -151,9 +151,9 @@ def post_to_share(csv_file):
                             $consigneePhone: String!,
                             $consigneeEmail: String!,
                             $location: [Float!],
-                            $goods: [goods_elementInput!]
+                            $goods: [Self_Shipment_goods_goodsItem_Input_!]
                         ) {
-                            addShipment_async(
+                            add_Shipment_async(
                                 input: {
                                     orderDate: $orderDate,
                                     status: $status,
