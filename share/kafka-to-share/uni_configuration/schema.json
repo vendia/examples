@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://vendia.net/schemas/solutions/eventbridge-to-share.json",
-    "title": "email-to-share",
-    "description": "Example for submitting data to a Uni via Amazon EventBridge",
+    "$id": "http://vendia.net/schemas/solutions/kafka-to-share.json",
+    "title": "kafka-to-share",
+    "description": "Example for submitting data to a Uni via Kafka",
     "type": "object",
     "properties": {
         "Shipment": {
