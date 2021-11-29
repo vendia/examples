@@ -3,7 +3,7 @@
     "schema": "schema.json",
     "nodes": [
         {
-            "name": "Shipper",
+            "name": "Consignee",
             "userId": "me@domain.com",
             "region": "us-west-2",
             "settings": {
@@ -16,18 +16,6 @@
         },
         {
             "name": "Carrier",
-            "userId": "me@domain.com",
-            "region": "us-west-2",
-            "settings": {
-                "apiSettings": {
-                    "auth": {
-                        "authorizerType": "API_KEY"
-                    }
-                }
-            }
-        },
-        {
-            "name": "Consignee",
             "userId": "me@domain.com",
             "region": "us-west-2",
             "settings": {

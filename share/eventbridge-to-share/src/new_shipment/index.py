@@ -83,7 +83,7 @@ def add_shipment(order_date, due_date,
         mutation addShipment(
             $orderDate: String!,
             $dueDate: String!,
-            $shipmentStatus: String!,
+            $shipmentStatus: Self_Shipment_shipmentStatusEnum,
             $consigneeName: String!,
             $consigneeAddress: String!,
             $consigneeCity: String!,
@@ -94,7 +94,7 @@ def add_shipment(order_date, due_date,
             $consigneeSpecialInstructions: String!,
             $purchaseOrder: String!,
         ) {
-            addShipment_async(
+            add_Shipment_async(
                 input: {
                     orderDate: $orderDate,
                     dueDate: $dueDate,
