@@ -1,2 +1,2 @@
 DELETE FROM item
-WHERE sku = 'aa1';
+WHERE itemNumber = 'aa1';

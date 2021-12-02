@@ -13,6 +13,8 @@
     - postgresql
     - postgresql-plpython3
     - python3-pip
+    - python3-dev
+    - gcc
 
 - name: Ensure pip packages are installed
   pip:
@@ -31,9 +33,6 @@
   become_user: postgres
   postgresql_db:
     name: "{{ dbname }}"
-    encoding: 'UTF-8'
-    lc_collate: 'en_US.UTF-8'
-    lc_ctype: 'en_US.UTF-8'
     template: 'template0'
     state: present
 
@@ -55,10 +54,10 @@
     db: "{{ dbname }}"
     table: "{{ dbtable }}"
     columns:
-    - name text
-    - sku text primary key
+    - itemname text
+    - itemnumber text primary key
     - quantity int
-    - last_updated timestamp
+    - lastupdated timestamp
 
 - name: Ensure database user exists
   become_user: postgres
@@ -112,28 +111,28 @@
 
         # Manipulate last_protected to adhere to
         # JSON Schema date-time format
-        last_updated = TD["new"]["last_updated"].replace(" ", "T")
-        last_updated = last_updated.split(".")[0] + "Z"
+        lastupdated = TD["new"]["lastupdated"].replace(" ", "T")
+        lastupdated = lastupdated.split(".")[0] + "Z"
         
         params = {
-          "name": TD["new"]["name"],
-          "sku": TD["new"]["sku"],
+          "itemName": TD["new"]["itemname"],
+          "itemNumber": TD["new"]["itemnumber"],
           "quantity": TD["new"]["quantity"],
-          "lastUpdated": last_updated
+          "lastUpdated": lastupdated
         }
 
         query = gql(
           """
           mutation addItem(
-            $name: String!,
-            $sku: String!,
+            $itemName: String!,
+            $itemNumber: String!,
             $quantity: Int!,
             $lastUpdated: String!
           ) {
-              addInventoryItem_async(
+              add_Inventory_async(
                 input: {
-                  name: $name,
-                  sku: $sku,
+                  itemName: $itemName,
+                  itemNumber: $itemNumber,
                   quantity: $quantity,
                   lastUpdated: $lastUpdated
                 }
@@ -210,26 +209,26 @@
 
         # Manipulate last_protected to adhere to
         # JSON Schema date-time format
-        last_updated = TD["new"]["last_updated"].replace(" ", "T")
-        last_updated = last_updated.split(".")[0] + "Z"
+        lastupdated = TD["new"]["lastupdated"].replace(" ", "T")
+        lastupdated = lastupdated.split(".")[0] + "Z"
 
         search_params = {
-          "sku": TD["new"]["sku"]
+          "itemNumber": TD["new"]["itemnumber"]
         }
 
         search_query = gql(
           """
           query listItem(
-            $sku: String!
+            $itemNumber: String!
           ) {
-              listInventoryItems(
+              list_InventoryItems(
                 filter: {
-                  sku: {
-                    eq: $sku
+                  itemNumber: {
+                    eq: $itemNumber
                   }
                 }
               ) {
-                InventoryItems {
+                _InventoryItems {
                   _id
                 }
               }
@@ -245,31 +244,31 @@
         except Exception as e:
           raise Exception(str(e))
         
-        item_id = result["listInventoryItems"]["InventoryItems"][0]["_id"]
+        item_id = result["list_InventoryItems"]["_InventoryItems"][0]["_id"]
 
         # Update the item in Vendia Share
         update_params = {
           "_id": item_id,
-          "name": TD["new"]["name"],
-          "sku": TD["new"]["sku"],
+          "itemName": TD["new"]["itemname"],
+          "itemNumber": TD["new"]["itemnumber"],
           "quantity": TD["new"]["quantity"],
-          "lastUpdated": last_updated
+          "lastUpdated": lastupdated
         }
 
         update_query = gql(
           """
           mutation updateItem(
             $_id: ID!,
-            $name: String!,
-            $sku: String!,
+            $itemName: String!,
+            $itemNumber: String!,
             $quantity: Int!,
             $lastUpdated: String!
           ) {
-            putInventoryItem_async(
+            put_Inventory_async(
               id: $_id,
               input: {
-                name: $name,
-                sku: $sku,
+                itemName: $itemName,
+                itemNumber: $itemNumber,
                 quantity: $quantity,
                 lastUpdated: $lastUpdated
               }
@@ -294,6 +293,7 @@
       ' LANGUAGE plpython3u;
 
 - name: Drop trigger for item updates if it already exists
+  become: yes
   become_user: postgres
   postgresql_query:
     db: "{{ dbname }}"
@@ -301,6 +301,7 @@
       DROP TRIGGER IF EXISTS update_in_share on {{ dbtable }};
 
 - name: Create trigger for item updates
+  become: yes
   become_user: postgres
   postgresql_query:
     db: "{{ dbname }}"
@@ -311,6 +312,7 @@
         EXECUTE FUNCTION update_in_share();
 
 - name: Create function remove_from_share
+  become: yes
   become_user: postgres
   postgresql_query:
     db: "{{ dbname }}"
@@ -345,22 +347,22 @@
         )
 
         search_params = {
-          "sku": TD["old"]["sku"]
+          "itemNumber": TD["old"]["itemnumber"]
         }
 
         search_query = gql(
           """
           query listItem(
-            $sku: String!
+            $itemNumber: String!
           ) {
-              listInventoryItems(
+              list_InventoryItems(
                 filter: {
-                  sku: {
-                    eq: $sku
+                  itemNumber: {
+                    eq: $itemNumber
                   }
                 }
               ) {
-                InventoryItems {
+                _InventoryItems {
                   _id
                 }
               }
@@ -376,7 +378,7 @@
         except Exception as e:
           raise Exception(str(e))
         
-        item_id = result["listInventoryItems"]["InventoryItems"][0]["_id"]
+        item_id = result["list_InventoryItems"]["_InventoryItems"][0]["_id"]
 
         # Remove the item from Vendia Share
         delete_params = {
@@ -388,7 +390,7 @@
           mutation removeItem(
             $_id: ID!
           ) {
-            removeInventoryItem_async(
+            remove_Inventory_async(
               id: $_id
             ) {
               error
