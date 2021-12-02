@@ -4,8 +4,8 @@
     "description": "Store inventory data",
     "type": "object",
     "properties": {
-      "InventoryItem": {
-        "description": "Inventory items",
+      "Inventory": {
+        "description": "Inventory",
         "type": "array",
         "items": {
           "type": "object",
