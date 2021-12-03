@@ -7,7 +7,7 @@ Description: >
 Globals:
   Function:
     Timeout: 30
-    Runtime: python3.8
+    Runtime: python3.9
     Tracing: Active
 
 Parameters:
@@ -17,11 +17,11 @@ Parameters:
 
   ShareGraphqlUrl:
     Type: String
-    Description: The Vendia Share GraphQL URL used to store email data on-chain.
+    Description: Vendia Share GraphQL URL
   
   ShareGraphqlApiKey:
     Type: String
-    Description: The API key associated with the Vendia Share GraphQL URL.
+    Description: Vendia Share GraphQL API Key
 
 Resources:
   EmailBucket:

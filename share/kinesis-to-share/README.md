@@ -6,9 +6,9 @@
 
 # kinesis-to-share
 
-This example will demonstrate how to publish data from [Amazon Kinesis](https://aws.amazon.com/kinesis/) to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis).  The point is to illustrate that partners to a Uni can take advantage of existing services they may already use, like Amazon Kinesis, to share information with partners.  In our scenario, a **Consignee** is placing an order for goods that should be published to a Uni that is comprised of a **Consignee**, **Shipper**, and **Carrier**.  In our scenario, the **Consignee** uses an order system that integrates with Amazon Kinesis.
+This example will demonstrate how to publish data from [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/) to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis).  The point is to illustrate that partners to a Uni can take advantage of existing services they may already use, like Amazon Kinesis, to share information with partners.  In our scenario, a **Consignee** is placing an order for goods that should be published to a Uni that is comprised of a **Consignee** and **Carrier**.  In our scenario, the **Consignee** uses an order system that integrates with Amazon Kinesis.
 
-We will deploy the example using the [Vendia Share Command Line Interface (CLI)](https://vendia.net/docs/share/cli) and the [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html).  Serverless resources like a [Kinesis](https://aws.amazon.com/kinesis/) stream and [AWS Lambda](https://aws.amazon.com/lambda/) function will be deployed.  Data will be published to an Kinesis stream via [generator.py](./generator.py), a Python3 script.  This, in turn, will trigger a Lambda function to parse order data and publish it to our node in the Vendia Share Uni.
+We will deploy the example using the [Vendia Share Command Line Interface (CLI)](https://vendia.net/docs/share/cli) and the [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html).  Serverless resources like a [Kinesis](https://aws.amazon.com/kinesis/) stream and [AWS Lambda](https://aws.amazon.com/lambda/) function will be deployed.  Data will be published to a Kinesis stream via [generator.py](./generator.py), a Python3 script.  This, in turn, will trigger a Lambda function to parse order data and publish it to our node in the Vendia Share Uni.
 
 ![kinesis-to-share Architecture](img/kinesis-to-share.png)
 
@@ -82,7 +82,7 @@ share get --uni test-kinesis-to-share
 
 Make note of the **Consignee** node's graphqlApi `httpsUrl` and `apiKey`.  Our serverless application will interact with **Consignee** using this information.
 
-Once the Uni is deployed we can deploy our serverless application to parse the uploaded CSV and publish data to our **Consignee** node.
+Once the Uni is deployed we can deploy our serverless application to parse the stream data and publish it to our **Consignee** node.
 
 # Deploying the Serverless Application
 
@@ -123,9 +123,9 @@ Once the serverless application is deployed, let's verify there is no data store
 
 ```graphql
 query listShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       dueDate
       shipmentStatus
@@ -150,7 +150,7 @@ query listShipments {
 }
 ```
 
-![Blank Query Result - Consignee](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/kinesis-to-share/01-empty-uni.png)
+<img width="1413" alt="01-empty-uni" src="https://user-images.githubusercontent.com/71095088/143929289-7f06fb3a-cf73-41e9-9119-1f1bd9bf5c91.png" />
 
 ## Publish Events to our Order Stream
 
@@ -168,9 +168,9 @@ Now that we've sent over to our **Order bus**, we should have updated results in
 
 ```graphql
 query listShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       dueDate
       shipmentStatus
@@ -195,7 +195,7 @@ query listShipments {
 }
 ```
 
-![Query with Results - Consignee](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/kinesis-to-share/02-data-in-uni.png)
+<img width="1477" alt="02-data-in-uni" src="https://user-images.githubusercontent.com/71095088/143930885-297e090b-6f3b-4a21-a7c1-96b7861982b5.png" />
 
 
 # Cleaning Up the Solution

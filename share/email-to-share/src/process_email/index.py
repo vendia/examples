@@ -11,8 +11,7 @@ from aws_lambda_powertools import Logger
 from aws_lambda_powertools import Tracer
 import boto3
 import botocore
-from gql import gql, Client
-from gql.transport.requests import RequestsHTTPTransport
+
 
 urllib3.disable_warnings()
 

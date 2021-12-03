@@ -6,21 +6,21 @@
 
 # kafka-to-share
 
-This example will demonstrate how to send scalar data from a [Apache Kafka](https://kafka.apache.org/) topic to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis).  
+This example will demonstrate how to send scalar data from a [Apache Kafka](https://kafka.apache.org/) topic to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis).
 
-Why?  Couldn't we just publish data from an application to a Vendia Share Uni directly?
+Why? Couldn't we just publish data from an application to a Vendia Share Uni directly?
 
 **Absolutely!**
 
-It is possible to use the GraphQL APIs associated with each node of your Uni.  However, you may already have an application that is publishing data to Apache Kafka.  The purpose of this example is to demonstrate that Vendia Share can plug in to existing systems you may already have deployed in your environment.  In our scenario, a **Consignee** is placing an order for goods that should be published to a Uni that is comprised of a **Consignee**, **Shipper**, and **Carrier**.  In our scenario, the **Consignee** uses an order system that integrates with Kafka.
+It is possible to use the GraphQL APIs associated with each node of your Uni. However, you may already have an application that is publishing data to Apache Kafka. The purpose of this example is to demonstrate that Vendia Share can plug in to existing systems you may already have deployed in your environment. In our scenario, a **Consignee** is placing an order for goods that should be published to a Uni that is comprised of a **Consignee**, **Shipper**, and **Carrier**. In our scenario, the **Consignee** uses an order system that integrates with Kafka.
 
-We will deploy the example using the [Vendia Share Command Line Interface (CLI)](https://vendia.net/docs/share/cli) along with [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Hashicorp Vagrant](https://www.vagrantup.com), and [Ansible](https://www.ansible.com/).  Data added to a Kafka topic by a producer will consumed by a consumer that publishes data to a Uni's node.
+We will deploy the example using the [Vendia Share Command Line Interface (CLI)](https://vendia.net/docs/share/cli) along with [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Hashicorp Vagrant](https://www.vagrantup.com), and [Ansible](https://www.ansible.com/). Data added to a Kafka topic by a producer will consumed by a consumer that publishes data to a Uni's node.
 
 ![kafka-to-share Architecture](img/kafka-to-share.png)
 
-For this example, we will use a virtual machine that can be deployed to a local computer.  The same pattern can be applied to a cloud-hosted virtual machine or on-premise server.
+For this example, we will use a virtual machine that can be deployed to a local computer. The same pattern can be applied to a cloud-hosted virtual machine or on-premise server.
 
-**DISCLAIMER:** The following example uses [Confluent Platform Community Components](https://docs.confluent.io/platform/current/quickstart/cos-quickstart.html) and is used for development environments.  Please consult with your security and operations teams to ensure you are conforming to any standards in place set by your organization for your Kafka deployment.
+**DISCLAIMER:** The following example uses [Confluent Platform Community Components](https://docs.confluent.io/platform/current/quickstart/cos-quickstart.html) and is used for development environments. Please consult with your security and operations teams to ensure you are conforming to any standards in place set by your organization for your Kafka deployment.
 
 # Pre-requisites
 
@@ -77,22 +77,22 @@ If you are not already logged in to the share service you do so by running [`sha
 share login
 ```
 
-The `share uni create` command can be used to deploy our Uni.  You will need to copy the file `registration.json.sample` to `registration.json`.  Pick a unique `name` for your uni that begins with `test-` - by default all unis share a common namespace so here is your chance to get creative.  Update the `userId` attribute of each node to reflect your Vendia Share email address.
+The `share uni create` command can be used to deploy our Uni. You will need to copy the file `registration.json.sample` to `registration.json`. Pick a unique `name` for your uni that begins with `test-` - by default all unis share a common namespace so here is your chance to get creative. Update the `userId` attribute of each node to reflect your Vendia Share email address.
 
 ```bash
 cd uni_configuration
 share uni create --config registration.json
 ```
 
-The Uni will take several minutes to deploy.  We can check on its status in the Vendia Share web application or with the `share` CLI.
+The Uni will take several minutes to deploy. We can check on its status in the Vendia Share web application or with the `share` CLI.
 
-**NOTE:** The name of your uni will be different.  Adjust the name accordingly.
+**NOTE:** The name of your uni will be different. Adjust the name accordingly.
 
 ```bash
 share get --uni test-kafka-to-share
 ```
 
-Make note of the **Consignee** node's graphqlApi `httpsUrl` and `apiKey`.  Our virtual machine will interact with **Consignee** using this information.
+Make note of the **Consignee** node's graphqlApi `httpsUrl` and `apiKey`. Our virtual machine will interact with **Consignee** using this information.
 
 Once the Uni is deployed we can deploy our Vagrant virtual machine.
 
@@ -100,14 +100,14 @@ Once the Uni is deployed we can deploy our Vagrant virtual machine.
 
 Vagrant and Ansible are used to deploy a `ubuntu/focal64` VirtualBox virtual machine image with the necessary services to run Kafka.
 
-**NOTE:** You will need to copy the file `kafka-to-share/roles/kafka/vars/main.yml.sample` to `kafka-to-share/roles/kafka/vars/main.yml` and update the `share_node_url` and `share_node_api_key` variables in the file `kafka-to-share/roles/kafka/vars/main.yml` before running the commands below.  Failure to do so will prevent data from being published from the Kafka virtual machine to the **Consignee** node in Vendia Share.
+**NOTE:** You will need to copy the file `kafka-to-share/roles/kafka/vars/main.yml.sample` to `kafka-to-share/roles/kafka/vars/main.yml` and update the `share_node_url` and `share_node_api_key` variables in the file `kafka-to-share/roles/kafka/vars/main.yml` before running the commands below. Failure to do so will prevent data from being published from the Kafka virtual machine to the **Consignee** node in Vendia Share.
 
 ```bash
 cd .. # If you're not already in the root of the kafka-to-share example
 vagrant up kafka
 ```
 
-In a few minutes, a Vagrant virtual machine named `kafka` will be available.  You can run the following command to confirm it is up and available.
+In a few minutes, a Vagrant virtual machine named `kafka` will be available. You can run the following command to confirm it is up and available.
 
 ```bash
 vagrant status kafka
@@ -139,7 +139,7 @@ We used Ansible and Vagrant to:
 
 ## Verify There Is No Data in the Uni
 
-Once our Uni is deployed, let's verify there is no data stored in it.  Execute the following query from the **Consignee** GraphQL Explorer.
+Once our Uni is deployed, let's verify there is no data stored in it. Execute the following query from the **Consignee** GraphQL Explorer.
 
 ```graphql
 query listShipments {
@@ -170,11 +170,11 @@ query listShipments {
 }
 ```
 
-![Blank Query Result - Consignee](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/kafka-to-share/01-empty-uni.png)
+<img width="1413" alt="01-empty-uni" src="https://user-images.githubusercontent.com/71095088/143913396-47e39dbd-4794-452d-8b4d-9e07ce500f32.png" />
 
 ## Publish and Consume Orders on our Kafka Server
 
-We will connect to our `kafka` virtual machine and run our *consumer.py* script.  This script will collect orders that are published to our **orders** Kafka topic and publish them to our Uni.
+We will connect to our `kafka` virtual machine and run our *consumer.py* script. This script will collect orders that are published to our **orders** Kafka topic and publish them to our Uni.
 
 ```bash
 # From our workstation
@@ -184,7 +184,7 @@ vagrant ssh kafka
 python3 consumer.py 
 ```
 
-In a second shell, we will connect to  our `kafka` virtual machine and run our *producer.py* script.  This script will generate fake order data.
+In a second shell, we will connect to  our `kafka` virtual machine and run our *producer.py* script. This script will generate fake order data.
 
 ```bash
 # From our workstation
@@ -210,13 +210,13 @@ Put shipment with purchase order PO OhDa63672964 to https://xgmbcuijcb.execute-a
 
 ## Verify There Is Data in the Uni
 
-Now that we've sent over to our **orders** topic, we should have updated query results in our Uni.  Execute the same query we ran earlier from the **Consignee** GraphQL Explorer.
+Now that we've sent over to our **orders** topic, we should have updated query results in our Uni. Execute the same query we ran earlier from the **Consignee** GraphQL Explorer.
 
 ```graphql
 query listShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       dueDate
       shipmentStatus
@@ -241,11 +241,11 @@ query listShipments {
 }
 ```
 
-![Query with Results - Consignee](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/kafka-to-share/02-data-in-uni.png)
+<img width="1414" alt="02-data-in-uni" src="https://user-images.githubusercontent.com/71095088/143913911-c12d96b4-76dc-4899-b60b-80be04ff89b9.png" />
 
 # Cleaning Up the Solution
 
-Run the `cleanup.sh` script to destroy the `kafka` virtual machine and the Vendia Share Uni.
+Run the `cleanup.sh` script from your workstation to destroy the `kafka` virtual machine and the Vendia Share Uni.
 
 ```bash
 # Replace test-kafka-to-share with the name of your Uni

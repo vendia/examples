@@ -15,7 +15,7 @@ let
 		],
 
     //The Query JSON is escaped with double quotes and presented as a single line.
-    Query=Text.ToBinary("{""query"": ""query ListItems { listInventoryItems { InventoryItems { id itemName itemNumber quantity}}}""}"),
+    Query=Text.ToBinary("{""query"": ""query ListItems { list_InventoryItems { _InventoryItems { _id itemName itemNumber quantity}}}""}"),
     //Execute the Query
     Source = Web.Contents(UniEndpoint,	[Headers=Headers, Content=Query]),
     //Store the Resulting DataSet

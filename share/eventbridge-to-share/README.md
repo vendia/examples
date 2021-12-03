@@ -6,7 +6,7 @@
 
 # eventbridge-to-share
 
-This example will demonstrate how to publish data from [Amazon EventBridge](https://aws.amazon.com/eventbridge/) to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis).  The point is to illustrate that partners to a Uni can take advantage of existing services they may already use, like Amazon EventBridge, to share information with partners.  In our scenario, a **Consignee** is placing an order for goods that should be published to a Uni that is comprised of a **Consignee**, **Shipper**, and **Carrier**.  In our scenario, the **Consignee** uses an order system that integrates with Amazon EventBridge.
+This example will demonstrate how to publish data from [Amazon EventBridge](https://aws.amazon.com/eventbridge/) to a [Vendia Share Uni](https://vendia.net/docs/share/dev-and-use-unis).  The point is to illustrate that partners to a Uni can take advantage of existing services they may already use, like Amazon EventBridge, to share information with partners.  In our scenario, a **Consignee** is placing an order for goods that should be published to a Uni that is comprised of a **Consignee** and **Carrier**.  In our scenario, the **Consignee** uses an order system that integrates with Amazon EventBridge.
 
 We will deploy the example using the [Vendia Share Command Line Interface (CLI)](https://vendia.net/docs/share/cli) and the [AWS Serverless Application Model (SAM)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html).  Serverless resources like a [EventBridge](https://aws.amazon.com/eventbridge/) bus and rule and [AWS Lambda](https://aws.amazon.com/lambda/) function will be deployed.  Data will be published to an EventBridge bus via the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  A rule will be matched and trigger a Lambda function to parse order data and publish it to our node in the Vendia Share Uni.
 
@@ -77,7 +77,7 @@ Once the Uni is deployed we can deploy our serverless application to parse the u
 
 # Deploying the Serverless Application
 
-The default serverless application deploys a [AWS EventBridge](https://aws.amazon.com/eventbridge/) bus with a rule to trigger a Lambda function when a new order is added from a fictitious source application, consignee.orderapp.
+The default serverless application deploys a [AWS EventBridge](https://aws.amazon.com/eventbridge/) bus with a rule to trigger a Lambda function when a new order is added from a fictitious source application, _consignee.orderapp_.
 
 ## Build
 
@@ -112,9 +112,9 @@ Once the serverless application is deployed, let's verify there is no data store
 
 ```graphql
 query listShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       dueDate
       shipmentStatus
@@ -139,14 +139,14 @@ query listShipments {
 }
 ```
 
-![Blank Query Result - Consignee](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/eventbridge-to-share/01-empty-uni.png)
+<img width="1413" alt="01-empty-uni" src="https://user-images.githubusercontent.com/71095088/143903235-5cadf653-ee92-41f1-aeb0-934f2a4e4953.png" />
 
 ## Publish Events to our Order Bus
 
 You can publish a sample event to our **Order bus** using the AWS CLI.
 
 ```bash
-aws events put-events --entries file://new_order.json
+aws events put-events --entries file://new_order.json --region consignee_aws_region
 ```
 
 The **Order bus** has a rule associated with it.  Any message that has a *source* of `consignee.orderapp` and a *detail-type* of `new order` will trigger a AWS Lambda function to be invoked.  The function will parse the event and POST the data to the **Consignee** GraphQL endpoint.
@@ -164,9 +164,9 @@ Now that we've sent over to our **Order bus**, we should have updated results in
 
 ```graphql
 query listShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       dueDate
       shipmentStatus
@@ -191,7 +191,7 @@ query listShipments {
 }
 ```
 
-![Query with Results - Consignee](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/eventbridge-to-share/02-data-in-uni.png)
+<img width="1413" alt="02-data-in-uni" src="https://user-images.githubusercontent.com/71095088/143906521-5f860d3a-a2ae-45fe-8b03-dca8b9dfce5c.png" />
 
 
 # Cleaning Up the Solution

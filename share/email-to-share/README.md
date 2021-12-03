@@ -118,9 +118,9 @@ Once the serverless application is deployed, let's verify there is no data store
 
 ```graphql
 query listAllShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       shipperName
       shipperAddress
@@ -148,13 +148,13 @@ query listAllShipments {
 }
 ```
 
-![Blank Query Result - Shipper](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/email-to-share/01-empty-uni.png)
+<img width="1413" alt="01-empty-uni" src="https://user-images.githubusercontent.com/71095088/143316272-c4f2dd9f-443f-45a6-836c-04b635c6faf5.png" />
 
 ## Email Test CSV File
 
 You can attach the [test-shipment-data.csv](./test-shipment-data.csv) file to an email message and send it to `EmailAddress`.
 
-![Sending Email to Recipient Address](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/email-to-share/02-sending-email.png)
+<img width="595" alt="02-sending-email" src="https://user-images.githubusercontent.com/71095088/143316948-eed83e66-ebc9-4908-a08c-26d06b6d5ac3.png" />
 
 ## Verify There Is Data in the Uni
 
@@ -162,9 +162,9 @@ Now that we've sent over our CSV, we should have updated results in our Uni.  Ex
 
 ```graphql
 query listAllShipments {
-  listShipments {
-    Shipments {
-      id
+  list_ShipmentItems {
+    _ShipmentItems {
+      _id
       orderDate
       shipperName
       shipperAddress
@@ -192,8 +192,7 @@ query listAllShipments {
 }
 ```
 
-![Query with Results - Shipper](https://d24nhiikxn5jns.cloudfront.net/images/github-examples/email-to-share/03-data-in-uni.png)
-
+<img width="1413" alt="03-data-in-uni" src="https://user-images.githubusercontent.com/71095088/143318968-5d47d7af-e2d0-472c-83b4-32643ace46d8.png" />
 
 # Cleaning Up the Solution
 

@@ -39,7 +39,7 @@ gql_client = Client(
 schema_query = gql(
     """
     query schemaDefinition {
-        get_UniInfo {
+        getVendia_UniInfo {
             schema
         }
     }
@@ -48,7 +48,7 @@ schema_query = gql(
 
 
 result = gql_client.execute(schema_query)
-schema = json.loads(result['get_UniInfo']['schema'])
+schema = json.loads(result['getVendia_UniInfo']['schema'])
 
 model_properties = set()
 
@@ -147,8 +147,7 @@ def post_to_share(csv_file):
                         "quantity": row[1],
                         "recommended_location": row[2],
                         "bought": bool(row[3]),
-                        "timestamp_added": row[4],
-                        "timestamp_purchased": row[5]
+                        "timestamp_added": row[4]
                     }
                     print(params)
                     add_item_query = gql(
@@ -158,17 +157,15 @@ def post_to_share(csv_file):
                             $quantity: String!,
                             $recommended_location: String!,
                             $bought: Boolean!,
-                            $timestamp_added: String!,
-                            $timestamp_purchased: String!
+                            $timestamp_added: String!
                         ) {
-                            addShoppingList_async(
+                            add_ShoppingList_async(
                                 input: {
                                     item: $item,
                                     quantity: $quantity,
                                     recommendedLocation: $recommended_location,
                                     bought: $bought,
-                                    timestampAdded: $timestamp_added,
-                                    timestampPurchased: $timestamp_purchased
+                                    timestampAdded: $timestamp_added
                                 }
                             ) {
                                 error
