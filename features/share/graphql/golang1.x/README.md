@@ -27,3 +27,29 @@ go run query.go
 ```
 
 The command will return each of the items stored in the Uni.
+
+```json
+{
+  "_id": "017e215e-3b07-45d1-07c7-1b9117c72935",
+  "itemName": "Thing 1",
+  "itemNumber": "th001",
+  "quantity": 100,
+  "lastUpdated": "2022-01-01T00:00:00Z"
+}
+{
+  "_id": "017e215e-3c60-94a7-c62c-a0cb1393f5d5",
+  "itemName": "Thing 2",
+  "itemNumber": "th002",
+  "quantity": 200,
+  "lastUpdated": "2022-01-01T00:00:00Z"
+}
+{
+  "_id": "017e215e-3d82-ff72-c516-6c609f145bbf",
+  "itemName": "Thing 3",
+  "itemNumber": "th003",
+  "quantity": 300,
+  "lastUpdated": "2022-01-01T00:00:00Z"
+}
+```
+
+What is important to note is that we were able to use native Golang modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. This command-line program is simply querying a GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.
