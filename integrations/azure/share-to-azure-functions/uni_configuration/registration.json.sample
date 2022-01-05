@@ -1,0 +1,46 @@
+{
+  "name": "test-azure-functions",
+  "schema": "schema.json",
+  "initState": "initial-state.json",
+  "nodes": [
+    {
+      "name": "Supplier",
+      "userId": "you@domain.com",
+      "csp": "aws",
+      "region": "us-east-2",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "API_KEY"
+          }
+        }
+      }
+    },
+    {
+      "name": "Distributor",
+      "userId": "you@domain.com",
+      "csp": "aws",
+      "region": "us-west-2",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "API_KEY"
+          }
+        }
+      }
+    },
+    {
+      "name": "Retailer",
+      "userId": "you@domain.com",
+      "csp": "azure",
+      "region": "eastus",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "API_KEY"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -2,6 +2,9 @@
 .aws-sam
 samconfig.toml
 
+# Azure CLI
+**/.azure
+
 # Deployable uni artifacts
 registration.json
 init-state.json
