@@ -6,7 +6,7 @@
 
 # Reacting to Events from Vendia Share using Azure Functions
 
-In this example, we'll use a cross-cloud [Universal Application](https://www.vendia.net/product) to demonstrate real-time, event-driven processing using Azure Functions.  Consider the case of a Supplier (on AWS), working through a Distributor (on AWS), who delivers goods to a Retailer (on Azure).  When the Supplier makes an adjustment (say by changing the anticipated fulfilment date of an existing purchase order), both the Distributor and the Retailer would like to be made aware (and take action) immediately.
+In this example, we'll use a cross-cloud [Universal Application](https://www.vendia.net/product) to demonstrate real-time, event-driven processing using Azure Functions.  Consider the case of a `Supplier` (on AWS), working through a `Distributor` (on AWS), who delivers goods to a `Retailer` (on Azure).  When the `Supplier` makes an adjustment (say by changing the anticipated fulfillment date of an existing purchase order), both the `Distributor` and the `Retailer` would like to be made aware (and take action) immediately.
 
 <figure>
   <img src="https://user-images.githubusercontent.com/85032783/147981825-f0e94c34-6488-4fd3-82f4-7ef8e00224a2.png" width="100%"/>
