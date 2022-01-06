@@ -38,7 +38,7 @@ The first step is to create a cross-cloud Uni for this example, with the followi
 
 This is accomplished using a `registration.json` file that defines one Node per Uni participant.  Each Node definition includes a `csp` (short for cloud service provider) and a `region`, which is [unique to each CSP](https://www.vendia.net/docs/share/cli/guide#supported-cloud-platforms-and-regions).  Using the example below, we're able to provision a multi-cloud, multi-region Uni that connects all three participants in just about 5 minutes.
 
-> Note: Please refer to our docs for more information about the modeling Uni participants using [a registration file](https://www.vendia.net/docs/share/uni-creation#registration-file) or modeling data using [a schema file](https://www.vendia.net/docs/share/data-modeling#sample-registration-files).
+**Note:** Please refer to our docs for more information about the modeling Uni participants using [a registration file](https://www.vendia.net/docs/share/uni-creation#registration-file) or modeling data using [a schema file](https://www.vendia.net/docs/share/data-modeling#sample-registration-files).
 
 1. Change directories to `uni_configuration`
     * `cd uni_configuration`
@@ -72,7 +72,7 @@ This is accomplished using a `registration.json` file that defines one Node per 
 
 ## Step 2 - Create an Azure Service Principal
 
-A multi-cloud, multi-region Uni allows its participants - the Supplier, the Distributor, and the Retailer - to create and modify Products and Purchase Orders.  A participant can then integrate its Vendia Share Node with services in their cloud service provider (CSP) of choice in order to immediately detect and act upon Uni events.
+A multi-cloud, multi-region Uni allows its participants - the `Supplier`, the `Distributor`, and the `Retailer` - to create and modify Products and Purchase Orders.  A participant can then integrate its Vendia Share Node with services in their cloud service provider (CSP) of choice in order to immediately detect and act upon Uni events.
 
 Our next step is to connect the Vendia Retailer Node with an Azure CSP environment.  This mimics a common integration approach, where a Retailer has an existing Azure CSP environment and wants to use CSP services to produce or consume data from its Vendia Share Node.
 
@@ -119,7 +119,7 @@ When your Uni reaches a `RUNNING` state, you'll have a multi-cloud, multi-region
 
 ## Step 3 - Create an Azure Function
 
-Now that the Service Principal will permit the Retailer Node to emit events to services within your Azure environment, there are several integration options at our disposal.  The integration option we'll explore here is an Azure Function that takes action when an event is received.  In this example, consider a Supplier that makes a Purchase Order adjustment (changing the expected fulfillment date) and a Retailer that wants to take immediate action (changing dates for promoting a popular sale, as a result).
+Now that the Service Principal will permit the Retailer Node to emit events to services within your Azure environment, there are several integration options at our disposal.  The integration option we'll explore here is an Azure Function that takes action when an event is received.  In this example, consider a `Supplier` that makes a Purchase Order adjustment (changing the expected fulfillment date) and a `Retailer` that wants to take immediate action (changing dates for promoting a popular sale, as a result).
 
 To create an Azure Function:
 
@@ -200,7 +200,7 @@ To create an Azure Function:
 
 ## Step 4 - React in Real-Time Events on Azure
 
-Now it's time for the Supplier (from its Vendia Share AWS Node) to make a Purchase Order adjustment.  When that happens, the Retailer (from its Vendia Share Azure Node) will be notified immediately and will be able to take action (through its configured Azure Function).
+Now it's time for the `Supplier` (from its Vendia Share AWS Node) to make a Purchase Order adjustment.  When that happens, the `Retailer` (from its Vendia Share Azure Node) will be notified immediately and will be able to take action (through its configured Azure Function).
 
 1. Using the Vendia Share Web Application's GraphQL Explorer of the Supplier's AWS Node, identify a Purchase Order to modify, noting the `_id` for one of the Purchase Orders listed for the subsequent step, referred to hereafter as `<PO_ID>`
 
