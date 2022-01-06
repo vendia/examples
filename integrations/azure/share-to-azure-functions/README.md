@@ -252,7 +252,7 @@ Now it's time for the Supplier (from its Vendia Share AWS Node) to make a Purcha
       ```
     </details>
 
-The update to the Supplier Node will cause an event, a block notification, to be emitted from the Retailer Node.  The Retailer Node, thanks to the configuration in previous sections, will act on that event through the configured Azure Function.  We can now view the output of the Azure Function, which was triggered through the Retailer's Azure Node, using the Azure-provided [Application Insights](https://docs.microsoft.com/en-us/azure/azure-functions/analyze-telemetry-data) view.
+The update to the Supplier Node will cause a block notification event to be emitted from the Retailer Node.  Thanks to the configuration in previous sections, the Retailer Node will act on that event through the configured Azure Function.  We can now view the output of the Azure Function, which was triggered through the Retailer's Azure Node, using the Azure-provided [Application Insights](https://docs.microsoft.com/en-us/azure/azure-functions/analyze-telemetry-data) view.
 
 <figure>
   <img src="https://user-images.githubusercontent.com/85032783/147982095-1d1602ee-616f-4b81-b455-463fe7857429.png" width="100%"/>
