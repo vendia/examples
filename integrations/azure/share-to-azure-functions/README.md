@@ -26,7 +26,6 @@ To replicate the Retailer's environment on Azure, we'll first need to:
 * Install [Node.js](https://nodejs.org/en/download/) 
 * Install the [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (CLI)
 * Install the [Vendia Command Line Interface](https://www.vendia.net/docs/share/cli) (CLI)
-    * `npm install @vendia/share-cli -g`
 
 ## Step 1 - Create a Cross-Cloud Vendia Uni
 
