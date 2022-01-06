@@ -6,14 +6,14 @@
 
 # Reacting to Events from Vendia Share using Azure Functions
 
-In this example, we'll use a cross-cloud [Universal Application](https://www.vendia.net/product) to demonstrate real-time, event-driven processing using Azure Functions.  Consider the case of a `Supplier` (on AWS), working through a `Distributor` (on AWS), who delivers goods to a `Retailer` (on Azure).  When the `Supplier` makes an adjustment (say by changing the anticipated fulfillment date of an existing purchase order), both the `Distributor` and the `Retailer` would like to be made aware (and take action) immediately.
+In this example, we'll use a cross-cloud [Universal Application](https://www.vendia.net/product) to demonstrate real-time, event-driven processing using Azure Functions.  Consider the case of a Supplier (on AWS), working through a Distributor (on AWS), who delivers goods to a Retailer (on Azure).  When the Supplier makes an adjustment (say by changing the anticipated fulfillment date of an existing purchase order), both the Distributor and the Retailer would like to be made aware (and take action) immediately.
 
 <figure>
   <img src="https://user-images.githubusercontent.com/85032783/147981825-f0e94c34-6488-4fd3-82f4-7ef8e00224a2.png" width="100%"/>
   <figcaption align="center"><b>Figure 1</b> - <i>A Supplier, Distributor, and Retailer reacting in real-time across clouds as changes to purchase orders occur</i></figcaption>
 </figure>
 
-We'll start by modifying the fulfillment date of a purchase order by executing a [GraphQL mutation](https://graphql.org/learn/queries/#mutations) against the Supplier's Node in the Uni. That, in turn, will cause an event to flow to Retailer's Node in the Uni and then to the Retailer's Azure environment, delivered to [Azure Event Grid](https://azure.microsoft.com/en-us/services/event-grid/). From there, an event-driven [Azure Function](https://azure.microsoft.com/en-us/services/functions/) within the Retailer's Azure environment will process the delivered event.
+We'll start by modifying the fulfillment date of a purchase order by executing a [GraphQL mutation](https://graphql.org/learn/queries/#mutations) against the **Supplier** Node in the Uni. That, in turn, will cause an event to flow to **Retailer** Node in the Uni and then to the Retailer's Azure environment, delivered to [Azure Event Grid](https://azure.microsoft.com/en-us/services/event-grid/). From there, an event-driven [Azure Function](https://azure.microsoft.com/en-us/services/functions/) within the Retailer's Azure environment will process the delivered event.
 
 Now let's get started!
 
@@ -31,9 +31,9 @@ To replicate the Retailer's environment on Azure, we'll first need to:
 
 The first step is to create a cross-cloud Uni for this example, with the following participants:
 
-* A `Supplier` AWS Node (`us-east-2`)
-* A `Distributor` AWS Node (`us-west-2`)
-* A `Retailer` Azure Node (`eastus`)
+* A **Supplier** AWS Node (`us-east-2`)
+* A **Distributor** AWS Node (`us-west-2`)
+* A **Retailer** Azure Node (`eastus`)
 
 This is accomplished using a `registration.json` file that defines one Node per Uni participant.  Each Node definition includes a `csp` (short for cloud service provider) and a `region`, which is [unique to each CSP](https://www.vendia.net/docs/share/cli/guide#supported-cloud-platforms-and-regions).  Using the example below, we're able to provision a multi-cloud, multi-region Uni that connects all three participants in just about 5 minutes.
 
@@ -71,11 +71,11 @@ This is accomplished using a `registration.json` file that defines one Node per 
 
 ## Step 2 - Create an Azure Service Principal
 
-A multi-cloud, multi-region Uni allows its participants - the `Supplier`, the `Distributor`, and the `Retailer` - to create and modify Products and Purchase Orders.  A participant can then integrate its Vendia Share Node with services in their cloud service provider (CSP) of choice in order to immediately detect and act upon Uni events.
+A multi-cloud, multi-region Uni allows its participants - the Supplier, the Distributor, and the Retailer - to create and modify Products and Purchase Orders.  A participant can then integrate its Vendia Share Node with services in their cloud service provider (CSP) of choice in order to immediately detect and act upon Uni events.
 
-Our next step is to connect the Vendia Retailer Node with an Azure CSP environment.  This mimics a common integration approach, where a Retailer has an existing Azure CSP environment and wants to use CSP services to produce or consume data from its Vendia Share Node.
+Our next step is to connect the Vendia **Retailer** Node with an Azure CSP environment.  This mimics a common integration approach, where a Retailer has an existing Azure CSP environment and wants to use CSP services to produce or consume data from its Vendia Share Node.
 
-When your Uni reaches a `RUNNING` state, you'll have a multi-cloud, multi-region Uni, including a Retailer Node.  To permit the Retailer Node to send events to an Azure CSP environment secured by an [Azure Active Directory](https://azure.microsoft.com/en-us/services/active-directory/) (Azure AD) tenant, we need to create a [Service Principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object) within Azure AD.
+When your Uni reaches a `RUNNING` state, you'll have a multi-cloud, multi-region Uni, including a Retailer Node.  To permit the **Retailer** Node to send events to an Azure CSP environment secured by an [Azure Active Directory](https://azure.microsoft.com/en-us/services/active-directory/) (Azure AD) tenant, we need to create a [Service Principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object) within Azure AD.
 
 1. Change directories back to the root directory of this example
    * `cd ..`
@@ -109,22 +109,22 @@ When your Uni reaches a `RUNNING` state, you'll have a multi-cloud, multi-region
     * `az provider register --namespace Microsoft.EventGrid`
 1. Wait until the provider is in the `Registered` state
     * `az provider show --namespace Microsoft.EventGrid --query "registrationState"`
-1. Use the Vendia CLI to determine the Azure AD Application ID for your newly provisioned Retailer Node (the Retailer node in the Uni).
+1. Use the Vendia CLI to determine the Azure AD Application ID for your newly provisioned **Retailer** Node (the **Retailer** Node in the Uni).
     * `share uni get --uni <UNI_NAME>`
     * In the CLI output of the above command, note the value of the `Retailer.Resources.azure_ApplicationId` property.  The value hereafter will be referred to as `<RETAILER_NODE_APPLICATION_ID>`.
-1. Now it's time to permit connections between the automatically created Vendia tenant for the Retailer Node and your Azure tenant using a Service Principal.  After running the command below, note the Service Principal's ID (`objectId`) from the output for future reference, hereafter referred to as `<SERVICE_PRINCIPAL_ID>`.
+1. Now it's time to permit connections between the automatically created Vendia tenant for the **Retailer** Node and your Azure tenant using a Service Principal.  After running the command below, note the Service Principal's ID (`objectId`) from the output for future reference, hereafter referred to as `<SERVICE_PRINCIPAL_ID>`.
     * `az ad sp create --id "<RETAILER_NODE_APPLICATION_ID>"`
     * In the CLI output of the above command, note the value of the `objectId` property.  The value hereafter will be referred to as `<SERVICE_PRINCIPAL_ID>`.
 
 ## Step 3 - Create an Azure Function
 
-Now that the Service Principal will permit the Retailer Node to emit events to services within your Azure environment, there are several integration options at our disposal.  The integration option we'll explore here is an Azure Function that takes action when an event is received.  In this example, consider a `Supplier` that makes a Purchase Order adjustment (changing the expected fulfillment date) and a `Retailer` that wants to take immediate action (changing dates for promoting a popular sale, as a result).
+Now that the Service Principal will permit the **Retailer** Node to emit events to services within your Azure environment, there are several integration options at our disposal.  The integration option we'll explore here is an Azure Function that takes action when an event is received.  In this example, consider a Supplier that makes a Purchase Order adjustment (changing the expected fulfillment date) and a Retailer that wants to take immediate action (changing dates for promoting a popular sale, as a result).
 
 To create an Azure Function:
 
 1. Set the Azure CLI to store our parameters between steps in this section
    * `az config param-persist on`
-1. Create an Azure Resource Group in the same region as the Retailer Node.  Note that `eastus` in the command below matches the value in the `registration.json.sample` file but should be changed if you've adjusted the region in your `registration.json` file.
+1. Create an Azure Resource Group in the same region as the **Retailer** Node.  Note that `eastus` in the command below matches the value in the `registration.json.sample` file but should be changed if you've adjusted the region in your `registration.json` file.
    * `az group create --name retailer-function-rg --location eastus`
 1. Create an Azure Storage Account 
    * `az storage account create --name retailerfuncstorage --sku Standard_LRS`
@@ -135,7 +135,7 @@ To create an Azure Function:
    * `func azure functionapp publish retailer-functionapp`
 1. Grant the Service Principal permission to call the published Azure Function
    `az role assignment create --assignee "<SERVICE_PRINCIPAL_ID>" --role "Website Contributor" --scope "<FUNCTION_APP_RESOURCE_ID>"`
-1. Open the [Vendia Share web application](https://share.vendia.net/uni) and click your Uni’s name. Find the Retailer Node and click on its `GraphQL explorer` button. Clear the sample query in the middle pane, and insert the mutation below.
+1. Open the [Vendia Share web application](https://share.vendia.net/uni) and click your Uni’s name. Find the **Retailer** Node and click on its `GraphQL explorer` button. Clear the sample query in the middle pane, and insert the mutation below.
     <details>
     <summary>Update Azure Settings Mutation</summary>
    
@@ -199,7 +199,7 @@ To create an Azure Function:
 
 ## Step 4 - React in Real-Time Events on Azure
 
-Now it's time for the `Supplier` (from its Vendia Share AWS Node) to make a Purchase Order adjustment.  When that happens, the `Retailer` (from its Vendia Share Azure Node) will be notified immediately and will be able to take action (through its configured Azure Function).
+Now it's time for the Supplier (from its Vendia Share AWS Node) to make a Purchase Order adjustment.  When that happens, the Retailer (from its Vendia Share Azure Node) will be notified immediately and will be able to take action (through its configured Azure Function).
 
 1. Using the Vendia Share Web Application's GraphQL Explorer of the Supplier's AWS Node, identify a Purchase Order to modify, noting the `_id` for one of the Purchase Orders listed for the subsequent step, referred to hereafter as `<PO_ID>`
 
@@ -251,7 +251,7 @@ Now it's time for the `Supplier` (from its Vendia Share AWS Node) to make a Purc
       ```
     </details>
 
-The update to the Supplier Node will cause a block notification event to be emitted from the Retailer Node.  Thanks to the configuration in previous sections, the Retailer Node will act on that event through the configured Azure Function.  We can now view the output of the Azure Function, which was triggered through the Retailer's Azure Node, using the Azure-provided [Application Insights](https://docs.microsoft.com/en-us/azure/azure-functions/analyze-telemetry-data) view.
+The update to the **Supplier** Node will cause a block notification event to be emitted from the **Retailer** Node.  Thanks to the configuration in previous sections, the **Retailer** Node will act on that event through the configured Azure Function.  We can now view the output of the Azure Function, which was triggered through the **Retailer** Azure Node, using the Azure-provided [Application Insights](https://docs.microsoft.com/en-us/azure/azure-functions/analyze-telemetry-data) view.
 
 <figure>
   <img src="https://user-images.githubusercontent.com/85032783/147982095-1d1602ee-616f-4b81-b455-463fe7857429.png" width="100%"/>
