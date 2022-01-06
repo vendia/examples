@@ -13,7 +13,7 @@ In this example, we'll use a cross-cloud [Universal Application](https://www.ven
   <figcaption align="center"><b>Figure 1</b> - <i>A Supplier, Distributor, and Retailer reacting in real-time across clouds as changes to purchase orders occur</i></figcaption>
 </figure>
 
-We'll start by modifying the fulfillment date of a purchase order by executing a [GraphQL mutation](https://graphql.org/learn/queries/#mutations) against the **Supplier** Node in the Uni. That, in turn, will cause an event to flow to **Retailer** Node in the Uni and then to the Retailer's Azure environment, delivered to [Azure Event Grid](https://azure.microsoft.com/en-us/services/event-grid/). From there, an event-driven [Azure Function](https://azure.microsoft.com/en-us/services/functions/) within the Retailer's Azure environment will process the delivered event.
+We'll start by modifying the fulfillment date of a purchase order by executing a [GraphQL mutation](https://graphql.org/learn/queries/#mutations) against the Supplier's Node in the Uni. That, in turn, will cause an event to flow to Retailer's Node in the Uni and then to the Retailer's Azure environment, delivered to [Azure Event Grid](https://azure.microsoft.com/en-us/services/event-grid/). From there, an event-driven [Azure Function](https://azure.microsoft.com/en-us/services/functions/) within the Retailer's Azure environment will process the delivered event.
 
 Now let's get started!
 
@@ -201,7 +201,7 @@ To create an Azure Function:
 
 Now it's time for the Supplier (from its Vendia Share AWS Node) to make a Purchase Order adjustment.  When that happens, the Retailer (from its Vendia Share Azure Node) will be notified immediately and will be able to take action (through its configured Azure Function).
 
-1. Using the Vendia Share Web Application's GraphQL Explorer of the Supplier's AWS Node, identify a Purchase Order to modify, noting the `_id` for one of the Purchase Orders listed for the subsequent step, referred to hereafter as `<PO_ID>`
+1. Using the Vendia Share Web Application's GraphQL Explorer of the  **Supplier** AWS Node, identify a Purchase Order to modify, noting the `_id` for one of the Purchase Orders listed for the subsequent step, referred to hereafter as `<PO_ID>`
 
     <details>
       <summary>List Purchase Orders Query</summary>
