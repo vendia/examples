@@ -4,7 +4,7 @@
   "initState": "initial-state.json",
   "nodes": [
     {
-      "name": "Supplier",
+      "name": "SupplierNode",
       "userId": "you@domain.com",
       "csp": "aws",
       "region": "us-east-2",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "name": "Distributor",
+      "name": "DistributorNode",
       "userId": "you@domain.com",
       "csp": "aws",
       "region": "us-west-2",
@@ -30,7 +30,7 @@
       }
     },
     {
-      "name": "Retailer",
+      "name": "RetailerNode",
       "userId": "you@domain.com",
       "csp": "azure",
       "region": "eastus",
