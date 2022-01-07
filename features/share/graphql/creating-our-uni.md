@@ -42,3 +42,5 @@ Once our Uni is up and running, we can begin experimenting by using different pr
 * [golang1.x](./golang1.x/README.md)
 
 * [node.js](./node.js/README.md)
+
+* [python3](./python3/README.md)
