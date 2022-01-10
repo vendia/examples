@@ -29,16 +29,16 @@ gql_client = Client(
 query = gql(
     """
     query q {
-			list_InventoryItems {
-				_InventoryItems {
-					_id
-					itemName
-					itemNumber
-					quantity
-					lastUpdated
-				}
-			}
-		}
+        list_InventoryItems {
+            _InventoryItems {
+                _id
+                itemName
+                itemNumber
+                quantity
+                lastUpdated
+            }
+        }
+    }
     """
 )
 

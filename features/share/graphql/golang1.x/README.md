@@ -4,9 +4,9 @@
   </a>
 </p>
 
-# Using Go to Query Our Uni
+# Using golang to Work with Our Uni
 
-We will use the [machinebox/graphql](https://github.com/machinebox/graphql) module in our example to query our **Warehouse** node.
+We have used the [machinebox/graphql](https://github.com/machinebox/graphql) module in our example to query our **Warehouse** node.
 
 ## Installation
 
@@ -51,5 +51,17 @@ The command will return each of the items stored in the Uni.
   "lastUpdated": "2022-01-01T00:00:00Z"
 }
 ```
+
+# Changing Data in Our Uni Node
+
+Just as we can _query_ our inventory data, we can _change_ it as well. We will update the **quantity** of our **Thing 3** item to an arbitrary number. We will use the flags `itemname` and `-quantity` to set our desired values . The mutation is defined in the file `mutation.go` and will use the `API` and `API_KEY` of our **Warehouse** node.
+
+```bash
+API="warehouse_https_url" \
+API_KEY="warehouse_api_key" \
+go run -itemname="Thing 3" -quantity=3000 mutation.go
+```
+
+# Summary
 
 What is important to note is that we were able to use native Golang modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. This command-line program is simply querying a GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.

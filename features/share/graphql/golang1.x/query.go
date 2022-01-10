@@ -60,22 +60,6 @@ func main() {
 		}
 
 		fmt.Println(string(item_json))
-	}
 
-	// map[
-	// list_InventoryItems:
-	// map[
-	// _InventoryItems:[
-	// map[
-	// _id:017e215e-3b07-45d1-07c7-1b9117c72935 itemName:Thing 1 itemNumber:th001 lastUpdated:2022-01-01T00:00:00Z quantity:100
-	// ]
-	// map[
-	// _id:017e215e-3c60-94a7-c62c-a0cb1393f5d5 itemName:Thing 2 itemNumber:th002 lastUpdated:2022-01-01T00:00:00Z quantity:200
-	// ]
-	// map[
-	// _id:017e215e-3d82-ff72-c516-6c609f145bbf itemName:Thing 3 itemNumber:th003 lastUpdated:2022-01-01T00:00:00Z quantity:300
-	// ]
-	// ]
-	// ]
-	// ]
+	}
 }
