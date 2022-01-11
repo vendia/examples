@@ -66,4 +66,4 @@ go run -itemname="Thing 3" -quantity=3000 mutation.go
 
 # Summary
 
-What is important to note is that we were able to use native Golang modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. This command-line program is simply querying a GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.
+What is important to note is that we were able to use native Golang modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. These command-line programs are simply interacting with a node's GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.
