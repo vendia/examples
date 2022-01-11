@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/machinebox/graphql"
 )
@@ -49,15 +50,19 @@ func main() {
 
 	inventory_item_id := getIdResponse.List_InventoryItems.InventoryItems[0].Id
 
+	currentTime := time.Now()
+
 	updateQuantity := graphql.NewRequest(`
 	mutation m(
 		$id: ID!,
-		$quantity: Int
+		$quantity: Int,
+		$lastUpdated: String
 	) {
 		update_Inventory_async(
 		  id: $id,
 		  input: {
 			quantity: $quantity
+			lastUpdated: $lastUpdated
 		  }
 		) {
 		  error
@@ -70,12 +75,12 @@ func main() {
 
 	updateQuantity.Var("id", inventory_item_id)
 	updateQuantity.Var("quantity", quantityPtr)
+	updateQuantity.Var("lastUpdated", currentTime.Format("2006-01-02T15:04:05Z"))
 	updateQuantity.Header.Set("x-api-key", api_key)
 
 	if err := client.Run(context.Background(), updateQuantity, nil); err != nil {
 		panic(err)
 	}
 
-	fmt.Printf("Success: Item:%s Quantity:%d\n", *itemNamePtr, *quantityPtr)
-
+	fmt.Printf("%s quantity: %d\n", *itemNamePtr, *quantityPtr)
 }

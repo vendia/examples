@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# Using golang to Work with Our Uni
+# Using Golang to Work with Our Uni
 
 We have used the [machinebox/graphql](https://github.com/machinebox/graphql) module in our example to query our **Warehouse** node.
 
@@ -27,6 +27,8 @@ go run query.go
 ```
 
 The command will return each of the items stored in the Uni.
+
+**NOTE:** The results below are representative. If you've made changes using other runtime examples or the GraphQL Explorer then they will be reflected in your query results as well.
 
 ```json
 {

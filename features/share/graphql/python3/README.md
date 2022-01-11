@@ -31,6 +31,8 @@ python query.py
 
 The command will return each of the items stored in the Uni.
 
+**NOTE:** The results below are representative. If you've made changes using other runtime examples or the GraphQL Explorer then they will be reflected in your query results as well.
+
 ```json
 {
     "list_InventoryItems": {
@@ -61,4 +63,16 @@ The command will return each of the items stored in the Uni.
 }
 ```
 
-What is important to note is that we were able to use native python3 modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. This command-line program is simply querying a GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.
+# Changing Data in Our Uni Node
+
+Just as we can _query_ our inventory data, we can _change_ it as well. We will update the **quantity** of our **Thing 2** item to an arbitrary number. We will use the flags `--itemname` and `--quantity` to set our desired values . The mutation is defined in the file `mutation.go` and will use the `API` and `API_KEY` of our **Warehouse** node.
+
+```bash
+API="warehouse_https_url" \
+API_KEY="warehouse_api_key" \
+python mutation.py --itemname "Thing 2" --quantity 123
+```
+
+# Summary
+
+What is important to note is that we were able to use native python3 modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. These command-line programs are simply interacting with a node's GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.
