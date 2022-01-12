@@ -1,4 +1,4 @@
-import { GraphQLClient, gql } from 'graphql-request'
+const { GraphQLClient, gql } = require('graphql-request');
 
 async function main() {
   const api = process.env.API
