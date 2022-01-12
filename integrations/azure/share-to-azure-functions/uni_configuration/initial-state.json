@@ -1,0 +1,73 @@
+{
+  "Product": [
+    {
+      "name": "Widget 123",
+      "description": "Description of Widget 123",
+      "sku": "WDGT123",
+      "price": 49.99,
+      "supplierId": "Supplier123"
+    },
+    {
+      "name": "Widget 456",
+      "description": "Description of Widget 456",
+      "sku": "WDGT456",
+      "price": 149.99,
+      "supplierId": "Supplier123"
+    },
+    {
+      "name": "Widget 789",
+      "description": "Description of Widget 789",
+      "sku": "WDGT789",
+      "price": 249.99,
+      "supplierId": "Supplier123"
+    }
+  ],
+  "PurchaseOrder": [
+    {
+      "orderId": "Supplier123-Distributor123-ABCDEFG",
+      "items": [
+        {
+          "sku": "WDGT123",
+          "quantity": 10
+        }
+      ],
+      "created": "2021-11-20T09:15:44Z",
+      "expected": "2021-12-03T00:00:00Z",
+      "fulfilled": "2021-12-02T15:15:15Z"
+    },
+    {
+      "orderId": "Supplier123-Distributor123-BCDEFGH",
+      "items": [
+        {
+          "sku": "WDGT456",
+          "quantity": 10
+        },
+        {
+          "sku": "WDGT789",
+          "quantity": 5
+        }
+      ],
+      "created": "2021-12-02T14:10:02Z",
+      "expected": "2021-12-12T00:00:00Z"
+    },
+    {
+      "orderId": "Distributor123-Retailer123-ABCDEFG",
+      "items": [
+        {
+          "sku": "WDGT123",
+          "quantity": 1
+        },
+        {
+          "sku": "WDGT456",
+          "quantity": 5
+        },
+        {
+          "sku": "WDGT789",
+          "quantity": 2
+        }
+      ],
+      "created": "2021-12-05T12:12:03Z",
+      "expected": "2021-12-15T12:00:00Z"
+    }
+  ]
+}
