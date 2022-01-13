@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 # Querying our Uni Node
 
-[In our previous step](../creating-our-uni.md) we created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use this information to list out the items in our inventory. The query is defined in the file `query.py`.
+[In our previous step](../creating-our-uni.md) we created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use this information to list the items in our inventory. The query is defined in the file [`query.py`](./query.py).
 
 ```bash
 API="warehouse_https_url" \
@@ -31,7 +31,7 @@ python query.py
 
 The command will return each of the items stored in the Uni.
 
-**NOTE:** The results below are representative. If you've made changes using other runtime examples or the GraphQL Explorer then they will be reflected in your query results as well.
+**NOTE:** The results below are representative and may not be identical to this example. If you've made changes using other runtime examples or the GraphQL Explorer they will be reflected in your query results.
 
 ```json
 {
@@ -65,7 +65,7 @@ The command will return each of the items stored in the Uni.
 
 # Changing Data in Our Uni Node
 
-Just as we can _query_ our inventory data, we can _change_ it as well. We will update the **quantity** of our **Thing 2** item to an arbitrary number. We will use the flags `--itemname` and `--quantity` to set our desired values . The mutation is defined in the file `mutation.go` and will use the `API` and `API_KEY` of our **Warehouse** node.
+Just as we can _query_ our inventory data, we can _change_ it as well. We will update the **quantity** of our **Thing 2** item to an arbitrary number. We will use the flags `--itemname` and `--quantity` to set our desired values . The mutation is defined in the file [`mutation.py`](./mutation.py) and will use the `API` and `API_KEY` of our **Warehouse** node.
 
 ```bash
 API="warehouse_https_url" \
@@ -75,4 +75,4 @@ python mutation.py --itemname "Thing 2" --quantity 123
 
 # Summary
 
-What is important to note is that we were able to use native python3 modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. These command-line programs are simply interacting with a node's GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.
+What is important to note is that we were able to use native Python3 modules and capabilities to interact with our GraphQL API. As far as the client is concerned, there is nothing Vendia-specific at work. These command-line programs are simply interacting with a Node's GraphQL API. All of the goodness that Vendia Share offers - real-time, multi-party data sharing with control and lineage - happens behind the API.

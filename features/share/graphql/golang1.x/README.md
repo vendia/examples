@@ -6,7 +6,7 @@
 
 # Using Golang to Work with Our Uni
 
-We have used the [machinebox/graphql](https://github.com/machinebox/graphql) module in our example to query our **Warehouse** node.
+We have used the [machinebox/graphql](https://github.com/machinebox/graphql) module in our example to query the **Warehouse** node. You can experiment with or use other GraphQL modules for Go as well.
 
 ## Installation
 
@@ -18,7 +18,7 @@ go get github.com/machinebox/graphql
 
 # Querying our Uni Node
 
-[In our previous step](../creating-our-uni.md) we created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use this information to list out the items in our inventory. The query is defined in the file `query.go`.
+[In our previous step](../creating-our-uni.md) we created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use this information to list the items in our inventory. The query is defined in the file [`query.go`](./query.go).
 
 ```bash
 API="warehouse_https_url" \
@@ -28,7 +28,7 @@ go run query.go
 
 The command will return each of the items stored in the Uni.
 
-**NOTE:** The results below are representative. If you've made changes using other runtime examples or the GraphQL Explorer then they will be reflected in your query results as well.
+**NOTE:** The results below are representative and may not be identical to this example. If you've made changes using other runtime examples or the GraphQL Explorer they will be reflected in your query results.
 
 ```json
 {
@@ -56,7 +56,7 @@ The command will return each of the items stored in the Uni.
 
 # Changing Data in Our Uni Node
 
-Just as we can _query_ our inventory data, we can _change_ it as well. We will update the **quantity** of our **Thing 3** item to an arbitrary number. We will use the flags `itemname` and `-quantity` to set our desired values . The mutation is defined in the file `mutation.go` and will use the `API` and `API_KEY` of our **Warehouse** node.
+Just as we can _query_ our inventory data, we can _change_ it as well. We will update the **quantity** of our **Thing 3** item to an arbitrary number. We will use the flags `-itemname` and `-quantity` to set our desired values . The mutation is defined in the file [`mutation.go`](./mutation.go) and will use the `API` and `API_KEY` of our **Warehouse** node.
 
 ```bash
 API="warehouse_https_url" \

@@ -24,7 +24,7 @@ func main() {
 	client := graphql.NewClient(api)
 
 	getId := graphql.NewRequest(`
-	  query q($itemName:String) {
+	  query listInventoryItems($itemName:String) {
 		list_InventoryItems(filter: {itemName: {eq: $itemName}}) {
 		  _InventoryItems {
 			_id
@@ -53,7 +53,7 @@ func main() {
 	currentTime := time.Now()
 
 	updateQuantity := graphql.NewRequest(`
-	mutation m(
+	mutation updateInventory(
 		$id: ID!,
 		$quantity: Int,
 		$lastUpdated: String

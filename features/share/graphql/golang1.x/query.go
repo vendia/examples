@@ -19,7 +19,7 @@ func main() {
 	client := graphql.NewClient(api)
 
 	request := graphql.NewRequest(`
-		query q {
+		query listInventoryItems {
 			list_InventoryItems {
 				_InventoryItems {
 					_id

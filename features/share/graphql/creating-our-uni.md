@@ -14,22 +14,22 @@
 
 This example will create a Uni to store attributes regarding product inventory.
 
-If you are not already logged in to the share service you do so by running [`share login`](https://vendia.net/docs/share/cli/commands/login):
+If you are not already logged in to the Share CLI, do so by running [`share login`](https://vendia.net/docs/share/cli/commands/login):
 
 ```bash
 share login
 ```
 
-The `share uni create` command can be used to deploy our Uni. You will need to copy the file `registration.json.sample` to `registration.json`. Pick a unique `name` for your uni that begins with `test-` - by default all unis share a common namespace so here is your chance to get creative. Update the `userId` attribute of each node to reflect your Vendia Share email address.
+The `share uni create` command can be used to deploy our Uni. You will need to copy the file `registration.json.sample` to `registration.json`. Pick a unique `name` for your Uni that begins with `test-` - by default all Unis share a common namespace so here is your chance to get creative. Update the `userId` attribute of each node to reflect your Vendia Share email address.
 
 ```bash
 cd uni_configuration
 share uni create --config registration.json
 ```
 
-The Uni will take several minutes to deploy. We have pre-seeded several inventory items in our Uni. We can check on its status in the Vendia Share web application or with the `share` CLI.
+The Uni will take several minutes to deploy. We have seeded several inventory items in our Uni. We can check on its status in the Vendia Share web application or with the `share` CLI. The Uni is ready for use when it enters a `RUNNING` state.
 
-**NOTE:** The name of your uni will be different. Adjust the name accordingly.
+**NOTE:** The name of your Uni will be different. Adjust the name accordingly.
 
 ```bash
 share get --uni test-graphql-example
@@ -41,6 +41,6 @@ Once our Uni is up and running, we can begin experimenting by using different pr
 
 * [golang1.x](./golang1.x/README.md)
 
-* [node.js](./node.js/README.md)
+* [node](./node/README.md)
 
 * [python3](./python3/README.md)

@@ -46,7 +46,7 @@ def get_id(itemname):
 
     query = gql(
         """
-        query q($itemName:String) {
+        query listInventoryItems($itemName:String) {
             list_InventoryItems(filter: {itemName: {eq: $itemName}}) {
                 _InventoryItems {
                     _id
@@ -91,7 +91,7 @@ def set_quantity(itemid, quantity):
 
     query = gql(
         """
-        mutation m($id: ID!, $quantity: Int, $lastupdated: String) {
+        mutation updateInventory($id: ID!, $quantity: Int, $lastupdated: String) {
             update_Inventory_async(id: $id, input: {quantity: $quantity, lastUpdated: $lastupdated}) {
                 error
                 result {

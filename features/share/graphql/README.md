@@ -6,7 +6,9 @@
 
 # GraphQL in Vendia Share
 
-[Vendia Share](https://share.vendia.net) allows users to interact with their Universal Application (Uni) nodes through the use of managed [GraphQL](https://graphql.org/) APIs.
+[Vendia Share](https://share.vendia.net) helps you share code and data across companies, clouds, accounts, regions, and technology stacks. Vendia's unique architecture offers a distributed data model that goes everywhere you need it to, and its serverless design enables it to scale seamlessly.
+
+Vendia Share works by creating a Universal Application or Uni for short. Each Uni is composed of one or more nodes. Nodes can live in different clouds, regions, and accounts and can be owned by different organizations or companies. However, each node in a Uni has a common view of the Uni's application data. This is made possible by a fully replicated, totally ordered, ACID-semantics database. Vendia Share generates all the code and cloud resources required to create and maintain this database and the other elements of the Uni - there is no "centralized database", and Vendia never gains access to any of the data customers store in Unis. User interact with their Universal Application (Uni) nodes through the use of managed [GraphQL](https://graphql.org/) APIs.
 
 ## What is GraphQL?
 
@@ -14,17 +16,17 @@
 
 > --[Introduction to GraphQL](https://graphql.org/learn/)
 
-Simply put, GraphQL is a _specification_ that defines how developers can query data. The specification does not provide _implementation details_, where the GraphQL resolvers must be written in a certain language and persist data to a certain datastore. Indeed, there are examples of GraphQL clients and servers written in a [number of programming languages](https://graphql.org/code/) that interact with any number of datastores.
+GraphQL is a _specification_ that defines how developers can query data. The specification does not provide _implementation details_, requiring [GraphQL resolvers](https://www.apollographql.com/docs/tutorial/resolvers/) to be written in a certain language or persist data to a certain datastore. Indeed, there are examples of GraphQL clients and servers written in a [number of programming languages](https://graphql.org/code/) that interact with any number of datastores.
 
 Universal Applications (Unis) expose managed GraphQL APIs for each participant (_node_).
 
 ## What are the Benefits of Using GraphQL?
 
-There are several advantages of using GraphQL to query and change data.
+There are several advantages of using GraphQL.
 
 ### Get Precise Data
 
-Other API strategies like [REST](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) do not allow developers to precisely retrieve just the data that is needed by an application to satisfy a request for data. This can result in _overfetching_, where a larger payload is returned than needed, or _underfetching_, where the result doesn't return quite enough data and further requests are needed.
+Other API strategies like [REST](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) do not allow developers to precisely retrieve the data that is needed by an application to satisfy a request for data. This can result in _overfetching_, where a larger payload is returned than needed, or _underfetching_, where the result doesn't return enough data and further requests are needed.
 
 ### Get Many Resources in a Single Request
 
@@ -32,7 +34,7 @@ GraphQL allows applications to get all the data they need - even if they are dif
 
 ### Enforce Data Types
 
-Types ensure application developers understand the data with which they are working.
+The GraphQL specification defines a [type system](https://spec.graphql.org/October2021/#sec-Type-System). Per the specification, the type system is used to determine if a requested operation is valid, to guarantee the type of response results, and describes the input types of variables to determine if values provided at request time are valid. Types ensure application developers understand the data with which they are working.
 
 # Working with GraphQL APIs
 

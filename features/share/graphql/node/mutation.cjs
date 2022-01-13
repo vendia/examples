@@ -41,7 +41,7 @@ async function getId(itemname) {
   }
 
   const query = gql`
-    query q($itemName:String) {
+    query listInventoryItems($itemName:String) {
       list_InventoryItems(filter: {itemName: {eq: $itemName}}) {
           _InventoryItems {
               _id
@@ -62,7 +62,6 @@ async function getId(itemname) {
 
 async function setQuantity(itemId, quantity) {
   const now = moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
-  console.log(`DEBUG: ${now}`)
   const graphQLClient = new GraphQLClient(api, {
     headers: {
         'x-api-key': api_key
@@ -76,7 +75,7 @@ async function setQuantity(itemId, quantity) {
   }
 
   const mutation = gql`
-    mutation m($id: ID!, $quantity: Int, $lastUpdated: String) {
+    mutation updateInventory($id: ID!, $quantity: Int, $lastUpdated: String) {
       update_Inventory_async(id: $id, input: {quantity: $quantity, lastUpdated: $lastUpdated}) {
         error
         result {
