@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://vendia.net/schemas/demos/track-and-trace.json",
+  "title": "Inventory Management",
+  "description": "Managing inventory among supplier, distributor, and retailer",
+  "type": "object",
+  "properties": {
+    "Product": {
+      "description": "Product information",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Product name",
+            "type": "string"
+          },
+          "description": {
+            "description": "Product description",
+            "type": "string"
+          },
+          "sku": {
+            "description": "Product sku",
+            "type": "string"
+          },
+          "price": {
+            "description": "Product price",
+            "type": "number"
+          },
+          "supplierId": {
+            "description": "Supplier identifier",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PurchaseOrder": {
+      "description": "Purchase order information",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "description": "Order identifier",
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sku": {
+                  "description": "Product sku",
+                  "type": "string"
+                },
+                "quantity": {
+                  "description": "Quantity purchased",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "created": {
+            "description": "When order was placed",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "description": "When order was last updated",
+            "type": "string",
+            "format": "date-time"
+          },
+          "expected": {
+            "description": "When order is expected to be fulfilled",
+            "type": "string",
+            "format": "date-time"
+          },
+          "fulfilled": {
+            "description": "When order was actually fulfilled",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
