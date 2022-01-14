@@ -26,9 +26,7 @@
             "lastUpdated": {
               "description": "Last update timestamp",
               "type": "string",
-              "items": {
-                "type": "string"
-              }
+              "format": "date-time"
             }
           }
         }

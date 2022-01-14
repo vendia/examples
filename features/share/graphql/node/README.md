@@ -10,7 +10,7 @@ We will use the [prisma-labs/graphql-request](https://github.com/prisma-labs/gra
 
 ## Installation
 
-Make sure you have a working Node.js enironment. Run the following command to install the required dependencies:
+Make sure you have a working Node.js enironment. Run the following command from the current directory to install the required dependencies:
 
 ```bash
 npm install
