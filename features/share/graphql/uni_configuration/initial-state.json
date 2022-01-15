@@ -1,0 +1,22 @@
+{
+    "Inventory": [
+        {
+            "itemName": "Thing 1",
+            "itemNumber": "th001",
+            "quantity": 100,
+            "lastUpdated": "2022-01-01T00:00:00Z"
+        },
+        {
+            "itemName": "Thing 2",
+            "itemNumber": "th002",
+            "quantity": 200,
+            "lastUpdated": "2022-01-01T00:00:00Z"
+        },
+        {
+            "itemName": "Thing 3",
+            "itemNumber": "th003",
+            "quantity": 300,
+            "lastUpdated": "2022-01-01T00:00:00Z"
+        }
+    ]   
+}
