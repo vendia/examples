@@ -20,7 +20,7 @@ If you are not already logged in to the Share CLI, do so by running [`share logi
 share login
 ```
 
-The `share uni create` command can be used to deploy our Uni. You will need to copy the file `registration.json.sample` to `registration.json`. Pick a unique `name` for your Uni that begins with `test-` - by default all Unis share a common namespace so here is your chance to get creative. Update the `userId` attribute of each node to reflect your Vendia Share email address.
+The `share uni create` command can be used to deploy your Uni. You will need to copy the file `registration.json.sample` to `registration.json`. Pick a unique `name` for your Uni that begins with `test-`. Unis that start with `test-` prefix can be destroyed and reused much faster than those without the `test-` prefix. By default all Unis share a common namespace so here is your chance to get creative. Update the `userId` attribute of each node to reflect your Vendia Share email address.
 
 ```bash
 cd uni_configuration

@@ -34,7 +34,7 @@ GraphQL allows applications to get all the data they need - even if they are dif
 
 ### Enforce Data Types
 
-The GraphQL specification defines a [type system](https://spec.graphql.org/October2021/#sec-Type-System). Per the specification, the type system is used to determine if a requested operation is valid, to guarantee the type of response results, and describes the input types of variables to determine if values provided at request time are valid. Types ensure application developers understand the data with which they are working.
+The GraphQL specification defines a [type system](https://spec.graphql.org/October2021/#sec-Type-System). Types ensure application data complies with the required data formats. Per the specification, the type system is used to determine if a requested operation is valid, guarantee the type of response results, and describes the input types of variables to determine if values provided at request time are valid.
 
 # Working with GraphQL APIs
 
