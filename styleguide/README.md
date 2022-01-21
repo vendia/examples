@@ -12,7 +12,7 @@ Below are a set of conventions contributors should use to write code and documen
 
 * The [Vendia Share web application](https://share.vendia.net) should be referred to as `Vendia Share web application` or `Vendia Share web app`.
 
-* The [Vendia Share command line application (CLI)](https://www.vendia.net/docs/share/cli) should be referred to as the `Vendia Share CLI` or `Share CLI`.
+* The [Vendia Share command line interface (CLI)](https://www.vendia.net/docs/share/cli) should be referred to as the `Vendia Share CLI` or `Share CLI`.
 
 * Parties that comprise a Uni should be referred to as `participants`.
 
