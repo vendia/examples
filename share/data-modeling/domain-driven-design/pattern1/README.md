@@ -15,18 +15,16 @@ Since CRM is an independent function we will assume it is a domain on its own. I
 
 1. Login to Vendia Share [here](https://share.vendia.net/login). 
 
-	a. Don’t have a login, you can sign up for one [here](https://share.vendia.net/). 
+Don’t have a login, you can sign up for one [here](https://share.vendia.net/). 
 
 2. Create Uni
 
-	a. Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own option. 
+Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own option. 
 
 3. Fill out details in the Uni Creation Wizard. 
 
-
-
-1. Step 1: Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Click ‘Next’
-2. Step 2: Fill out the following information to create a Uni node. 
+1. **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Click ‘Next’
+2. **Step 2:** Fill out the following information to create a Uni node. 
 
 ```
 Node Name: "CRM Node". // you can change the name.
@@ -37,7 +35,7 @@ Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
 
-3. Step 3: provide the Uni Schema. copy and paste the Uni schema from the schema.json file in the schema folder. I have already designed a the schema based on model we described above. But, this is the step in which you will spend most time while constructing Uni for your business. 
+3. **Step 3:** provide the Uni Schema. copy and paste the Uni schema from the schema.json file in the schema folder. I have already designed a the schema based on model we described above. But, this is the step in which you will spend most time while constructing Uni for your business. 
 
    Let’s review few important things in the schema that you will reuse in most of your Unis.
 
@@ -117,7 +115,7 @@ The required constraint on the customerId, firstname, lastName, and on the next 
                 ]
 ```
 
-4. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning. _
+4. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning.
 
 After Uni Provisioning is complete. You will see that the Uni with the name you chose will appear in the running status on the home page. 
 
@@ -171,8 +169,6 @@ Take a moment now, and compare, the effort it took for you to create a Uni, and 
 
 
 # What did we learn?
-
-
 
 1. How to create a Uni?
 2. How to create a Singleton Value Object?
