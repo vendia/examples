@@ -1,6 +1,6 @@
 # Pattern 4: Multiple Domain, Multiple Bounded Context, and Multiple Unis
 
-**Prerequisite:**Please familiarize yourself with patterns 1, 2, 3 before you practice pattern 4. 
+**Prerequisite:** Please familiarize yourself with patterns 1, 2, 3 before you practice pattern 4. 
 
 
 # Scenario
@@ -26,20 +26,18 @@ Pattern 4 will function like pattern 1. However, I will still provide a differen
 
 1. Login to Vendia Share [here](https://share.vendia.net/login). 
 
-	a. Don’t have a login, you can sign up for one [here](https://share.vendia.net/). 
+Don’t have a login, you can sign up for one [here](https://share.vendia.net/). 
 
 2. Create Uni
 
-	a. Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own option. 
+Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own option. 
 
 3. Fill out details in the Uni Creation Wizard. 
 
+1. **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the Marketing team, give it a Name ‘Marketing’.
+2. **Step 2:** Fill out the following information to create a Uni node. 
 
-
-1. Step 1: Give your Uni a name. Since this Uni will be owned and operated by the Marketing team, give it a Name ‘Marketing’.
-2. Step 2: Fill out the following information to create a Uni node. 
-
-    ```
+```
 Node Name: "Marketing". // you can change the name.
 Node Description: "Node dedicated to Marketing". // You can change the description.
 Cloud Server Provider: "AWS"
@@ -47,8 +45,7 @@ Node Region:"us-east-1". //you can change it
 Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
-
-3. Step 3: provide the Uni Schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
+3. **Step 3:** provide the Uni Schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
 
 Make a note of the new ‘CustomerLoyality’ aggregate added to the schema.
 
@@ -107,8 +104,7 @@ You will also notice that ACLs are not present because each domain has its own d
 ```
 
 
-
-   Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning.
+Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning.
 
 After Uni Provisioning is complete. You will see that the Uni with one Marketing Node is ready for business transactions. 
 
