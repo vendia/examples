@@ -25,15 +25,11 @@ In this scenario we see two separate domains trying to leverage a single Uni. CR
 
 3. Fill out details in the Uni Creation Wizard. 
 
+	a. Step 1: Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Remember, A Uni can hold more data models for more than one bounded context such as a customer account. 
+	b. Step 2: Fill out the following information to create a Uni node. You will create two nodes - Node1 and Node2. 
 
-
-1. Step 1: Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Remember, A Uni can hold more data models for more than one bounded context such as a customer account. 
-2. Step 2: Fill out the following information to create a Uni node. You will create two nodes - Node1 and Node2. 
-
-    **Node 1**
-
-
-    ```
+**Node 1**
+```
 Node Name: "CRMReadWriteNode". // you can change the name.
 Node Description: "Node dedicated to CRMActivities". // You can change the description.
 Cloud Server Provider: "AWS"
@@ -41,12 +37,8 @@ Node Region:"us-east-1". //you can change it
 Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
-
-
-    **Node 2**
-
-
-    ```
+**Node 2**
+```
 Node Name: "MarketingReadOnlyNode". // you can change the name.
 Node Description: "Node dedicated to Marketing Activities". // You can change the description.
 Cloud Server Provider: "AWS"
@@ -55,7 +47,7 @@ Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
 
-3. Step 3: provide the Uni Schema. Copy and paste the Uni schema from the schema.json file in the schema folder._
+	c. Step 3: provide the Uni Schema. Copy and paste the Uni schema from the schema.json file in the schema folder._
 
 Let’s review new things we added to the schema that is different from pattern 1. 
 
@@ -88,10 +80,7 @@ CustomerProfile": {
 
 ```
 
-
-
-   You will specify the ACL when you insert a new record.  We will use the below script in the GraphQL add command later. _
-
+You will specify the ACL when you insert a new record.  We will use the below script in the GraphQL add command later. _
 
 ```
 aclInput: {
@@ -107,9 +96,7 @@ aclInput: {
 
 ```
 
-
-
-   Notice the ‘CustomerId’ property  and how it links ‘CustomerAccount’ and ‘CustomerProfile’. You can use this pattern to avoid the eager loading of two separate aggregates. You don’t have to load both ‘CustomerProfile’ and 'CustomerAccount’ at the same time. _
+Notice the ‘CustomerId’ property  and how it links ‘CustomerAccount’ and ‘CustomerProfile’. You can use this pattern to avoid the eager loading of two separate aggregates. You don’t have to load both ‘CustomerProfile’ and 'CustomerAccount’ at the same time. _
 
 
 ```
@@ -126,19 +113,12 @@ CustomerProfile": {
 
 ```
 
+Notice ‘zipcode’ in CustomerAccount Address and ‘DMAbyZip’ in ‘CustomerProfile’. Designated Marketing Area(DMA) is marketing geo that is identified by zipcode of the location. When a customer moves, the CRM team will update the address in the ‘CustomerAccount’ Address[zipcode] property. You can use vendia_transaction tag in GraphQL command to update zipcode both on ‘CustomerAccount’ and ‘CustomerProfile’ in the same transaction. You will try it later.
 
 
-
-
-   Notice ‘zipcode’ in CustomerAccount Address and ‘DMAbyZip’ in ‘CustomerProfile’. Designated Marketing Area(DMA) is marketing geo that is identified by zipcode of the location. When a customer moves, the CRM team will update the address in the ‘CustomerAccount’ Address[zipcode] property. You can use vendia_transaction tag in GraphQL command to update zipcode both on ‘CustomerAccount’ and ‘CustomerProfile’ in the same transaction. You will try it later.
-
-
-
-4. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning. 
+	d. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning. 
 
     After Uni Provisioning is complete. You will see that the Uni with the name you choose will appear in the running status on the home page. You will notice two different Nodes under ‘My Nodes’. ‘CRMReadWriteNode’ and MarketingReadOnlyNode’. 
-
-
 
 # Explore the Uni
 
@@ -164,13 +144,12 @@ aclInput: {acl: {principal: {nodes: "*"}, operations: READ}})
 Let’s test whether permission really works. Switch to ‘MarketingReadOnlyNode’, 
 
 
-
 * navigate to Entity Explorer>CustomerAccount>[click record you just added]>Edit
 * Update ‘zipcode’ with a different value and Save
 
 You will notice an unauthorized error message. 
 
-Now navigate back to ‘CRMReadWriteNode’ You will update the zipcode on both ‘CustomerAccount’ and ‘CustomerProfile’ in a single transaction using GraphQL @trasaction tag. 
+Now navigate back to ‘CRMReadWriteNode’ You will update the zipcode on both ‘CustomerAccount’ and ‘CustomerProfile’ in a single transaction using GraphQL vendia_trasaction tag. 
 
 Before you update the zipcode you will need the ‘_id’ property of the ‘CustomerAccount’ and ‘CustomerProfile’ you added. You can find it easily in Entity Explorer for each Entity. Note it down, you will use it to prepare a GraphQL command. 
 
@@ -186,7 +165,6 @@ mutation m @vendia_transaction {
 }
 
 ```
-
 
 Let’s verify whether the above transactions were executed in the same block. Execute the following query and in the results scroll down to the last block and you will notice both mutations executed with the same block id. 
 
@@ -217,11 +195,7 @@ query listBlocks {
 
 ```
 
-
-
 # What did we learn?
-
-
 
 1. How to model two Bounded Contexts as two data aggregates in the same Uni?
 2. How to create a Read-Only Node using a single Uni?
