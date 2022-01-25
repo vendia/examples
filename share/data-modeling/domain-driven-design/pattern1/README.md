@@ -28,7 +28,7 @@ Since CRM is an independent function we will assume it is a domain on its own. I
 1. Step 1: Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Click ‘Next’
 2. Step 2: Fill out the following information to create a Uni node. 
 
-    ```
+```
 Node Name: "CRM Node". // you can change the name.
 Node Description: "Node dedicated to the CRM Domain". // You can change the description.
 Cloud Server Provider: "AWS".
@@ -37,13 +37,11 @@ Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
 
-3. _Step 3: provide the Uni Schema. copy and paste the Uni schema from the schema.json file in the schema folder. I have already designed a the schema based on model we described above. But, this is the step in which you will spend most time while constructing Uni for your business. _
+3. Step 3: provide the Uni Schema. copy and paste the Uni schema from the schema.json file in the schema folder. I have already designed a the schema based on model we described above. But, this is the step in which you will spend most time while constructing Uni for your business. 
 
-    _Let’s review few important things in the schema that you will reuse in most of your Unis._
-
+   Let’s review few important things in the schema that you will reuse in most of your Unis.
 
 Indexes on the “CustomerAccount”.
-
 
 ```
 "x-vendia-indexes": {
@@ -56,11 +54,7 @@ Indexes on the “CustomerAccount”.
    }
 
 ```
-
-
-
-   The Singleton Value Object ‘Schema Owner’. You can store schema and Uni metadata in it.
-
+The Singleton Value Object ‘Schema Owner’. You can store schema and Uni metadata in it.
 
 ```
 "SchemaOwner": {
@@ -78,9 +72,7 @@ Indexes on the “CustomerAccount”.
 
 ```
 
-
 The ‘CustomerAccount’ entity and its structure.
-
 
 ```
 "CustomerAccount": {
@@ -93,8 +85,7 @@ The ‘CustomerAccount’ entity and its structure.
 ```
 
 
-
-  The nested complex type objects in the ‘CustomerAccount’ such as ‘ContactDetails’.
+The nested complex type objects in the ‘CustomerAccount’ such as ‘ContactDetails’.
 
 
 ```
@@ -114,9 +105,7 @@ The ‘CustomerAccount’ entity and its structure.
                    }
 ```
 
-
-
-   The required constraint on the customerId, firstname, lastName, and on the next complex type address, and property of address i.e zipcode.
+The required constraint on the customerId, firstname, lastName, and on the next complex type address, and property of address i.e zipcode.
 
 
 ```
@@ -128,13 +117,9 @@ The ‘CustomerAccount’ entity and its structure.
                 ]
 ```
 
-
-
-
 4. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning. _
 
 After Uni Provisioning is complete. You will see that the Uni with the name you chose will appear in the running status on the home page. 
-
 
 # Explore the Uni
 
