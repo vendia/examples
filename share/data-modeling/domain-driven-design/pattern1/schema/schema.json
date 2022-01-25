@@ -1,0 +1,103 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://vendia.net/schemas/sample.schema.json",
+    "title": "Pattern1",
+    "x-vendia-indexes": {
+        "CustomerAccountIdIndex": [
+            {
+                "type": "CustomerAccount",
+                "property": "customerId"
+            }
+        ]
+    },
+    "description": "CRM Uni",
+    "type": "object",
+    "properties": {
+        "SchemaOwner": {
+            "type": "object",
+            "description": "Schema Owner Details Singleton Value Object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "CustomerAccount": {
+            "description": "Customer Account",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "customerId": {
+                        "description": "The unique identifier for a customer",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First Name of a customer",
+                        "type": "string"
+                    },
+                    "middleName": {
+                        "description": "Middle Name of a customer",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last Name of a customer",
+                        "type": "string"
+                    },
+                    "contactDetails": {
+                        "description": "customer contact details",
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "description": "email Id of a customer",
+                                "type": "string"
+                            },
+                            "phone": {
+                                "description": "phone number of a customer",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "address": {
+                        "description": "customer contact details",
+                        "type": "object",
+                        "properties": {
+                            "addressLine1": {
+                                "description": "Customer Adddress Line 1",
+                                "type": "string"
+                            },
+                            "addressLine2": {
+                                "description": "Customer Adddress Line 2",
+                                "type": "string"
+                            },
+                            "city": {
+                                "description": "City",
+                                "type": "string"
+                            },
+                            "state": {
+                                "description": "State",
+                                "type": "string"
+                            },
+                            "zipcode": {
+                                "description": "Zipcode",
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "zipcode"
+                        ]
+                    }
+                },
+                "required": [
+                    "customerId",
+                    "firstName",
+                    "lastName",
+                    "address"
+                ]
+            }
+        }
+    }
+}
