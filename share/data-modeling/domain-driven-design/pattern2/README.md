@@ -23,7 +23,7 @@ In this scenario we see two separate domains trying to leverage a single Uni. CR
 
   Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own’ option. 
 
-3.Fill out details in the Uni Creation Wizard. 
+3. Fill out details in the Uni Creation Wizard. 
 
    **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Remember, A Uni can hold more data models for more than one bounded context such as a customer account. 
 
