@@ -17,11 +17,11 @@ In this scenario we see two separate domains trying to leverage a single Uni. CR
 
 1. Login to Vendia Share [here](https://share.vendia.net/login). 
 
-  a. Don’t have a login, you can sign up for one [here](https://share.vendia.net/). 
+  Don’t have a login, you can sign up for one [here](https://share.vendia.net/). 
 
 2. Create Uni
 
-  a.Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own’ option. 
+  Click the 'Create Universal Application' button on the top-right. Next, use the ‘Create your own’ option. 
 
 3.Fill out details in the Uni Creation Wizard. 
 
