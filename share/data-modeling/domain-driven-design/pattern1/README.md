@@ -10,6 +10,10 @@ The Customer Relationship Management(CRM) Team wants to create a single source o
 
 Since CRM is an independent business unit we will assume it is a domain on its own. Inside CRM, we will have multiple sub-domains; customer account is one such sub-domain. You will model customer account as a Bounded Context.  Since CRM will perform frequent lookup, search, and filter on customer records by customerId, you will index customer accounts on the customerId property. 
 
+If you are confused between Bounded Context, Entity, and the Aggregate. These terms correlate 1:1 for the purpose of this exercise. I will use the term Entity here to mean Root Entity which is an Aggregate in DDD. And, Bounded Context can have one or more than one Entity.
+
+
+
 
 ## Create a Uni
 
@@ -179,9 +183,9 @@ If you are operating in a Standard tier and plan to continue with Pattern 2, del
 1. How to create a Uni?
 2. How to create a Singleton Value Object?
 3. How to enforce a required constraint on a property?
-4. How to model a data aggregate in Uni for a given Bounded Context?
+4. How to model a data Aggregate(a.k.a)Root Entity in a Uni for a given Bounded Context?
 5. How to define indexes in the schema?
-6. How to create an Aggregate and an Entity in the schema?
+6. How to create an Aggregate(a.k.a Root Entity) and an Entity in the schema?
 7. How to use GraphQL to create entity records?
 8. How to use Entity Explorer to create entity records?
 9. How easy it is to deploy a Uni schema to create a Uni?
