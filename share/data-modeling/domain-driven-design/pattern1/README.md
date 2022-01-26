@@ -23,7 +23,10 @@ Click the 'Create Universal Application' button on the top-right. Next, use the 
 
 3. Fill out details in the Uni Creation Wizard. 
 
-1. **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘CRM Uni’. Click ‘Next’
+1. **Step 1:** Give your Uni a name. 
+Prefix your Uni name with prefix 'test-' so its name can be reused. Pick a unique Uni name since all Starter and Individual Tier users will share the vendia.net namespace, which will cause naming collisions.
+Since this Uni will be owned and operated by the CRM Team. I will give it the name ‘test-CRM Uni-<suffix>’. I will simply refer to it as the'CRM Uni'. Click ‘Next’. 
+
 2. **Step 2:** Fill out the following information to create a Uni node. 
 
 ```
@@ -117,12 +120,12 @@ The required constraint on the customerId, firstname, lastName, and on the next 
 
 4. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning.
 
-After Uni Provisioning is complete. You will see that the Uni with the name you chose will appear in the running status on the home page. 
-
+After Uni provisioning is complete, you will see that the Uni with the name you chose will appear in the `RUNNING` status on the home page. 
+	
 # Explore the Uni
 
-Click the Uni you just created. Click on the ‘Entity Explorer’. You will notice ‘Schema Owner’ and CustomerAccount’ Entity’ on the left. 
-
+Click the Uni you just created. Click on the `Entity Explorer`. You will notice `Schema Owner` and `CustomerAccount Entity` on the left. 
+	
 Schema Owner is a Value Object; it’s a singleton value object with no unique identifier. You will use it to keep track of who is the Uni `owner` and `emailId` of the group owning it. It is good to have this information in the Uni itself. Click Edit and fill the `group` and `emailId` properties.
 
 Let’s create a customer record. Click ‘CustomerAccount’ entity. Click ‘Create Customer Account’. Enter customer account details. For CustomerId, pick a number. I use the [10001,10002…] series for testing. In the real world, either you will have your own sequence generator for customerId, or you will use the customerId from enterprise source of truth systems elsewhere, or you can use the id property value automatically created by Uni for a customer record. 
@@ -167,6 +170,9 @@ mutation m {
 
 Take a moment now, and compare, the effort it took for you to create a Uni, and run queries. You see ease of use relative to other data platform that you use. The effort to deploy the same schema won’t be much different either. You can pump more data into your Uni and you don’t have to worry about scaling. Vendia will manage it for you. 
 
+**Clean Up:**
+If you are operating in a free tier  and plan to continue with Pattern 2, delete Uni you created for Pattern 1. Free tier allows you to create only one Uni. You can do it from Node Settings. Scroll down to the Danger Zone and you will find the 'Delete Uni' command. 
+
 
 # What did we learn?
 
@@ -180,4 +186,4 @@ Take a moment now, and compare, the effort it took for you to create a Uni, and 
 8. How to use Entity Explorer to create entity records?
 9. How easy it is to deploy a Uni schema to create a Uni?
 
-Let’s move on to Patern 2 now. 
+Let’s move on to the Patern 2 now. 
