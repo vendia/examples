@@ -171,10 +171,10 @@ mutation m {
 Take a moment now, and compare, the effort it took for you to create a Uni, and run queries. Compare the ease of use with Vendia Share relative to other data platform that you have used in the past. You can continue to pump more data into your Uni and you don’t have to worry about scaling. Vendia will shard your data.
 
 ## Clean Up
-If you are operating in a Standard tier and plan to continue with Pattern 2, delete your Uni. Standard tier allows you to create only one Uni. You can do it from the Node Settings. Navigate to your `Uni`>`Uni Settings`>Scroll down to the `Danger Zone` and you will find the 'Delete Uni' command. 
+If you are operating in a Standard tier and plan to continue with Pattern 2, delete your Uni. Standard tier allows you to create only one Uni. You can do it from the `Uni Settings`. Navigate to your Uni>`Uni Settings`>Scroll down to the `Danger Zone` and you will find the `Delete Uni` command. 
 
 
-## What did we learn?
+## What did you learn?
 
 1. How to create a Uni?
 2. How to create a Singleton Value Object?
