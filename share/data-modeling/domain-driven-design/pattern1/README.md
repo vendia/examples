@@ -8,7 +8,7 @@ The Customer Relationship Management(CRM) Team wants to create a single source o
 
 # Modeling
 
-Since CRM is an independent function we will assume it is a domain on its own. Inside CRM, we will have multiple sub-domains; customer account is one such sub-domain. You can model a customer account as a Bounded Context.  Since CRM will perform frequent lookup, search, and filter on customer records by customerId, you will index customer accounts on customerId property. 
+Since CRM is an independent business unit we will assume it is a domain on its own. Inside CRM, we will have multiple sub-domains; customer account is one such sub-domain. You can model a customer account as a Bounded Context.  Since CRM will perform frequent lookup, search, and filter on customer records by customerId, you will index customer accounts on customerId property. 
 
 
 # Create a Uni
