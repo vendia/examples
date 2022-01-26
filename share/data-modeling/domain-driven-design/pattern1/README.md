@@ -123,7 +123,7 @@ After Uni Provisioning is complete. You will see that the Uni with the name you 
 
 Click the Uni you just created. Click on the ‘Entity Explorer’. You will notice ‘Schema Owner’ and CustomerAccount’ Entity’ on the left. 
 
-Schema Owner is a Value Object; It’s a singleton value object with no unique identifier. You will use it to keep track of who is the Uni ‘owner’ and ‘emailId’ of the group owning it. It is good to have this information in the Uni itself. Click Edit and fill the ‘group’ and ‘emailId’ properties.
+Schema Owner is a Value Object; it’s a singleton value object with no unique identifier. You will use it to keep track of who is the Uni `owner` and `emailId` of the group owning it. It is good to have this information in the Uni itself. Click Edit and fill the `group` and `emailId` properties.
 
 Let’s create a customer record. Click ‘CustomerAccount’ entity. Click ‘Create Customer Account’. Enter customer account details. For CustomerId, pick a number. I use the [10001,10002…] series for testing. In the real world, either you will have your own sequence generator for customerId, or you will use the customerId from enterprise source of truth systems elsewhere, or you can use the id property value automatically created by Uni for a customer record. 
 
