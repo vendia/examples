@@ -197,9 +197,9 @@ If you are operating in a Standard tier and plan to continue with Pattern 3, del
 ## What did you learn?
 
 1. How to model two Bounded Contexts in the same Uni?
-2. How to create a Read-Only Node using a single Uni for second party?
+2. How to create a read-only node using a single Uni for the second party?
 3. How to link two entities together using a single customer identity?
-4. How to execute two entities together in a single transaction?
+4. How to transact on two co-related properties in two different two entities together in a single transaction?
 
 ## What's next?
 Time to practise Pattern 3 now. 
