@@ -170,7 +170,7 @@ mutation m {
 
 Take a moment now, and compare, the effort it took for you to create a Uni, and run queries. You see ease of use relative to other data platform that you use. The effort to deploy the same schema won’t be much different either. You can pump more data into your Uni and you don’t have to worry about scaling. Vendia will manage it for you. 
 
-**Clean Up:**
+# Clean Up
 If you are operating in a free tier  and plan to continue with Pattern 2, delete Uni you created for Pattern 1. Free tier allows you to create only one Uni. You can do it from Node Settings. Scroll down to the Danger Zone and you will find the 'Delete Uni' command. 
 
 
