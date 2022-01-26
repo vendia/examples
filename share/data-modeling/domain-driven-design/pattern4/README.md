@@ -114,7 +114,7 @@ If you are operating in a Standard tier and plan to continue with your own Uni f
 
 ## What did did we learn?
 
-1. The considerations for one Uni versus two Unis for two different Domains?
+1. The considerations for creating one Uni versus two Unis for two different Domains?
             
 ## What's next?
 First, I want to congraluate you for coming this far. Since you have worked so hard and showing dedication. It's time to build a Uni for your business problem now and show your skills on real problems. You don't need a big team to do it. You can do it as a side-hustle. You need help with your Uni, enegage with us at [Vendia Discorse](https://community.vendia.net/c/resources/8) or if you have a story to tell tag us on Twitter[@VendiaHQ]( https://twitter.com/VendiaHQ).
