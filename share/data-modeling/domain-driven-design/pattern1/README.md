@@ -3,7 +3,7 @@
 
 # Scenario
 
-The customer Relationship Management(CRM) Team wants to build a single source of truth for customer account data which includes first name, last name, customerId, personal details, contact details, and address. The CRM team will frequently query customer data using customerId. 
+The Customer Relationship Management(CRM) Team wants to create a single source of truth for customer account data, which includes first name, last name, customerId, personal details, contact details, and address. The CRM Team will frequently query customer data using customerId. 
 
 
 # Modeling
