@@ -191,5 +191,5 @@ If you are operating in a Standard tier and plan to continue with Pattern 2, del
 9. How easy it is to deploy a Uni schema to create a Uni?
 
 ## What's next?
-Time to review [Pattern 2](examples/design-patterns/domain-driven-design/pattern2/README.md) now.
+Time to review [Pattern 2](/examples/design-patterns/domain-driven-design/pattern2/README.md) now.
 
