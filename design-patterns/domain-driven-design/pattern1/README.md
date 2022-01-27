@@ -79,7 +79,7 @@ The Singleton Value Object `Schema Owner`. You can store schema and Uni metadata
 
 The `CustomerAccount` entity and its structure.
 
-```json
+```
 "CustomerAccount": {
            "description": "Customer Account",
            "type": "array",
