@@ -5,7 +5,7 @@ In this section, you will enable notifications that let the Distributor know a d
 Modifying the settings of the **DistributorNode** can be done using either the `GraphQL Explorer`, the `Entity Explorer`, or the `Share CLI`.
 
 ### Update the DistributorNode's Settings
-You will update the **DistributorNode** to enable email notifications anytime a new block is added to the Vendia Share ledger.  These `blockNotifications` contain information that can be used by the recipient to retrieve additional information, including the transaction submitted that resulted in a new block and even the mutation that was included in the transaction.  For simplicity, you will simply attempt to receieve block notifications from the **DistributorNode**.
+You will update the **DistributorNode** to enable email notifications anytime a new block is added to the Vendia Share ledger.  These `blockNotifications` contain information that can be used by the recipient to retrieve additional information, including the transaction submitted that resulted in a new [block](https://www.vendia.net/docs/share/terms-and-definitions#block) and even the mutations that were included in the transaction.  For simplicity, you will simply attempt to receieve block notifications from the **DistributorNode**.
 
 * Open the `GraphQL Explorer` of the **DistributorNode**. Remove any existing content from the middle pane.
 
