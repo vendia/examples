@@ -26,9 +26,9 @@ If you are confused between `Bounded Context`, `Entity`, and the `Aggregate`. Th
 
 3. Fill out details in the Uni Creation Wizard. 
 
-   **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘test-CRM-<append-unique-identifier>’. Remember, A Uni can hold more data models for more than one Bounded Context such as a `CustomerAccount`. 
+**Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘test-CRM-<append-unique-identifier>’. Remember, A Uni can hold more data models for more than one Bounded Context such as a `CustomerAccount`. 
 
-   **Step 2:** Fill out the following information to create a Uni node. You will create two nodes - Node1 and Node2. 
+**Step 2:** Fill out the following information to create a Uni node. You will create two nodes: Node1 and Node2. 
 
 **Node 1**
 ```
@@ -48,7 +48,7 @@ Node Region:"us-east-1". //you can change it
 Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
-  **Step 3:** Provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
+**Step 3:** Provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
 
 Let’s review new things we added to the schema that is different from the Pattern 1. 
 
@@ -115,7 +115,7 @@ Notice the `customerId` property  and how it links `CustomerAccount` and `Custom
 
 Notice `zipcode` in `CustomerAccount{address{zipcode}` and `DMAbyZip` in the `CustomerProfile`. Designated Marketing Area(DMA) is marketing geo that is identified by the zipcode of the location. When a customer moves, the CRM Team updates the customer address in the ‘CustomerAccount{address{zipcode}} property. You can use `vendia_transaction` tag in the GraphQL command to update both the `zipcode` and `DMAbyZip` in the same transaction. You will try it later.
 
-  **Step 4:** Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
+**Step 4:** Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
 
  After Uni Provisioning is complete. You will see that the Uni with the name you choose will appear in the `RUNNING` status on the home page. You will notice two different nodes under ‘My Nodes’. `CRMReadWriteNode` and `MarketingReadOnlyNode`. 
 
