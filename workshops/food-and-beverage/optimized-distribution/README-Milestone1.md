@@ -12,7 +12,7 @@ The `uni_configuration` directory contains several files that will help you quic
 Now it's time to create a Uni using the files from the previous section.
 
 ### Update Your registration.json File
-First, rename the `sample.registration.json` to `registration.json`.  
+First, rename the `registration.json.sample` to `registration.json`.  
 
 You'll want to update the `name` for your Uni to be unique, but preserving the `test-` prefix.  By default, all Unis share a common namespace (`vendia.net`) so try your best to avoid naming collisions - here is your chance to get creative!
 
