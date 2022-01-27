@@ -29,7 +29,7 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 
 **Step 1:** Give your Uni a name. 
 Prefix your Uni name with prefix `test-` so its name can be reused. Pick a unique Uni name since all Starter and Individual Tier users will share the vendia.net namespace, which will cause naming collisions.
-Since this Uni will be owned and operated by the CRM Team. I will give it the name `test-CRM-<append-unique-suffix>`. I will simply refer to it as the `CRM`. Click `Next`. 
+Since this Uni will be owned and operated by the CRM Team. I will give it the name `test-CRM-append-unique-suffix`. I will simply refer to it as the `CRM`. Click `Next`. 
 
 **Step 2:** Fill out the following information to create a Uni node. 
 
@@ -86,7 +86,6 @@ The `CustomerAccount` entity and its structure.
            "items": {
                "type": "object",
                "properties": {
-		…
 ```
 
 
@@ -122,7 +121,7 @@ The required constraint on the `customerId`, `firstname`, `lastName`, and on the
                 ]
 ```
 
-4. Press “Create”. Wait for 5 minutes for Share to finish Uni provisioning.
+4. Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning.
 
 After Uni provisioning is complete, you will notice that your Uni will appear in the `RUNNING` status on the home page. 
 	
@@ -191,5 +190,4 @@ If you are operating in a Standard tier and plan to continue with Pattern 2, del
 9. How easy it is to deploy a Uni schema to create a Uni?
 
 ## What's next?
-Time to review [Pattern 2](../pattern2/README.md) now.
-
+Time to review [Pattern 2](../pattern2/README.md)
