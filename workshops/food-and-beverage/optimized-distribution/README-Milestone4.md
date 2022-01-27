@@ -12,38 +12,37 @@ You will now create a purchase order using the GraphQL Explorer.
 * Open the `GraphQL Explorer` of the **DistributorNode**. Remove any existing content from the middle pane.
 * Copy and paste the mutation below and then execute the mutation to create a new purchase order
 
-```
-mutation createPurchaseOrder {
-  add_PurchaseOrder_async(input: {dateIssued: "2022-01-26", quantity: "100", sku: "00001", totalPrice: 199}) {
-    result {
-      _id
-      _owner
-      submissionTime
-      transactionId
-      version
+  ```
+  mutation createPurchaseOrder {
+    add_PurchaseOrder_async(input: {dateIssued: "2022-01-26", quantity: "100", sku: "00001", totalPrice: 199}) {
+      result {
+        _id
+        _owner
+        submissionTime
+        transactionId
+        version
+      }
+      error
     }
-    error
   }
-}
-```
+  ```
 
 * For good measure, create one more purchase order
 
-```
-mutation createPurchaseOrder {
-  add_PurchaseOrder_async(input: {dateIssued: "2022-01-26", quantity: "40", sku: "00004", totalPrice: 30.8}) {
-    result {
-      _id
-      _owner
-      submissionTime
-      transactionId
-      version
+  ```
+  mutation createPurchaseOrder {
+    add_PurchaseOrder_async(input: {dateIssued: "2022-01-26", quantity: "40", sku: "00004", totalPrice: 30.8}) {
+      result {
+        _id
+        _owner
+        submissionTime
+        transactionId
+        version
+      }
+      error
     }
-    error
   }
-}
-
-```
+  ```
 
 ### Schedule a Delivery from the SupplierNode
 After the Distributor submits purchase orders, the Supplier must respond with delivery information.
@@ -52,42 +51,66 @@ You will now create a delivery that references the recently submitted purchase o
 
 * Open the `GraphQL Explorer` of the **SupplierNode**. Remove any existing content from the middle pane.
 
-* Copy and paste the query below and then execute it to see all purchase orders
+First, confirm the purchase orders submitted to the **DistributorNode** are in fact also avaiable from the **SupplierNode**.  
 
-```
-query listPurchaseOrders {
-  list_PurchaseOrderItems {
-    _PurchaseOrderItems {
-      _id
-      _owner
-      dateIssued
-      quantity
-      sku
-      totalPrice
+* Copy and paste the query below and then execute it to see all purchase orders.
+ 
+  ```
+  query listPurchaseOrders {
+    list_PurchaseOrderItems {
+      _PurchaseOrderItems {
+        _id
+        _owner
+        dateIssued
+        quantity
+        sku
+        totalPrice
+      }
     }
   }
-}
-```
+  ```
 
 **Note:** Copy the `_id` of each purchase order, as you'll reference those values in the next step
 
 * Copy and paste the mutation below and then execute the mutation to create a delivery that will fulfill the purchase orders
     * Replace the `purchaseOrderId` placeholder values below with the `_id` values of the purchase orders listed in the previous step.  This associates the purchase orders and the scheduled delivery.
 
-```
-mutation scheduleDelivery {
-  add_Delivery_async(input: {status: scheduled, expectedDateTime: "2022-01-28T12:00:00Z", purchaseOrders: [{purchaseOrderId: "017e9989-52dd-eaa0-7c58-43a39bfc8b9d"}, {purchaseOrderId: "017e994e-c2a3-0bac-cd67-d23d6af22680"}]}) {
-    result {
-      _id
-      _owner
-      submissionTime
-      transactionId
-      version
+  ```
+  mutation scheduleDelivery {
+    add_Delivery_async(input: {status: scheduled, expectedDateTime: "2022-01-28T12:00:00Z", purchaseOrders: [{purchaseOrderId: "017e9989-52dd-eaa0-7c58-43a39bfc8b9d"}, {purchaseOrderId: "017e994e-c2a3-0bac-cd67-d23d6af22680"}]}) {
+      result {
+        _id
+        _owner
+        submissionTime
+        transactionId
+        version
+      }
+      error
     }
-    error
   }
-}
-```
+  ```
+  
+Finally, confirm the newly created delivery is stred on the **DistributorNode**.  
+
+* Open the `GraphQL Explorer` of the **DistributorNode**.  Remove any existing content from the middle pane.
+* Copy and paste the query below and then execute it to see all deliveries.
+  
+  ```
+  query listDeliveries {
+    list_DeliveryItems {
+      _DeliveryItems {
+        _id
+        _owner
+        actualDateTime
+        expectedDateTime
+        purchaseOrders {
+          purchaseOrderId
+        }
+        status
+      }
+    }
+  }
+  ```
 
 ## Collaborate Using the Entity Explorer
 The Supplier may need to change the expected date of an upcoming delivery.

@@ -31,6 +31,29 @@ mutation enableBlockNotificationEmails {
 }
 ```
 
+### Confirming the DistributorNode's Settings
+There are several ways to confirm the **DistributorNode** successfully applied the settings submitted in the previous section.
+
+#### Using the GraphQL Explorer 
+* Open the `GraphQL Explorer` of the **DistributorNode**. Remove any existing content from the middle pane.
+
+* Copy and paste the query below and then execute it to review the block notification email settings from **DistributorNode**
+```
+query getSettings {
+  getVendia_Settings {
+    _owner
+    blockReportEmails
+  }
+}
+```
+
+**Note:** Running the query above against the **SupplierNode** (i.e. using the **SupplierNode**'s GraphQL Explorer) will produce a different result, as expected, since the block notifications emails are only enabled on the **DistributorNode**.
+
+#### Using the Node Details View
+* Click on the `Manage node` button in the upper-right corner of the  **DistributorNode** display
+* Click on the `Success Notifications` option in the left menu pane
+* Confirm the email address you configured to received block notification emails is included in the list of `Emails` displayed 
+
 ### AWS Email Approval
 Wait for an email (from AWS) to confirm your desire to receive block notification emails.  
 
