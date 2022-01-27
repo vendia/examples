@@ -28,6 +28,7 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 3. Fill out details in the Uni Creation Wizard. 
 
 **Step 1:** Give your Uni a name. You can name it ‘test-CRMandMarketing-<append-unique-suffix>`. Click `Next`. 
+  
 **Step 2:** Fill out the following information to create nodes: Node 1 and Node 2. 
 
 *Node 1* [ READ/WRITE on the `Customer`Account`] and [READ Only on `CustomerProfile`]
