@@ -27,11 +27,11 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 
 3. Fill out details in the Uni creation wizard. 
 
-1. **Step 1:** Give your Uni a name. 
+**Step 1:** Give your Uni a name. 
 Prefix your Uni name with prefix `test-` so its name can be reused. Pick a unique Uni name since all Starter and Individual Tier users will share the vendia.net namespace, which will cause naming collisions.
 Since this Uni will be owned and operated by the CRM Team. I will give it the name `test-CRM-<append-unique-suffix>`. I will simply refer to it as the `CRM`. Click `Next`. 
 
-2. **Step 2:** Fill out the following information to create a Uni node. 
+**Step 2:** Fill out the following information to create a Uni node. 
 
 ```
 Node Name: "CRM". // you can change the name.
@@ -42,7 +42,7 @@ Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
 
-3. **Step 3:** Provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder. I have already designed the schema based on model we described above. But, this is the step in which you will spend most time while constructing Uni for your business problem.
+**Step 3:** Provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder. I have already designed the schema based on model we described above. But, this is the step in which you will spend most time while constructing Uni for your business problem.
 
    Let’s review few important things in the schema that you will reuse in most of your Unis.
 
