@@ -55,7 +55,7 @@ Let’s review new things we added to the schema that is different from the Patt
 Check out the new `CustomerProfile` entity.
 
 
-```json
+```
 "CustomerProfile": {
            "description": "Customer Profile",
            "type": "array",
@@ -99,7 +99,7 @@ aclInput: {
 Notice the `customerId` property  and how it links `CustomerAccount` and `CustomerProfile`. You can use this pattern to avoid the eager loading of two separate aggregates. You don’t have to load both `CustomerProfile` and `CustomerAccount` at the same time.
 
 
-```json
+```
 "CustomerProfile": {
            "description": "Customer Profile",
            "type": "array",
@@ -113,7 +113,7 @@ Notice the `customerId` property  and how it links `CustomerAccount` and `Custom
 
 ```
 
-Notice `zipcode` in `CustomerAccount{address{zipcode}` and `DMAbyZip` in the `CustomerProfile`. Designated Marketing Area(DMA) is marketing geo that is identified by the zipcode of the location. When a customer moves, the CRM Team updates the customer address in the ‘CustomerAccount{address{zipcode}} property. You can use `vendia_transaction` tag in the GraphQL command to update both the `zipcode` and `DMAbyZip` in the same transaction. You will try it later.
+Notice `zipcode` in `CustomerAccount{address{zipcode}` and `DMAbyZip` in the `CustomerProfile`. Designated Marketing Area(DMA) is marketing geo that is identified by the zipcode of the location. When a customer moves, the CRM Team updates the customer address in the ‘CustomerAccount{address{zipcode}} property. You can use [vendia_transaction](https://www.vendia.net/docs/share/vendia-transaction) tag in the GraphQL command to update both the `zipcode` and `DMAbyZip` in the same transaction. You will try it later.
 
 4. Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
 
