@@ -6,7 +6,7 @@ The `uni_configuration` directory contains several files that will help you quic
 
 * __schema.json__ - Specifies the data model for this Uni
 * __initial-state.json__ - Seeds the Uni with some initial data
-* __sample.registration.json__ - Contains cloud, region, and account information for this Uni
+* __registration.json.sample__ - Contains cloud, region, and account information for this Uni
 
 ## Create Your First Uni
 Now it's time to create a Uni using the files from the previous section.
