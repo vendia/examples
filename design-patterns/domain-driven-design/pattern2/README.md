@@ -20,7 +20,7 @@ If you are confused between `Bounded Context`, `Entity`, and the `Aggregate`. Th
 
   Don’t have a login, you can [Sign Up](https://share.vendia.net/) now. 
 
-2. Create Uni
+2. Create a Uni
 
   Click the `Create Universal Application` button on the top-right. Next, use the `Create your own` option. 
 
