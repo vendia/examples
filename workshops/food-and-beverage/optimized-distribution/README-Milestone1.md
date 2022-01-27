@@ -2,7 +2,7 @@
 Your first milestone in this workshop is to create a new [Universal Application](https://www.vendia.net/docs/share/dev-and-use-unis).
 
 ## Explore the /uni_configuration directory
-The `/uni_configuration` directory contains several pre-created files that will help you quickly create a new Uni.  Review the contents of each of these files to get a better understanding of their contents.
+The `uni_configuration` directory contains several files that will help you quickly create a new Uni.  Review the contents of each of these files to get a better understanding of their contents.
 
 * __schema.json__ - Specifies the data model for this Uni
 * __initial-state.json__ - Seeds the Uni with some initial data
