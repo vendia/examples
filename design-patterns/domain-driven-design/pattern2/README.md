@@ -115,7 +115,7 @@ Notice the `customerId` property  and how it links `CustomerAccount` and `Custom
 
 Notice `zipcode` in `CustomerAccount{address{zipcode}` and `DMAbyZip` in the `CustomerProfile`. Designated Marketing Area(DMA) is marketing geo that is identified by the zipcode of the location. When a customer moves, the CRM Team updates the customer address in the ‘CustomerAccount{address{zipcode}} property. You can use `vendia_transaction` tag in the GraphQL command to update both the `zipcode` and `DMAbyZip` in the same transaction. You will try it later.
 
-**Step 4:** Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
+4. Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
 
  After Uni Provisioning is complete. You will see that the Uni with the name you choose will appear in the `RUNNING` status on the home page. You will notice two different nodes under ‘My Nodes’. `CRMReadWriteNode` and `MarketingReadOnlyNode`. 
 
