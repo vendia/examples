@@ -12,3 +12,8 @@ An architectural pattern expresses a fundamental structural organization schema 
 A design pattern provides a scheme for refining the subsystems or components of a software system, or the relationships between them. It describes a commonly recurring structure of communicating components that solves a general design problem within a particular context.
 
 A framework is a partially complete software (sub-) system that is intended to be instantiated. It defines the architecture for a family of (sub-) systems and provides the basic building blocks to create them. It also defines the places where adaptations for specific functionality should be made.
+
+We at Vendia plan to build a library of software patterns application to Vendia Share Universal Application(`Uni').
+
+## Domain Driven Design
+A software developer named Eric Evans recognized the need to understand the software domain. To introduce the DDD approach, he wrote a book called Domain-Driven Design: Tackling Complexity in the Heart of Software.
