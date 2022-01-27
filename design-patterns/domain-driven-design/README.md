@@ -4,7 +4,7 @@ A software developer named Eric Evans recognized the need to understand the soft
 
 The most obvious advantage of DDD is that it gets everybody using the same language. When development teams use the same language as domain experts, it leads to software design that makes sense to the end user. Because the terminology in the application corresponds to real-world activities, there is less confusion and users will understand how to use the product more quickly.
 
-Check out four DDD patterns that we apply to the Vendia Share Univseral Application( we call it `Uni`).
+Check out four DDD patterns that we apply to Vendia Share Universal Applications ( or `Unis` for short).
 
 ## Pattern 1: Single Domain, Single Bounded Context, and a Single Uni
 
