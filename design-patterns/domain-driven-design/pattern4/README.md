@@ -25,13 +25,14 @@ Pattern 4 will function like Pattern 1. However, in this blog, I will provide a 
 
 Don’t have a login, you can [Sign Up](https://share.vendia.net/). 
 
-2. Create Uni
+2. Create a Uni
 
 Click the `Create Universal Application` button on the top-right. Next, use the `Create your own` option. 
 
 3. Fill out details in the Uni Creation Wizard. 
 
 **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-<your-unique-indentifier>’.
+            
 **Step 2:** Fill out the following information to create a Uni node. 
 
 ```
@@ -44,7 +45,7 @@ Auth Option: "Vendia User". // Let's use Vendia User
 
 **Step 3:** provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
 
-Make a note of the new ‘CustomerLoyality’ aggregate(a.k.a Root Entity) added to the schema.
+Make a note of the new `CustomerLoyality` aggregate(a.k.a Root Entity) added to the schema.
 
 ```json
 "CustomerLoyalty": {
@@ -100,7 +101,7 @@ You will also notice that ACLs are not present because each domain has its own d
 ```
 
 
-Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning.
+4. Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning.
 
 After Uni Provisioning is complete. You will see that your Uni shows in '`RUNNING` status in the home page. 
 
