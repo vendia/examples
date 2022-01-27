@@ -1,6 +1,6 @@
 # Pattern 4: Multiple Domain, Multiple Bounded Contexts, and Multiple Unis
 
-**Prerequisite:** Please familiarize yourself with Patterns 1, 2, 3 before you practice Pattern 4. 
+**Prerequisite:** Please familiarize yourself with [Patterns 1](../pattern1/README.md), [Pattern 2](../pattern2/README.md), [Pattern 3](../pattern3/README.md) before you practice the Pattern 4. 
 
 
 ## Scenario
@@ -31,7 +31,7 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 
 3. Fill out details in the Uni Creation Wizard. 
 
-**Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-<your-unique-indentifier>’.
+**Step 1:** Give your Uni a name.Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-append-unique-suffix’.Get creative and choose a unique suffix that you will need for your Uni name. Reaplace it with the `append-unique-suffix` in the proposed Uni name.
             
 **Step 2:** Fill out the following information to create a Uni node. 
 
