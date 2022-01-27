@@ -13,7 +13,7 @@ A design pattern provides a scheme for refining the subsystems or components of 
 
 A framework is a partially complete software (sub-) system that is intended to be instantiated. It defines the architecture for a family of (sub-) systems and provides the basic building blocks to create them. It also defines the places where adaptations for specific functionality should be made.
 
-We at Vendia plan to build a library of software patterns application to Vendia Share Universal Application(`Uni').
+The `design-patterns` directory of this repo includes a collection of patterns for building solutions using Vendia Share.  The intent is to capture and share knowledge and experiences gained from working with Universal Applications ("Unis") on the Share platform.  Enjoy!
 
 ## Domain Driven Design
 A software developer named Eric Evans recognized the need to understand the software domain. To introduce the DDD approach, he wrote a book called Domain-Driven Design: Tackling Complexity in the Heart of Software.
