@@ -31,8 +31,8 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 
 3. Fill out details in the Uni Creation Wizard. 
 
-1. **Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-<your-unique-indentifier>’.
-2. **Step 2:** Fill out the following information to create a Uni node. 
+**Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-<your-unique-indentifier>’.
+**Step 2:** Fill out the following information to create a Uni node. 
 
 ```
 Node Name: "Marketing". // you can change the name.
@@ -42,7 +42,7 @@ Node Region:"us-east-1". //you can change it
 Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
-3. **Step 3:** provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
+**Step 3:** provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder.
 
 Make a note of the new ‘CustomerLoyality’ aggregate(a.k.a Root Entity) added to the schema.
 
