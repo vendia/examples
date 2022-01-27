@@ -26,7 +26,7 @@ If you are confused between `Bounded Context`, `Entity`, and the `Aggregate`. Th
 
 3. Fill out details in the Uni Creation Wizard. 
 
-**Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘test-CRM-<append-unique-identifier>’. Remember, A Uni can hold more data models for more than one Bounded Context such as a `CustomerAccount`. 
+**Step 1:** Give your Uni a name. Since this Uni will be owned and operated by the CRM team. I will give it the name ‘test-CRM-append-unique-siffix’. Time to get creative, choose a unique siffix and replace it with `append-unique-siffix` in the Uni name. 
 
 **Step 2:** Fill out the following information to create a Uni node. You will create two nodes: Node1 and Node2. 
 
@@ -183,7 +183,7 @@ query listBlocks {
 **Query Results**
 
 
-```json
+```
           "blockId": "00000000000000X",
           "transactions": [
             {
