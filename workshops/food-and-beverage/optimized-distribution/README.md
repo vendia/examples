@@ -30,7 +30,7 @@ git clone https://github.com/vendia/examples.git
 ```
 
 # Workshop Milestones
-You'll incrementally create a multi-party application through a series of Milestones.  Each Milestone builds on the last, so they should be executed in order.
+You'll incrementally create a multi-party application through a series of Milestones.  Each Milestone builds on the previous, so they should be executed in order.
 
 ## Foundational
 * [Milestone 1 - Create a Supplier-Only Uni](README-Milestone1.md)
