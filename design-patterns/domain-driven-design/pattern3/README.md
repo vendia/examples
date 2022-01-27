@@ -1,6 +1,6 @@
 # Pattern 3: Two Domains, Multiple Bounded Contexts, and a Single Uni
 
-**Prerequisite:** Please familiarize yourself with the Pattern 1 and the Pattern 2 before you practice the Pattern 3. 
+**Prerequisite:** Please familiarize yourself with the [Pattern 1](../pattern1/README.md) and the [Pattern 2](../pattern2/README.md) before you practice the Pattern 3. 
 
 
 ## Scenario
@@ -118,4 +118,4 @@ If you are operating in a Standard tier and plan to continue with Pattern 4, del
 1. How to model two domains on a single Uni with different access levels for each Domain on different Bounded Contexts?
   
 ## What's next?
-  Time to practice Pattern 4 now. 
+  Time to practice [Pattern 4](../pattern4/README.md) now. 
