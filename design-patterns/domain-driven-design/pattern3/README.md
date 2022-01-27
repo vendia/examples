@@ -27,12 +27,11 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 
 3. Fill out details in the Uni Creation Wizard. 
 
-1. **Step 1:** Give your Uni a name. You can name it ‘test-CRMandMarketing-<append-unique-suffix>`. Click `Next`. 
-2. **Step 2:** Fill out the following information to create nodes: Node 1 and Node 2. 
+**Step 1:** Give your Uni a name. You can name it ‘test-CRMandMarketing-<append-unique-suffix>`. Click `Next`. 
+**Step 2:** Fill out the following information to create nodes: Node 1 and Node 2. 
 
-*Node 1 [ READ/WRITE on the `Customer`Account`] and [READ Only on `CustomerProfile`]*
-
-
+*Node 1* [ READ/WRITE on the `Customer`Account`] and [READ Only on `CustomerProfile`]
+  
 ```
 Node Name: "CRM". // you can change the name.
 Node Description: "Node dedicated Marketing". // You can change the description.
@@ -41,7 +40,7 @@ Node Region:"us-east-1"// you can change it
 Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
-*Node 2 [ READ Only on the `CustomerAccount`] and [READ/WRITE on the `CustomerProfile`]*
+*Node 2* [ READ Only on the `CustomerAccount`] and [READ/WRITE on the `CustomerProfile`]
 
 ```
 Node Name: "Marketing". // you can change the name.
@@ -51,7 +50,8 @@ Node Region:"us-east-1". //you can change it
 Auth Option: "Vendia User". // Let's use Vendia User
 ```
 
-3. **Step 3:** Provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder. The schema is the same as the one you used in Pattern 2. The difference is in the ‘aclnput’ you used in the GraphQL query that you used to add new records. 
+**Step 3:** Provide the Uni schema. Copy and paste the Uni schema from the schema.json file in the schema folder. The schema is the same as the one you used in Pattern 2. The difference is in the ‘aclnput’ you used in the GraphQL query that you used to add new records. 
+  
 4. Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
 
 After Uni Provisioning is complete. You will see that your Uni will appear in the `RUNNING` status on the home page. In ‘My Nodes’ you will see two nodes: `CRM` and `Marketing`. 
