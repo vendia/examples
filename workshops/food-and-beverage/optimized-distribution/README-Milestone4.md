@@ -2,7 +2,7 @@
 In this section, you will act as both the Supplier and the Distributor as you collaborate on the shared Uni created in [Milestone 3](README-Milestone3.md).
 
 ## Collaborate Using the GraphQL Explorer
-Each node in a Vendia Share Uni has its own GraphQL endpoint.  The GraphQL Explorer of each node is configured to talk to its respective node's custom GraphQL endpoint, which we'll target in this section.
+Each node in a Vendia Share Uni has its own GraphQL endpoint.  The GraphQL Explorer of each node is configured to work with its respective node's custom GraphQL endpoint, which we'll target in this section.
 
 ### Issue Purchase Orders from the DistributorNode
 The Distributor is now ready and able to submit purchase orders and schedule deliveries.
