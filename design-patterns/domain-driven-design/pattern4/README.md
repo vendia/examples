@@ -31,7 +31,7 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 
 3. Fill out details in the Uni Creation Wizard. 
 
-**Step 1:** Give your Uni a name.Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-append-unique-suffix’.Get creative and choose a unique suffix that you will need for your Uni name. Reaplace it with the `append-unique-suffix` in the proposed Uni name.
+**Step 1:** Give your Uni a name.Since this Uni will be owned and operated by the Marketing team, give it a Name ‘test-Marketing-append-unique-suffix’. Its time to get creative and choose a unique suffix that you will need for your Uni name. Reaplace it with the `append-unique-suffix` in the proposed Uni name.
             
 **Step 2:** Fill out the following information to create a Uni node. 
 
