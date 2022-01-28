@@ -1,0 +1,165 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://vendia.net/schemas/sample.schema.json",
+    "title": "Pattern3",
+    "description": "CRM and Marketing Uni",
+    "x-vendia-acls": {
+        "CustomerAccountAcl": {
+            "type": "CustomerAccount"
+        },
+        "CustomerProfileAcl": {
+            "type": "CustomerProfile"
+        }
+    },
+    "x-vendia-indexes": {
+        "CustomerAccountIdIndex": [
+            {
+                "type": "CustomerAccount",
+                "property": "customerId"
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "SchemaOwner": {
+            "type": "object",
+            "description": "Schema Owner Details Singleton Value Object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "CustomerAccount": {
+            "description": "Customer Account",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "customerId": {
+                        "description": "The unique identifier for a customer",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First Name of a customer",
+                        "type": "string"
+                    },
+                    "middleName": {
+                        "description": "Middle Name of a customer",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last Name of a customer",
+                        "type": "string"
+                    },
+                    "contactDetails": {
+                        "description": "customer contact details",
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "description": "email Id of a customer",
+                                "type": "string"
+                            },
+                            "phone": {
+                                "description": "phone number of a customer",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "address": {
+                        "description": "customer contact details",
+                        "type": "object",
+                        "properties": {
+                            "addressLine1": {
+                                "description": "Customer Adddress Line 1",
+                                "type": "string"
+                            },
+                            "addressLine2": {
+                                "description": "Customer Adddress Line 2",
+                                "type": "string"
+                            },
+                            "city": {
+                                "description": "City",
+                                "type": "string"
+                            },
+                            "state": {
+                                "description": "State",
+                                "type": "string"
+                            },
+                            "zipcode": {
+                                "description": "Zipcode",
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "zipcode"
+                        ]
+                    }
+                },
+                "required": [
+                    "customerId",
+                    "firstName",
+                    "lastName",
+                    "address"
+                ]
+            }
+        },
+        "CustomerProfile": {
+            "description": "Customer Profile",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "customerId": {
+                        "description": "The unique identifier for a customer",
+                        "type": "string"
+                    },
+                    "DMAbyZip": {
+                        "description": "The Zipcode for Designed Marketing Area Lookup",
+                        "type": "string"
+                    },
+                    "Psychographic": {
+                        "description": "customer Psychographic details",
+                        "type": "object",
+                        "properties": {
+                            "lifestyle": {
+                                "description": "Lifestyle",
+                                "type": "string"
+                            },
+                            "goals": {
+                                "description": "Goals",
+                                "type": "string"
+                            },
+                            "pains": {
+                                "description": "Pains",
+                                "type": "string"
+                            },
+                            "habits": {
+                                "description": "Habits",
+                                "type": "string"
+                            },
+                            "values": {
+                                "description": "Values",
+                                "type": "string"
+                            },
+                            "interests": {
+                                "description": "Interests",
+                                "type": "string"
+                            }
+                        },
+                        "required":[
+                            "goals"
+                        ]
+                    }
+                },
+                "required":[
+                    "customerId",
+                    "DMAbyZip"
+                ]
+            }
+        }
+    }
+}
