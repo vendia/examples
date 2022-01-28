@@ -98,7 +98,7 @@ The nested complex type objects in the `CustomerAccount` such as `ContactDetails
                        "type": "object",
                        "properties": {
                            "email": {
-                               "description": "email Id of a customer",
+                               "description": "email address of a customer",
                                "type": "string"
                            },
                            "phone": {
