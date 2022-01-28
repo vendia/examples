@@ -177,17 +177,17 @@ Take a moment now, and compare, the effort it took for you to create a Uni, and 
 If you are operating in a Standard tier and plan to continue with Pattern 2, delete your Uni. Standard tier allows you to create only one Uni. You can do it from the `Uni Settings`. Navigate to your Uni>`Uni Settings`>Scroll down to the `Danger Zone` and you will find the `Delete Uni` command. 
 
 
-## What did you learn?
+## What did you learn
 
-1. How to create a Uni?
-2. How to create a Singleton Value Object?
-3. How to enforce a required constraint on a property?
-4. How to model a data Aggregate(a.k.a)Root Entity in a Uni for a given Bounded Context?
-5. How to define indexes in the schema?
-6. How to create an Aggregate(a.k.a Root Entity) and an Entity in the schema?
-7. How to use GraphQL to create entity records?
-8. How to use Entity Explorer to create entity records?
-9. How easy it is to deploy a Uni schema to create a Uni?
+1. How to create a Uni
+2. How to create a Singleton Value Object
+3. How to enforce a required constraint on a property
+4. How to model a data Aggregate(a.k.a)Root Entity in a Uni for a given Bounded Context
+5. How to define indexes in the schema
+6. How to create an Aggregate(a.k.a Root Entity) and an Entity in the schema
+7. How to use GraphQL to create entity records
+8. How to use Entity Explorer to create entity records
+9. How easy it is to deploy a Uni schema to create a Uni
 
-## What's next?
+## What's next
 Time to review [Pattern 2](../pattern2/README.md)
