@@ -1,7 +1,7 @@
 # Milestone 1 - Create a Supplier-Only Uni
 Your first milestone in this workshop is to create a new [Uni](https://www.vendia.net/docs/share/dev-and-use-unis).
 
-## Explore the /uni_configuration directory
+## Explore the uni_configuration directory
 The `uni_configuration` directory contains several files that will help you quickly create a new Uni.  Review the contents of each of these files to get a better understanding of their contents.
 
 * __schema.json__ - Specifies the data model for this Uni
@@ -14,7 +14,7 @@ Now it's time to create a Uni using the files from the previous section.
 ### Update Your registration.json File
 First, rename the `registration.json.sample` to `registration.json`.  
 
-You'll want to update the `name` for your Uni to be unique, but preserving the `test-` prefix.  By default, all Unis share a common namespace (`vendia.net`) so try your best to avoid naming collisions - here is your chance to get creative!
+You'll want to update the `name` for your Uni to be unique, but [preserving the `test-` prefix](https://www.vendia.net/docs/share/limits#uni-and-node-names).  By default, all Unis share a common namespace (`unis.vendia.net`) so try your best to avoid naming collisions - here is your chance to get creative!
 
 You'll also want to update the `userId` of the `SupplierNode` to reflect your personal Vendia Share `userId` (i.e. the email address you used to register) before creating the Uni.
 
