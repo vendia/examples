@@ -113,9 +113,9 @@ Test out whether the records added with the above `aclInput` are visible to the 
 If you are operating in a Standard tier and plan to continue with Pattern 4, delete your Uni. Standard tier allows you to create only one Uni. You can do it from the `Uni Settings`. Navigate to your Uni>`Uni Settings`>Scroll down to the `Danger Zone` and you will find the `Delete Uni` command.
 
 
-## What did we learn?
+## What did we learn
 
-1. How to model two domains on a single Uni with different access levels for each Domain on different Bounded Contexts?
+1. How to model two domains on a single Uni with different access levels for each Domain on different Bounded Contexts
   
 ## What's next?
-  Time to practice [Pattern 4](../pattern4/README.md) now. 
+  Time to practice the [Pattern 4](../pattern4/README.md) now. 
