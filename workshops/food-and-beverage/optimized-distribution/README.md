@@ -4,7 +4,7 @@
 
 The scenario you'll explore in this workshop may sound familiar.  A food Supplier and a Distributor currently do not have an effective way to share data in real-time, meaning that they often do not work from a single, shared source of truth.  This results in costly data reconciliation, frequent food waste, and a lack of awareness when deliveries are delayed.  After struggling with this challenge for some time, the Supplier and Distributor agree to pilot a new application.  This application will use the Vendia Share platform to enable real-time data sharing between the Supplier and Distributor, increasing data timeliness, reducing errors and manual intervention, and establishing a shared source of truth between both participants.
 
-In this workshop, you will create your own Universal Application (or "Uni" for short), integrated an existing web application with the Uni, invite another participant to join your Uni, and, lastly, interact with that participant in real-time and with control.
+In this workshop, you will create your own Universal Application (or "Uni" for short), integrate an existing web application with the Uni, invite another participant to join your Uni, and, lastly, interact with that participant in real-time and with control.
 
 # Pre-requisites
 
