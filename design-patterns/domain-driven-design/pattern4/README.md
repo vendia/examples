@@ -113,9 +113,9 @@ You can try the same activities that you tried in the Pattern 1 on the Marketing
 ## Clean Up
 If you are operating in a Standard tier and plan to continue with your own Uni for your on business problem, delete your Uni. Standard tier allows you to create only one Uni. You can do it from the `Uni Settings`. Navigate to your Uni>`Uni Settings`>Scroll down to the `Danger Zone` and you will find the `Delete Uni` command.
 
-## What did did we learn?
+## What did did we learn
 
-1. The considerations for creating one Uni versus two Unis for two different Domains?
+1. The considerations for creating one Uni versus two Unis for two different Domains
             
-## What's next?
+## What's next
 First, I want to congraluate you for coming this far. Since you have worked so hard and showing dedication. It's time to build a Uni for your business problem now and show your skills on real problems. You don't need a big team to do it. You can do it as a side-hustle. You need help with your Uni, enegage with us at [Vendia Discorse](https://community.vendia.net/c/resources/8) or if you have a story to tell tag us on Twitter[@VendiaHQ]( https://twitter.com/VendiaHQ).
