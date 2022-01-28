@@ -4,7 +4,7 @@ Interested in contributing examples to our repository?
 
 **Awesome!**  Thanks for making this repository better for everyone in the Vendia community. 
 
-Read this document to understand how to report issues, provide new examples, and participate in the general development process.
+Read this document to understand how to report issues, provide new examples, and participate in the general development process. We've created a [style guide](./styleguide/README.md) as a reference.
 
 ## Submitting feature requests
 

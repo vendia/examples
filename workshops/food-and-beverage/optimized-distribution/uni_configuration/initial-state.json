@@ -1,0 +1,52 @@
+{
+    "Product": [
+        {
+            "sku": "00001",
+            "name": "Blue Corn Tortillas Chips",
+            "description": "Organic and delicious",
+            "price": 1.99,
+            "supplier": "Wild Harvest",
+            "category": "natural"
+        },
+        {
+            "sku": "00002",
+            "name": "Sheep's Milk Feta",
+            "description": "Imported from Greece",
+            "price": 2.19,
+            "supplier": "MT Vikos",
+            "category": "specialty"
+        },
+        {
+            "sku": "00003",
+            "name": "Raisin Bran Cereal",
+            "description": "Simple and healthful",
+            "price": 1.45,
+            "supplier": "Essential Everyday",
+            "category": "conventional"
+        },
+        {
+            "sku": "00004",
+            "name": "Sour Cream and Onion Chips",
+            "description": "So good!",
+            "price": 0.77,
+            "supplier": "Essential Everyday",
+            "category": "conventional"
+        },
+        {
+            "sku": "00005",
+            "name": "Organic Baby Spinach",
+            "description": "Pre-washed and ready to eat",
+            "price": 2.99,
+            "supplier": "Wild Harvest",
+            "category": "natural"
+        },
+        {
+            "sku": "00006",
+            "name": "Olive Spread",
+            "description": "Imported from Greece",
+            "price": 2.39,
+            "supplier": "MT Vikos",
+            "category": "specialty"
+        }
+    ]
+}
