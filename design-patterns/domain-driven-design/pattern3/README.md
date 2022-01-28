@@ -55,7 +55,7 @@ Auth Option: "Vendia User". // Let's use Vendia User
   
 4. Press `Create`. Wait for 5 minutes for Share to finish Uni provisioning. 
 
-After Uni Provisioning is complete. You will see that your Uni will appear in the `RUNNING` status on the home page. In ‘My Nodes’ you will see two nodes: `CRM` and `Marketing`. 
+You will see that your Uni will appear in the `RUNNING` status after Uni Provisioning is complete. In ‘My Nodes’ you will see two nodes: **CRM** and **Marketing**. 
 
 ## Explore the Uni
 
