@@ -133,7 +133,7 @@ Click the Uni you just created. Click on the `Entity Explorer`. You will notice 
 
 Let’s create a customer record. Click `CustomerAccount` entity. Click `Create Customer Account`. Enter customer account details. For `CustomerId`, pick a number. I use the [10001,10002…] series for testing. In the real world, either you will have your own sequence generator for `customerId`, or you will use the `customerId` from different enterprise source of truth system.
 
-You will see all the customer account records you created under the `CustomerAccount` entity. You can edit a specific record, change address, and in the version history, you will see both the current and the previous state of the customer account you just edited. This is the ledger aspect of the Uni. Uni keeps both the current and previous versions of the record. 
+You will see all the customer account records you created under the `CustomerAccount` entity. You can edit a specific record, change address, and view the version history of the customer account you just edited. The ledger keeps a record of all changes made to data in the Uni.
 
 What you did do using `Entity Explorer`. You can do the same through `GraphQL Explorer`. You don’t have to type every single command and attribute to write a GraphQL query. You can build a GraphQL command by selecting the commands and the attributes in the `Schema Explorer`.
 
