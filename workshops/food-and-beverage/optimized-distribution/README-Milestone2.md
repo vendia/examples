@@ -1,5 +1,5 @@
 # Milestone 2 - Add and Update the Product Inventory
-The GraphQL API you explored in Milestone 1 makes web and mobile app development on top of Vendia Share extremely simple.  Your second milestone in this workshop is to use the [Vendia Share web application](https://share.vendia.net) to build up the Supplier's product inventory.
+The GraphQL API you explored in [Milestone 1](README-Milestone1.md) makes web and mobile app development on top of Vendia Share extremely simple.  Your second milestone in this workshop is to use the [Vendia Share web application](https://share.vendia.net) to build up the Supplier's product inventory.
 
 ## Using Entity Explorer
 The Entity Explorer view of the Vendia Share web application is one of several views we'll use in this section of the workshop.  It is used to directly manage the data stored in Vendia Share.

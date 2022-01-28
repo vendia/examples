@@ -1,5 +1,5 @@
 # Milestone 1 - Create a Supplier-Only Uni
-Your first milestone in this workshop is to create a new [Universal Application](https://www.vendia.net/docs/share/dev-and-use-unis).
+Your first milestone in this workshop is to create a new [Uni](https://www.vendia.net/docs/share/dev-and-use-unis).
 
 ## Explore the /uni_configuration directory
 The `uni_configuration` directory contains several files that will help you quickly create a new Uni.  Review the contents of each of these files to get a better understanding of their contents.
@@ -25,7 +25,7 @@ Next, if not already logged in to the Vendia Share [Command Line Interface (CLI)
 share login
 ```
 
-After that, you're ready to creat your first Vendia Share Uni.
+After that, you're ready to create your first Vendia Share Uni.
 
 ```bash
 cd uni_configuration
@@ -41,10 +41,10 @@ share get --uni <your_uni_name>
 **NOTE:** `<your_uni_name>` should match the value of the `name` in `registration.json`
 
 ### Explore the Uni and Its Initial Data
-Once the Uni is ready, explore its content using the Vendia Share [web application](https://share.vendia.net/).  The Uni has a single node, the **SupplierNode**.  The Share web app provides a number views to explore the node in more detail.
+Once the Uni is ready, explore its content using the Vendia Share [web application](https://share.vendia.net/).  The Uni has a single node, the **SupplierNode**.  The Share web app provides a number of views to explore the node in more detail.
 
 #### GraphQL Explorer
-The GraphQL Explorer can be used to interact with the data stored by Vendia Share.  It can serve as a helpful tool if you're newer to GraphQL and want to experiment with forming queries, mutations, and subscriptions as you develop an application powered by Vendia Share.
+The GraphQL Explorer can be used to interact with a node.  It can serve as a helpful tool if you're new to GraphQL and want to experiment with forming queries, mutations, and subscriptions as you develop an application powered by Vendia Share.
 
 Here are a few examples to help you get started.  Feel free to build your own queries but please refrain from updating the data for now (i.e. no mutations just yet).
 
@@ -72,7 +72,7 @@ You will see all available products, which were returned by the GraphQL interfac
 
 A GraphQL interface provides [many benefits](https://www.vendia.net/blog/why-we-combined-graphql-and-a-serverless-distributed-ledger) to those interacting with a Vendia Share node.  By allowing a caller to dictate the fields to be returned, along with optional filters and limits, you're able to get to exactly the data you want.  This can be especially helpful as you create a new web or mobile application powered by Vendia Share, as you can tailor the data retrieved to exactly match the data needed for a component or view.
 
-Here's a refined query that only returns the `name`, `description`, and `price` of all products supplied by `Wild Harvest`.
+Here's a query with filters that only returns the `name`, `description`, and `price` of all products supplied by `Wild Harvest`.
 
 ```
 query listProducts {
@@ -91,9 +91,9 @@ Congratulations.  You've successfully reached Milestone 1!
 
 In this section you:
 
-* Learned more about Vendia Share's schema-first approach and the necessary files it comprises
-* Saw the ease of creating a Universal Application, all in about 5 minutes
-* Used Vendia Share's Entity Explorer to visual initial seed data for the Uni
-* Interacted with a powerful and auto-generated GraphQL API, with the help of Share's GraphQL Explorer
+* Learned about Vendia Share's schema-first approach and the files necessary to create a Uni 
+* Experienced the simplicity of creating a Universal Application, all in about 5 minutes
+* Used Vendia Share's Entity Explorer to visualize the initial data loaded in the Uni
+* Interacted with your data using a powerful and auto-generated GraphQL API, with the help of Share's GraphQL Explorer
 
 Now on to [Milestone 2](README-Milestone2.md).
