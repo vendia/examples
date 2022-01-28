@@ -19,7 +19,7 @@ If you are confused between Bounded Context, Entity, and the Aggregate you shoul
 
 1. Login to [Vendia Share](https://share.vendia.net/login). 
 
-Don’t have a login, you can [sign up](https://share.vendia.net/) now. 
+You can [sign up](https://share.vendia.net/) if you don't have a login. 
 
 2. Create a Uni
 
