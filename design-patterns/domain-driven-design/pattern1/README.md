@@ -10,7 +10,7 @@ The Customer Relationship Management (CRM) Team wants to create a single source 
 
 Since CRM is an independent business unit we will assume it is a domain on its own. Inside CRM, we will have multiple sub-domains; customer account is one such sub-domain. You will model customer account as a Bounded Context.  Since CRM will perform frequent lookup, search, and filter on customer records by customerId, you will index customer accounts on the customerId property. 
 
-If you are confused between Bounded Context, Entity, and the Aggregate. These terms correlate 1:1 for the purpose of this exercise. I will use the term Entity here to mean Root Entity which is an Aggregate in DDD. And, Bounded Context can have one or more than one Entity.
+If you are confused between Bounded Context, Entity, and the Aggregate you should keep in mind these terms correlate 1:1 for the purpose of this exercise. I will use the term Entity here to mean Root Entity which is an Aggregate in DDD. Bounded Context can have one or more than one Entity.
 
 
 
