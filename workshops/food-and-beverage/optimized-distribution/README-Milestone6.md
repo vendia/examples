@@ -10,11 +10,11 @@ It's time to interact with your Uni using something that isn't included in the V
 | addPurchaseOrder | [windows_amd64.exe](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_windows_amd64.exe) / [darwin_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_darwin_amd64) / [darwin_arm64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_darwin_arm64) / [linux_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_linux_amd64) |
 | listProducts | [windows_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_windows_amd64.exe) / [darwin_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_darwin_amd64) / [darwin_arm64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_darwin_arm64) / [linux_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_linux_amd64) | 
 
-Each of the binaries depends upon two environment variables being set - `API` and `API_KEY`. This is how you'll specify the node you'll read from and write to.
+Each of the binaries depends upon two environment variables - `API` and `API_KEY`. This is how you'll specify the node you'll read from and write to.
 
 ## Adding a New Product
 
-The `addProduct` utility can take in the same parameters you used in the built-in GraphQL Explorer. There is built-in `-help` functionality that shares how to pass in parameters.
+The `addProduct` utility can take in the same parameters you used in the built-in GraphQL Explorer. There is a built-in `-help` function that details the command line arguments the utility accepts.
 
 ```bash
 API="https://my-api.execute-api.us-east-1.amazonaws.com/graphql/" \
@@ -149,7 +149,7 @@ func main() {
 
 ## Adding a New Purchase Order
 
-The `addPurchaseOrder` utility can take in the same parameters you used in the built-in GraphQL Explorer. There is built-in `-help` functionality that shares how to pass in parameters.
+The `addPurchaseOrder` utility can take in the same parameters you used in the built-in GraphQL Explorer. There is a built-in `-help` function that details the command line arguments the utility accepts.
 
 ```bash
 API="https://my-api.execute-api.us-east-1.amazonaws.com/graphql/" \
