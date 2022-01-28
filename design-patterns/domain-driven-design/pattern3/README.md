@@ -59,7 +59,7 @@ You will see that your Uni will appear in the `RUNNING` status after Uni Provisi
 
 ## Explore the Uni
 
-Let’s test how permission boundaries will work between the `CRM` and `Marketing` node. 
+Let’s test how permission boundaries will work between the **CRM** and **Marketing** nodes. 
 
 Using the `CRM` Node. Add the following mutation using `GraphQL Explorer`. 
 
