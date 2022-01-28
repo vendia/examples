@@ -194,12 +194,12 @@ query listBlocks {
 ## Clean Up
 If you are operating in a Standard tier and plan to continue with Pattern 3, delete your Uni. Standard tier allows you to create only one Uni. You can do it from the `Uni Settings`. Navigate to your Uni>`Uni Settings`>Scroll down to the `Danger Zone` and you will find the `Delete Uni` command.
 
-## What did you learn?
+## What did you learn
 
-1. How to model two Bounded Contexts in the same Uni?
-2. How to create a read-only node using a single Uni for the second party?
-3. How to link two entities together using a single customer identity?
-4. How to transact on two co-related properties in two different two entities together in a single transaction?
+1. How to model two Bounded Contexts in the same Uni
+2. How to create a read-only node using a single Uni for the second party
+3. How to link two entities together using a single customer identity
+4. How to transact on two co-related properties in two different two entities together in a single transaction
 
-## What's next?
-Time to review [Pattern 3](../pattern3/README.md) now. 
+## What's next
+Time to review the [Pattern 3](../pattern3/README.md) now. 
