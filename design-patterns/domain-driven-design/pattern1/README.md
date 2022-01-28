@@ -190,4 +190,4 @@ If you are operating in a Standard tier and plan to continue with Pattern 2, del
 9. How easy it is to deploy a Uni schema to create a Uni
 
 ## What's next
-Time to review [Pattern 2](../pattern2/README.md)
+Time to review the [Pattern 2](../pattern2/README.md)
