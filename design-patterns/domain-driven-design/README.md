@@ -8,7 +8,7 @@ Check out four DDD patterns that we apply to Vendia Share Universal Applications
 
 ## Pattern 1: Single Domain, Single Bounded Context, and a Single Uni
 
-[Pattern 1](pattern1/README.md) is well suited for organizations who want to build small custom applications surrounding complex enterprise applications, or organizations who want to construct a new application to prove a new business idea.
+[Pattern 1](pattern1/README.md) is well suited for organizations that want to build small custom applications surrounding complex enterprise applications, or organizations that want to construct a new application to prove a new business idea.
 
 ## Pattern 2: Single Domain, Multiple Bounded Contexts, and a Single Uni
 [Pattern 2](pattern2/README.md) is well suited for organizations who already have experience working with Uni and want to leverage existing Uni implementation in their organization with more custom and new applications. This model is also a good fit for new analytics focussed domains within the organization that has not built its software platform yet. These organizations can continue to operate lean by leveraging Uni owned by other domains with read-only copies of data for analytics and visualization.
