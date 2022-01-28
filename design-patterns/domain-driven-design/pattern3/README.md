@@ -73,7 +73,7 @@ aclInput: {acl: {principal: {nodes: "*"}, operations: READ}})
 }
 ```
 
-Use `Marketing` node `Entity Explorer` to `Edit` the above `CustomerAccount` record and try to change the last name from `Pipes` to `Jaeger`. You will see an error. 
+Use the `Entity Explorer` on the **Marketing** node `Entity Explorer` to `Edit` the above `CustomerAccount` record. Try to change the last name from `Pipes` to `Jaeger`. You will see an error. 
 
 Using the `Marketing` node. Add the following mutation using GraphQL explorer. 
 
