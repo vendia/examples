@@ -28,7 +28,7 @@ Click the `Create Universal Application` button on the top-right. Next, use the 
 3. Fill out details in the Uni creation wizard. 
 
 **Step 1:** Give your Uni a name. 
-Prefix your Uni name with prefix `test-` so its name can be reused. Pick a unique Uni name since all Starter and Individual Tier users will share the vendia.net namespace, which will cause naming collisions.
+Prefix your Uni name with prefix `test-` [so its name can be reused](https://www.vendia.net/docs/share/limits#uni-and-node-names). Pick a unique Uni name to avoid name collisions. All Starter and Individual Tier users share the default `unis.vendia.net` namespace.
 Since this Uni will be owned and operated by the CRM Team. I will give it the name `test-CRM-append-unique-suffix`. Time to get creative, replace `append-unique-suffix` with your unique suffix in the Uni name. In this blog, I will simply refer to new Uni as the `CRM`. Click `Next`. 
 
 **Step 2:** Fill out the following information to create a Uni node. 
