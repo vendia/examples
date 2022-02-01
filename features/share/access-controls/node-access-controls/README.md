@@ -5,7 +5,7 @@
 </p>
 
 # Node Access Controls
-Node Access Controls authorize requests to a specific node's GraphQL API.  They can be thought of as the "coarse-grained" authorization to the GraphQL API.  They act as an enforcement point, permitting or denying every request.  Whether that authorization mechanism is direct (i.e. performed by Vendia Share) or indirect (i.e. delegated to another authorization service), the Node Access Controls are responsible for protecting unauthorized API access.
+Node Access Controls authorize requests to a specific node's GraphQL API.  They can be thought of as the "coarse-grained" authorization to the GraphQL API.  They act as an enforcement point, permitting or denying every request.  Whether that authorization mechanism is direct (i.e. performed by Vendia Share) or indirect (i.e. delegated to another authorization service), the Node Access Controls are responsible for preventing unauthorized API access.
 
 The GraphQL API that provides access to the serverless distributed ledger available on a node is protected by the Node Access Control configured when a node is created.  Each participant in a Uni can select a different authorization scheme, depending on their authorization preferences.
 
