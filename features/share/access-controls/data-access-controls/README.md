@@ -28,13 +28,6 @@ In this example, you will protect data in several ways using Data Access Control
 ## Pre-requisites
 See [prerequisites](../README.md#prerequisites) for the `access-controls` examples.
 
-## Install Dependencies
-Install the dependencies for this module using `npm`.
-
-```
-npm install
-```
-
 ## Creating a Uni using the Vendia Share CLI
 In order to protect data, you first must create a Uni that includes a schema with [Access Control List](https://www.vendia.net/docs/share/fine-grained-data-permissions) definitions.
 
