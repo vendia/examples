@@ -1,0 +1,13 @@
+{
+  "name": "uni-access-controls",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "An example of executing Vendia Uni operations, which are protected by Uni Access Controls, using a GraphQL client",
+  "scripts": {
+    "getUni" : "node getUni.js"
+  },
+  "dependencies": {
+    "@vendia/aws-signed-fetch": "^0.0.5",
+    "argparse": "^2.0.1"
+  }
+}

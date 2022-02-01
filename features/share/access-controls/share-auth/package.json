@@ -1,0 +1,14 @@
+{
+  "name": "share-auth",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "An example of authenticating with Vendia Share",
+  "scripts": {
+    "login" : "node login.js"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^5.2.5",
+    "aws-sdk": "^2.1066.0",
+    "argparse": "^2.0.1"
+  }
+}

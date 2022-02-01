@@ -1,3 +1,7 @@
+#Share Environment Files
+**/.share.env
+**/*.policy.json
+
 # AWS Serverless Application Model (SAM)
 .aws-sam
 samconfig.toml
@@ -24,10 +28,10 @@ venv
 
 #Node
 node_modules
-package-lock.json
 
 #OS X
 .DS_Store
 
 #IntelliJ IDEA
 /.idea/
+/features/share/access-controls/share-auth/.share.env
