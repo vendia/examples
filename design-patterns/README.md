@@ -5,4 +5,4 @@ The `design-patterns` directory of this repo includes a collection of patterns f
 ## Domain Driven Design
 A software developer named Eric Evans recognized the need to understand the software domain. To introduce the DDD approach, he wrote a book called _Domain-Driven Design: Tackling Complexity in the Heart of Software_.
 
-Check out this set of [Domain Driven Design inspired patterns](design-patterns/domain-driven-design/README.md) to leverage when creating Unis on Vendia Share.
+Check out this set of [Domain Driven Design inspired patterns](./domain-driven-design/README.md) to leverage when creating Unis on Vendia Share.
