@@ -103,7 +103,7 @@ Once the appropriate system variables are set, you can use the `listProducts.js`
 npm run listProductsUsingApiKey
 ```
 
-A successful call will produce output similar to the following.
+A successful call will produce the following output.
 
 <details>
 <summary>Output</summary>
