@@ -14,7 +14,7 @@ Unlike centralized architectures, where a single data owner dictates the data ac
   <figcaption><b>Figure 1</b> - <i>Data Access Controls in the Vendia Share Data Plane</i></figcaption>
 </figure>
 
-Figure 1 depicts a two-node Uni, each with different [authorization settings](https://www.vendia.net/docs/share/node-access-control#api-access) configured.
+Figure 1 depicts a two-node Uni, each with [data access controls](https://www.vendia.net/docs/share/fine-grained-data-permissions) applied to data stored in the ledger.  This allows the writer of any record to dictate the read and write permissions of other nodes, at the record or field level.
 
 ## Key Terminology
 * **Object** - An entity that can written to Vendia Share, consisting of one or more properties, including an optional `acl` property
