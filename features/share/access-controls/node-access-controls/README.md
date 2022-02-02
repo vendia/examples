@@ -181,7 +181,7 @@ And retry the previous `npm` command
 npm run listProductsUsingApiKey
 ```
 
-The call will fail, as expected, because the request does not contain a valid api key.  The failure message will be similar to:
+The call will fail, as expected, because the request does not contain a valid API key.  The failure message will be similar to:
 
 ```
 $ npm run listProductsUsingApiKey
