@@ -167,7 +167,7 @@ To confirm the `API_KEY` authorizer works as expected, now unset the API_KEY sys
 
 **On Mac or Linux**
 ```
-export API_KEY=
+unset API_KEY
 ```
 
 **On Windows**
