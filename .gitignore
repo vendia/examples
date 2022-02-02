@@ -1,6 +1,6 @@
 #Share Environment Files
-**/.share.env
-**/*.policy.json
+.share.env
+*.policy.json
 
 # AWS Serverless Application Model (SAM)
 .aws-sam
@@ -34,4 +34,3 @@ node_modules
 
 #IntelliJ IDEA
 /.idea/
-/features/share/access-controls/share-auth/.share.env
