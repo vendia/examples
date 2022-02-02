@@ -166,7 +166,7 @@ Node: SupplierNode
         CSP Org: 123456789012
 
         GraphQL API: https://api-id.execute-api.region.amazonaws.com/graphql/
-        WSS API: wss://iwu1bz9mh3.execute-api.us-east-1.amazonaws.com/graphql
+        WSS API: wss://api-id.execute-api.region.amazonaws.com/graphql/
         GraphQL API Key: ******************************************************
 ```
 </details>
