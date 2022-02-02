@@ -162,7 +162,7 @@ Node: SupplierNode
         Region: us-east-1
 
         CSP: AWS
-        CSP Account Id: 635892999999
+        CSP Account Id: 123456789012
         CSP Org: 332134999999
 
         GraphQL API: https://mtmgxhxpw1.execute-api.us-east-1.amazonaws.com/graphql/
