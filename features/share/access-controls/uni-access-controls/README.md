@@ -10,10 +10,10 @@ Uni access controls protect the Uni management operations provided by Vendia Sha
 Authorization to specific Uni management operations is granted through a [Role Based Access Control (RBAC) mechanism](https://www.vendia.net/docs/share/rbac) mechanism, very similar to the RBAC mechanism that protects [user controls](../user-access-controls/README.md).
 
 ## Key Terminology
-* **Action** - The right to call one of the Uni management operations exposed by the Vendia Share control plane
-* **Resource** - The Vendia Share Uni or Unis against which a Uni management Action can be performed
-* **Capability** - A mapping of Action to Resource, linking the right to call (an operation) with the right to manage (a Uni)
-* **Role** - A named collection of Capabilities; used to determine if a Uni management or data operation, executed by invoking the Vendia Share control plane or data plane API, is permitted or denied
+* **Action** - the right to call one or more of Share's Uni management operations
+* **Resource** - the Uni or node against which an Action can be performed
+* **Capability** - a mapping of Action to Resource, linking the "right to call" (an operation) with the "right to manage" (a Uni or node)
+* **Role** - a named collection of Capabilities and used to determine if a Uni management operation is authorized
 
 <figure>
   <img src="https://user-images.githubusercontent.com/85032783/151488926-9a5e17fc-0ae0-4687-816c-3c70724c6bf3.png" />
@@ -177,6 +177,6 @@ You can inspect the `getUni.js` file behind the `npm` command above to see the c
 
 In this example you:
 
-* Learned more about Vendia Share Uni Access Controls
+* Learned more about Vendia Share Uni Access Controls, including their composition, function, and purpose
 * Used the Share CLI to interact with some of Vendia Share's Uni management operations, which are protected by Uni Access Controls
 * Used a Node.js GraphQL client to interact with those same Uni management operations, demonstrating the ability to fully automate user management with any GraphQL-capable tool you choose

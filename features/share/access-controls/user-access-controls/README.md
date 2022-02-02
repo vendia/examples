@@ -10,10 +10,10 @@ User access controls protect the user account management operations provided by 
 Authorization to specific user account management operations that act on user accounts is granted through a [Role Based Access Control (RBAC) mechanism](https://www.vendia.net/docs/share/rbac).  Before going further, it's important to define a few key RBAC terms, as they relate to user access controls.
 
 ## Key Terminology
-* **Action** - The right to call one of the user account management operations exposed by the Vendia Share control plane
-* **Resource** - The Vendia Share account or accounts against which a user account management Action can be performed
-* **Capability** - A mapping of Action to Resource, linking the right to call (an operation) with the right to manage (a Vendia Share account)
-* **Role** - A named collection of Capabilities; used to determine if a user management operation, executed by invoking the Vendia Share control plane API, is permitted or denied.
+* **Action** - the right to call one or more of Share's user account management operations
+* **Resource** - the user account against which an Action can be performed
+* **Capability** - a mapping of Action to Resource, linking the "right to call" (an operation) with the "right to manage" (a user account)
+* **Role** - a named collection of Capabilities and used to determine if a user management operation is authorized
 
 <figure>
   <img src="https://user-images.githubusercontent.com/85032783/151488927-8625e14b-4912-4fff-af82-d8e133790f61.png" />
@@ -260,6 +260,6 @@ You can inspect the `getRole.js` files behind the `npm` command above to see the
 
 In this example you:
 
-* Learned more about Vendia Share User Access Controls
+* Learned more about Vendia Share User Access Controls, including their composition, function, and purpose
 * Used the Share CLI to interact with some of Vendia Share's user management operations, which are protected by User Access Controls 
 * Used a Node.js GraphQL client to interact with those same user management operations, demonstrating the ability to fully automate user management with any GraphQL-capable tool you choose

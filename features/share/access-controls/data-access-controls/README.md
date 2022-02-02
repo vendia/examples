@@ -442,6 +442,6 @@ The error returned captures the unauthorized access to modify the `price` field 
 ## Summary
 In this example you:
 
-* Learned more about Vendia Share Data Access Controls
+* Learned more about Vendia Share Data Access Controls, including their composition, function, and purpose
 * Used the Share CLI to create a Uni with two nodes, allowing ACLs to distinguish access rights between the two nodes 
 * Used a Node.js GraphQL client to create, read, and edit data, as allowed by the ACLs in place

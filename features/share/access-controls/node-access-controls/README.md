@@ -263,7 +263,7 @@ Failed to call Share { message: 'Forbidden' }
 
 In this example you:
 
-* Learned more about Vendia Share Node Access Controls
+* Learned more about Vendia Share Node Access Controls, including their composition, function, and purpose
 * Used the Share CLI to create a Uni with two nodes, each of which is protected by different Node Access Controls
 * Used a Node.js GraphQL client to interact with each node in the Uni, providing different authorization tokens depending on the node's authorizer type configuration
 
