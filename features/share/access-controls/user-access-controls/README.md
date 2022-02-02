@@ -51,7 +51,7 @@ share auth role get default
 
 You'll see is that the `default` role includes just one user Action (`USER_INVITE `) mapped to a Resource (`NameResource(*@*.*.*)`).  This means that, by default, the only user management operation your user is permitted to invoke is the `invite` operation, which allows this user to invite any other Vendia Share user to join a Uni.
 
-Note: This does not imply the other Vendia Share user will be permitted to join your Uni without some additional Uni permissions being granted.
+**NOTE:** This does not imply the other Vendia Share user will be permitted to join your Uni without some additional Uni permissions being granted.
 
 ```
 Found 1 Role
