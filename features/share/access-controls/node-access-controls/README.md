@@ -231,17 +231,62 @@ A successful call will produce output similar to the following.
 <summary>Output</summary>
 
 ```
+$ npm run listProductsUsingShareJwt
 
+> uni-access-controls@1.0.0 listProductsUsingShareJwt
+> node listProducts.js --authtype sharejwt
+
+Calling listProducts with authtype sharejwt
+
+Successfully called Share
+Product
+        ID:  00001
+        Name:  Blue Corn Tortillas Chips
+        Description:  Organic and delicious
+        Price:  1.99
+        Category:  natural
+        Supplier:  Wild Harvest
+Product
+        ID:  00002
+        Name:  Sheep's Milk Feta
+        Description:  Imported from Greece
+        Price:  2.19
+        Category:  specialty
+        Supplier:  MT Vikos
+Product
+        ID:  00003
+        Name:  Raisin Bran Cereal
+        Description:  Simple and healthful
+        Price:  1.45
+        Category:  conventional
+        Supplier:  Essential Everyday
+Product
+        ID:  00004
+        Name:  Sour Cream and Onion Chips
+        Description:  So good!
+        Price:  0.77
+        Category:  conventional
+        Supplier:  Essential Everyday
+Product
+        ID:  00005
+        Name:  Organic Baby Spinach
+        Description:  Pre-washed and ready to eat
+        Price:  2.99
+        Category:  natural
+        Supplier:  Wild Harvest
+Product
+        ID:  00006
+        Name:  Olive Spread
+        Description:  Imported from Greece
+        Price:  2.39
+        Category:  specialty
+        Supplier:  MT Vikos
 ```
 </details>
 
-To confirm the `VENDIA_USER` authorizer works as expected, now delete the `.share.env` file.
+To confirm the `VENDIA_USER` authorizer works as expected, now delete the `identityJwt` attribute stored in the `../share-auth/.share.env` file.  This will remove the Share JWT from the subsequent client request, leading to an attempted unauthorized request to the Share GraphQL API.
 
-```
-rm ../share-auth/.share.env
-```
-
-And retry the client
+Now retry the client
 
 ```
 npm run listProductsUsingShareJwt
@@ -252,7 +297,7 @@ The call will fail, as expected, because the request does not contain a valid JW
 ```
 $ npm run listProductsUsingShareJwt
 
-> uni-access-controls@1.0.0 listProductsUsingApiKey
+> uni-access-controls@1.0.0 listProductsUsingShareJwt
 > node listProducts.js --authtype sharejwt
 
 Calling listProducts with authtype sharejwt
