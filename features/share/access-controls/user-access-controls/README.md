@@ -85,7 +85,7 @@ share login
 
 Next, get information about the `default` role as you did in the prior step, but this time add a `--json`` argument and redirect the output to produce an RBAC policy file
 ```
-share auth role get default --json > default.policy.json
+share auth role get default --json --silent > default.policy.json
 ```
 
 <details>
