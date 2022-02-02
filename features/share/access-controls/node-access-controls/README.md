@@ -63,7 +63,7 @@ share get --uni <your_uni_name>
 **NOTE:** `<your_uni_name>` should match the value of the `name` in `registration.json`
 
 ## Interacting with the SupplierNode
-The **SupplierNode** is configured with an `authorizerType` of `API_KEY`.  This means the Node Access Controls in place will confirm every inbound request to the node's GraphQL API contains a valid api key. Specifically, the api key must be contained in the `x-api-key` request header.
+The **SupplierNode** is configured with an `authorizerType` of `API_KEY`.  This means the Node Access Controls in place will confirm every inbound request to the node's GraphQL API contains a valid API key. Specifically, the API key must be contained in the `x-api-key` request header.
 
 ### Setting System Variables
 To identify the values for the GraphQL API endpoint and corresponding api key, use this command:
