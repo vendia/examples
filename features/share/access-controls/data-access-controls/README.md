@@ -31,7 +31,7 @@ See [prerequisites](../README.md#prerequisites) for the `access-controls` exampl
 ## Creating a Uni using the Vendia Share CLI
 In order to protect data, you first must create a Uni that includes a schema with [Access Control List](https://www.vendia.net/docs/share/fine-grained-data-permissions) definitions.
 
-**Note:** Depending on your [Share pricing plan](https://www.vendia.net/pricing) you may need to delete your existing Unis before creating a new Uni to avoid hitting Uni or node limits.
+**NOTE:** Depending on your [Share pricing plan](https://www.vendia.net/pricing) you may need to delete your existing Unis before creating a new Uni to avoid hitting Uni or node limits.
 
 ### Update Your registration.json File
 First, rename the `registration.json.sample` to `registration.json`.
