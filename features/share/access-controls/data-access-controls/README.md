@@ -31,7 +31,7 @@ See [prerequisites](../README.md#prerequisites) for the `access-controls` exampl
 ## Creating a Uni using the Vendia Share CLI
 In order to protect data, you first must create a Uni that includes a schema with [Access Control List](https://www.vendia.net/docs/share/fine-grained-data-permissions) definitions.
 
-**Note:** Depending on your [Share pricing plan](https://www.vendia.net/pricing) you may need to delete your existing Unis before creating a new Uni to avoid hitting Uni or node limits.
+**NOTE:** Depending on your [Share pricing plan](https://www.vendia.net/pricing) you may need to delete your existing Unis before creating a new Uni to avoid hitting Uni or node limits.
 
 ### Update Your registration.json File
 First, rename the `registration.json.sample` to `registration.json`.
@@ -52,10 +52,10 @@ You'll also want to update the `userId` of the `SupplierNode` and `DistributorNo
 
 That very simple snippet makes the fine-grained authorization that follows possible.
 
-**Note:** there is no `initial-state.json` file in this example. Currently, Share's initial state and ACL functions are incompatible.
+**NOTE:** there is no `initial-state.json` file in this example. Currently, Share's initial state and ACL functions are incompatible.
 
 ### Create a Uni
-Next, if not already logged in to the Vendia Share [Command Line Interface (CLI)](https://vendia.net/docs/share/cli), do so by executing the command below and providing your Vendia Share credentials when prompted.
+Next, if you are not already logged in to the Vendia Share [Command Line Interface (CLI)](https://vendia.net/docs/share/cli), do so by executing the command below and providing your Vendia Share credentials when prompted.
 
 ```bash
 share login
