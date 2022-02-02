@@ -163,7 +163,7 @@ Node: SupplierNode
 
         CSP: AWS
         CSP Account Id: 123456789012
-        CSP Org: 332134999999
+        CSP Org: 123456789012
 
         GraphQL API: https://api-id.execute-api.region.amazonaws.com/graphql/
         WSS API: wss://iwu1bz9mh3.execute-api.us-east-1.amazonaws.com/graphql
