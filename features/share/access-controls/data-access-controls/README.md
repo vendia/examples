@@ -55,7 +55,7 @@ That very simple snippet makes the fine-grained authorization that follows possi
 **Note:** there is no `initial-state.json` file in this example. Currently, Share's initial state and ACL functions are incompatible.
 
 ### Create a Uni
-Next, if not already logged in to the Vendia Share [Command Line Interface (CLI)](https://vendia.net/docs/share/cli), do so by executing the command below and providing your Vendia Share credentials when prompted.
+Next, if you are not already logged in to the Vendia Share [Command Line Interface (CLI)](https://vendia.net/docs/share/cli), do so by executing the command below and providing your Vendia Share credentials when prompted.
 
 ```bash
 share login
