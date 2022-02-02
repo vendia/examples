@@ -32,7 +32,7 @@ Each example is self-contained so can explore any or all of them in any order yo
 * [Vendia Share Account](https://share.vendia.net/)
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
 * [Share Authentication](share-auth/README.md)
-    * Required prior to any custom GraphQL client invocations
+    * Required prior to running any custom GraphQL client invocations in the Examples below
 
 ### Examples
 * [User Management Access Controls](user-access-controls/README.md)
