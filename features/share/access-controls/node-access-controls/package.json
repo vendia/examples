@@ -1,0 +1,14 @@
+{
+  "name": "uni-access-controls",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "An example of executing Vendia Uni operations, which are protected by Uni Access Controls, using a GraphQL client",
+  "scripts": {
+    "listProductsUsingApiKey" : "node listProducts.js --authtype apikey",
+    "listProductsUsingShareJwt" : "node listProducts.js --authtype sharejwt"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.0",
+    "argparse": "^2.0.1"
+  }
+}

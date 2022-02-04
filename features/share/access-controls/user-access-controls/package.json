@@ -1,0 +1,15 @@
+{
+  "name": "user-access-controls",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "An example of executing Vendia user management operations, which are protected by user access controls, using a GraphQL client",
+  "scripts": {
+    "getRole" : "node getRole.js"
+  },
+  "dependencies": {
+    "@vendia/aws-signed-fetch": "^0.0.5",
+    "argparse": "^2.0.1"
+  },
+  "bin": {
+  }
+}
