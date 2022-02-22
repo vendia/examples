@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://vendia.net/schemas/demos/loans.schema.json",
+  "title": "Loan Marketplace",
+  "description": "Single Source of Loan Truth",
+  "type": "object",
+  "properties": {
+    "Loan": {
+      "description": "Information about a Loan that was recently extended",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "loanIdentifier": {
+            "description": "Unique loan identifier",
+            "type": "string"
+          },
+          "originationDate": {
+            "description": "Date loan originated",
+            "type": "string",
+            "format": "date"
+          },
+          "originalInterestRate": {
+            "description": "Original loan interest rate",
+            "type": "number"
+          },
+          "originalUnpaidPrincipalBalance": {
+            "description": "Original loan balance",
+            "type": "number"
+          },
+          "originalLoanToValue": {
+            "description": "Original Loan to Value (LTV)",
+            "type": "number"
+          },
+          "borrowerCreditScore": {
+            "description": "Credit score of borrower",
+            "type": "integer"
+          },
+          "numberOfUnits": {
+            "description": "Number of units in the property",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "loanIdentifier",
+          "originationDate",
+          "originalInterestRate"
+        ]
+      }
+    },
+    "LoanPerformance": {
+      "description": "Information about the performance of a Loan",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "loanIdentifier": {
+            "description": "Unique loan identifier",
+            "type": "string"
+          },
+          "monthlyReportingPeriod": {
+            "description": "Reporting period for which this performance information applies",
+            "type": "string",
+            "format": "date"
+          },
+          "servicerId": {
+            "description": "Unique identifier for the loan Servicer",
+            "type": "string"
+          },
+          "loanDelinquencyStatus" : {
+            "description": "Current delinquency status of the loan",
+            "type": "string",
+            "enum": ["current", "late", "delinquent"]
+          },
+          "lastPaidInstallmentDate": {
+            "description": "Date of last loan payment",
+            "type": "string",
+            "format": "date"
+          },
+          "currentInterestRate": {
+            "description": "Current loan interest rate",
+            "type": "number"
+          },
+          "currentUnpaidPrincipalBalance": {
+            "description": "Current loan balance",
+            "type": "number"
+          }
+        },
+        "required": ["loanIdentifier", "monthlyReportingPeriod", "servicerId", "lastPaidInstallmentDate"]
+      }
+    }
+  }
+}
