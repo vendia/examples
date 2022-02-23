@@ -1,5 +1,5 @@
 {
-  "name": "test-simple-loan-marketplace",
+  "name": "test-<name-of-your-choice>",
   "schema": "schema.json",
   "initState": "initial-state.json",
   "nodes": [

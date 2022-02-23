@@ -1,4 +1,4 @@
-# Vendia Share Demo - Easily Create a Loan Marketplace
+# Vendia Share Demo - Easily Create a Multi-Party Product Catalog
 
 [Vendia Share](https://www.vendia.net) is the real-time data cloud for rapidly building applications that securely share data across departments, companies, clouds, and regions.  
 
@@ -14,7 +14,7 @@
 This demo highlights the ease of creating a multi-party data sharing solution, using the Vendia Share platform, as applied to the Financial Services industry. 
 
 ## Demo Context
-Specifically, this demo explores a LoanOriginator and a LoanServicer who use Vendia Share to share loan data in real-time.  Prior to using Vendia Share, the LoanOriginator and LoanServicer often struggled to maintain a consistent, shared source of truth for loan information.   Since adopting Vendia Share, they dramatically decreased the time and resource spent on data reconciliation between their isolated loan databases, streamlined their loan origination-to-servicing transition process, decreased payment penalties (e.g. fees for late  property tax payments), and improved their customer satisfaction scores.
+Specifically, this demo explores a food Supplier who uses Vendia Share to share product changes with Distributors in real-time.  Prior to using Vendia Share, the Supplier and Distributor often struggled to maintain a consistent, shared source of truth.   Since adopting Vendia Share, they dramatically decreased the time and resource spent on data reconciliation between their isolated product databases, streamlined their product ordering processes, decreased food waste (e.g. misunderstanding of purchase orders and delivery timelines), and improved their grocer satisfaction scores.
 
 ## Demo Pre-Requisites
 
@@ -39,7 +39,7 @@ To create a Uni using the Share Web Application:
 1. Click the `+ Create Universal Application` button
 1. Select the `Create your own` option
 1. Enter a unique name, prefixed with `test-`, and then click `Next`
-1. Define an `OriginatorNode` and a `ServicerNode`
+1. Define an `SupplierNode` and a `DistributorNode`
     1. Feel free to vary the `Node region` but leave the other defaults the same
 1. Click the checkbox on each node definition and then click `Next`
 1. Copy the contents of [schema.json](uni_configuration/schema.json) into the `Uni Schema` text area
@@ -73,7 +73,7 @@ Select a Uni by name from the Uni listing to view Uni details.  These views are 
 
 * __Partner Nodes__ - A list of all partner nodes.  In this demo, there are none as you're acting on behalf of both participants.
 * __Schema__ - The schema for the Uni, which is identical to [schema.json](uni_configuration/schema.json)
-* __Transactions__ - All transactions of the Uni, and their corresponding block in the distributed ledger 
+* __Transactions__ - All transactions of the Uni, and their corresponding block in the distributed ledger
 * __Uni Settings__ - Participant listing and Uni management functions
 
 ### Node Configuration Views
@@ -99,145 +99,117 @@ You can now explore that data using several of the Node Views mentioned in the l
 You can view data using the Entity Explorer view from either node in the Uni.
 
 1. Click `Entity Explorer` on either node
-1. View both `Loan` items
+1. View all `Product` items
     1. Columns allow sorting
-    1. Clicking on an `_id` value shows a detailed view of the `Loan`
-    1. Clicking on `View history` from the detailed view shows all version of the `Loan` over time
-1. View the `Loan Perforamnce` items
-    1. Repeat the same sub-steps from above
+    1. Clicking on an `_id` value shows a detailed view of the `Product`
+    1. Clicking on `View history` from the detailed view shows all version of the `Product` over time
     
 ### Explore Data using GraphQL Explorer
 You can view data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
-1. List all `Loan` items
+1. List all `Product` items
     ```
-    query ListLoans {
-      list_LoanItems {
-        _LoanItems {
-          _id
-          _owner
-          borrowerCreditScore
-          loanIdentifier
-          numberOfUnits
-          originalInterestRate
-          originalLoanToValue
-          originalUnpaidPrincipalBalance
-          originationDate
-        }
+   query listProducts {
+      list_ProductItems {
+         _ProductItems {
+            _id
+            _owner
+            category
+            description
+            name
+            price
+            sku
+            supplier
+            promotionalContent
+         }
       }
-    }
+   }
     ```
 
-1. List all `LoanPerformance` items
+1. Filter `Product` items by `supplier`
     ```
-    query ListLoanPerformance {
-      list_LoanPerformanceItems {
-        _LoanPerformanceItems {
-          _id
-          _owner
-          currentInterestRate
-          currentUnpaidPrincipalBalance
-          lastPaidInstallmentDate
-          loanDelinquencyStatus
-          loanIdentifier
-          monthlyReportingPeriod
-          servicerId
-        }
+    query listProducts {
+      list_ProductItems(filter: {supplier: {eq: "Wild Harvest"}}) {
+         _ProductItems {
+            name
+            description
+            price
+         }
       }
-    }
-    ```
-1. Filter `LoanPerformance` items by `currentInterestRate`
-    ```
-    query ListLoanPerformance {
-      list_LoanPerformanceItems(filter: {currentInterestRate: {lt: 3.00}}) {
-        _LoanPerformanceItems {
-          _id
-          _owner
-          currentInterestRate
-          currentUnpaidPrincipalBalance
-          lastPaidInstallmentDate
-          loanDelinquencyStatus
-          loanIdentifier
-          monthlyReportingPeriod
-          servicerId
-        }
-      }
-    }    
+   }
     ```
 
-## Step 4 - Add a LoanPerformance Record
+## Step 4 - Add a Product
 You can also add new data to the Uni using either the Entity Explorer or GraphQL Explorer.
 
 ### Add Data using Entity Explorer
 You can add data using the Entity Explorer view from either node in the Uni.
 
 1. Click `Entity Explorer` on either node
-1. Click `LoanPerformance` on the left-most pane
-1. Click `+ Create LoanPerformance`
-1. Enter values for each field
-    1. `loanIdentifier` - `23456`
-    1. `monthlyReportingPeriod` - `05/01/2022`
-    1. `servicerId` - `54321`
-    1. `loanDelinquencyStatus` - `current`
-    1. `lastPaidInstallmentDate` - `04/01/2022`
-    1. `currentInterestRate` - `2.75`
-    1. `currentUnpaidPrincipalBalance` - `551000`
+1. Click `Product` on the left-most pane
+1. Click `+ Create Product`
+1. Create a new product by completing this form
+   1. `sku` - `00007` 
+   1. `name` - `Apple Juice`
+   1. `description` - `100% Juice`
+   1. `price` - `0.99`
+   1. `supplier` - `Essential Everyday`
+   1. `category` - `conventional`
 1. Click `Save`
 1. Wait for the indicator in the bottom-right to provide confirmation
-1. View the new `LoanPerformance` entry in the table
+1. View the new `Product` in the table
 
 ### Add Data using GraphQL Explorer
 You can add data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
-1. Add a `LoanPerformance` item using the mutation below
-```
-mutation AddLoanPerformance {
-  add_LoanPerformance_async(
-    input: {lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current}
-  ) {
-    result {
-      _id
-      _owner
-      submissionTime
-      transactionId
-      version
-    }
-    error
-  }
-}
-
-```
-1. Confirm the `LoanPerformance` item is included in the list of all items
+1. Add a `Product` item using the mutation below
+   ```
+   mutation AddProduct {
+     add_Product_async(
+       input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}
+     ) {
+       error
+       result {
+         _id
+         _owner
+         submissionTime
+         transactionId
+         version
+       }
+     }
+   }   
+   ```
+1. Confirm the `Product` item is included in the list of all items
     ```
-    query ListLoanPerformance {
-      list_LoanPerformanceItems {
-        _LoanPerformanceItems {
-          _id
-          _owner
-          currentInterestRate
-          currentUnpaidPrincipalBalance
-          lastPaidInstallmentDate
-          loanDelinquencyStatus
-          loanIdentifier
-          monthlyReportingPeriod
-          servicerId
-        }
+    query listProducts {
+      list_ProductItems {
+         _ProductItems {
+            _id
+            _owner
+            category
+            description
+            name
+            price
+            sku
+            supplier
+            promotionalContent
+         }
       }
-    }
+   }
     ```
 
-## Step 5 - Update a LoanPerformance Record
+## Step 5 - Update a Product Record
 You can update existing data using either the Entity Explorer or GraphQL Explorer.
 
 ### Update Data using Entity Explorer
 You can update data using the Entity Explorer view from either node in the Uni.
 
 1. Click `Entity Explorer` on either node
-1. Click `LoanPerformance` on the left-most pane
+1. Click `Product` on the left-most pane
 1. Select one of the records by clicking its `_id` value
-1. Modify the `currentUnpaidPrincipalBalance` value and click `Save`
+1. Modify the `price` value and click `Save`
 1. Once the indicator in the bottom-right confirms the save, click the `View history` button
 1. Review the changes between the two versions of this record
 
@@ -245,62 +217,63 @@ You can update data using the Entity Explorer view from either node in the Uni.
 You can update data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
-1. List all `LoanPerformance` records
+1. List all `Product` records
     ```
-    query ListLoanPerformance {
-      list_LoanPerformanceItems {
-        _LoanPerformanceItems {
-          _id
-          _owner
-          currentInterestRate
-          currentUnpaidPrincipalBalance
-          lastPaidInstallmentDate
-          loanDelinquencyStatus
-          loanIdentifier
-          monthlyReportingPeriod
-          servicerId
-        }
+    query listProducts {
+      list_ProductItems {
+         _ProductItems {
+            _id
+            _owner
+            category
+            description
+            name
+            price
+            sku
+            supplier
+            promotionalContent
+         }
       }
-    }
+   }
     ```
 1. Copy the `_id` value of one of the records - this is the record your will modify in the next step
-1. Execute this mutation to modify the `unpaidPrincipalBalance` of the `LoanPerformance` record identified in the previous step.
+1. Execute this mutation to modify the `price` of the `Product` record identified in the previous step.
     1. __NOTE__: The `id` value in the mutation below should be modified to reflect the `id` value you copied in the previous step.
     
    ```
-    mutation UpdateLoanPerformance {
-      update_LoanPerformance_async(
-        id: "017f2389-b33e-3e52-c7e6-76e60628cb23"
-        input: {currentUnpaidPrincipalBalance: 549000}
-      ) {
-        result {
-          _id
-          _owner
-          submissionTime
-          transactionId
-          version
-        }
-        error
-      }
-    }    
-    ```
-1. Confirm the update `LoanPerformance` record is reflected in the list of all items
-     ```
-     query ListLoanPerformance {
-       list_LoanPerformanceItems {
-         _LoanPerformanceItems {
-           _id
-           _owner
-           currentInterestRate
-           currentUnpaidPrincipalBalance
-           lastPaidInstallmentDate
-           loanDelinquencyStatus
-           loanIdentifier
-           monthlyReportingPeriod
-           servicerId
-         }
+   mutation UpdateProduct {
+     update_Product_async(
+       id: "017f273f-6f69-4adb-e73a-a140b3ccc28f"
+       input: {price: 3.49}
+     ) {
+       error
+       result {
+         _id
+         _owner
+         submissionTime
+         transactionId
+         version
        }
      }
+   }
+   ```
+   
+1. Confirm the update `Product` record is reflected in the list of all items
+     ```
+     query listProducts {
+      list_ProductItems {
+         _ProductItems {
+            _id
+            _owner
+            category
+            description
+            name
+            price
+            sku
+            supplier
+            promotionalContent
+         }
+      }
+   }
      ```
 ## Demo Conclusion
 Through these simple steps, you've explore the basics of Vendia Share.  

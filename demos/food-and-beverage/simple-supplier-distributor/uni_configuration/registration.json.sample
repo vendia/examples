@@ -1,0 +1,31 @@
+{
+    "name": "test-<name_of_your_choice>",
+    "schema": "schema.json",
+    "initState": "initial-state.json",
+    "nodes": [
+        {
+            "name": "SupplierNode",
+            "userId": "you@domain.com",
+            "region": "us-east-1",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
+        },
+        {
+            "name": "DistributorNode",
+            "userId": "you@domain.com",
+            "region": "us-east-1",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$id": "https://vendia.net/schemas/solutions/vendia-share-workshop.json",
+    "title": "Food Supply and Distribution Uni",
+    "description": "Universal Application that can be used by Suppliers and Distributors to transact with each other in real-time",
+    "type": "object",
+    "properties": {
+        "Product": {
+            "description": "A food product, made by a supplier",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sku": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "supplier": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string",
+                        "enum": ["specialty", "natural", "conventional"]
+                    },
+                    "promotionalContent": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
