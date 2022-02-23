@@ -303,6 +303,6 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
      }
      ```
 ## Demo Conclusion
-Through these simple steps, you've explore the basics of Vendia Share.  
+Through these simple steps, you explored the basics of Vendia Share.  
 
 For more advanced features, please explore additional [demos](../../../demos).

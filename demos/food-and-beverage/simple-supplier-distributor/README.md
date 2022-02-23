@@ -11,7 +11,7 @@
     * GraphQL Explorer
     * Entity Explorer
 
-This demo highlights the ease of creating a multi-party data sharing solution, using the Vendia Share platform, as applied to the Financial Services industry. 
+This demo highlights the ease of creating a multi-party data sharing solution, using the Vendia Share platform, as applied to the Food Services industry. 
 
 ## Demo Context
 Specifically, this demo explores a food Supplier who uses Vendia Share to share product changes with Distributors in real-time.  Prior to using Vendia Share, the Supplier and Distributor often struggled to maintain a consistent, shared source of truth.   Since adopting Vendia Share, they dramatically decreased the time and resource spent on data reconciliation between their isolated product databases, streamlined their product ordering processes, decreased food waste (e.g. misunderstanding of purchase orders and delivery timelines), and improved their grocer satisfaction scores.
@@ -276,6 +276,6 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
    }
      ```
 ## Demo Conclusion
-Through these simple steps, you've explore the basics of Vendia Share.  
+Through these simple steps, you explored the basics of Vendia Share.  
 
 For more advanced features, please explore additional [demos](../../../demos).
