@@ -220,7 +220,7 @@ mutation AddLoanPerformance {
 
 ```
 1. Confirm the `LoanPerformance` item is included in the list of all items
-    ```
+    ```graphql
     query ListLoanPerformance {
       list_LoanPerformanceItems {
         _LoanPerformanceItems {
