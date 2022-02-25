@@ -179,7 +179,7 @@ query ListPurchaseOrders {
 ### Confirm Purchase Orders as the Supplier
 You can confirm the existence of the newly added Purchase Orders by executing this GraphQL query from the GraphQL Explorer of the __SupplierNode__
 
-```
+```graphql
 query ListPurchaseOrders {
   list_PurchaseOrderItems {
     _PurchaseOrderItems {
