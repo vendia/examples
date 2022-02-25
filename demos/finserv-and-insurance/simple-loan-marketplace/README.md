@@ -28,7 +28,15 @@ To complete the Programmatic steps of this demo, you'll need the following:
 * [Node.js](https://nodejs.org/en/download/)
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
 
-In addition, you'll also need to clone this respository.
+In addition, you'll also need to clone this repository.
+
+<details>
+<summary>Instructions for cloning the repository</summary>
+
+## Clone with SSH
+ 
+```bash
+git clone git@github.com:vendia/examples.git
 
 ## Step 1 - Create a Multi-Party Uni
 To create a Uni, you can use either the [Share Web Application](https://share.vendia.net) or the [Share CLI]((https://vendia.net/docs/share/cli).
