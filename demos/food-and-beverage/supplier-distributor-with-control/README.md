@@ -23,7 +23,24 @@ This demo heavily uses the Share CLI and the GraphQL Explorer so all pre-reqs li
 * [Node.js](https://nodejs.org/en/download/)
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
 
-In addition, you'll also need to clone this respository.
+In addition, you'll also need to clone this repository.
+
+<details>
+<summary>Instructions for cloning the repository</summary>
+
+### Clone with SSH
+
+```bash
+git clone git@github.com:vendia/examples.git
+```
+
+### Clone with HTTPS
+
+```bash
+git clone https://github.com/vendia/examples.git
+```
+
+</details>
 
 ## Step 1 - Create a Multi-Party Uni
 To create a Uni using the [Share CLI]((https://vendia.net/docs/share/cli).

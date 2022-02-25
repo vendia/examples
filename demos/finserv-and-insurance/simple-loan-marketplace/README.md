@@ -33,10 +33,19 @@ In addition, you'll also need to clone this repository.
 <details>
 <summary>Instructions for cloning the repository</summary>
 
-## Clone with SSH
- 
+### Clone with SSH
+
 ```bash
 git clone git@github.com:vendia/examples.git
+```
+
+### Clone with HTTPS
+
+```bash
+git clone https://github.com/vendia/examples.git
+```
+
+</details>
 
 ## Step 1 - Create a Multi-Party Uni
 To create a Uni, you can use either the [Share Web Application](https://share.vendia.net) or the [Share CLI]((https://vendia.net/docs/share/cli).
@@ -202,23 +211,23 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
 1. Add a `LoanPerformance` item using the mutation below
-```graphql
-mutation AddLoanPerformance {
-  add_LoanPerformance_async(
-    input: {lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current}
-  ) {
-    result {
-      _id
-      _owner
-      submissionTime
-      transactionId
-      version
+    ```graphql
+    mutation AddLoanPerformance {
+      add_LoanPerformance_async(
+        input: {lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current}
+      ) {
+        result {
+          _id
+          _owner
+          submissionTime
+          transactionId
+          version
+        }
+        error
+      }
     }
-    error
-  }
-}
-
-```
+    
+    ```
 1. Confirm the `LoanPerformance` item is included in the list of all items
     ```graphql
     query ListLoanPerformance {
