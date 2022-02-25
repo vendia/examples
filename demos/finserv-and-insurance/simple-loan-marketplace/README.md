@@ -158,7 +158,7 @@ You can view data using the GraphQL Explorer view from either node in the Uni.
     }
     ```
 1. Filter `LoanPerformance` items by `currentInterestRate`
-    ```
+    ```graphql
     query ListLoanPerformance {
       list_LoanPerformanceItems(filter: {currentInterestRate: {lt: 3.00}}) {
         _LoanPerformanceItems {
