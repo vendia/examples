@@ -119,7 +119,7 @@ You can view data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
 1. List all `Loan` items
-    ```
+    ```graphql
     query ListLoans {
       list_LoanItems {
         _LoanItems {
