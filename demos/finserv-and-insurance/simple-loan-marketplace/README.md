@@ -256,7 +256,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
 1. List all `LoanPerformance` records
-    ```
+    ```graphql
     query ListLoanPerformance {
       list_LoanPerformanceItems {
         _LoanPerformanceItems {
@@ -277,7 +277,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
 1. Execute this mutation to modify the `unpaidPrincipalBalance` of the `LoanPerformance` record identified in the previous step.
     1. __NOTE__: The `id` value in the mutation below should be modified to reflect the `id` value you copied in the previous step.
     
-   ```
+   ```graphql
     mutation UpdateLoanPerformance {
       update_LoanPerformance_async(
         id: "017f2389-b33e-3e52-c7e6-76e60628cb23"
@@ -295,7 +295,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
     }    
     ```
 1. Confirm the update `LoanPerformance` record is reflected in the list of all items
-     ```
+     ```graphql
      query ListLoanPerformance {
        list_LoanPerformanceItems {
          _LoanPerformanceItems {

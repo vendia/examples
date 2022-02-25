@@ -109,7 +109,7 @@ You can view data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
 1. List all `Product` items
-    ```
+    ```graphql
    query listProducts {
       list_ProductItems {
          _ProductItems {
@@ -128,7 +128,7 @@ You can view data using the GraphQL Explorer view from either node in the Uni.
     ```
 
 1. Filter `Product` items by `supplier`
-    ```
+    ```graphql
     query listProducts {
       list_ProductItems(filter: {supplier: {eq: "Wild Harvest"}}) {
          _ProductItems {
@@ -165,7 +165,7 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
 1. Add a `Product` item using the mutation below
-   ```
+   ```graphql
    mutation AddProduct {
      add_Product_async(
        input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}
@@ -182,7 +182,7 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
    }   
    ```
 1. Confirm the `Product` item is included in the list of all items
-    ```
+    ```graphql
     query listProducts {
       list_ProductItems {
          _ProductItems {
@@ -218,7 +218,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
 
 1. Click `GraphQL Explorer` on either node
 1. List all `Product` records
-    ```
+    ```graphql
     query listProducts {
       list_ProductItems {
          _ProductItems {
@@ -239,7 +239,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
 1. Execute this mutation to modify the `price` of the `Product` record identified in the previous step.
     1. __NOTE__: The `id` value in the mutation below should be modified to reflect the `id` value you copied in the previous step.
     
-   ```
+   ```graphql
    mutation UpdateProduct {
      update_Product_async(
        id: "017f273f-6f69-4adb-e73a-a140b3ccc28f"
@@ -258,7 +258,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
    ```
    
 1. Confirm the update `Product` record is reflected in the list of all items
-     ```
+     ```graphql
      query listProducts {
       list_ProductItems {
          _ProductItems {
