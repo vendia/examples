@@ -90,7 +90,7 @@ Notice that all fields listed are populated in the response.
 ### Confirm Products as the Distributor
 You can also confirm the existence of the newly added Products by executing this GraphQL query from the GraphQL Explorer of the __DistributorNode__
 
-```
+```graphql
 query ListProducts {
   list_ProductItems {
     _ProductItems {
