@@ -283,7 +283,7 @@ You can confirm the existence of the newly added Delivery by executing this Grap
 ### Confirm Delivery as the Distributor
 You can confirm the existence of the newly added Delivery by executing this GraphQL query from the GraphQL Explorer of the __DistributorNode__
 
-  ```
+  ```graphql
    query ListDeliveries {
      list_DeliveryItems {
        _DeliveryItems {
