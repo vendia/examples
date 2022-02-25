@@ -48,7 +48,7 @@ git clone https://github.com/vendia/examples.git
 </details>
 
 ## Step 1 - Create a Multi-Party Uni
-To create a Uni, you can use either the [Share Web Application](https://share.vendia.net) or the [Share CLI]((https://vendia.net/docs/share/cli).
+To create a Uni, you can use either the [Share Web Application](https://share.vendia.net) or the [Share CLI](https://vendia.net/docs/share/cli).
 
 ### Create a Uni using the Share Web Application
 To create a Uni using the Share Web Application:
