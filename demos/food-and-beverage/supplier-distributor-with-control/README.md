@@ -54,7 +54,7 @@ As the Supplier, add several Product records to the Uni, each with Access Contro
 ### Confirm Products as the Supplier
 You can confirm the existence of the newly added Products by executing this GraphQL query from the GraphQL Explorer of the __SupplierNode__
 
-```
+```graphql
 query ListProducts {
   list_ProductItems {
     _ProductItems {
