@@ -250,7 +250,7 @@ As the Supplier, add a Delivery to the Uni, each with Access Control List (ACL) 
 ### Confirm Delivery as the Supplier
 You can confirm the existence of the newly added Delivery by executing this GraphQL query from the GraphQL Explorer of the __SupplierNode__
 
-   ```
+   ```graphql
    query ListDeliveries {
      list_DeliveryItems {
        _DeliveryItems {
