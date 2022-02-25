@@ -1,0 +1,83 @@
+mutation AddPurchaseOrders {
+    order1: add_PurchaseOrder_async(
+        input: {
+            sku: "00001",
+            quantity: "100",
+            totalPrice: 349.00,
+            dateIssued: "2022-02-23",
+            status: submitted
+        },
+        aclInput: {
+            acl: [
+                {principal: {nodes: "SupplierNode"}, path: "sku", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "quantity", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "totalPrice", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
+            ]
+        }
+    ) {
+        error
+        result {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+        }
+    }
+    order2:add_PurchaseOrder_async(
+        input: {
+            sku: "00004",
+            quantity: "100",
+            totalPrice: 399.00,
+            dateIssued: "2022-02-23",
+            status: submitted
+        },
+        aclInput: {
+            acl: [
+                {principal: {nodes: "SupplierNode"}, path: "sku", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "quantity", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "totalPrice", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
+            ]
+        }
+    ) {
+        error
+        result {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+        }
+    }
+    order3:add_PurchaseOrder_async(
+        input: {
+            sku: "00005",
+            quantity: "50",
+            totalPrice: 249.50,
+            dateIssued: "2022-02-23",
+            status: submitted
+        },
+        aclInput: {
+            acl: [
+                {principal: {nodes: "SupplierNode"}, path: "sku", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "quantity", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "totalPrice", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
+                {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
+            ]
+        }
+    ) {
+        error
+        result {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+        }
+    }
+}

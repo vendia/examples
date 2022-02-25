@@ -1,0 +1,30 @@
+mutation AddDelivery {
+    add_Delivery_async(
+        input: {
+            purchaseOrders: [
+                {purchaseOrderId: "ffffffff-41e6-ffff-cd9d-c51f2f7e5143"},
+                {purchaseOrderId: "ffffffff-459d-ffff-c841-b779b7a43d48"},
+                {purchaseOrderId: "ffffffff-45e0-ffff-ab36-8c1c937d49b7"},
+            ]
+            expectedDateTime: "2022-02-28T12:00:00Z",
+            status: scheduled,
+        },
+        aclInput: {
+            acl: [
+                {principal: {nodes: "DistributorNode"}, path: "purchaseOrders", operations: [READ]},
+                {principal: {nodes: "DistributorNode"}, path: "expectedDateTime", operations: [READ]},
+                {principal: {nodes: "DistributorNode"}, path: "actualDateTime", operations: [READ]},
+                {principal: {nodes: "DistributorNode"}, path: "status", operations: [READ]}
+            ]
+        }
+    ) {
+        error
+        result {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+        }
+    }
+}

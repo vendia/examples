@@ -1,0 +1,87 @@
+{
+  "Loan": [
+    {
+      "loanIdentifier": "12345",
+      "originalInterestRate": 3.75,
+      "originationDate": "2021-01-01",
+      "borrowerCreditScore": 650,
+      "numberOfUnits": 12,
+      "originalLoanToValue": 0.55,
+      "originalUnpaidPrincipalBalance": 1543000.00
+    },
+    {
+      "loanIdentifier": "23456",
+      "originalInterestRate": 2.75,
+      "originationDate": "2022-01-01",
+      "borrowerCreditScore": 755,
+      "numberOfUnits": 1,
+      "originalLoanToValue": 0.78,
+      "originalUnpaidPrincipalBalance": 555000.00
+    }
+  ],
+  "LoanPerformance": [
+    {
+      "loanIdentifier": "12345",
+      "lastPaidInstallmentDate": "2021-01-01",
+      "currentInterestRate": 3.75,
+      "currentUnpaidPrincipalBalance": 1540000.00,
+      "monthlyReportingPeriod": "2021-02-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "current"
+    },
+    {
+      "loanIdentifier": "12345",
+      "lastPaidInstallmentDate": "2021-02-01",
+      "currentInterestRate": 3.75,
+      "currentUnpaidPrincipalBalance": 1537000.00,
+      "monthlyReportingPeriod": "2021-03-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "current"
+    },
+    {
+      "loanIdentifier": "12345",
+      "lastPaidInstallmentDate": "2021-02-01",
+      "currentInterestRate": 3.75,
+      "currentUnpaidPrincipalBalance": 1537000.00,
+      "monthlyReportingPeriod": "2021-04-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "late"
+    },
+    {
+      "loanIdentifier": "12345",
+      "lastPaidInstallmentDate": "2021-02-01",
+      "currentInterestRate": 3.75,
+      "currentUnpaidPrincipalBalance": 1537000.00,
+      "monthlyReportingPeriod": "2021-05-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "delinquent"
+    },
+    {
+      "loanIdentifier": "23456",
+      "lastPaidInstallmentDate": "2022-01-01",
+      "currentInterestRate": 2.75,
+      "currentUnpaidPrincipalBalance": 554000.00,
+      "monthlyReportingPeriod": "2021-02-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "current"
+    },
+    {
+      "loanIdentifier": "23456",
+      "lastPaidInstallmentDate": "2022-02-01",
+      "currentInterestRate": 2.75,
+      "currentUnpaidPrincipalBalance": 553000.00,
+      "monthlyReportingPeriod": "2021-03-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "current"
+    },
+    {
+      "loanIdentifier": "23456",
+      "lastPaidInstallmentDate": "2022-03-01",
+      "currentInterestRate": 2.75,
+      "currentUnpaidPrincipalBalance": 552000.00,
+      "monthlyReportingPeriod": "2021-04-01",
+      "servicerId": "54321",
+      "loanDelinquencyStatus": "current"
+    }
+  ]
+}
