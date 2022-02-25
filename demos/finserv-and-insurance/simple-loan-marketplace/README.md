@@ -106,6 +106,8 @@ You can now explore that data using several of the Node Views mentioned in the l
 ### Explore Data using Entity Explorer
 You can view data using the Entity Explorer view from either node in the Uni.
 
+**NOTE:** Vendia's security model allows users to see Unis and nodes they have access to. You are able to work with either node because both nodes were created with the same user.
+
 1. Click `Entity Explorer` on either node
 1. View both `Loan` items
     1. Columns allow sorting
