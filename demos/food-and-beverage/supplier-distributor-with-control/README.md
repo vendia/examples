@@ -148,7 +148,7 @@ As the Distributor, add several Product Orders to the Uni, each with Access Cont
 ### Confirm Purchase Orders as the Distributor
 You can confirm the existence of the newly added Purchase Orders by executing this GraphQL query from the GraphQL Explorer of the __DistributorNode__
 
-```
+```graphql
 query ListPurchaseOrders {
   list_PurchaseOrderItems {
     _PurchaseOrderItems {
