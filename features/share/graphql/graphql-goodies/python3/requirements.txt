@@ -1,0 +1,5 @@
+click
+gql
+requests
+requests_toolbelt
+vendia-utils @ git+https://github.com/brian-vendia/vendia-utils.git
