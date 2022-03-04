@@ -1,0 +1,268 @@
+mutation createTickets {
+    ticket1: add_Ticket_async(
+        input: {
+            passengerNameRecord: "ABC123",
+            airlineCode: "AA",
+            ticketNumber: "1234567890",
+            dateOfIssue: "2022-03-03",
+            passenger: {
+                firstName: "John",
+                lastName: "Dough",
+                dateOfBirth: "1972-05-06",
+                frequentFlyerInformation: {
+                    airlineCode: "AA",
+                    frequentFlyerNumber: "5454321"
+                }
+            },
+            coupons: [
+                {
+                    ticketNumber: "0014321900234",
+                    ticketingDateOfIssue: "2022-03-03",
+                    baggage: {
+                        allowance: "2PC",
+                        overAllowanceQualifier: "PC",
+                        quantity: 1,
+                        rate: {
+                            amount: 50.00,
+                            currency: "USD",
+                            precision: 4
+                        }
+                    },
+                    couponNumber: 1,
+                    value: {
+                        amount: 150.00,
+                        currency: "USD",
+                        precision: 5
+                    },
+                    classOfService: "J",
+                    fareBasis: "W",
+                    soldAirlineDesignator: "AA",
+                    operatingAirlineDesignator: "AA",
+                    soldDestinationCityCode: "DCA",
+                    soldFlightDepartureDateTime: "2022-04-03T08:08:00Z",
+                    soldFlightNumber: "1017",
+                    soldOriginCityCode: "BOS"
+                },
+                {
+                    ticketNumber: "0014321900234",
+                    ticketingDateOfIssue: "2022-03-03",
+                    baggage: {
+                        allowance: "2PC",
+                        overAllowanceQualifier: "PC",
+                        quantity: 1,
+                        rate: {
+                            amount: 50.00,
+                            currency: "USD",
+                            precision: 4
+                        }
+                    },
+                    couponNumber: 2,
+                    value: {
+                        amount: 225.00,
+                        currency: "USD",
+                        precision: 5
+                    },
+                    classOfService: "J",
+                    fareBasis: "W",
+                    soldAirlineDesignator: "AA",
+                    operatingAirlineDesignator: "AA",
+                    soldDestinationCityCode: "BOS",
+                    soldFlightDepartureDateTime: "2022-04-04T18:08:00Z",
+                    soldFlightNumber: "1219",
+                    soldOriginCityCode: "DCA"
+                }
+            ],
+            payments: [
+                {
+                    paymentType: CC,
+                    paymentValue: {
+                        amount: 445.20,
+                        currency: "USD",
+                        precision: 5
+                    }
+                }
+            ],
+            prices: {
+                baseFareAmount: {
+                    amount: 375.00,
+                    currency: "USD",
+                    precision: 5
+                }
+            }, taxes: [
+                {
+                    code: "XT",
+                    value: {
+                        amount: 50.00,
+                        currency: "USD",
+                        precision: 4
+                    }
+                }
+            ],
+            fees: [
+                {
+                    code: XF,
+                    value: {
+                        amount: 11.20,
+                        currency: "USD",
+                        precision: 4
+                    }
+                }, {
+                    code: MF,
+                    value: {
+                        amount: 9.00,
+                        currency: "USD",
+                        precision: 3
+                    }
+                }
+            ]
+        },
+        aclInput: {
+            acl: [
+                { principal: {nodes: ["AmericanNode"]}, operations: [ALL, UPDATE_ACL] },
+            ]
+        }
+    ) {
+        error
+        result {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+        }
+    },
+    ticket2: add_Ticket_async(
+        input: {
+            passengerNameRecord: "EFG321",
+            airlineCode: "AA",
+            ticketNumber: "0987654321",
+            dateOfIssue: "2022-03-04",
+            passenger: {
+                firstName: "Juan",
+                lastName: "Pasta",
+                dateOfBirth: "1982-06-05",
+                frequentFlyerInformation: {
+                    airlineCode: "IA",
+                    frequentFlyerNumber: "1234545"
+                }
+            },
+            coupons: [
+                {
+                    ticketNumber: "0014321900234",
+                    ticketingDateOfIssue: "2022-03-03",
+                    baggage: {
+                        allowance: "2PC",
+                        overAllowanceQualifier: "PC",
+                        quantity: 1,
+                        rate: {
+                            amount: 50.00,
+                            currency: "USD",
+                            precision: 4
+                        }
+                    },
+                    couponNumber: 1,
+                    value: {
+                        amount: 250.00,
+                        currency: "USD",
+                        precision: 5
+                    },
+                    classOfService: "J",
+                    fareBasis: "W",
+                    soldAirlineDesignator: "AA",
+                    operatingAirlineDesignator: "IA",
+                    soldDestinationCityCode: "MAD",
+                    soldFlightDepartureDateTime: "2022-04-03T11:00:00Z",
+                    soldFlightNumber: "2233",
+                    soldOriginCityCode: "DCA"
+                },
+                {
+                    ticketNumber: "0014321900234",
+                    ticketingDateOfIssue: "2022-03-03",
+                    baggage: {
+                        allowance: "2PC",
+                        overAllowanceQualifier: "PC",
+                        quantity: 1,
+                        rate: {
+                            amount: 50.00,
+                            currency: "USD",
+                            precision: 4
+                        }
+                    },
+                    couponNumber: 2,
+                    value: {
+                        amount: 325.00,
+                        currency: "USD",
+                        precision: 5
+                    },
+                    classOfService: "J",
+                    fareBasis: "W",
+                    soldAirlineDesignator: "AA",
+                    operatingAirlineDesignator: "IA",
+                    soldDestinationCityCode: "DCA",
+                    soldFlightDepartureDateTime: "2022-04-10T22:00:00Z",
+                    soldFlightNumber: "9234",
+                    soldOriginCityCode: "MAD"
+                }
+            ],
+            payments: [
+                {
+                    paymentType: CC,
+                    paymentValue: {
+                        amount: 645.20,
+                        currency: "USD",
+                        precision: 5
+                    }
+                }
+            ],
+            prices: {
+                baseFareAmount: {
+                    amount: 575.00,
+                    currency: "USD",
+                    precision: 5
+                }
+            }, taxes: [
+                {
+                    code: "XT",
+                    value: {
+                        amount: 50.00,
+                        currency: "USD",
+                        precision: 4
+                    }
+                }
+            ],
+            fees: [
+                {
+                    code: XF,
+                    value: {
+                        amount: 11.20,
+                        currency: "USD",
+                        precision: 4
+                    }
+                }, {
+                    code: MF,
+                    value: {
+                        amount: 9.00,
+                        currency: "USD",
+                        precision: 3
+                    }
+                }
+            ]
+        },
+        aclInput: {
+            acl: [
+                { principal: {nodes: ["AmericanNode"]}, operations: [ALL, UPDATE_ACL] },
+                { principal: {nodes: ["IberiaNode"]}, operations: [READ] },
+            ]
+        }
+    )
+    {
+        error
+        result {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+        }
+    }
+}

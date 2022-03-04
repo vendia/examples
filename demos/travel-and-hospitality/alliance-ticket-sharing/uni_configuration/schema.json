@@ -1,349 +1,307 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://vendia.net/schemas/alliance-ticket-sharing/v1.0",
-  "type": "object",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://vendia.net/schemas/alliance-ticket-sharing/v1.0",
   "title": "Alliance Partner Ticket Share",
   "description": "A ticket data model with ACLs that allows alliance partners to share ticket data in real-time and with control",
+  "x-vendia-acls": {
+    "TicketAcl": {
+      "type": "Ticket"
+    }
+  },
+  "type": "object",
   "properties": {
     "Ticket": {
-      "type": "object",
-      "properties": {
-        "personalNameRecord": {
-          "type": "string",
-          "description": "A unique passenger record, represented by a 6-digit alphanumeric value",
-          "pattern": "[A-Z0-9]{6}"
-        },
-        "airlineCode": {
-          "type": "string",
-          "description": "The 2-letter code of the issuing airline",
-          "pattern": "[A-Z]{2}"
-        },
-        "ticketNumber": {
-          "type": "string",
-          "description": "A unique ticket number, represented as a 3-digit airline code followed by a 4-digit form number followed by a 6-digit serial number",
-          "pattern": "[0-9]{10}"
-        },
-        "dateOfIssue": {
-          "type": "string",
-          "description": "The date and time this ticket was issued, in the format YYYY-MM-DDThh:mm:ss",
-          "format": "date-time"
-        },
-        "bookingAgentId": {
-          "type": "string",
-          "description": "A code identifying the booking agent, as determined by the issuing airline"
-        },
-        "remarks": {
-          "type": "string",
-          "description": "Free text to provide further information related to the ticket"
-        },
-        "passenger": {
-          "type": "object",
-          "description": "Information about the passenger",
-          "properties": {
-            "firstName": {
-              "type": "string",
-              "description": "Passenger's first name"
-            },
-            "lastName": {
-              "type": "string",
-              "description": "Passenger's last name"
-            },
-            "dateOfBirth": {
-              "type": "string",
-              "description": "The date of birth of the passenger, in YYYY-MM-DD format",
-              "format": "date"
-            },
-            "frequentFlyerInformation": {
-              "type": "object",
-              "description": "Passenger's frequent flyer information",
-              "properties": {
-                "airlineCode": {
-                  "type": "string",
-                  "description": "The 2-letter code of the airline",
-                  "pattern": "[A-Z]{2}"
-                },
-                "frequentFlyerNumber": {
-                  "type": "string",
-                  "description": "The  identifier assigned to the passenger by the airline"
-                }
-              }
-            }
-          }
-        },
-        "coupons": {
-          "description": "A list of coupons related to this transaction",
-          "type": "array",
-          "items": {
-            "description": "Information related to a coupon",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "passengerNameRecord": {
+            "type": "string",
+            "description": "A unique passenger record, represented by a 6-digit alphanumeric value",
+            "pattern": "[A-Z0-9]{6}"
+          },
+          "airlineCode": {
+            "type": "string",
+            "description": "The 2-letter code of the issuing airline",
+            "pattern": "[A-Z]{2}"
+          },
+          "ticketNumber": {
+            "type": "string",
+            "description": "A unique ticket number, represented as a 3-digit airline code followed by a 4-digit form number followed by a 6-digit serial number",
+            "pattern": "[0-9]{10}"
+          },
+          "dateOfIssue": {
+            "type": "string",
+            "description": "The date and time this ticket was issued, in the format YYYY-MM-DD",
+            "format": "date"
+          },
+          "bookingAgentId": {
+            "type": "string",
+            "description": "A code identifying the booking agent, as determined by the issuing airline"
+          },
+          "remarks": {
+            "type": "string",
+            "description": "Free text to provide further information related to the ticket"
+          },
+          "passenger": {
             "type": "object",
+            "description": "Information about the passenger",
             "properties": {
-              "ticketNumber": {
+              "firstName": {
                 "type": "string",
-                "description": "A unique ticket number, represented as a 3-digit airline code followed by a 4-digit form number followed by a 6-digit serial number"
+                "description": "Passenger's first name"
               },
-              "ticketingDateOfIssue": {
-                "description": "The date a ticket was issued in the format YYYY-MM-DD",
+              "lastName": {
                 "type": "string",
+                "description": "Passenger's last name"
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "description": "The date of birth of the passenger, in YYYY-MM-DD format",
                 "format": "date"
               },
-              "baggage": {
-                "description": "The applicable free baggage allowance amount followed by kilos ‘K’ or pounds ‘L’, e.g. 20K or 44L. When the baggage allowance is based on pieces, the field shall contain ‘PC’ preceded by the number of pieces, e.g. 2PC. When the fare used does not permit any free baggage allowance, ‘NO’, ‘NIL’, or ‘XX’ shall be entered in the baggage allowance box",
+              "frequentFlyerInformation": {
                 "type": "object",
+                "description": "Passenger's frequent flyer information",
                 "properties": {
-                  "allowance": {
-                    "description": "The applicable free baggage allowance amount followed by kilos ‘K’ or pounds ‘L’, e.g. 20K or 44L. When the baggage allowance is based on pieces, the field shall contain ‘PC’ preceded by the number of pieces, e.g. 2PC. When the fare used does not permit any free baggage allowance, ‘NO’, ‘NIL’, or ‘XX’ shall be entered in the baggage allowance box",
-                    "type": "string"
+                  "airlineCode": {
+                    "type": "string",
+                    "description": "The 2-letter code of the airline",
+                    "pattern": "[A-Z]{2}"
                   },
-                  "overAllowanceQualifier": {
-                    "description": "The type of applicable excess baggage allowance",
-                    "type": "string"
-                  },
-                  "quantity": {
-                    "description": "The numeric value for baggage weight, pieces, or seats used for excess baggage.",
-                    "type": "number"
-                  },
-                  "rate": {
-                    "description": "The monetary value being charged for excess baggage per baggage allowance for the total number in excess",
-                    "type": "object",
-                    "properties": {
-                      "amount": {
-                        "description": "Amount without decimals",
-                        "type": "integer"
-                      },
-                      "currency": {
-                        "description": "The code that is equivalent to the currency associated with the amount",
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "precision": {
-                        "description": "Number of decimals",
-                        "type": "integer"
-                      }
+                  "frequentFlyerNumber": {
+                    "type": "string",
+                    "description": "The  identifier assigned to the passenger by the airline"
+                  }
+                }
+              }
+            }
+          },
+          "coupons": {
+            "description": "A list of coupons related to this transaction",
+            "type": "array",
+            "items": {
+              "description": "Information related to a coupon",
+              "type": "object",
+              "properties": {
+                "ticketNumber": {
+                  "type": "string",
+                  "description": "A unique ticket number, represented as a 3-digit airline code followed by a 4-digit form number followed by a 6-digit serial number",
+                  "pattern": "[0-9]{13}"
+                },
+                "ticketingDateOfIssue": {
+                  "description": "The date a ticket was issued in the format YYYY-MM-DD",
+                  "type": "string",
+                  "format": "date"
+                },
+                "baggage": {
+                  "description": "The applicable free baggage allowance amount followed by kilos ‘K’ or pounds ‘L’, e.g. 20K or 44L. When the baggage allowance is based on pieces, the field shall contain ‘PC’ preceded by the number of pieces, e.g. 2PC. When the fare used does not permit any free baggage allowance, ‘NO’, ‘NIL’, or ‘XX’ shall be entered in the baggage allowance box",
+                  "type": "object",
+                  "properties": {
+                    "allowance": {
+                      "description": "The applicable free baggage allowance amount followed by kilos ‘K’ or pounds ‘L’, e.g. 20K or 44L. When the baggage allowance is based on pieces, the field shall contain ‘PC’ preceded by the number of pieces, e.g. 2PC. When the fare used does not permit any free baggage allowance, ‘NO’, ‘NIL’, or ‘XX’ shall be entered in the baggage allowance box",
+                      "type": "string"
                     },
-                    "required": [
-                      "amount",
-                      "currency",
-                      "precision"
-                    ]
-                  }
-                }
-              },
-              "couponNumber": {
-                "type": "integer",
-                "description": "The coupon number for the ticket, within the range 1 through 4",
-                "minimum": 1,
-                "maximum": 4
-              },
-              "value": {
-                "description": "The value associated with a single coupon",
-                "type": "object",
-                "properties": {
-                  "amount": {
-                    "type": "number"
-                  },
-                  "currency": {
-                    "type": "string",
-                    "description": "The code that is equivalent to the currency associated with the amount"
-                  },
-                  "precision": {
-                    "type": "number",
-                    "description": "Number of digits"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "currency",
-                  "precision"
-                ]
-              },
-              "fareBasis": {
-                "description": "A series of characters defining the entitlement of the passenger, based on the fare charged",
-                "type": "string",
-                "minLength": 1
-              },
-              "ticketDesignator": {
-                "description": "A series of characters defining the entitlement of the passenger based on the fare charged",
-                "type": "string"
-              },
-              "additionalServicesAttributeGroup": {
-                "description": "A value which specifies the high-level group applicable to the service at the coupon level",
-                "type": "string"
-              },
-              "remarks": {
-                "description": "Free text to provide further information related to the coupon",
-                "type": "string"
-              },
-              "soldAirlineDesignator": {
-                "description": "The two character designator identifying the Marketing Carrier for each coupon as it was sold",
-                "type": "string",
-                "minLength": 1
-              },
-              "operatingAirlineDesignator": {
-                "description": "The two character designator identifying the Operating Carrier for each coupon as it was sold",
-                "type": "string",
-                "minLength": 1
-              },
-              "soldFlightDepartureDateTime": {
-                "description": "The scheduled date of departure for the coupon as it was sold. The local flight departure time based on a 12 or 24-hour clock as it was sold on each coupon",
-                "type": "string",
-                "format": "date-time"
-              },
-              "soldOriginCityCode": {
-                "description": "The airport or city code identifying the point of embarkation for each coupon as it was sold",
-                "type": "string",
-                "minLength": 1
-              },
-              "soldDestinationCityCode": {
-                "description": "The airport or city code for the point of disembarkation for each coupon as it was sold",
-                "type": "string",
-                "minLength": 1
-              },
-              "soldFlightNumber": {
-                "description": "The Marketing Carrier's flight number for each coupon as it was sold",
-                "type": "string",
-                "minLength": 1
-              },
-              "soldReservationBookingDesignator": {
-                "description": "The Marketing Carrier's code used in reservations to identify a compartment on an aircraft and/or a special inventory control for the coupon as it was sold",
-                "type": "string"
-              },
-              "soldReservationStatusCode": {
-                "description": "The passenger’s reservation status for each coupon at the time of ticket issuance",
-                "type": "string"
-              },
-              "stopoverCode": {
-                "description": "A code to indicate whether a point is a stopover or not in accordance with PTC Composite Resolution 012 where O or blank indicates a stopover is taken and X indicates no stopover is taken",
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 1
-              },
-              "classOfService": {
-                "description": "The class of service for the coupon",
-                "type": "string",
-                "minLength": 1
-              },
-              "useIndicator": {
-                "description": "An indication of the status of each coupon in the ticket consisting of one indicator per possible coupon number (‘1’ through ‘4’)",
-                "type": "string",
-                "minLength": 1
-              },
-              "conjunctionCompanionTicketIndicator": {
-                "description": "Provides additional information about any relationship this ticket has with any preceding ticket(s) within a transaction",
-                "type": "string"
-              }
-            },
-            "required": [
-              "ticketNumber",
-              "ticketingDateOfIssue",
-              "couponNumber",
-              "fareBasis",
-              "soldAirlineDesignator",
-              "soldFlightDepartureDateTime",
-              "soldOriginCityCode",
-              "soldDestinationCityCode",
-              "soldFlightNumber",
-              "classOfService"
-            ]
-          }
-        },
-        "payments": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "paymentValue": {
-                "type": "object",
-                "description": "The monetary value of the payment",
-                "properties": {
-                  "amount": {
-                    "type": "number"
-                  },
-                  "currency": {
-                    "type": "string",
-                    "description": "The code that is equivalent to the currency associated with the amount"
-                  },
-                  "precision": {
-                    "type": "number",
-                    "description": "Number of digits"
+                    "overAllowanceQualifier": {
+                      "description": "The type of applicable excess baggage allowance",
+                      "type": "string"
+                    },
+                    "quantity": {
+                      "description": "The numeric value for baggage weight, pieces, or seats used for excess baggage.",
+                      "type": "number"
+                    },
+                    "rate": {
+                      "description": "The monetary value being charged for excess baggage per baggage allowance for the total number in excess",
+                      "type": "object",
+                      "properties": {
+                        "amount": {
+                          "type": "number"
+                        },
+                        "currency": {
+                          "description": "The code that is equivalent to the currency associated with the amount",
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "precision": {
+                          "description": "Number of digits",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "amount",
+                        "currency",
+                        "precision"
+                      ]
+                    }
                   }
                 },
-                "required": [
-                  "amount",
-                  "currency",
-                  "precision"
-                ]
-              },
-              "paymentType": {
-                "type": "string",
-                "description": "The type of payment",
-                "enum": [
-                  "CA",
-                  "CC",
-                  "EX",
-                  "RF",
-                  "TC"
-                ]
-              }
-            }
-          }
-        },
-        "prices": {
-          "type": "object",
-          "properties": {
-            "baseFareAmount": {
-              "type": "object",
-              "description": "The amount (excluding tax, fees, and commissions)",
-              "properties": {
-                "amount": {
-                  "type": "number"
+                "couponNumber": {
+                  "type": "integer",
+                  "description": "The coupon number for the ticket, within the range 1 through 4",
+                  "minimum": 1,
+                  "maximum": 4
                 },
-                "currency": {
+                "value": {
+                  "description": "The value associated with a single coupon",
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "description": "The code that is equivalent to the currency associated with the amount"
+                    },
+                    "precision": {
+                      "type": "integer",
+                      "description": "Number of digits"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "precision"
+                  ]
+                },
+                "fareBasis": {
+                  "description": "A series of characters defining the entitlement of the passenger, based on the fare charged",
                   "type": "string",
-                  "description": "The code that is equivalent to the currency associated with the amount"
+                  "minLength": 1
                 },
-                "precision": {
-                  "type": "number",
-                  "description": "Number of digits"
+                "ticketDesignator": {
+                  "description": "A series of characters defining the entitlement of the passenger based on the fare charged",
+                  "type": "string"
+                },
+                "additionalServicesAttributeGroup": {
+                  "description": "A value which specifies the high-level group applicable to the service at the coupon level",
+                  "type": "string"
+                },
+                "remarks": {
+                  "description": "Free text to provide further information related to the coupon",
+                  "type": "string"
+                },
+                "soldAirlineDesignator": {
+                  "description": "The two character designator identifying the Marketing Carrier for each coupon as it was sold",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "operatingAirlineDesignator": {
+                  "description": "The two character designator identifying the Operating Carrier for each coupon as it was sold",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "soldFlightDepartureDateTime": {
+                  "description": "The scheduled date of departure for the coupon as it was sold. The local flight departure time based on a 12 or 24-hour clock as it was sold on each coupon",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "soldOriginCityCode": {
+                  "description": "The airport or city code identifying the point of embarkation for each coupon as it was sold",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "soldDestinationCityCode": {
+                  "description": "The airport or city code for the point of disembarkation for each coupon as it was sold",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "soldFlightNumber": {
+                  "description": "The Marketing Carrier's flight number for each coupon as it was sold",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "soldReservationBookingDesignator": {
+                  "description": "The Marketing Carrier's code used in reservations to identify a compartment on an aircraft and/or a special inventory control for the coupon as it was sold",
+                  "type": "string"
+                },
+                "soldReservationStatusCode": {
+                  "description": "The passenger’s reservation status for each coupon at the time of ticket issuance",
+                  "type": "string"
+                },
+                "stopoverCode": {
+                  "description": "A code to indicate whether a point is a stopover or not in accordance with PTC Composite Resolution 012 where O or blank indicates a stopover is taken and X indicates no stopover is taken",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1
+                },
+                "classOfService": {
+                  "description": "The class of service for the coupon",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "useIndicator": {
+                  "description": "An indication of the status of each coupon in the ticket consisting of one indicator per possible coupon number (‘1’ through ‘4’)",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "conjunctionCompanionTicketIndicator": {
+                  "description": "Provides additional information about any relationship this ticket has with any preceding ticket(s) within a transaction",
+                  "type": "string"
                 }
               },
               "required": [
-                "amount",
-                "currency",
-                "precision"
+                "ticketNumber",
+                "ticketingDateOfIssue",
+                "couponNumber",
+                "value",
+                "fareBasis",
+                "soldAirlineDesignator",
+                "operatingAirlineDesignator",
+                "soldFlightDepartureDateTime",
+                "soldOriginCityCode",
+                "soldDestinationCityCode",
+                "soldFlightNumber",
+                "classOfService"
               ]
-            },
-            "equivalentFarePaid": {
+            }
+          },
+          "payments": {
+            "type": "array",
+            "items": {
               "type": "object",
-              "description": "The amount (excluding tax, fees, and commissions) converted into the currency of the country of payment when the published fare is in a currency other than of the country of payment",
               "properties": {
-                "amount": {
-                  "type": "number"
+                "paymentValue": {
+                  "type": "object",
+                  "description": "The monetary value of the payment",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "description": "The code that is equivalent to the currency associated with the amount"
+                    },
+                    "precision": {
+                      "type": "integer",
+                      "description": "Number of digits"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "precision"
+                  ]
                 },
-                "currency": {
+                "paymentType": {
                   "type": "string",
-                  "description": "The code that is equivalent to the currency associated with the amount"
-                },
-                "precision": {
-                  "type": "number",
-                  "description": "Number of digits"
+                  "description": "The type of payment",
+                  "enum": [
+                    "CA",
+                    "CC",
+                    "EX",
+                    "RF",
+                    "TC"
+                  ]
                 }
-              },
-              "required": [
-                "amount",
-                "currency",
-                "precision"
-              ]
+              }
             }
-          }
-        },
-        "taxes": {
-          "type": "array",
-          "items": {
+          },
+          "prices": {
             "type": "object",
             "properties": {
-              "value": {
+              "baseFareAmount": {
                 "type": "object",
-                "description": "Taxes for the ticket",
+                "description": "The amount (excluding tax, fees, and commissions)",
                 "properties": {
                   "amount": {
                     "type": "number"
@@ -353,7 +311,7 @@
                     "description": "The code that is equivalent to the currency associated with the amount"
                   },
                   "precision": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Number of digits"
                   }
                 },
@@ -363,25 +321,9 @@
                   "precision"
                 ]
               },
-              "code": {
-                "type": "string",
-                "description": "The various tax or charge codes reflected on traffic documents as published in the IATA Ticket Tax/Fee/Charge Box Service (“TTBS”)"
-              },
-              "subCode": {
-                "type": "string",
-                "description": "A secondary code that further qualifies the tax code"
-              }
-            }
-          }
-        },
-        "fees": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Fees for the ticket",
-            "properties": {
-              "value": {
+              "equivalentFarePaid": {
                 "type": "object",
+                "description": "The amount (excluding tax, fees, and commissions) converted into the currency of the country of payment when the published fare is in a currency other than of the country of payment",
                 "properties": {
                   "amount": {
                     "type": "number"
@@ -391,7 +333,7 @@
                     "description": "The code that is equivalent to the currency associated with the amount"
                   },
                   "precision": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Number of digits"
                   }
                 },
@@ -400,85 +342,154 @@
                   "currency",
                   "precision"
                 ]
-              },
-              "code": {
-                "type": "string",
-                "description": "The various fee code reflected on traffic documents as published in the IATA Ticket Tax/Fee/Charge Box Service (“TTBS”)",
-                "enum": [
-                  "XF",
-                  "CP",
-                  "MF",
-                  "OA",
-                  "OB",
-                  "OC",
-                  "OD",
-                  "YR",
-                  "YQ"
-                ]
-              },
-              "subCode": {
-                "type": "string",
-                "description": "A secondary code that further qualifies the fee code"
+              }
+            }
+          },
+          "taxes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "object",
+                  "description": "Taxes for the ticket",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "description": "The code that is equivalent to the currency associated with the amount"
+                    },
+                    "precision": {
+                      "type": "number",
+                      "description": "Number of digits"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "precision"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The various tax or charge codes reflected on traffic documents as published in the IATA Ticket Tax/Fee/Charge Box Service (“TTBS”)"
+                },
+                "subCode": {
+                  "type": "string",
+                  "description": "A secondary code that further qualifies the tax code"
+                }
+              }
+            }
+          },
+          "fees": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Fees for the ticket",
+              "properties": {
+                "value": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "description": "The code that is equivalent to the currency associated with the amount"
+                    },
+                    "precision": {
+                      "type": "number",
+                      "description": "Number of digits"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "precision"
+                  ]
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The various fee code reflected on traffic documents as published in the IATA Ticket Tax/Fee/Charge Box Service (“TTBS”)",
+                  "enum": [
+                    "AY",
+                    "XF",
+                    "CP",
+                    "MF",
+                    "OA",
+                    "OB",
+                    "OC",
+                    "OD",
+                    "YR",
+                    "YQ"
+                  ]
+                },
+                "subCode": {
+                  "type": "string",
+                  "description": "A secondary code that further qualifies the fee code"
+                }
+              }
+            }
+          },
+          "commissions": {
+            "type": "array",
+            "description": "Commissions owed for the ticket",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "description": "The code that is equivalent to the currency associated with the amount"
+                    },
+                    "precision": {
+                      "type": "number",
+                      "description": "Number of digits"
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "precision"
+                  ]
+                },
+                "rate": {
+                  "type": "number",
+                  "description": "The decimal percentage claimed by the agent as eligible commission. The format for 10.5% commission would be 10.5."
+                },
+                "commissionType": {
+                  "type": "string",
+                  "description": "A code indicating the type of commission applicable to the transaction and associated with the corresponding COMMISSION RATE or COMMISSION AMOUNT",
+                  "enum": [
+                    "XLP",
+                    "NEW",
+                    "OLD"
+                  ]
+                }
               }
             }
           }
         },
-        "commissions": {
-          "type": "array",
-          "description": "Commissions owed for the ticket",
-          "items": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "object",
-                "properties": {
-                  "amount": {
-                    "type": "number"
-                  },
-                  "currency": {
-                    "type": "string",
-                    "description": "The code that is equivalent to the currency associated with the amount"
-                  },
-                  "precision": {
-                    "type": "number",
-                    "description": "Number of digits"
-                  }
-                },
-                "required": [
-                  "amount",
-                  "currency",
-                  "precision"
-                ]
-              },
-              "rate": {
-                "type": "number",
-                "description": "The decimal percentage claimed by the agent as eligible commission. The format for 10.5% commission would be 10.5."
-              },
-              "commissionType": {
-                "type": "string",
-                "description": "A code indicating the type of commission applicable to the transaction and associated with the corresponding COMMISSION RATE or COMMISSION AMOUNT",
-                "enum": [
-                  "XLP",
-                  "NEW",
-                  "OLD"
-                ]
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "personalNameRecord",
-        "airlineCode",
-        "ticketNumber",
-        "dateOfIssue",
-        "passenger",
-        "coupons",
-        "payments",
-        "prices",
-        "taxes",
-        "fees"
-      ]
+        "required": [
+          "passengerNameRecord",
+          "airlineCode",
+          "ticketNumber",
+          "dateOfIssue",
+          "passenger",
+          "coupons",
+          "payments",
+          "prices",
+          "taxes",
+          "fees"
+        ]
+      }
     }
   }
 }
