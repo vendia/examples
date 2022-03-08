@@ -1,9 +1,9 @@
 mutation createTickets {
     ticket1: add_Ticket_async(
         input: {
-            passengerNameRecord: "ABC123",
+            passengerNameRecordCode: "ABC123",
             airlineCode: "AA",
-            ticketNumber: "1234567890",
+            ticketNumber: "0014321900234",
             dateOfIssue: "2022-03-03",
             passenger: {
                 firstName: "John",
@@ -13,6 +13,12 @@ mutation createTickets {
                     airlineCode: "AA",
                     frequentFlyerNumber: "5454321"
                 }
+            },
+            ticketDocumentInfo: {
+                primaryDocumentNumber: "4321900234",
+                documentType: TKTT,
+                fareBasis: "WE3MXUS",
+                fareCalculationArea: ["BOS 6X DCA375.00END"]
             },
             coupons: [
                 {
@@ -34,8 +40,7 @@ mutation createTickets {
                         currency: "USD",
                         precision: 5
                     },
-                    classOfService: "J",
-                    fareBasis: "W",
+                    classOfService: "W",
                     soldAirlineDesignator: "AA",
                     operatingAirlineDesignator: "AA",
                     soldDestinationCityCode: "DCA",
@@ -62,8 +67,7 @@ mutation createTickets {
                         currency: "USD",
                         precision: 5
                     },
-                    classOfService: "J",
-                    fareBasis: "W",
+                    classOfService: "W",
                     soldAirlineDesignator: "AA",
                     operatingAirlineDesignator: "AA",
                     soldDestinationCityCode: "BOS",
@@ -133,9 +137,9 @@ mutation createTickets {
     },
     ticket2: add_Ticket_async(
         input: {
-            passengerNameRecord: "EFG321",
+            passengerNameRecordCode: "EFG321",
             airlineCode: "AA",
-            ticketNumber: "0987654321",
+            ticketNumber: "0010987654321",
             dateOfIssue: "2022-03-04",
             passenger: {
                 firstName: "Juan",
@@ -146,9 +150,15 @@ mutation createTickets {
                     frequentFlyerNumber: "1234545"
                 }
             },
+            ticketDocumentInfo: {
+                primaryDocumentNumber: "0987654321",
+                documentType: TKTT,
+                fareBasis: "WE3MXSP",
+                fareCalculationArea: ["DCA 6X MAD575.00END"]
+            },
             coupons: [
                 {
-                    ticketNumber: "0014321900234",
+                    ticketNumber: "0010987654321",
                     ticketingDateOfIssue: "2022-03-03",
                     baggage: {
                         allowance: "2PC",
@@ -166,8 +176,7 @@ mutation createTickets {
                         currency: "USD",
                         precision: 5
                     },
-                    classOfService: "J",
-                    fareBasis: "W",
+                    classOfService: "W",
                     soldAirlineDesignator: "AA",
                     operatingAirlineDesignator: "IA",
                     soldDestinationCityCode: "MAD",
@@ -176,7 +185,7 @@ mutation createTickets {
                     soldOriginCityCode: "DCA"
                 },
                 {
-                    ticketNumber: "0014321900234",
+                    ticketNumber: "0010987654321",
                     ticketingDateOfIssue: "2022-03-03",
                     baggage: {
                         allowance: "2PC",
@@ -194,8 +203,7 @@ mutation createTickets {
                         currency: "USD",
                         precision: 5
                     },
-                    classOfService: "J",
-                    fareBasis: "W",
+                    classOfService: "W",
                     soldAirlineDesignator: "AA",
                     operatingAirlineDesignator: "IA",
                     soldDestinationCityCode: "DCA",
@@ -251,7 +259,18 @@ mutation createTickets {
         aclInput: {
             acl: [
                 { principal: {nodes: ["AmericanNode"]}, operations: [ALL, UPDATE_ACL] },
-                { principal: {nodes: ["IberiaNode"]}, operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "ticketDocumentInfo.primaryDocumentNumber", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "ticketDocumentInfo.documentType", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "passengerNameRecordCode", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "airlineCode", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "ticketNumber", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "dateOfIssue", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "passenger", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "coupons", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "payments", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "prices", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "taxes", operations: [READ] },
+                { principal: {nodes: ["IberiaNode"]}, path: "fees", operations: [READ] }
             ]
         }
     )

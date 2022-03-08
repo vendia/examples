@@ -15,7 +15,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "passengerNameRecord": {
+          "passengerNameRecordCode": {
             "type": "string",
             "description": "A unique passenger record, represented by a 6-digit alphanumeric value",
             "pattern": "[A-Z0-9]{6}"
@@ -28,7 +28,7 @@
           "ticketNumber": {
             "type": "string",
             "description": "A unique ticket number, represented as a 3-digit airline code followed by a 4-digit form number followed by a 6-digit serial number",
-            "pattern": "[0-9]{10}"
+            "pattern": "[0-9]{13}"
           },
           "dateOfIssue": {
             "type": "string",
@@ -76,6 +76,74 @@
                 }
               }
             }
+          },
+          "ticketDocumentInfo": {
+            "type": "object",
+            "properties": {
+              "primaryDocumentNumber": {
+                "description": "A unique document number, represented as 4-digit form number followed by a 6-digit serial number",
+                "type": "string",
+                "pattern": "[0-9]{10}"
+              },
+              "documentType": {
+                "description": "The type of document being processed.",
+                "type": "string",
+                "enum": [
+                  "ADMS",
+                  "ACMS",
+                  "EMDA",
+                  "EMDS",
+                  "MD50",
+                  "NONT",
+                  "RCSM",
+                  "TAAD",
+                  "TASF",
+                  "TKTT"
+                ]
+              },
+              "fareBasis": {
+                "description": "A series of characters defining the entitlement of the passenger, based on the fare charged",
+                "type": "string",
+                "minLength": 1
+              },
+              "fareCalculationArea": {
+                "description": "A repeatable field containing a string of data reflecting the fare construction applicable to the transaction and, when applicable, the breakdown for Passenger Facility Charges and U.S. Flight Segment Taxes.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fareCalculationPricingIndicator": {
+                "description": "The identifier reflecting the method of pricing for this transaction sent with the fare calculation of the document.",
+                "type": "string"
+              },
+              "fareCalculationModeIndicator": {
+                "description": "A code identifying how the ticket was priced.",
+                "type": "string"
+              },
+              "attributeGroup": {
+                "description": "A value which specifies the high-level group applicable to the service at the coupon level.",
+                "type": "string"
+              },
+              "attributeSubGroup": {
+                "description": "A value which specifies the sub group (within the specified group) applicable to the service at the coupon level.",
+                "type": "string"
+              },
+              "internationalSaleIndicator": {
+                "description": "Used for domestic or international sales differentiation.",
+                "type": "boolean"
+              },
+              "endorsementRestriction": {
+                "description": "Remarks provided to ensure common understanding between passenger and carrier when a fare is restricted as to time of travel, period of validity, voluntary rerouting, or where any other restricting condition(s) are applicable that are not otherwise clearly evident from other entries.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "primaryDocumentNumber",
+              "documentType",
+              "fareBasis",
+              "fareCalculationArea"
+            ]
           },
           "coupons": {
             "description": "A list of coupons related to this transaction",
@@ -163,11 +231,6 @@
                     "precision"
                   ]
                 },
-                "fareBasis": {
-                  "description": "A series of characters defining the entitlement of the passenger, based on the fare charged",
-                  "type": "string",
-                  "minLength": 1
-                },
                 "ticketDesignator": {
                   "description": "A series of characters defining the entitlement of the passenger based on the fare charged",
                   "type": "string"
@@ -244,7 +307,6 @@
                 "ticketingDateOfIssue",
                 "couponNumber",
                 "value",
-                "fareBasis",
                 "soldAirlineDesignator",
                 "operatingAirlineDesignator",
                 "soldFlightDepartureDateTime",
@@ -478,11 +540,12 @@
           }
         },
         "required": [
-          "passengerNameRecord",
+          "passengerNameRecordCode",
           "airlineCode",
           "ticketNumber",
           "dateOfIssue",
           "passenger",
+          "ticketDocumentInfo",
           "coupons",
           "payments",
           "prices",

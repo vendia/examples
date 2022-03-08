@@ -1,9 +1,9 @@
 mutation createTickets {
     ticket1: add_Ticket_async(
         input: {
-            passengerNameRecord: "XYZ123",
+            passengerNameRecordCode: "XYZ123",
             airlineCode: "IA",
-            ticketNumber: "5463728190",
+            ticketNumber: "0755463728190",
             dateOfIssue: "2022-05-05",
             passenger: {
                 firstName: "John",
@@ -13,6 +13,12 @@ mutation createTickets {
                     airlineCode: "IA",
                     frequentFlyerNumber: "999888777"
                 }
+            },
+            ticketDocumentInfo: {
+                primaryDocumentNumber: "5463728190",
+                documentType: TKTT,
+                fareBasis: "JE3MXSP",
+                fareCalculationArea: ["SVQ 6X MAD375.00EUREND"]
             },
             coupons: [
                 {
@@ -35,7 +41,6 @@ mutation createTickets {
                         precision: 5
                     },
                     classOfService: "J",
-                    fareBasis: "W",
                     soldAirlineDesignator: "IA",
                     operatingAirlineDesignator: "IA",
                     soldDestinationCityCode: "MAD",
@@ -63,7 +68,6 @@ mutation createTickets {
                         precision: 5
                     },
                     classOfService: "J",
-                    fareBasis: "W",
                     soldAirlineDesignator: "IA",
                     operatingAirlineDesignator: "IA",
                     soldDestinationCityCode: "SVQ",
@@ -134,9 +138,9 @@ mutation createTickets {
     },
     ticket2: add_Ticket_async(
         input: {
-            passengerNameRecord: "ZYXWV3",
+            passengerNameRecordCode: "ZYXWV3",
             airlineCode: "IA",
-            ticketNumber: "0987654321",
+            ticketNumber: "0754321905432",
             dateOfIssue: "2022-04-24",
             passenger: {
                 firstName: "Juan",
@@ -146,6 +150,12 @@ mutation createTickets {
                     airlineCode: "IA",
                     frequentFlyerNumber: "1234545"
                 }
+            },
+            ticketDocumentInfo: {
+                primaryDocumentNumber: "4321905432",
+                documentType: TKTT,
+                fareBasis: "JE3MXSP",
+                fareCalculationArea: ["DCA 6X MAD575.00EUREND"]
             },
             coupons: [
                 {
@@ -168,7 +178,6 @@ mutation createTickets {
                         precision: 5
                     },
                     classOfService: "J",
-                    fareBasis: "W",
                     soldAirlineDesignator: "IA",
                     operatingAirlineDesignator: "AA",
                     soldDestinationCityCode: "MAD",
@@ -196,7 +205,6 @@ mutation createTickets {
                         precision: 5
                     },
                     classOfService: "J",
-                    fareBasis: "W",
                     soldAirlineDesignator: "IA",
                     operatingAirlineDesignator: "AA",
                     soldDestinationCityCode: "DCA",
@@ -252,7 +260,18 @@ mutation createTickets {
         aclInput: {
             acl: [
                 { principal: {nodes: ["IberiaNode"]}, operations: [ALL, UPDATE_ACL] },
-                { principal: {nodes: ["AmericanNode"]}, operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "ticketDocumentInfo.primaryDocumentNumber", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "ticketDocumentInfo.documentType", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "passengerNameRecordCode", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "airlineCode", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "ticketNumber", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "dateOfIssue", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "passenger", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "coupons", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "payments", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "prices", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "taxes", operations: [READ] },
+                { principal: {nodes: ["AmericanNode"]}, path: "fees", operations: [READ] }
             ]
         }
     )
