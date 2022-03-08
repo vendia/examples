@@ -4,9 +4,11 @@
   </a>
 </p>
 
-# GraphQL Goodies
+# GraphQL Enhancements
 
 [Vendia Share](https://share.vendia.net/) has features that improve the GraphQL developer experience and addresses known limitations to what the core GraphQL specification allows. Each of the features has been illustrated using code examples.
+
+**NOTE:** The features highlighted are not tied to any of the languages chosen. You can use the same capabilities in [many different languages and frameworks](https://graphql.org/code/).
 
 # Creating Our Universal Application
 
