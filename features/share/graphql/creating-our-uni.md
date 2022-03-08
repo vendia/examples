@@ -45,10 +45,10 @@ Once our Uni is up and running, we can begin experimenting by using different pr
 
 * [python3](./python3/README.md)
 
-Once you've gone through these foundation examples, feel free to dive deeper into some of the [Vendia Share GraphQL Goodies](#).
+Once you've gone through these foundation examples, feel free to dive deeper into some of the Vendia Share GraphQL Goodies.
 
-* [golang1.x](./graphql-goodies/golang1.x/README.md)
+* [Using Conditionals](./graphql-goodies/golang1.x/README.md)
 
-* [node](./graphql-goodies/node/README.md)
+* [Using Vendia Transactions](./graphql-goodies/node/README.md)
 
-* [python3](./graphql-goodies/python3/README.md)
+* [Examining Changes to Uni Data](./graphql-goodies/python3/README.md)
