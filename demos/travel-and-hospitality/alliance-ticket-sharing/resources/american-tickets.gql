@@ -92,7 +92,8 @@ mutation createTickets {
                     currency: "USD",
                     precision: 5
                 }
-            }, taxes: [
+            },
+            taxes: [
                 {
                     code: "XT",
                     value: {
@@ -110,7 +111,8 @@ mutation createTickets {
                         currency: "USD",
                         precision: 4
                     }
-                }, {
+                },
+                {
                     code: MF,
                     value: {
                         amount: 9.00,
@@ -228,7 +230,8 @@ mutation createTickets {
                     currency: "USD",
                     precision: 5
                 }
-            }, taxes: [
+            },
+            taxes: [
                 {
                     code: "XT",
                     value: {
@@ -246,7 +249,8 @@ mutation createTickets {
                         currency: "USD",
                         precision: 4
                     }
-                }, {
+                },
+                {
                     code: MF,
                     value: {
                         amount: 9.00,
