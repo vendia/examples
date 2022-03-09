@@ -4,6 +4,12 @@
   </a>
 </p>
 
+# GraphQL Enhancements
+
+[Vendia Share](https://share.vendia.net/) has features that improve the GraphQL developer experience and addresses known limitations to what the core GraphQL specification allows. Each of the features has been illustrated using code examples.
+
+**NOTE:** The features highlighted are not tied to any of the languages chosen. You can use the same capabilities in [many different languages and frameworks](https://graphql.org/code/).
+
 # Creating Our Universal Application
 
 ## Pre-requisites
@@ -12,7 +18,7 @@
 
 ## Deploying the Uni
 
-This example will create a Uni to store attributes regarding product inventory.
+This example will create a Uni to store attributes regarding product inventory. This Uni will add a constraint to the `quantity` property.
 
 If you are not already logged in to the Share CLI, do so by running [`share login`](https://vendia.net/docs/share/cli/commands/login):
 
@@ -32,17 +38,17 @@ The Uni will take several minutes to deploy. We have seeded several inventory it
 **NOTE:** The name of your Uni will be different. Adjust the name accordingly.
 
 ```bash
-share get --uni test-graphql-example
+share get --uni test-graphql-goodies
 ```
 
-Make note of the **Warehouse** node's graphqlApi `httpsUrl` and `apiKey`. Our code examples will use these values.
+Make note of the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use it in the examples below.
 
-Once our Uni is up and running, we can begin experimenting by using different programming languages.
+# Examining Vendia GraphQL Enhancements
 
-* [golang1.x](./golang1.x/README.md)
+We have three separate code examples that highlight capabilities Vendia has to improve the GraphQL developer experience.
 
-* [node](./node/README.md)
+* [Vendia Transactions](./node/README.md)
 
-* [python3](./python3/README.md)
+* [Conditional Updates](./golang1.x/README.md)
 
-Once you've gone through these foundation examples, feel free to dive deeper into some of the Vendia Share [GraphQL enhancements](./graphql-enhancements/README.md).
+* [Examining Changes to Data](./python3/README.md)

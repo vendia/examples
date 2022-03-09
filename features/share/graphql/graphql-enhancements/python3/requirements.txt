@@ -1,0 +1,3 @@
+click
+gql[requests]
+vendia-utils @ git+https://github.com/brian-vendia/vendia-utils.git
