@@ -113,8 +113,59 @@ node mutation.cjs --quantity 1000
 
 After a period, the address associated with the Dead-Letter notification will receive an email. The body will contain information about the failed mutation. You can see the condition for **Thing 1** was not met. The difference between the requested quantity and on-hand quantity was not greater than or equal to the 99 units available. Even though there was sufficient quantity for **Thing 2** and **Thing 3** _the failure of one operation prevented the entire transaction from completing successfully_.
 
+**NOTE:** Formatting of the **"mutation"** string value has been added to make the payload more legible.
+
 ```json
-{"mutation": "mutation m{item1: updateSelf_Inventory(id:\"017f64cc-9587-c0ad-6f07-39644846ee5c\",input: {lastUpdated: \"2022-03-08T07:00:09Z\", quantity: -1},condition: {quantity: {ge: 100}}){error}\nitem2: updateSelf_Inventory(id:\"017f64cc-9661-66f5-59a4-bf5f64776126\",input: {lastUpdated: \"2022-03-08T07:00:09Z\", quantity: 99},condition: {quantity: {ge: 100}}){error}\nitem3: updateSelf_Inventory(id:\"017f64cc-978e-0fc2-fcf6-7d1c01e295db\",input: {lastUpdated: \"2022-03-08T07:00:09Z\", quantity: 299},condition: {quantity: {ge: 100}}){error}}", "submission_time": "2022-03-08T12:00:10.516557+00:00", "id": "017f6966-ab14-09a8-36c9-1267038b65cf", "owner": "Warehouse", "transactionId": "017f6966-ab14-09a8-36c9-1267038b65cf", "status": "Failed", "submissionTime": "2022-03-08T12:00:10.516557+00:00"}
+{
+  "mutation": "mutation m{
+    item1: updateSelf_Inventory(
+      id:\"017f64cc-9587-c0ad-6f07-39644846ee5c\",
+      input: {
+        lastUpdated: \"2022-03-08T07:00:09Z\",
+        quantity: -1
+      },
+      condition: {
+        quantity: {
+          ge: 100
+        }
+      }
+    ){
+      error
+    }\n
+    item2: updateSelf_Inventory(id:\"017f64cc-9661-66f5-59a4-bf5f64776126\",
+      input: {
+        lastUpdated: \"2022-03-08T07:00:09Z\",
+        quantity: 99
+      },
+      condition: {
+        quantity: {
+          ge: 100
+        }
+      }
+    ){
+      error
+    }\n
+    item3: updateSelf_Inventory(id:\"017f64cc-978e-0fc2-fcf6-7d1c01e295db\",
+      input: {
+        lastUpdated: \"2022-03-08T07:00:09Z\",
+        quantity: 299
+      },
+      condition: {
+        quantity: {
+          ge: 100
+        }
+      }
+    ){
+      error
+    }
+  }",
+  "submission_time": "2022-03-08T12:00:10.516557+00:00",
+  "id": "017f6966-ab14-09a8-36c9-1267038b65cf",
+  "owner": "Warehouse",
+  "transactionId": "017f6966-ab14-09a8-36c9-1267038b65cf",
+  "status": "Failed",
+  "submissionTime": "2022-03-08T12:00:10.516557+00:00"
+}
 ```
 
 You can run the following GraphQL query to confirm none of the inventory quantities have been updated.
