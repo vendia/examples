@@ -148,8 +148,10 @@ Mutation with required `zipcode` property.
 
 ```graphql
 mutation m{
-  add_CustomerAccount_async(input: {customerId: "10001", firstName: "Jay", lastName: "Pipes"}) {
-    error
+  add_CustomerAccount(input: {customerId: "10001", firstName: "Jay", lastName: "Pipes"}, syncMode: ASYNC) {
+      transaction {
+        transactionId
+      }
   }
 }
 ```
@@ -162,8 +164,10 @@ Mutation with required properties.
 
 ```graphql
 mutation m {
-  add_CustomerAccount_async(input: {customerId: "10001", firstName: "Jay", lastName: "Pipes", contactDetails: {}, address: {zipcode: 94568}}) {
-    error
+  add_CustomerAccount(input: {customerId: "10001", firstName: "Jay", lastName: "Pipes", contactDetails: {}, address: {zipcode: 94568}}, transactionId) {
+    transaction {
+        transactionId
+    }
   }
 }
 ```

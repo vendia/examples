@@ -92,9 +92,8 @@ def set_quantity(itemid, quantity):
     query = gql(
         """
         mutation updateInventory($id: ID!, $quantity: Int, $lastupdated: String) {
-            update_Inventory_async(id: $id, input: {quantity: $quantity, lastUpdated: $lastupdated}) {
-                error
-                result {
+            update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastupdated}, syncMode: ASYNC) {
+                transaction {
                     _id
                 }
             }
@@ -111,7 +110,7 @@ def set_quantity(itemid, quantity):
         raise Exception(f'Error: {str(e)}')
     
     try:
-        return(result['update_Inventory_async']['result']['_id'])
+        return(result['update_Inventory']['result']['_id'])
     except:
         raise Exception(f'{itemid} not found')
 

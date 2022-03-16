@@ -200,12 +200,12 @@ We should be able to see output in our `consumer` window indicating that data is
 
 ```bash
 vagrant@kafka-to-share:~$ python3 consumer.py 
-Put shipment with purchase order PO EQJu80380438 to https://xgmbcuijcb.execute-api.us-west-2.amazonaws.com/graphql/: {'addShipment_async': {'error': None, 'result': {'id': '0179d4d9-b34b-37e8-c355-56e3fac5ec24'}}}
-{'addShipment_async': {'error': None, 'result': {'id': '0179d4d9-b34b-37e8-c355-56e3fac5ec24'}}}
-Put shipment with purchase order PO DdXg50383085 to https://xgmbcuijcb.execute-api.us-west-2.amazonaws.com/graphql/: {'addShipment_async': {'error': None, 'result': {'id': '0179d4d9-c6b4-4b5c-412d-412d37474fdc'}}}
-{'addShipment_async': {'error': None, 'result': {'id': '0179d4d9-c6b4-4b5c-412d-412d37474fdc'}}}
-Put shipment with purchase order PO OhDa63672964 to https://xgmbcuijcb.execute-api.us-west-2.amazonaws.com/graphql/: {'addShipment_async': {'error': None, 'result': {'id': '0179d4d9-da2b-0b1e-e4b5-6f03fa53a37c'}}}
-{'addShipment_async': {'error': None
+Put shipment with purchase order PO EQJu80380438 to https://xgmbcuijcb.execute-api.us-west-2.amazonaws.com/graphql/: {'addShipment': {'transaction': {'_id': '0179d4d9-b34b-37e8-c355-56e3fac5ec24'}}}
+{'addShipment': {'transaction': {'_id': '0179d4d9-b34b-37e8-c355-56e3fac5ec24'}}}
+Put shipment with purchase order PO DdXg50383085 to https://xgmbcuijcb.execute-api.us-west-2.amazonaws.com/graphql/: {'addShipment': {'transaction': {'_id': '0179d4d9-c6b4-4b5c-412d-412d37474fdc'}}}
+{'addShipment': {'transaction': {'_id': '0179d4d9-c6b4-4b5c-412d-412d37474fdc'}}}
+Put shipment with purchase order PO OhDa63672964 to https://xgmbcuijcb.execute-api.us-west-2.amazonaws.com/graphql/: {'addShipment': {'transaction': {'_id': '0179d4d9-da2b-0b1e-e4b5-6f03fa53a37c'}}}
+{'addShipment': {'transaction' : {
 ```
 
 ## Verify There Is Data in the Uni

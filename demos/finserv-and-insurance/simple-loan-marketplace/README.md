@@ -213,19 +213,14 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
 1. Add a `LoanPerformance` item using the mutation below
     ```graphql
     mutation AddLoanPerformance {
-      add_LoanPerformance_async(
-        input: {lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current}
-      ) {
-        result {
-          _id
-          _owner
-          submissionTime
-          transactionId
-          version
+      add_LoanPerformance(
+        input: { lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current }, syncMode: ASYNC) {
+          transaction {
+            transactionId
+            _owner
+          }
         }
-        error
       }
-    }
     
     ```
 1. Confirm the `LoanPerformance` item is included in the list of all items
@@ -288,20 +283,15 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
     
    ```graphql
     mutation UpdateLoanPerformance {
-      update_LoanPerformance_async(
+      update_LoanPerformance(
         id: "017f2389-b33e-3e52-c7e6-76e60628cb23"
-        input: {currentUnpaidPrincipalBalance: 549000}
-      ) {
-        result {
-          _id
-          _owner
-          submissionTime
-          transactionId
-          version
+        input: {currentUnpaidPrincipalBalance: 549000}, ) {
+          transaction {
+            transactionId
+            _owner
+          }
         }
-        error
-      }
-    }    
+      }    
     ```
 1. Confirm the update `LoanPerformance` record is reflected in the list of all items
      ```graphql

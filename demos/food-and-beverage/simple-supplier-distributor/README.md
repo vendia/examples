@@ -184,18 +184,13 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
 1. Add a `Product` item using the mutation below
    ```graphql
    mutation AddProduct {
-     add_Product_async(
-       input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}
-     ) {
-       error
-       result {
-         _id
-         _owner
-         submissionTime
-         transactionId
-         version
-       }
-     }
+     add_Product(
+      input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}, syncMode: ASYNC) {
+        transaction {
+            _id
+            transactionId
+         }
+      }
    }   
    ```
 1. Confirm the `Product` item is included in the list of all items
@@ -258,19 +253,14 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
     
    ```graphql
    mutation UpdateProduct {
-     update_Product_async(
-       id: "017f273f-6f69-4adb-e73a-a140b3ccc28f"
-       input: {price: 3.49}
-     ) {
-       error
-       result {
-         _id
-         _owner
-         submissionTime
-         transactionId
-         version
-       }
-     }
+     update_Product(
+      id: "017f273f-6f69-4adb-e73a-a140b3ccc28f"
+      input: {price: 3.49}, syncMode: ASYNC) {
+         transaction {
+            _id
+            transactionId
+         }
+      }
    }
    ```
    

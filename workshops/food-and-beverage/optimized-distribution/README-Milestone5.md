@@ -14,13 +14,12 @@ You will update the **DistributorNode** to enable email notifications anytime a 
 
 ```
 mutation enableBlockNotificationEmails {
-  updateVendia_Settings_async(
+  updateVendia_Settings(
     input: {
       blockReportEmails: ["you@domain.com"]
-    }
-  ) {
-    error
-    result {
+    }, 
+    syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime

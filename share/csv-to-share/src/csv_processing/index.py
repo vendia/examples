@@ -159,17 +159,16 @@ def post_to_share(csv_file):
                             $bought: Boolean!,
                             $timestamp_added: String!
                         ) {
-                            add_ShoppingList_async(
+                            add_ShoppingList(
                                 input: {
                                     item: $item,
                                     quantity: $quantity,
                                     recommendedLocation: $recommended_location,
                                     bought: $bought,
                                     timestampAdded: $timestamp_added
-                                }
-                            ) {
-                                error
-                                result {
+                                }, 
+                                syncMode: ASYNC) {
+                                transaction {
                                     _id
                                 }
                             }

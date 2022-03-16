@@ -129,11 +129,11 @@ In the `MyNodes` click the `CRMReadWriteNode` and navigate to `GraphQL Explorer`
 ```graphql
 mutation m {
 
-  add_CustomerAccount_async(id: "", input: {address: {zipcode: 95678}, customerId: "1001", firstName: "Vikrant", lastName: "Kahir"}, 
-aclInput: {acl: {principal: {nodes: "*"}, operations: READ}})
+  add_CustomerAccount(id: "", input: {address: {zipcode: 95678}, customerId: "1001", firstName: "Vikrant", lastName: "Kahir"}, 
+aclInput: {acl: {principal: {nodes: "*"}, operations: READ}}, syncMode: ASYNC)
 
-  add_CustomerProfile_async(input: {DMAbyZip: "95678", Psychographic: {goals: "quit smoking", habits: "smoking", pains: "back pain"}, customerId: "1001"}, 
-aclInput: {acl: {principal: {nodes: "*"}, operations: READ}})
+  add_CustomerProfile(input: {DMAbyZip: "95678", Psychographic: {goals: "quit smoking", habits: "smoking", pains: "back pain"}, customerId: "1001"}, 
+aclInput: {acl: {principal: {nodes: "*"}, operations: READ}}, syncMode: ASYNC)
 
 
 }
@@ -157,8 +157,8 @@ _id:&lt;?CustomerProfile>
 
 ```graphql
 mutation m @vendia_transaction {
-  update_CustomerAccount_async(id: "<?insert_id(CustomerAccount) here>", input: {address: {zipcode: 88888}})
-  update_CustomerProfile_async(id: "<?insert _id(CustomerProfile) here>", input: {DMAbyZip: "88888"})
+  update_CustomerAccount(id: "<?insert_id(CustomerAccount) here>", input: {address: {zipcode: 88888}}, syncMode: ASYNC)
+  update_CustomerProfile(id: "<?insert _id(CustomerProfile) here>", input: {DMAbyZip: "88888"}, syncMode: ASYNC)
 }
 
 ```
@@ -188,7 +188,7 @@ query listBlocks {
           "transactions": [
             {
               "mutations": [
-                "mutation m{update_CustomerAccount_async: updateSelf_CustomerAccount(id:\"xxxxxxxxxxxxxxxx\",input: {address: {zipcode: 88888}}){error}\nupdate_CustomerProfile_async: updateSelf_CustomerProfile(id:\"xxxxxxxxxxxxxxxx\",input: {DMAbyZip: \"88888\"}){error}}"
+                "mutation m{update_CustomerAccount: updateSelf_CustomerAccount(id:\"xxxxxxxxxxxxxxxx\",input: {address: {zipcode: 88888}}){error}\nupdate_CustomerProfile: updateSelf_CustomerProfile(id:\"xxxxxxxxxxxxxxxx\",input: {DMAbyZip: \"88888\"}, syncMode: ASYNC)}"
 
 ```
 ## Clean Up

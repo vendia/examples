@@ -1,5 +1,5 @@
 mutation AddProductsWithACLs {
-    product1: add_Product_async(
+    product1: add_Product(
         input: {
             sku: "00001",
             name: "Blue Corn Tortilla Chips",
@@ -18,9 +18,9 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]},
             ]
-        }
-    ) {
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -28,7 +28,7 @@ mutation AddProductsWithACLs {
             version
         }
     }
-    product2: add_Product_async(
+    product2: add_Product(
         input: {
             sku: "00002",
             name: "Sheep's Milk Feta",
@@ -47,9 +47,9 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        }
-    ) {
-        result {
+        }, 
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -57,7 +57,7 @@ mutation AddProductsWithACLs {
             version
         }
     }
-    product3: add_Product_async(
+    product3: add_Product(
         input: {
             sku: "00003",
             name: "Raisin Bran Cereal",
@@ -76,9 +76,9 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        }
-    ) {
-        result {
+        }, 
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -86,7 +86,7 @@ mutation AddProductsWithACLs {
             version
         }
     }
-    product4: add_Product_async(
+    product4: add_Product(
         input: {
             sku: "00004",
             name: "Sour Cream and Onion Chips",
@@ -105,9 +105,9 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]},
             ]
-        }
-    ) {
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -115,7 +115,7 @@ mutation AddProductsWithACLs {
             version
         }
     }
-    product5: add_Product_async(
+    product5: add_Product(
         input: {
             sku: "00005",
             name: "Organic Baby Spinach",
@@ -134,9 +134,9 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        }
-    ) {
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -144,7 +144,7 @@ mutation AddProductsWithACLs {
             version
         }
     }
-    product6: add_Product_async(
+    product6: add_Product(
         input: {
             sku: "00006",
             name: "Olive Spread",
@@ -163,9 +163,9 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        }
-    ) {
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime

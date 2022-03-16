@@ -96,7 +96,7 @@ def add_shipment(order_date, due_date,
             $consigneeSpecialInstructions: String!,
             $purchaseOrder: String!,
         ) {
-            add_Shipment_async(
+            add_Shipment(
                 input: {
                     orderDate: $orderDate,
                     dueDate: $dueDate,
@@ -110,10 +110,9 @@ def add_shipment(order_date, due_date,
                     consigneeEmail: $consigneeEmail,
                     consigneeSpecialInstructions: $consigneeSpecialInstructions,
                     purchaseOrder: $purchaseOrder
-                }
-            ) {
-                error
-                result {
+                },
+                syncMode: ASYNC) {
+                transaction {
                     _id
                 }
             }

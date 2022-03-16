@@ -108,7 +108,7 @@ func main() {
 		$promotionalContent: String,
 		$supplier: String
 	) {
-		add_Product_async(
+		add_Product(
 		  input: {
 			name: $name
 			description: $description
@@ -117,10 +117,9 @@ func main() {
 			price: $price
 			promotionalContent: $promotionalContent
 			supplier: $supplier
-		  }
-		) {
-		  error
-		  result {
+		  },
+		  syncMode: ASYNC) {
+		  transaction {
 			_id
 		  }
 		}
@@ -234,16 +233,15 @@ func main() {
 		$dateIssued: String,
 		$totalPrice: Float
 	) {
-		add_PurchaseOrder_async(
+		add_PurchaseOrder(
 		  input: {
 			sku: $sku,
 			quantity: $quantity,
 			dateIssued: $dateIssued,
 			totalPrice: $totalPrice
-		  }
-		) {
-		  error
-		  result {
+		  },
+		  syncMode: ASYNC) {
+		  transaction {
 			_id
 		  }
 		}

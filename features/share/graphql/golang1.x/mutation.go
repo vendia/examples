@@ -58,15 +58,14 @@ func main() {
 		$quantity: Int,
 		$lastUpdated: String
 	) {
-		update_Inventory_async(
+		update_Inventory(
 		  id: $id,
 		  input: {
 			quantity: $quantity
 			lastUpdated: $lastUpdated
-		  }
-		) {
-		  error
-		  result {
+		  },
+		  syncMode: ASYNC) {
+		  transaction {
 			_id
 		  }
 		}

@@ -1,5 +1,5 @@
 mutation AddPurchaseOrders {
-    order1: add_PurchaseOrder_async(
+    order1: add_PurchaseOrder(
         input: {
             sku: "00001",
             quantity: "100",
@@ -15,10 +15,9 @@ mutation AddPurchaseOrders {
                 {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
                 {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
             ]
-        }
-    ) {
-        error
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -26,7 +25,7 @@ mutation AddPurchaseOrders {
             version
         }
     }
-    order2:add_PurchaseOrder_async(
+    order2:add_PurchaseOrder(
         input: {
             sku: "00004",
             quantity: "100",
@@ -42,10 +41,9 @@ mutation AddPurchaseOrders {
                 {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
                 {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
             ]
-        }
-    ) {
-        error
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -53,7 +51,7 @@ mutation AddPurchaseOrders {
             version
         }
     }
-    order3:add_PurchaseOrder_async(
+    order3:add_PurchaseOrder(
         input: {
             sku: "00005",
             quantity: "50",
@@ -69,10 +67,9 @@ mutation AddPurchaseOrders {
                 {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
                 {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
             ]
-        }
-    ) {
-        error
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction{
             _id
             _owner
             submissionTime

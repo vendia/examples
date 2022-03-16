@@ -76,9 +76,8 @@ async function setQuantity(itemId, quantity) {
 
   const mutation = gql`
     mutation updateInventory($id: ID!, $quantity: Int, $lastUpdated: String) {
-      update_Inventory_async(id: $id, input: {quantity: $quantity, lastUpdated: $lastUpdated}) {
-        error
-        result {
+      update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastUpdated}, syncMode: ASYNC) {
+        transaction {
           _id
         }
       }
@@ -88,7 +87,7 @@ async function setQuantity(itemId, quantity) {
 const result = await graphQLClient.request(mutation, params)
 
 try {
-  return(result.update_Inventory_async.result._id)
+  return(result.update_Inventory.result._id)
 } catch (error) {
   console.error(`Could not find update quantity of ${itemId} to ${quantity}.`)
   process.exit(1)

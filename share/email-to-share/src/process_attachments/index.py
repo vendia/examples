@@ -153,7 +153,7 @@ def post_to_share(csv_file):
                             $location: [Float!],
                             $goods: [Self_Shipment_goods_goodsItem_Input_!]
                         ) {
-                            add_Shipment_async(
+                            add_Shipment(
                                 input: {
                                     orderDate: $orderDate,
                                     status: $status,
@@ -180,12 +180,11 @@ def post_to_share(csv_file):
                                     consigneeEmail: $consigneeEmail,
                                     location: $location,
                                     goods: $goods
-                                }
-                            ) {
-                                result {
+                                },
+                                syncMode: ASYNC) {
+                                transaction {
                                     _id
                                 }
-                                error
                             }
                         }
                         """

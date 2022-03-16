@@ -129,16 +129,15 @@
             $quantity: Int!,
             $lastUpdated: String!
           ) {
-              add_Inventory_async(
+              add_Inventory(
                 input: {
                   itemName: $itemName,
                   itemNumber: $itemNumber,
                   quantity: $quantity,
                   lastUpdated: $lastUpdated
-                }
-              ) {
-                error
-                result {
+                },
+                syncMode: ASYNC) {
+                transaction {
                   _id
                 }
               }
@@ -264,17 +263,16 @@
             $quantity: Int!,
             $lastUpdated: String!
           ) {
-            put_Inventory_async(
+            put_Inventory(
               id: $_id,
               input: {
                 itemName: $itemName,
                 itemNumber: $itemNumber,
                 quantity: $quantity,
                 lastUpdated: $lastUpdated
-              }
-            ) {
-              error
-              result {
+              },
+              syncMode: ASYNC) {
+              transaction {
                 _id
               }
             }
@@ -390,11 +388,8 @@
           mutation removeItem(
             $_id: ID!
           ) {
-            remove_Inventory_async(
-              id: $_id
-            ) {
-              error
-              result {
+            remove_Inventory(id: $_id, syncMode: ASYNC) {
+              transaction {
                 _id
               }
             }
