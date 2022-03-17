@@ -187,7 +187,6 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
      add_Product(
       input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}, syncMode: ASYNC) {
         transaction {
-            _id
             transactionId
          }
       }
