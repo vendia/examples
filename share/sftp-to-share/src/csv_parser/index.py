@@ -185,7 +185,7 @@ def post_to_share(csv_file):
                                 }, 
                                 syncMode: ASYNC) {
                                 transaction {
-                                    _id
+                                    transactionId
                                 }
                             }
                         }

@@ -78,7 +78,7 @@ async function setQuantity(itemId, quantity) {
     mutation updateInventory($id: ID!, $quantity: Int, $lastUpdated: String) {
       update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastUpdated}, syncMode: ASYNC) {
         transaction {
-          _id
+          transactionId
         }
       }
     }

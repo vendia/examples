@@ -138,7 +138,7 @@
                 },
                 syncMode: ASYNC) {
                 transaction {
-                  _id
+                  transactionId
                 }
               }
           }
@@ -273,7 +273,7 @@
               },
               syncMode: ASYNC) {
               transaction {
-                _id
+                transactionId
               }
             }
           }
@@ -390,7 +390,7 @@
           ) {
             remove_Inventory(id: $_id, syncMode: ASYNC) {
               transaction {
-                _id
+                transactionId
               }
             }
           }

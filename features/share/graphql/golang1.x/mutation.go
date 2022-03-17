@@ -66,7 +66,7 @@ func main() {
 		  },
 		  syncMode: ASYNC) {
 		  transaction {
-			_id
+			transactionId
 		  }
 		}
 	  }

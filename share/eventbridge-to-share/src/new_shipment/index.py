@@ -111,7 +111,7 @@ def add_shipment(order_date, due_date,
                 },
                 syncMode: ASYNC) {
                 transaction {
-                    _id
+                    transactionId
                 }
             }
 }

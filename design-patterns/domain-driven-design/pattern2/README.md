@@ -188,7 +188,8 @@ query listBlocks {
           "transactions": [
             {
               "mutations": [
-                "mutation m{update_CustomerAccount: updateSelf_CustomerAccount(id:\"xxxxxxxxxxxxxxxx\",input: {address: {zipcode: 88888}}){error}\nupdate_CustomerProfile: updateSelf_CustomerProfile(id:\"xxxxxxxxxxxxxxxx\",input: {DMAbyZip: \"88888\"}, syncMode: ASYNC)}"
+                "mutation m{update_CustomerAccount: updateSelf_CustomerAccount(id:\"xxxxxxxxxxxxxxxx\",input: {address: {zipcode: 88888}})
+                \nupdate_CustomerProfile: updateSelf_CustomerProfile(id:\"xxxxxxxxxxxxxxxx\",input: {DMAbyZip: \"88888\"}, syncMode: ASYNC)}"
 
 ```
 ## Clean Up

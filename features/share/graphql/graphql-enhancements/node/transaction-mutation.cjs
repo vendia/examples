@@ -110,7 +110,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         },
         syncMode: ASYNC) {
           transaction {
-            _id
+            transactionId
           }
       }
       
@@ -125,7 +125,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         },
         syncMode: ASYNC) {
           transaction {
-            _id
+            transactionId
           }
       }
 
@@ -140,7 +140,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         },
         syncMode: ASYNC) {
           transaction {
-            _id
+            transactionId
           }
       }
     }

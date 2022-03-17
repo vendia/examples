@@ -76,7 +76,7 @@ def add_to_share(
                 },
                 syncMode: ASYNC) {
                 transaction {
-                    _id
+                    transactionId
                 }
             }
         }
@@ -155,7 +155,7 @@ def remove_from_share(
         ) {
             remove_Inventory(id: $_id, syncMode: ASYNC) {
                 transaction {
-                    _id
+                    transactionId
                 }
             }
         }
@@ -261,7 +261,7 @@ def update_in_share(
                 },
                 syncMode: ASYNC) {
                 transaction {
-                    _id
+                    transactionId
                 }
             }
         }

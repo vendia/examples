@@ -94,7 +94,7 @@ def set_quantity(itemid, quantity):
         mutation updateInventory($id: ID!, $quantity: Int, $lastupdated: String) {
             update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastupdated}, syncMode: ASYNC) {
                 transaction {
-                    _id
+                    transactionId
                 }
             }
         }

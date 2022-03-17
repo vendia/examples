@@ -120,7 +120,7 @@ func main() {
 		  },
 		  syncMode: ASYNC) {
 		  transaction {
-			_id
+			transactionId
 		  }
 		}
 	  }
@@ -242,7 +242,7 @@ func main() {
 		  },
 		  syncMode: ASYNC) {
 		  transaction {
-			_id
+			transactionId
 		  }
 		}
 	  }
