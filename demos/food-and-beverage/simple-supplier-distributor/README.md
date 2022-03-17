@@ -256,7 +256,6 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
       id: "017f273f-6f69-4adb-e73a-a140b3ccc28f"
       input: {price: 3.49}, syncMode: ASYNC) {
          transaction {
-            _id
             transactionId
          }
       }
