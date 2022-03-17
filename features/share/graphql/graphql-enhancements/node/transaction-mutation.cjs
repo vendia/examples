@@ -99,7 +99,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
       $lastUpdated: String,
       $shipQuantity: Int
     ) @vendia_transaction {
-      item1: update_Inventory_async(
+      item1: update_Inventory(
         id: $id1,
         input: {
           quantity: $newQuantity1,
@@ -107,15 +107,14 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         }
         condition: {
           quantity: {ge: $shipQuantity}
-        }
-      ) {
-          error
-          result {
-            _id
+        },
+        syncMode: ASYNC) {
+          transaction {
+            transactionId
           }
       }
       
-      item2: update_Inventory_async(
+      item2: update_Inventory(
         id: $id2,
         input: {
           quantity: $newQuantity2,
@@ -123,15 +122,14 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         }
         condition: {
           quantity: {ge: $shipQuantity}
-        }
-      ) {
-          error
-          result {
-            _id
+        },
+        syncMode: ASYNC) {
+          transaction {
+            transactionId
           }
       }
 
-      item3: update_Inventory_async(
+      item3: update_Inventory(
         id: $id3,
         input: {
           quantity: $newQuantity3,
@@ -139,11 +137,10 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         }
         condition: {
           quantity: {ge: $shipQuantity}
-        }
-      ) {
-          error
-          result {
-            _id
+        },
+        syncMode: ASYNC) {
+          transaction {
+            transactionId
           }
       }
     }

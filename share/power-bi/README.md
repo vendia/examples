@@ -15,7 +15,7 @@ Data visualization and reporting tools leverage common interfaces, like APIs, to
 **Exiting Uni**
 This example assumes that you already have a functioning Uni with data.  Please refer to our [Quick Start Documentation](https://vendia.net/docs/share/quickstart) to learn how to quickly create a Uni. If you would like to follow along using queries from this example, you may create a uni with the matching [Example Schema](example_schema.json).  
 
-**Important** Once your Uni is Running, add some data using the addInventoryItem_async mutation. Otherwise, there will be no data to visualize in later steps.
+**Important** Once your Uni is Running, add some data using the addInventoryItem mutation. Otherwise, there will be no data to visualize in later steps.
 
 **Microsoft Power BI**
 This example requires [Microsoft Power BI](https://powerbi.microsoft.com/en-us/). The example demonstrates the use of the desktop version of the software but is compatible with the web-application as well.

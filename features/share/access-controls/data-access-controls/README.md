@@ -81,7 +81,7 @@ Working from the GraphQL Explorer of the **SupplierNode**, create your first Pro
 
 ```
 mutation addProductWithACLs {
-  add_Product_async(
+  add_Product(
     input: {
       category: specialty, 
       description: "Organic and delicious", 
@@ -102,9 +102,9 @@ mutation addProductWithACLs {
         {principal: {nodes: "DistributorNode"}, path: "supplier", operations: READ},
         {principal: {nodes: "DistributorNode"}, path: "price", operations: READ}    
       ]
-    }
-		) {
-    result {
+    }, 
+    syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
@@ -127,7 +127,7 @@ Add another product, with identical ACLs
 
 ```
 mutation addProductWithACLs {
-  add_Product_async(
+  add_Product(
     input: {
       category: conventional
       description: "A 20oz. classic", 
@@ -148,9 +148,9 @@ mutation addProductWithACLs {
         {principal: {nodes: "DistributorNode"}, path: "supplier", operations: READ},
         {principal: {nodes: "DistributorNode"}, path: "price", operations: READ}    
       ]
-    }
-		) {
-    result {
+    }, 
+    syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
@@ -166,7 +166,7 @@ Now add one final product, a top-secret new flavor of chips that no one (not eve
 
 ```
 mutation addProductWithACLs {
-  add_Product_async(
+  add_Product(
     input: {
       category: conventional
       description: "Top secret", 
@@ -181,9 +181,9 @@ mutation addProductWithACLs {
       acl: [
         {principal: {nodes: "DistributorNode"}, path: "*", operations: []},
       ]
-    }
-		) {
-    result {
+    },
+    syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
@@ -350,15 +350,14 @@ The Supplier should be able to modify any field of any Product.
 Executing this mutation from the **SupplierNode** will succeed.  
 ```
 mutation updateCornTortillaPromoContent {
-  update_Product_async(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}) {
-    result {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}, syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
       transactionId
       version
     }
-    error
   }
 }
 ```
@@ -366,15 +365,14 @@ mutation updateCornTortillaPromoContent {
 As will executing this mutation from the **SupplierNode**.
 ```
 mutation updateCornTortillaPrice {
-  update_Product_async(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}) {
-    result {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}, syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
       transactionId
       version
     }
-    error
   }
 }
 ```
@@ -387,15 +385,14 @@ The same is not true of the Distributor. The Distributor can only modify the `pr
 Executing this mutation from the **DistributorNode** will succeed.
 ```
 mutation updateCornTortillaPromoContent {
-  update_Product_async(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}) {
-    result {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}, syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
       transactionId
       version
     }
-    error
   }
 }
 ```
@@ -403,15 +400,14 @@ mutation updateCornTortillaPromoContent {
 But executing this mutation from the **DistributorNode** will fail, as expected, because of the ACLs protecting the `price` field.
 ```
 mutation updateCornTortillaPrice {
-  update_Product_async(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}) {
-    result {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}, syncMode: ASYNC) {
+    transaction {
       _id
       _owner
       submissionTime
       transactionId
       version
     }
-    error
   }
 }
 ```
@@ -420,7 +416,7 @@ The error returned captures the unauthorized access to modify the `price` field 
 ```
 {
   "data": {
-    "update_Product_async": null
+    "update_Product": null
   },
   "errors": [
     {
@@ -432,7 +428,7 @@ The error returned captures the unauthorized access to modify the `price` field 
         }
       ],
       "path": [
-        "update_Product_async"
+        "update_Product"
       ]
     }
   ]

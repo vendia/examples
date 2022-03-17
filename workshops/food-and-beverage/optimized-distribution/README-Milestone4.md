@@ -14,15 +14,14 @@ You will now create a purchase order using the GraphQL Explorer.
 
   ```
   mutation createPurchaseOrder {
-    add_PurchaseOrder_async(input: {dateIssued: "2022-01-26", quantity: "100", sku: "00001", totalPrice: 199}) {
-      result {
+    add_PurchaseOrder(input: {dateIssued: "2022-01-26", quantity: "100", sku: "00001", totalPrice: 199}, syncMode: ASYNC) {
+      transaction {
         _id
         _owner
         submissionTime
         transactionId
         version
       }
-      error
     }
   }
   ```
@@ -31,15 +30,14 @@ You will now create a purchase order using the GraphQL Explorer.
 
   ```
   mutation createPurchaseOrder {
-    add_PurchaseOrder_async(input: {dateIssued: "2022-01-26", quantity: "40", sku: "00004", totalPrice: 30.8}) {
-      result {
+    add_PurchaseOrder(input: {dateIssued: "2022-01-26", quantity: "40", sku: "00004", totalPrice: 30.8}, syncMode: ASYNC) {
+      transaction {
         _id
         _owner
         submissionTime
         transactionId
         version
       }
-      error
     }
   }
   ```
@@ -77,15 +75,14 @@ First, confirm the purchase orders submitted to the **DistributorNode** are in f
 
   ```
   mutation scheduleDelivery {
-    add_Delivery_async(input: {status: scheduled, expectedDateTime: "2022-01-28T12:00:00Z", purchaseOrders: [{purchaseOrderId: "017e9989-52dd-eaa0-7c58-43a39bfc8b9d"}, {purchaseOrderId: "017e994e-c2a3-0bac-cd67-d23d6af22680"}]}) {
-      result {
+    add_Delivery(input: {status: scheduled, expectedDateTime: "2022-01-28T12:00:00Z", purchaseOrders: [{purchaseOrderId: "017e9989-52dd-eaa0-7c58-43a39bfc8b9d"}, {purchaseOrderId: "017e994e-c2a3-0bac-cd67-d23d6af22680"}]}, syncMode: ASYNC) {
+      transaction {
         _id
         _owner
         submissionTime
         transactionId
         version
       }
-      error
     }
   }
   ```

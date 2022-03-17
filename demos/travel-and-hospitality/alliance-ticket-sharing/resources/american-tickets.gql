@@ -1,5 +1,5 @@
 mutation createTickets {
-    ticket1: add_Ticket_async(
+    ticket1: add_Ticket(
         input: {
             passengerNameRecordCode: "ABC123",
             airlineCode: "AA",
@@ -126,10 +126,9 @@ mutation createTickets {
             acl: [
                 { principal: {nodes: ["AmericanNode"]}, operations: [ALL, UPDATE_ACL] },
             ]
-        }
-    ) {
-        error
-        result {
+        },
+        syncMode: ASYNC) {
+        transaction {
             _id
             _owner
             submissionTime
@@ -137,7 +136,7 @@ mutation createTickets {
             version
         }
     },
-    ticket2: add_Ticket_async(
+    ticket2: add_Ticket(
         input: {
             passengerNameRecordCode: "EFG321",
             airlineCode: "AA",
@@ -276,11 +275,9 @@ mutation createTickets {
                 { principal: {nodes: ["IberiaNode"]}, path: "taxes", operations: [READ] },
                 { principal: {nodes: ["IberiaNode"]}, path: "fees", operations: [READ] }
             ]
-        }
-    )
-    {
-        error
-        result {
+        },
+        syncMode: ASYNC){
+        transaction {
             _id
             _owner
             submissionTime

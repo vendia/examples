@@ -1,5 +1,5 @@
 mutation AddDelivery {
-    add_Delivery_async(
+    add_Delivery(
         input: {
             purchaseOrders: [
                 {purchaseOrderId: "ffffffff-41e6-ffff-cd9d-c51f2f7e5143"},
@@ -16,15 +16,14 @@ mutation AddDelivery {
                 {principal: {nodes: "DistributorNode"}, path: "actualDateTime", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "status", operations: [READ]}
             ]
+        }, 
+        syncMode: ASYNC) {
+            transaction {
+                _id
+                _owner
+                submissionTime
+                transactionId
+                version
+            }
         }
-    ) {
-        error
-        result {
-            _id
-            _owner
-            submissionTime
-            transactionId
-            version
-        }
-    }
 }

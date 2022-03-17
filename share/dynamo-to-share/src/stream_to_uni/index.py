@@ -66,18 +66,17 @@ def add_to_share(
             $unitPrice: Float!,
             $tags: [String!]
         ) {
-            add_Inventory_async(
+            add_Inventory(
                 input: {
                     itemName: $itemName,
                     itemNumber: $itemNumber,
                     quantity: $quantity,
                     tags: $tags,
                     unitPrice: $unitPrice
-                }
-            ) {
-                error
-                result {
-                    _id
+                },
+                syncMode: ASYNC) {
+                transaction {
+                    transactionId
                 }
             }
         }
@@ -154,12 +153,9 @@ def remove_from_share(
         mutation removeItem(
             $_id: ID!
         ) {
-            remove_Inventory_async(
-                id: $_id
-            ) {
-                error
-                result {
-                    _id
+            remove_Inventory(id: $_id, syncMode: ASYNC) {
+                transaction {
+                    transactionId
                 }
             }
         }
@@ -254,7 +250,7 @@ def update_in_share(
             $unitPrice: Float!,
             $tags: [String!]
         ) {
-            put_Inventory_async(
+            put_Inventory(
                 id: $_id,
                 input: {
                     itemName: $itemName,
@@ -262,11 +258,10 @@ def update_in_share(
                     quantity: $quantity,
                     unitPrice: $unitPrice,
                     tags: $tags
-                }
-            ) {
-                error
-                result {
-                    _id
+                },
+                syncMode: ASYNC) {
+                transaction {
+                    transactionId
                 }
             }
         }

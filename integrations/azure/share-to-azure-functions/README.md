@@ -187,7 +187,7 @@ To create an Azure Function:
 
       ```
       mutation updateAzureSettings {
-        updateVendia_Settings_async(
+        updateVendia_Settings(
           input: {
             azure: {
               defaultTenantId: "<AZURE_TENANT_ID>"
@@ -200,9 +200,9 @@ To create an Azure Function:
                 }
               ]
             }
-          }
-        ) {
-          result {
+          }, 
+          syncMode: ASYNC) {
+          transaction {
             _id
             _owner
             transactionId
@@ -293,12 +293,12 @@ configured Azure Function).
 
       ```
       mutation updatePurchaseOrder {
-        update_PurchaseOrder_async(
+        update_PurchaseOrder(
           id: "<PO_ID>",
           input: {
             expected: "2022-01-03T00:00:00Z"
-          }) {
-          result {
+          }, syncMode: ASYNC) {
+          transaction {
             _id
             _owner
             submissionTime

@@ -70,7 +70,7 @@ func main() {
 			$lastUpdated: String
 			$shipQuantity: Int
 		) {
-			update_Inventory_async(
+			update_Inventory(
 			id: $id,
 			input: {
 				quantity: $newQuantity
@@ -78,12 +78,11 @@ func main() {
 			}
 			condition: {
 				quantity: {ge: $shipQuantity}
-			}
-			) {
-			error
-			result {
-				_id
-			}
+			},
+			syncMode: ASYNC) {
+				transaction {
+					transactionId
+				}
 			}
 		}
 	`)
