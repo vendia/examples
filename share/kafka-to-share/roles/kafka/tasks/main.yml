@@ -33,7 +33,7 @@
     name: "{{ item }}"
   loop:
     - faker
-    - gql
+    - gql[requests]
     - kafka-python
     - pymongo
     - urllib3
