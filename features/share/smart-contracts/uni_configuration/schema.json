@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://vendia.net/schemas/demos/loans.schema.json",
+  "title": "Loan Marketplace",
+  "description": "Single Source of Loan Truth",
+  "type": "object",
+  "x-vendia-acls": {
+    "LoanAcl": {
+      "type": "Loan"
+    },
+    "LoanPerformanceAcl": {
+      "type": "LoanPerformance"
+    }
+  },
+  "properties": {
+    "Loan": {
+      "description": "Information about a new Loan that was recently originated",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "loanIdentifier": {
+            "description": "Unique loan identifier",
+            "type": "string",
+            "pattern": "[a-z0-9]{8}"
+          },
+          "originationDate": {
+            "description": "Date loan originated",
+            "type": "string",
+            "format": "date"
+          },
+          "originalInterestRatePercent": {
+            "description": "Original loan interest rate, as a percent",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "originalUnpaidPrincipalBalance": {
+            "description": "Original loan balance",
+            "type": "number",
+            "minimum": 0
+          },
+          "originalLoanToValuePercent": {
+            "description": "Original Loan to Value (LTV), as a percent",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "borrowerCreditScore": {
+            "description": "Credit score of borrower",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 850
+          },
+          "numberOfUnits": {
+            "description": "Number of units in the property",
+            "type": "integer",
+            "minimum": 0
+          },
+          "validationStatus": {
+            "description": "The validation status of the loan",
+            "type": "string",
+            "enum": ["PENDING","VALID","INVALID"]
+          }
+        },
+        "required": [
+          "loanIdentifier",
+          "originationDate",
+          "originalInterestRate",
+          "validationStatus"
+        ]
+      }
+    },
+    "LoanPerformance": {
+      "description": "Information about the performance of a Loan",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "loanIdentifier": {
+            "description": "Unique loan identifier",
+            "type": "string",
+            "pattern": "[a-z0-9]{8}"
+          },
+          "monthlyReportingPeriod": {
+            "description": "Reporting period for which this performance information applies",
+            "type": "string",
+            "format": "date"
+          },
+          "servicerId": {
+            "description": "Unique identifier for the loan servicer",
+            "type": "string",
+            "pattern": "[0-9]{8}"
+          },
+          "loanDelinquencyStatus" : {
+            "description": "Current delinquency status of the loan",
+            "type": "string",
+            "enum": ["CURRENT", "LATE", "DELINQUENT"]
+          },
+          "lastPaidInstallmentDate": {
+            "description": "Date of last loan payment",
+            "type": "string",
+            "format": "date"
+          },
+          "currentInterestRatePercent": {
+            "description": "Current loan interest rate, as a percent",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "currentUnpaidPrincipalBalance": {
+            "description": "Current loan balance",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": ["loanIdentifier", "monthlyReportingPeriod", "servicerId", "lastPaidInstallmentDate"]
+      }
+    }
+  }
+}

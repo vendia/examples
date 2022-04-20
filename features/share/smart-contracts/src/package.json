@@ -1,0 +1,13 @@
+{
+  "name": "smart-contracts-feature-example",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A set of scripts to load a Uni with Loan and Loan Performance data",
+  "scripts": {
+    "loadLoans" : "node LoanLoader.js"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0"
+  }
+}

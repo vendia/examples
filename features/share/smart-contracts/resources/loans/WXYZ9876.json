@@ -1,0 +1,10 @@
+{
+  "loanIdentifier": "WXYZ9876",
+  "originationDate": "2021-04-14",
+  "originalInterestRatePercent": 2.99,
+  "originalUnpaidPrincipalBalance": 325000.00,
+  "originalLoanToValuePercent": 85.00,
+  "borrowerCreditScore": 765,
+  "numberOfUnits": 1,
+  "validationStatus": "PENDING"
+}

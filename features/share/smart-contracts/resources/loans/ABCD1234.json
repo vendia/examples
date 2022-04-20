@@ -1,0 +1,10 @@
+{
+  "loanIdentifier": "ABCD1234",
+  "originationDate": "2021-12-25",
+  "originalInterestRatePercent": 3.25,
+  "originalUnpaidPrincipalBalance": 415000.00,
+  "originalLoanToValuePercent": 79.50,
+  "borrowerCreditScore": 750,
+  "numberOfUnits": 1,
+  "validationStatus": "PENDING"
+}
