@@ -2,7 +2,7 @@ exports.handler = async (event) => {
 
     console.log("Event is", event)
 
-    let loan = event.queryResult.get_LoanItem._LoanItem
+    let loan = event.queryResult.list_LoanItems._LoanItems[0]
 
     let isValid = isValidOrigination(loan.originationDate) &&
         isValidLoanAmount(loan.originalUnpaidPrincipalBalance, loan.borrowerCreditScore)
@@ -10,9 +10,8 @@ exports.handler = async (event) => {
     console.log("Validation function determined the loan" + (isValid ? " IS " : " IS NOT ") + "valid");
 
     return {
-        input: {
-            validationStatus: (isValid ? "VALID" : "INVALID")
-        }
+        id: loan._id,
+        validationStatus: (isValid ? "VALID" : "INVALID")
     }
 }
 

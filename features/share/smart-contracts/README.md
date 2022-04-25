@@ -79,9 +79,9 @@ The scripts look for a file named `.share.env` within the `src` directory.  To c
    ```
 1. Create the file with a set of pre-defined properties
    ```shell
-   echo -e "ORIGINATOR_GQL_URL=\nORIGINATOR_GQL_APIKEY=\nSERVICER_GQL_URL=\nSERVICER_GQL_APIKEY=\n" >> .share.env
+   echo -e "ORIGINATOR_GQL_URL=\nORIGINATOR_GQL_APIKEY=\nSERVICER_GQL_URL=\nSERVICER_GQL_APIKEY=\nVALIDATION_LAMBDA_ARN=\n" >> .share.env
    ```
-1. Insert the values for each property based on the GraphQL URL and API Key information for the **OriginatorNode** and **ServicerNode**
+1. Insert the values for each property prefixed with `ORIGINATOR` or `SERVICER` based on the GraphQL URL and API Key information for the **OriginatorNode** and **ServicerNode**.  The remainder of the properities will be assigned values in the subsequent sections. 
    ```shell
    share uni get --name <name_of_your_uni>
    ```
@@ -137,9 +137,39 @@ Once the Lambda function exists, it must be configured to permit a specific node
 ### Create a Loan Validation Smart Contract
 You'll now use a Smart Contract to connect the Lambda function from the previous section to the **OriginatorNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
 
-The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **OriginatorNode** when the Smart Contract is invoked.
+The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **OriginatorNode** when the Smart Contract is invoked.  See the `validationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
-The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **OriginatorNode** when the Smart Contract invocation is complete.
+The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **OriginatorNode** when the Smart Contract invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+
+To create a Loan Validation Smart Contract:
+
+1. Open `.share.env` and assign `VALIDATION_LAMBDA_ARN` to the validation Lambda function's ARN (the same value used in the previous section for `<your-lambda-function-arn>`)
+2. Invoke the provided npm script to create a validation smart contract on the **OriginatorNode**
+   ```
+   npm run createValidationSmartContract
+   ```
+3. Use the GraphQL Explorer view of the **OriginatorNode** to confirm the smart contract exists, and to find its unique identifier (`_id`) needed in subsequent sections. 
+   ```graphql
+   query ListSmartContracts {
+     listVendia_ContractItems {
+       Vendia_ContractItems {
+         ... on Vendia_Contract {
+           _id
+           _owner
+           name
+           revisionId
+           description
+           inputQuery
+           outputMutation
+           resource {
+             csp
+             uri
+           }
+         }
+       }
+     }
+   }
+   ```
 
 ### Validate Loan Data
 All the Loans the Originator added in the last step have a `validationStatus` set to `PENDING`.  This indicates to the Servicer that the Loans have not yet been validated.  Likewise, Servicer GraphQL queries for Loans can now easily include a filter based on `validationStatus`.
@@ -147,30 +177,70 @@ All the Loans the Originator added in the last step have a `validationStatus` se
 You can validate each Loan previously added by invoking the validation Smart Contract created in the previous sections.  The Smart Contract takes a single query argument, which is the `loanIdentifier` of the Loan to be validated.  Upon validation, the Loan's `validationStatus` will be set to either `VALID` or `INVALID`.
 
 #### Example - Validate a Valid Loan
-Loan `123456768` is valid based on the [validation rules](README.md#define-validation-rules) above.
+Loan `ABCD1234` is valid based on the [validation rules](README.md#define-validation-rules) above.
 
-To validate the loan, invoke the validation Smart Contract by submitting this GraphQL mutation using the GraphQL Explorer view of the **OriginatorNode** through the Share web app.
+##### Using a Programmatic Client
+You can invoke the validation Smart Contract using the provided npm script.  The script takes 1 argument, which is the `_id` of the Smart Contract to invoke.
 
+1. Invoke the provided npm script to invoke the validation smart contract on the **OriginatorNode**
+```
+npm run invokeValidationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier ABCD1234
 ```
 
+##### Using the Share Web App
+You can alternatively invoke the validation Smart Contract using the Smart Contract view of the **OriginatorNode** through the Share web app.
+
+1. Click on the smart contract by name 
+2. Then click `Invoke`
+3. Provide the required `loanIdentifier` input query arguments
+   ```json
+   {
+     "loanIdentifier": "ABCD1234"
+   }
+   ```
+4. Click `Invoke`
+
+In either case, the end result is the Loan's `validationStatus` is now set to `VALID`.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
+
+```graphql
+query ListLoanValidationStatus {
+  list_LoanItems {
+    _LoanItems {
+      ... on Self_Loan {
+        loanIdentifier
+        validationStatus
+      }
+    }
+  }
+}
 ```
-
-You can alternatively invoke the valid Smart Contract using the Smart Contract view of the **OriginatorNode** through the Share web app.
-
-In either case, the end result should show the Loan's `validationStatus` is now set to `VALID`.
 
 #### Example - Validate an Invalid Loan
-Loan `87654321` is invalid based on the [validation rules](README.md#define-validation-rules) above.
+Loan `EFGH4567` is invalid based on the [validation rules](README.md#define-validation-rules) above.
 
-To validate the loan, invoke the validation Smart Contract by submitting this GraphQL mutation using the GraphQL Explorer view of the **OriginatorNode** through the Share web app.
+Repeat the steps from the previous section to invoke the validation smart contract again, either programatically or through the Smart Contract view of the Share web app, using a new `loanIdentifier` of `EFGH4567`.
 
+#### Example - Validate the Remaining Loans 
+Repeat the steps from the previous section for the remaining two loans: `QRST5432` and `WXYZ9876`.
+
+Confirm the end result using the Entity Explorer or GraphQL Explorer view of the Share web app.
+
+In either case, the end result is the Loan's `validationStatus` is now set to `VALID`.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
+
+```graphql
+query ListLoanValidationStatus {
+  list_LoanItems {
+    _LoanItems {
+      ... on Self_Loan {
+        loanIdentifier
+        validationStatus
+      }
+    }
+  }
+}
 ```
 
-```
-
-You can alternatively invoke the valid Smart Contract using the Smart Contract view of the **OriginatorNode** through the Share web app.
-
-In either case, the end result should show the Loan's `validationStatus` is now set to `INVALID`.
+You should see 2 loans with a `VALID` validation status, 2 loans with an `INVALID` validation status, and 0 loans with a `PENDING` validation status.
 
 ## Step 3 - Create a Smart Contract for Data Computation
 

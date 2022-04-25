@@ -22,7 +22,7 @@
           "loanIdentifier": {
             "description": "Unique loan identifier",
             "type": "string",
-            "pattern": "[a-z0-9]{8}"
+            "pattern": "[A-Z0-9]{8}"
           },
           "originationDate": {
             "description": "Date loan originated",
@@ -65,8 +65,12 @@
         },
         "required": [
           "loanIdentifier",
+          "originalUnpaidPrincipalBalance",
+          "numberOfUnits",
+          "borrowerCreditScore",
           "originationDate",
-          "originalInterestRate",
+          "originalInterestRatePercent",
+          "originalLoanToValuePercent",
           "validationStatus"
         ]
       }
@@ -80,7 +84,7 @@
           "loanIdentifier": {
             "description": "Unique loan identifier",
             "type": "string",
-            "pattern": "[a-z0-9]{8}"
+            "pattern": "[A-Z0-9]{8}"
           },
           "monthlyReportingPeriod": {
             "description": "Reporting period for which this performance information applies",
@@ -114,7 +118,15 @@
             "minimum": 0
           }
         },
-        "required": ["loanIdentifier", "monthlyReportingPeriod", "servicerId", "lastPaidInstallmentDate"]
+        "required": [
+          "loanIdentifier",
+          "loanDelinquencyStatus",
+          "servicerId",
+          "monthlyReportingPeriod",
+          "currentUnpaidPrincipalBalance",
+          "lastPaidInstallmentDate",
+          "currentInterestRatePercent"
+        ]
       }
     }
   }
