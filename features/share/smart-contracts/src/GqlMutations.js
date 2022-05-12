@@ -22,6 +22,29 @@ export class GqlMutations {
       }
   `
 
+  static addPerformanceMutation = `
+      mutation AddPerformance($input: Self_LoanPerformance_Input_!) {
+        add_LoanPerformance(
+          input: $input,
+          syncMode: ASYNC,
+          aclInput: {
+              acl: [
+                  { principal: {nodes: "OriginatorNode"}, operations: [READ] }
+                  { principal: {nodes: "ServicerNode"}, operations: [ALL, UPDATE_ACL] }
+              ]
+          }
+        ) {
+          transaction {
+            _id
+            _owner
+            submissionTime
+            transactionId
+            version
+          }
+        }
+      }
+  `
+
   static smartContractMutation = `
     mutation CreateSmartContract($name: String!, $description: String, $inputQuery: String, $outputMutation: String!, $resource: String!) {
       addVendia_Contract(
@@ -91,4 +114,11 @@ export class GqlMutations {
       }
     }
   `
+
+  static computationInputQuery = `
+  `
+
+  static computationOutputMutation = `
+  `
+
 }

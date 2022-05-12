@@ -1,0 +1,38 @@
+[
+  {
+    "loanIdentifier": "ABCD1234",
+    "servicerId":  "12345678",
+    "monthlyReportingPeriod":  "2022-01-01",
+    "currentUnpaidPrincipalBalance":  414000.00,
+    "loanDelinquencyStatus": "CURRENT",
+    "lastPaidInstallmentDate":  "2022-01-01",
+    "currentInterestRatePercent": 3.25
+  },
+  {
+    "loanIdentifier": "ABCD1234",
+    "servicerId":  "12345678",
+    "monthlyReportingPeriod":  "2022-02-01",
+    "currentUnpaidPrincipalBalance":  413000.00,
+    "loanDelinquencyStatus": "CURRENT",
+    "lastPaidInstallmentDate":  "2022-02-01",
+    "currentInterestRatePercent": 3.25
+  },
+  {
+    "loanIdentifier": "ABCD1234",
+    "servicerId":  "12345678",
+    "monthlyReportingPeriod":  "2022-03-01",
+    "currentUnpaidPrincipalBalance":  414000.00,
+    "loanDelinquencyStatus": "LATE",
+    "lastPaidInstallmentDate":  "2022-02-01",
+    "currentInterestRatePercent": 3.25
+  },
+  {
+    "loanIdentifier": "ABCD1234",
+    "servicerId":  "12345678",
+    "monthlyReportingPeriod":  "2022-04-01",
+    "currentUnpaidPrincipalBalance":  414000.00,
+    "loanDelinquencyStatus": "LATE",
+    "lastPaidInstallmentDate":  "2022-02-01",
+    "currentInterestRatePercent": 3.25
+  }
+]

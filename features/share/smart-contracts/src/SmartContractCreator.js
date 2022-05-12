@@ -21,6 +21,9 @@ let requestPayload = null;
 if(args.type == 'validation') {
     console.debug("Adding validation smart contract")
     requestPayload = createValidationSmartContractPayload()
+} else if(args.type == 'computation') {
+    console.debug("Adding computation smart contract")
+    requestPayload = createComputationSmartContractPayload()
 }
 
 invokeVendiaShare(requestPayload)
@@ -44,6 +47,19 @@ function createValidationSmartContractPayload() {
             inputQuery: GqlMutations.validationInputQuery,
             outputMutation: GqlMutations.validationOutputMutation,
             resource: process.env.VALIDATION_LAMBDA_ARN
+        }
+    }
+}
+
+function createComputationSmartContractPayload() {
+    return {
+        query: GqlMutations.smartContractMutation,
+        variables: {
+            name: 'computation-smart-contract',
+            description: 'Smart contract for computation, created programatically',
+            inputQuery: GqlMutations.computatiohInputQuery,
+            outputMutation: GqlMutations.computationOutputMutation,
+            resource: process.env.COMPUTATION_LAMBDA_ARN
         }
     }
 }
