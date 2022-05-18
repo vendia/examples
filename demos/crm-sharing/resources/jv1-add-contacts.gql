@@ -1,0 +1,76 @@
+mutation createAccountContacts {
+    contact1: add_AccountContact(
+        input: {
+            partner: "JV1",
+            accountName: "Vendia",
+            duns: "111111111",
+            primaryContactName: "Chris Smith",
+            primaryContactEmail: "not-real-1@vendia.net",
+            primaryContactPhone: "9085551212",
+            users: [
+                {
+                    name: "Robin Jones",
+                    role: "Account Executive",
+                    emailAddress: "not-real-2@vendia.net",
+                    phoneNumber: "9085551213"
+                },
+                {
+                    name: "Pat Singh",
+                    role: "Account Analyst",
+                    emailAddress: "not-real-3@vendia.net",
+                    phoneNumber: "9085551214"
+                }
+            ]
+        },
+        aclInput: {
+            acl: [
+                {principal: { nodes: [ "*" ] }, operations: [ READ ] }
+            ]
+        },
+        syncMode: ASYNC
+    ) {
+        transaction: {
+            _id
+        }
+    },
+
+    contact2: add_AccountContact(
+        input: {
+            partner: "JV1",
+            accountName: "Amazon",
+            duns: "222222222",
+            primaryContactName: "Terry Patel",
+            primaryContactEmail: "not-real-1@amazon.com",
+            primaryContactPhone: "2125551212",
+            users: [
+                {
+                    name: "Jo Anderson",
+                    role: "Account Executive",
+                    emailAddress: "not-real-2@amazon.com",
+                    phoneNumber: "2125551213"
+                },
+                {
+                    name: "Frank Palumbo",
+                    role: "Account Analyst",
+                    emailAddress: "not-real-3@amazon.com",
+                    phoneNumber: "2125551214"
+                }
+            ]
+        },
+        aclInput: {
+            acl: [
+                {principal: { nodes: [ "JV3" ] }, path: "partner", operations: [ READ ] },
+                {principal: { nodes: [ "JV3" ] }, path: "accountName", operations: [ READ ] },
+                {principal: { nodes: [ "JV3" ] }, path: "duns", operations: [ READ ] },
+                {principal: { nodes: [ "JV3" ] }, path: "primaryContactName", operations: [ READ ] },
+                {principal: { nodes: [ "JV3" ] }, path: "primaryContactEmail", operations: [ READ ] },
+                {principal: { nodes: [ "JV3" ] }, path: "primaryContactPhone", operations: [ READ ] },
+            ]
+        },
+        syncMode: ASYNC
+    ) {
+        transaction: {
+            _id
+        }
+    }
+}

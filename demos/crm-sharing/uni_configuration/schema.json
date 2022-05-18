@@ -1,0 +1,75 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$id": "https://vendia.net/schemas/crm-data-sharing/v1.0",
+    "title": "Joint-venture Partner Account Contact Share",
+    "x-vendia-acls": {
+        "AccountContactAcl": {
+            "type": "AccountContact"
+        }
+    },
+    "x-vendia-indexes": {
+        "AccountContactDunsIndex": [
+            {
+                "type": "AccountContact",
+                "property": "duns"
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "AccountContact": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "partner": {
+                        "description": "Partner name",
+                        "type": "string"
+                    },
+                    "accountName": {
+                        "description": "Account name",
+                        "type": "string"
+                    },
+                    "duns": {
+                        "description": "DUNS number",
+                        "type": "string"
+                    },
+                    "primaryContactName": {
+                        "description": "Primary account contact name",
+                        "type": "string"
+                    },
+                    "primaryContactEmail": {
+                        "description": "Primary account contact email",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "primaryContactPhone": {
+                        "description": "Primary account contact phone number",
+                        "type": "string"
+                    },
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "role": {
+                                    "type": "string"
+                                },
+                                "emailAddress": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "phoneNumber": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
