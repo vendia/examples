@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "description": "A set of scripts to load a Uni with Loan and Loan Performance data",
   "scripts": {
-    "loadLoans" : "node LoanLoader.js",
-    "loadPerformance" : "node LoanPerformanceLoader.js",
+    "loadData" : "node DataLoader.js",
     "createValidationSmartContract" : "node SmartContractCreator.js --type validation",
     "createComuptationSmartContract" : "node SmartContractCreator.js --type computation",
     "invokeValidationSmartContract" : "node SmartContractInvoker.js --type validation"

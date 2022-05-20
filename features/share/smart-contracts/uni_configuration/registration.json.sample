@@ -3,7 +3,7 @@
   "schema": "schema.json",
   "nodes": [
     {
-      "name": "OriginatorNode",
+      "name": "LenderNode",
       "userId": "you@domain.com",
       "region": "us-east-2",
       "settings": {

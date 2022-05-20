@@ -6,8 +6,7 @@ export class GqlMutations {
           syncMode: ASYNC,
           aclInput: {
               acl: [
-                  { principal: {nodes: "OriginatorNode"}, operations: [ALL, UPDATE_ACL] }
-                  { principal: {nodes: "ServicerNode"}, operations: [READ] }
+                  { principal: {nodes: "LenderNode"}, operations: [ALL, UPDATE_ACL] }
               ]
           }
         ) {
@@ -22,26 +21,29 @@ export class GqlMutations {
       }
   `
 
-  static addPerformanceMutation = `
-      mutation AddPerformance($input: Self_LoanPerformance_Input_!) {
-        add_LoanPerformance(
-          input: $input,
-          syncMode: ASYNC,
-          aclInput: {
-              acl: [
-                  { principal: {nodes: "OriginatorNode"}, operations: [READ] }
-                  { principal: {nodes: "ServicerNode"}, operations: [ALL, UPDATE_ACL] }
-              ]
+  static addPortfolioMutation = `
+      mutation AddPortfolio {
+          add_LoanPortfolio(
+              input: {
+                portfolioIdentifier: "AAAA1111",
+                portfolioName: "Loan Portfolio"
+            }
+              syncMode: ASYNC
+              aclInput: {
+                  acl: [
+                      { principal: { nodes: "ServicerNode" }, operations: [ALL, UPDATE_ACL] },
+                      { principal: {nodes: "LenderNode"}, operations: [READ] }
+                  ]
+              }
+          ) {
+              transaction {
+                  _id
+                  _owner
+                  submissionTime
+                  transactionId
+                  version
+              }
           }
-        ) {
-          transaction {
-            _id
-            _owner
-            submissionTime
-            transactionId
-            version
-          }
-        }
       }
   `
 
@@ -103,11 +105,15 @@ export class GqlMutations {
   `
 
   static validationOutputMutation = `
-    mutation ValidationOutputMutation($id: ID!,  $validationStatus: Self_Loan_validationStatusEnum!) {
+    mutation ValidationOutputMutation($id: ID!,  $input: Self_Loan_UpdateInput_!, $servicerAction: Vendia_OperationType) {
       update_Loan_async(
         id: $id, 
-        input: {
-          validationStatus: $validationStatus
+        input: $input,
+        aclInput: {
+            acl: [
+                { principal: {nodes: "LenderNode"}, operations: [ALL, UPDATE_ACL] }
+                { principal: {nodes: "ServicerNode"}, operations: [$servicerAction] }
+            ]
         }
       ) {
         error

@@ -1,17 +1,46 @@
 exports.handler = async (event) => {
 
-    console.log("Event is", event)
+    try {
+        console.log("Event is", event)
 
-    let loan = event.queryResult.list_LoanItems._LoanItems[0]
+        let loan = event.queryResult.list_LoanItems._LoanItems[0]
 
-    let isValid = isValidOrigination(loan.originationDate) &&
-        isValidLoanAmount(loan.originalUnpaidPrincipalBalance, loan.borrowerCreditScore)
+        //throw an unexpected error to demonstrate the purpose of the "catch" block below
+        if(loan.loanIdentifier == "0000000000000005") {
+            throw new Error("Something unexpected happened - oh no!")
+        }
 
-    console.log("Validation function determined the loan" + (isValid ? " IS " : " IS NOT ") + "valid");
+        let isValid = isValidOrigination(loan.originationDate) &&
+            isValidLoanAmount(loan.originalUnpaidPrincipalBalance, loan.borrowerCreditScore)
 
-    return {
-        id: loan._id,
-        validationStatus: (isValid ? "VALID" : "INVALID")
+        console.log("Validation function determined the loan" + (isValid ? " IS " : " IS NOT ") + "valid");
+
+        if(isValid) {
+            return {
+                id: loan._id,
+                input: {
+                    validationStatus: "VALID"
+                },
+                servicerAction: "READ"
+            }
+        } else {
+            return {
+                id: loan._id,
+                input: {
+                    validationStatus: "INVALID"
+                },
+                servicerAction: null
+            }
+        }
+    } catch (error) {
+        console.error("Unexpected exception during validation", error)
+        return {
+            id: loan._id,
+            input: {
+                validationStatus: "ERROR"
+            },
+            servicerAction: null
+        }
     }
 }
 

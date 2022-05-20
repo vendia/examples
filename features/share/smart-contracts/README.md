@@ -7,17 +7,17 @@
 # Vendia Share Smart Contracts
 
 ## Overview
-Vendia Share enables companies to rapidly build applications that securely share data across departments, companies, and clouds.  If sharing data among parties is Step 1, then _acting on the data_ shared among parties is Step 2.  There are many ways to act on the data shared using Vendia Share: auto-generated [GraphQL APIs](https://www.vendia.net/docs/share/graphql), event-driven [inbound and outbound integrations](https://www.vendia.net/docs/share/integrations), and, as of [a few months ago](https://www.vendia.net/releases/2021-12-10-releasenotes#smart-contracts) the introduction of [smart contracts](https://www.vendia.net/docs/share/smart-contracts).
+Vendia Share enables companies to rapidly build applications that securely share data across departments, companies, and clouds.  If _sharing data_ is Step 1, then _acting on_ shared data is almost always Step 2.  There are many ways to act on the data shared using Vendia Share: auto-generated [GraphQL APIs](https://www.vendia.net/docs/share/graphql), event-driven [inbound and outbound integrations](https://www.vendia.net/docs/share/integrations), and, more recently the introduction of [smart contracts](https://www.vendia.net/docs/share/smart-contracts).
 
-Smart contracts allow users to take action on data in a predefined way, one that is versioned and ledgered for improved transparency of other participants.  This allows predefined and versioned functions to be created by a single participant for the benefit of all participants.  Further, the ledgered nature of smart contracts provides an added level of transparency and auditability that event-driven data processing does not.
+Smart contracts allow users to take action on data in a predefined way, one that is versioned and ledgered for the improved transparency of all Uni participants.  This allows predefined and versioned functions to be created by a single participant for the benefit of all participants.  Further, the ledgered nature of smart contracts provides an added level of transparency and auditability that the "off-chain" approaches to data processing do not.
 
 Smart contracts can be used for a variety of purposes.  In this example, we'll explore a set of smart contracts that are used for:
 
 * **Data validation** - Making sure data is valid prior to its use by other participants
 * **Data computation** - Calculating new data values using data shared by other participants
-* **Data enrichment** - Enhancing data using an external data source external to Vendia Share
+* **Data enrichment** - Enhancing data with additional information provided from an external system
 
-In this example, you'll explore a Uni with two participants: a Loan Originator and a Loan Servicer.  The Loan Originator writes new loans to the Uni.  The Loan Servicer writes loan performance data to the Uni. Both participants will make use of smart contracts to automate their interactions and increase their operational transparency.
+In this example, you'll explore a Uni with two participants: a Lender and a Servicer working in the home mortgage space.  The Lender creates new loans on the Uni.  The Servicer manages a portfolio of loans on the Uni. Both participants will make use of smart contracts to automate their interactions and increase their operational transparency.
 
 ## Step 0 - Prerequisites
 Smart contracts are programmatic in nature, which means this example will be heavily programmatic as well.  Before getting started with this example, you'll first need to:
@@ -48,7 +48,7 @@ git clone https://github.com/vendia/examples.git
 </details>
 
 ## Step 1 - Create a Universal Application
-Before exploring smart contract functionality, you'll first want to create a [Uni](https://www.vendia.net/docs/share/dev-and-use-unis#what-is-a-uni).  A Uni is what allows the Loan Originator and the Loan Servicer to share data and code (i.e. smart contracts) with each other in real-time and with control.
+Before exploring smart contract functionality, you'll first want to create a [Uni](https://www.vendia.net/docs/share/dev-and-use-unis#what-is-a-uni).  A Uni is what allows the Lender and the Servicer to share data and code (i.e. smart contracts) with each other in real-time and with control.
 
 To create a Uni using the Share CLI:
 
@@ -65,13 +65,13 @@ To create a Uni using the Share CLI:
 Wait about 5 minutes for the Uni to reach a `Running` state.
 
 ## Step 2 - Create a Smart Contract for Data Validation
-Once the Uni has reached a `Running` state, it's time for the Loan Originator to add some loans.  
+Once the Uni has reached a `Running` state, it's time for the Lender to add some loans.  
 
 ### Load Unvalidated Loan Data
-With the Uni running, the Loan Originator is ready to add Loans to the Uni.
+With the Uni running, the Lender is ready to add Loans to the Uni.
 
 #### Configure the Scripts
-The scripts look for a file named `.share.env` within the `src` directory.  To create that file:
+The below scripts look for a file named `.share.env` within the `src` directory.  To create that file:
 
 1. Change into the `src` directory (assuming from the `uni_configuration` directory from Step 1)
    ```shell
@@ -79,9 +79,9 @@ The scripts look for a file named `.share.env` within the `src` directory.  To c
    ```
 1. Create the file with a set of pre-defined properties
    ```shell
-   echo -e "ORIGINATOR_GQL_URL=\nORIGINATOR_GQL_APIKEY=\nSERVICER_GQL_URL=\nSERVICER_GQL_APIKEY=\nVALIDATION_LAMBDA_ARN=\nCOMPUTATION_LAMBDA_ARN=\n" >> .share.env
+   echo -e "LENDER_GQL_URL=\nLENDER_GQL_APIKEY=\nSERVICER_GQL_URL=\nSERVICER_GQL_APIKEY=\nVALIDATION_LAMBDA_ARN=\nCOMPUTATION_LAMBDA_ARN=\nENRICHMENT_LAMBDA_ARN=\n" >> .share.env
    ```
-1. Insert the values for each property prefixed with `ORIGINATOR` or `SERVICER` based on the GraphQL URL and API Key information for the **OriginatorNode** and **ServicerNode**.  The remainder of the properities will be assigned values in the subsequent sections. 
+1. Insert the values for each property prefixed with `LENDER` or `SERVICER` based on the GraphQL URL and API Key information for the **OriginatorNode** and **ServicerNode**.  The remainder of the properities will be assigned values in the subsequent sections. 
    ```shell
    share uni get --name <name_of_your_uni>
    ```
@@ -95,22 +95,22 @@ npm i
 
 #### Add Loans
 
-The script below adds the loans from the [resources](resources/loans) directory to the Uni.
+The script below adds the loans from the [resources](data/loans) directory to the Uni, on behalf of the Lender, and adds a loan portfolio, on behalf of the Servicer.  Both the loans and the loan portfolio will be used in subsequent sections to highlight the value of real-time data sharing and smart contracts.
 
 ```shell
-npm run loadLoans
+npm run loadData
 ```
 
 ### Define Validation Rules
-The Loan Originator wants to ensure the Loan Servicer is only able to act on loans with valid data.
+The Lender wants to ensure the Servicer is only able to act on loans with valid data.
 
-The [schema](uni_configuration/schema.json) for the Uni provides basic validation based on the schema definition.  For example, `loanIdentifier` must be 64-character alphanumeric value, `originationDate` must be a valid date,  and `originalInterestRate` must be a value between 0 and 100.  While those checks are necessary, they are not sufficient.
+The [schema](uni_configuration/schema.json) for the Uni provides basic validation based on the schema definition.  For example, `loanIdentifier` must be a 16-digit value, `originationDate` must be a valid date, and `originalInterestRate` must be a number between 0 and 100.  While those syntax checks are necessary for data validation, they do not address business rule validation.
 
-The Loan Originator can use a smart contract to ensure more in-depth data validation occurs prior to the Loan Servicer making use of the data.
+The Lender can use a smart contract to ensure more in-depth data validation occurs prior to the Servicer making use of the data.
 
-Let's assume the Loan Originator wants to perform two additional validations on every new Loan added to the Uni.
+Let's assume the Lender wants to perform two additional validations on every new Loan added to the Uni.
 
-1. **Origination Date Validation** - Ensuring `originationDate` is not a future date (i.e. a Loan can't exist if it hasn't been created)
+1. **Origination Date Validation** - Ensuring `originationDate` is not a future date (i.e. a Loan can't exist if it hasn't yet been created)
 1. **Original Unpaid Principal Balance Validation** - Assessing `originalUnpaidPrincipalBalance` validity based on the `borrowerCreditScore`
 
 Neither of these in-depth validations are feasible through the schema definition itself.  Both require dynamic validation using the data provided as part of a new Loan.
@@ -118,13 +118,13 @@ Neither of these in-depth validations are feasible through the schema definition
 ### Create and Configure a Loan Validation Lambda Function
 **NOTE:** The validation pattern demonstrated here is just one of several that can be used to prevent other participants from accessing data prior to validation.
 
-The [validation Lambda function](src/validation/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the validation rules outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by Lambda will work.
+The [validation Lambda function](src/validation/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the validation rules outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by AWS Lambda will work.
 
 Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).
 
-Once the Lambda function exists, it must be configured to permit a specific node in the Uni (in this case the **OriginatorNode**) to invoke it.
+Once the Lambda function exists, it must be configured to permit a specific node in the Uni (in this case the **LenderNode**) to invoke it.
 
-1. First you'll need the Smart Contracts role from the **OriginatorNode**, which is found in the output of the command below (`OriginatorNode.resources.smartContracts.aws_Role`)
+1. First you'll need the Smart Contract Role from the **LenderNode**, which is found in the output of the command below (`LenderNode.resources.smartContracts.aws_Role`)
    ```shell
    share uni get --uni <your_uni_name>
    ```
@@ -135,20 +135,20 @@ Once the Lambda function exists, it must be configured to permit a specific node
    ```
 
 ### Create a Loan Validation Smart Contract
-You'll now use a Smart Contract to connect the Lambda function from the previous section to the **OriginatorNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
+You'll now use a Smart Contract to connect the Lambda function from the previous section to the **LenderNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
 
-The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **OriginatorNode** when the Smart Contract is invoked.  See the `validationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked.  See the `validationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
-The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **OriginatorNode** when the Smart Contract invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Smart Contract invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
 To create a Loan Validation Smart Contract:
 
 1. Open `.share.env` and assign `VALIDATION_LAMBDA_ARN` to the validation Lambda function's ARN (the same value used in the previous section for `<your-lambda-function-arn>`)
-2. Invoke the provided npm script to create a validation smart contract on the **OriginatorNode**
+2. Invoke the provided npm script to create a validation smart contract on the **LenderNode**
    ```
    npm run createValidationSmartContract
    ```
-3. Use the GraphQL Explorer view of the **OriginatorNode** to confirm the smart contract exists, and to find its unique identifier (`_id`) needed in subsequent sections. 
+3. Use the GraphQL Explorer view of the **LenderNode** to confirm the smart contract exists, and to find its unique identifier (`_id`) needed in subsequent sections. 
    ```graphql
    query ListSmartContracts {
      listVendia_ContractItems {
@@ -172,35 +172,35 @@ To create a Loan Validation Smart Contract:
    ```
 
 ### Validate Loan Data
-All the Loans the Originator added in the last step have a `validationStatus` set to `PENDING`.  This indicates to the Servicer that the Loans have not yet been validated.  Likewise, Servicer GraphQL queries for Loans can now easily include a filter based on `validationStatus`.
+All the Loans the Lender added in the last step have a `validationStatus` set to `PENDING` and [data access controls](https://www.vendia.net/docs/share/fine-grained-data-permissions) in the form of an Access Control List (ACL) that prevent the Servicer from seeing the yet-to-be-validated loans.
 
-You can validate each Loan previously added by invoking the validation Smart Contract created in the previous sections.  The Smart Contract takes a single query argument, which is the `loanIdentifier` of the Loan to be validated.  Upon validation, the Loan's `validationStatus` will be set to either `VALID` or `INVALID`.
+You can validate each Loan by invoking the validation Smart Contract created in the previous sections.  The Smart Contract takes a single query argument, which is the `loanIdentifier` of the Loan to be validated.  Upon validation, the Loan's `validationStatus` will be set to either `VALID` (all validation rules are satisfied), `INVALID` (at least one validation rule was not satisified), or `ERROR` (validation failed for an unexpected reason).  Further, if a loan is `VALID`, its  
 
 #### Example - Validate a Valid Loan
-Loan `ABCD1234` is valid based on the [validation rules](README.md#define-validation-rules) above.
+Loan `0000000000000001` is valid based on the [validation rules](README.md#define-validation-rules) above.
 
 ##### Using a Programmatic Client
-You can invoke the validation Smart Contract using the provided npm script.  The script takes 1 argument, which is the `_id` of the Smart Contract to invoke.
+You can invoke the validation Smart Contract using the provided npm script.  The script takes one argument, which is the `_id` of the Smart Contract to invoke.
 
 1. Run the provided npm script to invoke the validation smart contract on the **OriginatorNode**
 ```
-npm run invokeValidationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier ABCD1234
+npm run invokeValidationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier 0000000000000001
 ```
 
 ##### Using the Share Web App
-You can alternatively invoke the validation Smart Contract using the Smart Contract view of the **OriginatorNode** through the Share web app.
+You can alternatively invoke the validation Smart Contract using the Smart Contract view of the **LenderNode** through the Share web app.
 
 1. Click on the smart contract by name 
 2. Then click `Invoke`
 3. Provide the required `loanIdentifier` input query arguments
    ```json
    {
-     "loanIdentifier": "ABCD1234"
+     "loanIdentifier": "0000000000000001"
    }
    ```
 4. Click `Invoke`
 
-In either case, the end result is the Loan's `validationStatus` is now set to `VALID`.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
+In either case, the end result is the loan's `validationStatus` is now set to `VALID` and the loan's ACL has been adjusted to allow the Servicer to see it.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
 
 ```graphql
 query ListLoanValidationStatus {
@@ -216,16 +216,18 @@ query ListLoanValidationStatus {
 ```
 
 #### Example - Validate an Invalid Loan
-Loan `EFGH4567` is invalid based on the [validation rules](README.md#define-validation-rules) above.
+Loan `0000000000000002` is invalid based on the [validation rules](README.md#define-validation-rules) above (it's `originationDate` is in the future).
 
-Repeat the steps from the previous section to invoke the validation smart contract again, either programatically or through the Smart Contract view of the Share web app, using a new `loanIdentifier` of `EFGH4567`.
+Repeat the steps from the previous section to invoke the validation smart contract again, either programatically or through the Smart Contract view of the Share web app, using a new `loanIdentifier` of `0000000000000002`.
 
 #### Example - Validate the Remaining Loans 
-Repeat the steps from the previous section for the remaining two loans: `QRST5432` and `WXYZ9876`.
+Repeat the steps from the previous section for the remaining three loans: `0000000000000003`, `0000000000000004` and `0000000000000005`.
 
 Confirm the end result using the Entity Explorer or GraphQL Explorer view of the Share web app.
 
-In either case, the end result is the Loan's `validationStatus` is now set to `VALID`.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
+From the **LenderNode** you should see all 5 loans - 3 with the validation status of `VALID`, 1 with the validation status of `INVALID`, and 1 with the validation status of `ERROR`.
+
+From the **ServicerNode** you should see only 3 loans - the 3 with the validation status of `VALID`.
 
 ```graphql
 query ListLoanValidationStatus {
@@ -240,14 +242,12 @@ query ListLoanValidationStatus {
 }
 ```
 
-You should see 2 loans with a `VALID` validation status, 2 loans with an `INVALID` validation status, and 0 loans with a `PENDING` validation status.
-
 ## Step 3 - Create a Smart Contract for Data Computation
 With several valid loans in place, it's time for the Loan Servicer to add loan performance data.  This data will be used by the Loan Originator to better assist borrower's facing payment hardship in Step 4.
 
 #### Add Historical Loan Performance Data
 
-The script below adds the historical loan performance data from the [resources](resources/performance) directory to the Uni.
+The script below adds the historical loan performance data from the [resources](data/performance) directory to the Uni.
 
 ```shell
 npm run loadPerformance
