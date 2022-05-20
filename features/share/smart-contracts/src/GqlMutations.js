@@ -47,7 +47,7 @@ export class GqlMutations {
       }
   `
 
-  static smartContractMutation = `
+  static smartContractCreationMutation = `
     mutation CreateSmartContract($name: String!, $description: String, $inputQuery: String, $outputMutation: String!, $resource: String!) {
       addVendia_Contract(
         input: {
@@ -71,11 +71,12 @@ export class GqlMutations {
   `
 
   static smartContractInvocationMutation = `
-    mutation InvokeSmartContract($id: ID!, $queryArgs: String!) {
+    mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "") {
       invokeVendia_Contract_async(
         id: $id, 
         input: {
-          queryArgs: $queryArgs
+          queryArgs: $queryArgs,
+          invokeArgs: $invokeArgs
         }
       ) {
         result {
@@ -120,9 +121,64 @@ export class GqlMutations {
   `
 
   static computationInputQuery = `
+    query ComputationInputQuery($portfolioIdentifier: String) {
+      list_LoanItems(filter: {portfolioIdentifier: {eq: $portfolioIdentifier}}) {
+          _LoanItems {
+              ... on Self_Loan {
+                  delinquencyStatus
+                  interestRatePercent
+                  unpaidPrincipalBalance
+              }
+          }
+      }
+      list_LoanPortfolioItems(filter: {portfolioIdentifier: {eq: $portfolioIdentifier}}) {
+          _LoanPortfolioItems {
+              ... on Self_LoanPortfolio {
+                  _id
+              }
+          }
+      }
+    }
   `
 
   static computationOutputMutation = `
+    mutation ValidationOutputMutation($id: ID!, $delinquencyPercentage: Float, $weightedAverageInterestRate: Float) {
+        update_LoanPortfolio_async(
+            id: $id
+            input: {
+                delinquencyPercentage: $delinquencyPercentage,
+                weightedAverageInterestRate: $weightedAverageInterestRate
+            }
+        ) {
+            error
+        }
+    }
+  `
+
+  static enrichmentInputQuery = `
+    query ValidationInputQuery($loanIdentifier: String!) {
+      list_LoanItems(filter: {loanIdentifier: {eq: $loanIdentifier}}) {
+        _LoanItems {
+          ... on Self_Loan {
+            _id
+            loanIdentifier
+          }
+        }
+      }
+    }
+  `
+
+  static enrichmentOutputMutation = `
+    mutation ValidationOutputMutation($id: ID!, $additionalResources: [Self_Loan_additionalResources_additionalResourcesItem_UpdateInput_]) {
+      update_Loan_async(
+        id: $id, 
+        input: {
+          additionalResources: $additionalResources
+        }
+      ) {
+        error
+      }
+    }
   `
 
 }

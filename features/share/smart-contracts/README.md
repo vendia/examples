@@ -139,7 +139,7 @@ You'll now use a Smart Contract to connect the Lambda function from the previous
 
 The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked.  See the `validationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
-The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Smart Contract invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Lambda function invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
 To create a Loan Validation Smart Contract:
 
@@ -180,7 +180,7 @@ You can validate each Loan by invoking the validation Smart Contract created in 
 Loan `0000000000000001` is valid based on the [validation rules](README.md#define-validation-rules) above.
 
 ##### Using a Programmatic Client
-You can invoke the validation Smart Contract using the provided npm script.  The script takes one argument, which is the `_id` of the Smart Contract to invoke.
+You can invoke the validation Smart Contract using the provided npm script.  The script takes two arguments, which are the `_id` of the Smart Contract to invoke and the `loanIdentifer` of the loan to validate.
 
 1. Run the provided npm script to invoke the validation smart contract on the **OriginatorNode**
 ```
@@ -243,25 +243,18 @@ query ListLoanValidationStatus {
 ```
 
 ## Step 3 - Create a Smart Contract for Data Computation
-With several valid loans in place, it's time for the Loan Servicer to add loan performance data.  This data will be used by the Loan Originator to better assist borrower's facing payment hardship in Step 4.
-
-#### Add Historical Loan Performance Data
-
-The script below adds the historical loan performance data from the [resources](data/performance) directory to the Uni.
-
-```shell
-npm run loadPerformance
-```
+With several valid loans in place, it's time for the Servicer to update the statistics of its loan portfolio.
 
 ### Define Computation To Be Performed
-The Loan Servicer adds loan performance data to the Uni every (currently monthly) reporting period.  As this happens, the Loan Servicer would like to compute the loan's `loanDelinquencyStatus` based on its current and historical performance data.
+The Servicer will calculate two values using data from the loans recently added to its loan portfolio.
 
-Specifically, a loan performance record should be marked as `LATE` if the last payment was more than a month and `DELINQUENT` if the last payment was more than three months ago.
+* **Weighted Average Interest Rate** - The [weighted average](https://www.investopedia.com/terms/w/weightedaverage.asp) of the `interestRatePercent`, weighted by `unpaidPrincipalBalance`
+* **Delinquency Percentage** - The percentage of loans with a `delinquencyStatus` set to `DELINQUENT`
 
-### Create and Configure a Loan Risk Calculation Lambda Function
-**NOTE:** The computation pattern demonstrated here is just one of several that can be used to generate values from data input prior to adding that data to the shared ledger.
+### Create and Configure a Loan Portfolio Statistics Calculation Lambda Function
+**NOTE:** The computation pattern demonstrated here is just one of several that can be used to compute new values.
 
-The [computation Lambda function](src/computation/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the computation of `loanDelinquencyStatus` outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by Lambda will work.
+The [computation Lambda function](src/computation/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the computation of loan portfolio statistics outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by Lambda will work.
 
 Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).
 
@@ -277,17 +270,17 @@ Once the Lambda function exists, it must be configured to permit a specific node
    aws lambda add-permission --region <your-lambda-function-region> --function-name <your-lambda-function-arn> --action lambda:GetFunctionConfiguration  --statement-id AllowVendiaGetFunctionConfiguration  --principal <smart-contract-role>
    ```
 
-### Create a Loan Risk Calculation Smart Contract
+### Create a Loan Portfolio Statistics Calculation Smart Contract
 You'll now use a Smart Contract to connect the Lambda function from the previous section to the **ServicerNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
 
-The Lambda function from the previous section expects an input that includes certain fields (those used to compute loan delinquency status).  That input comes from a pre-defined GraphQL query, which will be executed against the **ServicerNode** when the Smart Contract is invoked, and from the invocation arguements sent when the Smart Contract is invoked.  See the `computationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lambda function from the previous section expects an input that includes certain fields.  That input comes from a pre-defined GraphQL query, which will be executed against the **ServicerNode** when the Smart Contract is invoked.  See the `computationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
-The Lamdba function from the previous section produces an output that includes the loan performance data and its computed loan delinquency status (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **ServicerNode** when the Smart Contract invocation is complete.  See the `computationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lamdba function from the previous section produces an output that includes the loan portfolio statistics (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **ServicerNode** when the Lambda function invocation is complete.  See the `computationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
 
-To create a Loan Validation Smart Contract:
+To create a Loan Portfolio Statistics Calculation Smart Contract:
 
 1. Open `.share.env` and assign `COMPUTATION_LAMBDA_ARN` to the computation Lambda function's ARN (the same value used in the previous section for `<your-lambda-function-arn>`)
-2. Invoke the provided npm script to create a validation smart contract on the **ServicerNode**
+2. Invoke the provided npm script to create a calculation smart contract on the **ServicerNode**
    ```
    npm run createComputationSmartContract
    ```
@@ -314,20 +307,20 @@ To create a Loan Validation Smart Contract:
    }
    ```
 
-### Calculate Loan Delinquency Status
-The Servicer now wants to add loan performance data for the next reporting period.  In this step the `invokeArgument` includes loan performance data, but without a `loanDelinquencyStatus` value present.  The Smart Contract will determine the appropriate value, based on the provided (via `invokeArguments`) and historical (via `inputQuery`) data.
+### Calculate Loan Portfolio Statistics
+The Servicer now wants to calculate updated values for its loan portfolio.
 
-You can now simulate the operations a Servicer might perform when adding new loan performance data that requires additional computation before the data is stored to the ledger, and shared with others. 
+You can simulate the operations a Servicer might perform when receiving new loans - executing additional computations to keep loan portfolio data accurate for all viewers.
 
-#### Example - Calculate Loan Delinquency 
-Loan `ABCD1234` is delinquent based on the [computation logic](README.md#define-computation-to-be-performed) above.
+#### Example - Calculate Loan Portfolio Statistics
+The loan portfolio's `delinquencyPercentage` and `weightedAverageInterestRate` fields were originally empty.  Now that loans have been added to the loan portfolio, those values can be calculated.
 
 ##### Using a Programmatic Client
-You can invoke the calculation Smart Contract using the provided npm script.  The script takes 1 argument, which is the `_id` of the Smart Contract to invoke.
+You can invoke the calculation Smart Contract using the provided npm script.  The script takes no arguments, as its hardcoded to a specific `portfolioIdentifier`.
 
 1. Run the provided npm script to invoke the validation smart contract on the **OriginatorNode**
 ```
-npm run invokeComputationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier ABCD1234
+npm run invokeComputationSmartContract -- --smartContractId <your_smart_contract_id>
 ```
 
 ##### Using the Share Web App
@@ -335,49 +328,160 @@ You can alternatively invoke the validation Smart Contract using the Smart Contr
 
 1. Click on the smart contract by name
 2. Then click `Invoke`
-3. Provide the required `loanIdentifier` input query arguments
+3. Provide the required `portfolioIdentifier` input query arguments
    ```json
    {
-     "loanIdentifier": "ABCD1234"
+     "portfolioIdentifier": "AAAA1111"
    }
-   ```
-4. Provide the required `invokeArguments`
-   ```json
-   
    ```
 4. Click `Invoke`
 
-In either case, the end result is the Loan Performance data is added and a computed `loanDelinquencyStatus` is included.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
+In either case, the end result are the computed loan portfolio calculations - `delinquencyPercentage` and `weightedAverageInterestRate` -  are populated.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
 
 ```graphql
-
+query ListPortfolios {
+  list_LoanPortfolioItems {
+    _LoanPortfolioItems {
+      ... on Self_LoanPortfolio {
+        portfolioName
+        portfolioIdentifier
+        delinquencyPercentage
+        weightedAverageInterestRate
+      }
+    }
+  }
+}
 ```
-
-#### Example - Validate an Invalid Loan
-Loan `WXYZ9876` is late based on the [validation rules](README.md#define-validation-rules) above.
-
-Repeat the steps from the previous section to invoke the computation smart contract again, either programatically or through the Smart Contract view of the Share web app, using:
-
-* A new `loanIdentifier` of `WXYZ9876`
-* A new `invokeArguments` value of 
-```json
-
-```
-
-You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
-
-```graphql
-```
-
-You should see two new loan performance data entries, one with loan delinquency status of `DELINQUENT` and one with a loan delinquency status of `CURRENT`. 
 
 ## Step 4 - Create a Smart Contract for Data Enrichment
+With updated statistics on the Servicer's loan portfolio health, the Lender may now want to help borrowers facing payment challenges.  Specifically, the Lender may want to suggest assistance programs - tailored to the borrower - that may be relevant.
 
-### Create a Loan Assistance Lambda Function
+### Define Enrichment To Be Performed
+The Lender will populate the `additionalResources` field of a non-performing loan with payment assistance information.  In this example, we'll use a few sample values.  In the real-world, these suggestions could come from an analytics / machine learning solution purpose-built to identify the right assistance program for a borrower.
 
-### Create a Loan Assistance Smart Contract
+### Create and Configure a Loan Enrichment Lambda Function
+**NOTE:** The enrichment pattern demonstrated here is just one of several that can be used to supplement data values.
 
-### Enrich Loans with Loan Assistance Info
+The [enrichment Lambda function](src/enrichment/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the computation of loan portfolio statistics outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by Lambda will work.
+
+Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).
+
+Once the Lambda function exists, it must be configured to permit a specific node in the Uni (in this case the **LenderNode**) to invoke it.
+
+1. First you'll need the Smart Contracts role from the **LenderNode**, which is found in the output of the command below (`LenderNode.resources.smartContracts.aws_Role`)
+   ```shell
+   share uni get --uni <your_uni_name>
+   ```
+2. Next you'll use the AWS CLI to set two permissions, one that allows the Smart Contract Principal to view the Lambda function's properties and one that allows the principal to invoke the Lambda function.
+   ```
+   aws lambda add-permission --region <your-lambda-function-region> --function-name <your-lambda-function-arn> --action lambda:InvokeFunction --statement-id AllowVendiaInvokeFunction --principal <smart-contract-role>
+   aws lambda add-permission --region <your-lambda-function-region> --function-name <your-lambda-function-arn> --action lambda:GetFunctionConfiguration  --statement-id AllowVendiaGetFunctionConfiguration  --principal <smart-contract-role>
+   ```
+
+### Create a Loan Enrichment Smart Contract
+You'll now use a Smart Contract to connect the Lambda function from the previous section to the **LenderNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
+
+The Lambda function from the previous section expects an input that includes certain fields.  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked, and from the invocation arguements sent when the Smart Contract is invoked.  See the `enrichmentInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
+
+The Lamdba function from the previous section produces an output that includes `additionalResources` for the loan (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Lambda function invocation is complete.  See the `enrichmentOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+
+To create a Loan Enrichment Smart Contract:
+
+1. Open `.share.env` and assign `ENRICHMENT_LAMBDA_ARN` to the computation Lambda function's ARN (the same value used in the previous section for `<your-lambda-function-arn>`)
+2. Invoke the provided npm script to create an enrichment smart contract on the **LenderNode**
+   ```
+   npm run createEnrichmentSmartContract
+   ```
+3. Use the GraphQL Explorer view of the **LenderNode** to confirm the smart contract exists, and to find its unique identifier (`_id`) needed in subsequent sections.
+   ```graphql
+   query ListSmartContracts {
+     listVendia_ContractItems {
+       Vendia_ContractItems {
+         ... on Vendia_Contract {
+           _id
+           _owner
+           name
+           revisionId
+           description
+           inputQuery
+           outputMutation
+           resource {
+             csp
+             uri
+           }
+         }
+       }
+     }
+   }
+   ```
+
+### Enrich Loan Data
+The Lender now wants to add supplemental information to a non-performing loan.
+
+You can simulate the operations a Lender might perform when addressing a non-performing loan - providing the borrower with tailored payment assistance information.
+
+#### Example - Enrich Loan Data 
+Each loan's `additionalResources` field was originally empty.  Now, that field will be populated based on external input.
+
+##### Using a Programmatic Client
+You can invoke the enrichment Smart Contract using the provided npm script.  The script takes two arguments, which are the `_id` of the Smart Contract to invoke and the `loanIdentifer` of the loan to enrich.
+
+1. Run the provided npm script to invoke the enrichment smart contract on the **LenderNode**
+```
+npm run invokeEnrichmentSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier 0000000000000003
+```
+
+##### Using the Share Web App
+You can alternatively invoke the enrichment Smart Contract using the Smart Contract view of the **LenderNode** through the Share web app.
+
+1. Click on the smart contract by name
+2. Then click `Invoke`
+3. Provide the required `loanIdentifier` input query arguments
+   ```json
+   {
+     "loanIdentifier": "0000000000000003"
+   }
+   ```
+3. Provide the additional `invokeArguments`, which will be used to populate the `aditionalResources` values with these dynamic data values.
+   ```json
+   {
+     "additionalResources": [
+        {
+          "description": "Option 1 - HUD Payment Programs for Homeowners",
+          "uri": "https://www.hud.gov/sites/dfiles/Main/documents/HUDPrograms2020.pdf"
+        },
+        {
+          "description": "Option 2 - FNMA Payment Programs for Homeowners",
+          "uri": "https://www.knowyouroptions.com/loanlookup"
+        }
+      ]  
+   }
+   ```
+4. Click `Invoke`
+
+In either case, the end result is the `additionalResources` of loan `0000000000000003` is populated with the values sent as `invokeArguments`.  You can confirm this through the Entity Explorer view of the Share web app or the GraphQL Explorer view of the Share web app using this GraphQL query:
+
+```graphql
+query ListLoans {
+    list_LoanItems {
+        _LoanItems {
+            ... on Self_Loan {
+                _id
+                loanIdentifier
+                delinquencyStatus
+                additionalResources {
+                    description
+                    uri
+                }
+            }
+        }
+    }
+}
+```
 
 ## Summary
-In this example you:
+In this example, you explored three different smart contracts:
+
+* **Validation Smart Contract** - That validates a record _and_ changes the ACLs on that record if it is valid (and only if it is valid).  This allows other participants to see _only_ valid data at all times.
+* **Computation Smart Contract** - That computes "rollup" values based on existing data.  This allows computations to be executed (and re-executed) as data changes on the Uni.
+* **Enrichment Smart Contract** - That enriches an existing record based on dynamic, runtime inputs provided during smart contract invocation.  This allows the caller to provide per-call data, instructions, or other just-in-time inputs.

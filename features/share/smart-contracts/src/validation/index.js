@@ -1,3 +1,9 @@
+/**
+ * Performs a set of validations against a loan provided as part of the event input.
+ *
+ * @param event that contains a loan to be validated, among other fields
+ * @returns Promise of an object that contains the validation results and ACL modifications, as expected by the associated smart contract's outputMutation
+ */
 exports.handler = async (event) => {
 
     let loan = {}

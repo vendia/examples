@@ -25,6 +25,8 @@ if(args.type === 'validation') {
    createValidationSmartContract()
 } else if(args.type === 'computation') {
     createComputationSmartContract()
+} else if(args.type === 'enrichment') {
+    createEnrichmentSmartContract()
 }
 
 function createValidationSmartContract() {
@@ -49,12 +51,32 @@ function createValidationSmartContract() {
 
 function createComputationSmartContract() {
     console.debug("Adding computation smart contract")
-    let lenderClient = new VendiaClient(
+    let servicerClient = new VendiaClient(
         process.env.SERVICER_GQL_URL,
         {'x-api-key': process.env.SERVICER_GQL_APIKEY}
     )
-    lenderClient
+    servicerClient
         .invokeVendiaShare(createComputationSmartContractPayload())
+        .then(response => {
+            console.debug("Response status", response.status)
+            if(response?.data?.errors) {
+                throw new Error("GraphQL response included errors")
+            }
+            console.debug("Smart contract created", response.data)
+        })
+        .catch(error => {
+            console.error("Failed to invoke Vendia Share", error)
+        })
+}
+
+function createEnrichmentSmartContract() {
+    console.debug("Adding enrichment smart contract")
+    let lenderClient = new VendiaClient(
+        process.env.LENDER_GQL_URL,
+        {'x-api-key': process.env.LENDER_GQL_APIKEY}
+    )
+    lenderClient
+        .invokeVendiaShare(createEnrichmentSmartContractPayload())
         .then(response => {
             console.debug("Response status", response.status)
             if(response?.data?.errors) {
@@ -69,7 +91,7 @@ function createComputationSmartContract() {
 
 function createValidationSmartContractPayload() {
     return {
-        query: GqlMutations.smartContractMutation,
+        query: GqlMutations.smartContractCreationMutation,
         variables: {
             name: 'validation-smart-contract',
             description: 'Smart contract for validation, created programatically',
@@ -82,13 +104,26 @@ function createValidationSmartContractPayload() {
 
 function createComputationSmartContractPayload() {
     return {
-        query: GqlMutations.smartContractMutation,
+        query: GqlMutations.smartContractCreationMutation,
         variables: {
             name: 'computation-smart-contract',
             description: 'Smart contract for computation, created programatically',
-            inputQuery: GqlMutations.computatiohInputQuery,
+            inputQuery: GqlMutations.computationInputQuery,
             outputMutation: GqlMutations.computationOutputMutation,
             resource: process.env.COMPUTATION_LAMBDA_ARN
+        }
+    }
+}
+
+function createEnrichmentSmartContractPayload() {
+    return {
+        query: GqlMutations.smartContractCreationMutation,
+        variables: {
+            name: 'enrichment-smart-contract',
+            description: 'Smart contract for enrichment, created programatically',
+            inputQuery: GqlMutations.enrichmentInputQuery,
+            outputMutation: GqlMutations.enrichmentOutputMutation,
+            resource: process.env.ENRICHMENT_LAMBDA_ARN
         }
     }
 }
