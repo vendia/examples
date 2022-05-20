@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { ArgumentParser } from 'argparse';
 import {GqlMutations} from "./GqlMutations.js";
-import {VendiaClient} from "./VendiaClient";
+import {VendiaClient} from "./VendiaClient.js";
 
 dotenv.config({path: "./.share.env"})
 

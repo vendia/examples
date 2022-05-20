@@ -95,8 +95,9 @@ export class GqlMutations {
         _LoanItems {
           ... on Self_Loan {
             _id
+            loanIdentifier
             borrowerCreditScore
-            originalUnpaidPrincipalBalance
+            unpaidPrincipalBalance
             originationDate
           }
         }
@@ -105,15 +106,12 @@ export class GqlMutations {
   `
 
   static validationOutputMutation = `
-    mutation ValidationOutputMutation($id: ID!,  $input: Self_Loan_UpdateInput_!, $servicerAction: Vendia_OperationType) {
+    mutation ValidationOutputMutation($id: ID!,  $input: Self_Loan_UpdateInput_!, $acl: [Vendia_Acl_Input_!]) {
       update_Loan_async(
         id: $id, 
         input: $input,
         aclInput: {
-            acl: [
-                { principal: {nodes: "LenderNode"}, operations: [ALL, UPDATE_ACL] }
-                { principal: {nodes: "ServicerNode"}, operations: [$servicerAction] }
-            ]
+            acl: $acl
         }
       ) {
         error

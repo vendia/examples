@@ -1,17 +1,21 @@
 exports.handler = async (event) => {
 
+    let loan = {}
+
     try {
         console.log("Event is", event)
 
-        let loan = event.queryResult.list_LoanItems._LoanItems[0]
+        loan = event.queryResult.list_LoanItems._LoanItems[0]
+
+        console.log("Loan is", loan)
 
         //throw an unexpected error to demonstrate the purpose of the "catch" block below
-        if(loan.loanIdentifier == "0000000000000005") {
+        if(loan.loanIdentifier === "0000000000000005") {
             throw new Error("Something unexpected happened - oh no!")
         }
 
         let isValid = isValidOrigination(loan.originationDate) &&
-            isValidLoanAmount(loan.originalUnpaidPrincipalBalance, loan.borrowerCreditScore)
+            isValidLoanAmount(loan.unpaidPrincipalBalance, loan.borrowerCreditScore)
 
         console.log("Validation function determined the loan" + (isValid ? " IS " : " IS NOT ") + "valid");
 
@@ -21,7 +25,10 @@ exports.handler = async (event) => {
                 input: {
                     validationStatus: "VALID"
                 },
-                servicerAction: "READ"
+                acl: [
+                    { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] },
+                    { principal: {nodes: "ServicerNode"}, operations: ["READ"] }
+                ]
             }
         } else {
             return {
@@ -29,7 +36,9 @@ exports.handler = async (event) => {
                 input: {
                     validationStatus: "INVALID"
                 },
-                servicerAction: null
+                acl: [
+                    { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] }
+                ]
             }
         }
     } catch (error) {
@@ -39,7 +48,9 @@ exports.handler = async (event) => {
             input: {
                 validationStatus: "ERROR"
             },
-            servicerAction: null
+            acl: [
+                { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] }
+            ]
         }
     }
 }
