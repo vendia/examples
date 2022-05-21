@@ -1,0 +1,36 @@
+query listAccountContacts {
+  list_AccountContactItems {
+    _AccountContactItems {
+      ... on Self_AccountContact {
+        _id
+        partner
+        accountName
+        duns
+        primaryContactName
+        primaryContactEmail
+        primaryContactPhone
+        users {
+          name
+          role
+          emailAddress
+          phoneNumber
+        }
+      }
+      ... on Self_AccountContact_Partial_ {
+        _id
+        partner
+        accountName
+        duns
+        primaryContactName
+        primaryContactEmail
+        primaryContactPhone
+        users {
+          name
+          role
+          emailAddress
+          phoneNumber
+        }
+      }
+    }
+  }
+}

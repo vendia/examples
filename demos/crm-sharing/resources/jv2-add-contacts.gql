@@ -1,0 +1,73 @@
+mutation createAccountContacts {
+    contact1: add_AccountContact(
+        input: {
+            partner: "JV2",
+            accountName: "Disney",
+            duns: "333333333",
+            primaryContactName: "Tim Snyder",
+            primaryContactEmail: "not-real-1@disney.com",
+            primaryContactPhone: "9085550000",
+            users: [
+                {
+                    name: "James Khalir",
+                    role: "Account Executive",
+                    emailAddress: "not-real-2@disney.com",
+                    phoneNumber: "9085550987"
+                },
+                {
+                    name: "Francine Rao",
+                    role: "Account Analyst",
+                    emailAddress: "not-real-3@disney.com",
+                    phoneNumber: "9085556543"
+                }
+            ]
+        },
+        syncMode: ASYNC,
+        aclInput: {
+            acl: [
+                {principal: { nodes: [ "JV1" ] }, operations: [ READ ] }
+            ]
+        }
+    ) {
+        transaction {
+            _id
+        }
+    },
+
+    contact2: add_AccountContact(
+        input: {
+            partner: "JV2",
+            accountName: "NBC Universal",
+            duns: "222222222",
+            primaryContactName: "Terry Patel",
+            primaryContactEmail: "not-real-1@nbcu.com",
+            primaryContactPhone: "2125561111",
+            users: [
+                {
+                    name: "Gil Anderson",
+                    role: "Account Executive",
+                    emailAddress: "not-real-2@nbcu.com",
+                    phoneNumber: "2125562222"
+                },
+                {
+                    name: "Michelle Lo",
+                    role: "Account Analyst",
+                    emailAddress: "not-real-3@nbcu.com",
+                    phoneNumber: "2125563333"
+                }
+            ]
+        },
+        syncMode: ASYNC
+        aclInput: {
+            acl: [
+                {principal: { nodes: [ "JV1" ] }, path: "partner", operations: [ READ ] },
+                {principal: { nodes: [ "JV1" ] }, path: "accountName", operations: [ READ ] },
+                {principal: { nodes: [ "JV1" ] }, path: "primaryContactName", operations: [ READ ] },
+                {principal: { nodes: [ "JV1" ] }, path: "primaryContactEmail", operations: [ READ ] }            ]
+        }
+    ) {
+        transaction {
+            _id
+        }
+    }
+}

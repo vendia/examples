@@ -22,14 +22,14 @@ mutation createAccountContacts {
                 }
             ]
         },
+        syncMode: ASYNC,
         aclInput: {
             acl: [
                 {principal: { nodes: [ "*" ] }, operations: [ READ ] }
             ]
-        },
-        syncMode: ASYNC
+        }
     ) {
-        transaction: {
+        transaction {
             _id
         }
     },
@@ -57,19 +57,19 @@ mutation createAccountContacts {
                 }
             ]
         },
+        syncMode: ASYNC
         aclInput: {
             acl: [
-                {principal: { nodes: [ "JV3" ] }, path: "partner", operations: [ READ ] },
-                {principal: { nodes: [ "JV3" ] }, path: "accountName", operations: [ READ ] },
-                {principal: { nodes: [ "JV3" ] }, path: "duns", operations: [ READ ] },
-                {principal: { nodes: [ "JV3" ] }, path: "primaryContactName", operations: [ READ ] },
-                {principal: { nodes: [ "JV3" ] }, path: "primaryContactEmail", operations: [ READ ] },
-                {principal: { nodes: [ "JV3" ] }, path: "primaryContactPhone", operations: [ READ ] },
+                {principal: { nodes: [ "JV2" ] }, path: "partner", operations: [ READ ] },
+                {principal: { nodes: [ "JV2" ] }, path: "accountName", operations: [ READ ] },
+                {principal: { nodes: [ "JV2" ] }, path: "duns", operations: [ READ ] },
+                {principal: { nodes: [ "JV2" ] }, path: "primaryContactName", operations: [ READ ] },
+                {principal: { nodes: [ "JV2" ] }, path: "primaryContactEmail", operations: [ READ ] },
+                {principal: { nodes: [ "JV2" ] }, path: "primaryContactPhone", operations: [ READ ] },
             ]
-        },
-        syncMode: ASYNC
+        }
     ) {
-        transaction: {
+        transaction {
             _id
         }
     }
