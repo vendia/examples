@@ -28,6 +28,8 @@ Smart contracts are programmatic in nature, which means this example will be hea
 * Install [Node.js](https://nodejs.org/en/download/)
 * Install [Git Client](https://git-scm.com/downloads)
 
+The Lambda functions demonstrated in this example use [Node.js](https://nodejs.dev/) source code that implements the business logic outlined in each section. While the examples use Node.js code, any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by AWS Lambda will work as the basis for Vendia Share Smart Contracts.
+
 In addition, you'll also need to clone this repository.
 
 <details>
@@ -104,7 +106,7 @@ npm run loadData
 ### Define Validation Rules
 The Lender wants to ensure the Servicer is only able to act on loans with valid data.
 
-The [schema](uni_configuration/schema.json) for the Uni provides basic validation based on the schema definition.  For example, `loanIdentifier` must be a 16-digit value, `originationDate` must be a valid date, and `originalInterestRate` must be a number between 0 and 100.  While those syntax checks are necessary for data validation, they do not address business rule validation.
+The [schema](uni_configuration/schema.json) for the Uni provides basic data validation based on the schema definition.  For example, `loanIdentifier` must be a 16-digit value, `originationDate` must be a valid date, and `originalInterestRate` must be a number between 0 and 100.  Vendia Share's GraphQL API implementation will reject input that's invalid with respect to the Uni's schema.  While basic data validations are necessary, they do not address the validation of _business rules_ that cannot be expressed through a pre-defined format or regular expression.
 
 The Lender can use a smart contract to ensure more in-depth data validation occurs prior to the Servicer making use of the data.
 
@@ -176,7 +178,7 @@ To create a Loan Validation Smart Contract:
 ### Validate Loan Data
 All the Loans the Lender added in the last step have a `validationStatus` set to `PENDING` and [data access controls](https://www.vendia.net/docs/share/fine-grained-data-permissions) in the form of an Access Control List (ACL) that prevent the Servicer from seeing the yet-to-be-validated loans.
 
-You can validate each Loan by invoking the validation Smart Contract created in the previous sections.  The Smart Contract takes a single query argument, which is the `loanIdentifier` of the Loan to be validated.  Upon validation, the Loan's `validationStatus` will be set to either `VALID` (all validation rules are satisfied), `INVALID` (at least one validation rule was not satisified), or `ERROR` (validation failed for an unexpected reason).  Further, if a loan is `VALID`, its  
+You can validate each Loan by invoking the validation Smart Contract created in the previous sections.  The Smart Contract takes a single query argument, which is the `loanIdentifier` of the Loan to be validated.  Upon validation, the Loan's `validationStatus` will be set to either `VALID` (all validation rules are satisfied), `INVALID` (at least one validation rule was not satisified), or `ERROR` (validation failed for an unexpected reason).  Further, if a loan is `VALID`,  its ACLs are updated to allow the **ServicerNode** read access.  In other words, the Servicer will only see valid loans, as only valid loans are made visible to the Servicer by the Lender.
 
 #### Example - Validate a Valid Loan
 Loan `0000000000000001` is valid based on the [validation rules](README.md#define-validation-rules) above.
