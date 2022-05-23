@@ -62,7 +62,7 @@ exports.handler = async (event) => {
 }
 
 /**
- * True if originationDate is prior to now, false other wise
+ * True if originationDate is prior to now, false otherwise
  * @param originationDate of a loan
  * @returns {boolean} true if origination date isn't in the future, false if it is
  */

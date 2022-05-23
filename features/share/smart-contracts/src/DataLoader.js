@@ -35,7 +35,7 @@ fsPromises
             lenderClient
                 .invokeVendiaShare(createLoanMutation(loanDirPath + filename))
                 .then(response => {
-                    console.log("Creat loan response status", response.status)
+                    console.log("Create loan response status", response.status)
                     if(response?.data?.errors) {
                         throw new Error("GraphQL response included errors for " + filename, )
                     }
@@ -62,7 +62,6 @@ function createLoanMutation(filepath) {
     let json = fs.readFileSync(filepath);
     let loan = JSON.parse(json);
 
-    //console.log("Parsed loan is", loan);
 
     return {
         query: GqlMutations.addLoanMutation,

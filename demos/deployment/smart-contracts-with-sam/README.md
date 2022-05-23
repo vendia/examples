@@ -19,19 +19,19 @@ In order to use this example, you'll first need to clone the respository.
 ### Clone with SSH
 
 ```bash
-git clone git@github.com:brian-vendia/simple-little-smart-contract.git
+git clone git@github.com:vendia/examples.git
 ```
 
 ### Clone with HTTPS
 
 ```bash
-git clone https://github.com/brian-vendia/simple-little-smart-contract.git
+git clone https://github.com/vendia/examples.git
 ```
 
-### Change to the simple-little-smart-contract Directory
+### Change to the smart-contracts-with-sam Directory
 
 ```bash
-cd simple-little-smart-contract
+cd demos/deployment/smart-contracts-with-sam
 ```
 
 ## Deploying the Smart Contract Function Stack

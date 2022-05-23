@@ -9,7 +9,7 @@
 ## Overview
 Vendia Share enables companies to rapidly build applications that securely share data across departments, companies, and clouds.  If _sharing data_ is Step 1, then _acting on_ shared data is almost always Step 2.  There are many ways to act on the data shared using Vendia Share: auto-generated [GraphQL APIs](https://www.vendia.net/docs/share/graphql), event-driven [inbound and outbound integrations](https://www.vendia.net/docs/share/integrations), and, more recently the introduction of [smart contracts](https://www.vendia.net/docs/share/smart-contracts).
 
-Smart contracts allow users to take action on data in a predefined way, one that is versioned and ledgered for the improved transparency of all Uni participants.  This allows predefined and versioned functions to be created by a single participant for the benefit of all participants.  Further, the ledgered nature of smart contracts provides an added level of transparency and auditability that the "off-chain" approaches to data processing do not.
+Smart contracts allow users to take action on data in a predefined way, one that is versioned and ledgered for the improved transparency of all Uni participants.  This requires predefined and versioned functions to be created by a single participant for the benefit of one or more participants.  Further, the ledgered nature of smart contracts provides an added level of transparency and auditability that the "off-chain" approaches to data processing do not.
 
 Smart contracts can be used for a variety of purposes.  In this example, we'll explore a set of smart contracts that are used for:
 
@@ -87,7 +87,7 @@ The below scripts look for a file named `.share.env` within the `src` directory.
    ```
 
 #### Pull Dependencies
-The Node.js scripts rely on a set of 3rd party libraries, which must be retreived before executing the scripts
+The Node.js scripts rely on a set of 3rd party libraries, which must be retreived before executing the scripts.
 
 ```shell
 npm i
@@ -122,6 +122,8 @@ The [validation Lambda function](src/validation/index.js) includes [Node.js](htt
 
 Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../demos/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
 
+**NOTE:** Vendia Smart Contracts require AWS Lambda functions be versioned. The special version `$LATEST` will not work. 
+
 Once the Lambda function exists, it must be configured to permit a specific node in the Uni (in this case the **LenderNode**) to invoke it.
 
 1. First you'll need the Smart Contract Role from the **LenderNode**, which is found in the output of the command below (`LenderNode.resources.smartContracts.aws_Role`)
@@ -137,9 +139,9 @@ Once the Lambda function exists, it must be configured to permit a specific node
 ### Create a Loan Validation Smart Contract
 You'll now use a Smart Contract to connect the Lambda function from the previous section to the **LenderNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
 
-The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked.  See the `validationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lambda function from the previous section expects an input that includes certain fields (those needing validation).  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked.  See the `validationInputQuery` in [GqlMutations.js](src/GqlMutations.js#L93) for an example.
 
-The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Lambda function invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lamdba function from the previous section produces an output that includes the validation result (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Lambda function invocation is complete.  See the `validationOutputMutation` in [GqlMutations.js](src/GqlMutations.js#L109) for an example.
 
 To create a Loan Validation Smart Contract:
 
@@ -258,6 +260,8 @@ The [computation Lambda function](src/computation/index.js) includes [Node.js](h
 
 Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../demos/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
 
+**NOTE:** Vendia Smart Contracts require AWS Lambda functions be versioned. The special version `$LATEST` will not work.
+
 Once the Lambda function exists, it must be configured to permit a specific node in the Uni (in this case the **ServicerNode**) to invoke it.
 
 1. First you'll need the Smart Contracts role from the **ServicerNode**, which is found in the output of the command below (`ServicerNode.resources.smartContracts.aws_Role`)
@@ -273,9 +277,9 @@ Once the Lambda function exists, it must be configured to permit a specific node
 ### Create a Loan Portfolio Statistics Calculation Smart Contract
 You'll now use a Smart Contract to connect the Lambda function from the previous section to the **ServicerNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
 
-The Lambda function from the previous section expects an input that includes certain fields.  That input comes from a pre-defined GraphQL query, which will be executed against the **ServicerNode** when the Smart Contract is invoked.  See the `computationInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lambda function from the previous section expects an input that includes certain fields.  That input comes from a pre-defined GraphQL query, which will be executed against the **ServicerNode** when the Smart Contract is invoked.  See the `computationInputQuery` in [GqlMutations.js](src/GqlMutations.js#L123) for an example.
 
-The Lamdba function from the previous section produces an output that includes the loan portfolio statistics (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **ServicerNode** when the Lambda function invocation is complete.  See the `computationOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lamdba function from the previous section produces an output that includes the loan portfolio statistics (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **ServicerNode** when the Lambda function invocation is complete.  See the `computationOutputMutation` in [GqlMutations.js](src/GqlMutations.js#L144) for an example.
 
 To create a Loan Portfolio Statistics Calculation Smart Contract:
 
@@ -366,6 +370,8 @@ The [enrichment Lambda function](src/enrichment/index.js) includes [Node.js](htt
 
 Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../demos/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
 
+**NOTE:** Vendia Smart Contracts require AWS Lambda functions be versioned. The special version `$LATEST` will not work.
+
 Once the Lambda function exists, it must be configured to permit a specific node in the Uni (in this case the **LenderNode**) to invoke it.
 
 1. First you'll need the Smart Contracts role from the **LenderNode**, which is found in the output of the command below (`LenderNode.resources.smartContracts.aws_Role`)
@@ -381,9 +387,9 @@ Once the Lambda function exists, it must be configured to permit a specific node
 ### Create a Loan Enrichment Smart Contract
 You'll now use a Smart Contract to connect the Lambda function from the previous section to the **LenderNode**.  Think of the Smart Contract as a wrapper around the Lambda function, responsible for sending data to the Lambda function (its input) and receiving data from the Lambda function (its output).
 
-The Lambda function from the previous section expects an input that includes certain fields.  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked, and from the invocation arguements sent when the Smart Contract is invoked.  See the `enrichmentInputQuery` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lambda function from the previous section expects an input that includes certain fields.  That input comes from a pre-defined GraphQL query, which will be executed against the **LenderNode** when the Smart Contract is invoked, and from the invocation arguements sent when the Smart Contract is invoked.  See the `enrichmentInputQuery` in [GqlMutations.js](src/GqlMutations.js#L158) for an example.
 
-The Lamdba function from the previous section produces an output that includes `additionalResources` for the loan (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Lambda function invocation is complete.  See the `enrichmentOutputMutation` in [GqlMutations.js](src/GqlMutations.js) for an example.
+The Lamdba function from the previous section produces an output that includes `additionalResources` for the loan (modeled as an object).  That output is mapped into a pre-defined GraphQL mutation, which wil lbe executed against the **LenderNode** when the Lambda function invocation is complete.  See the `enrichmentOutputMutation` in [GqlMutations.js](src/GqlMutations.js#L171) for an example.
 
 To create a Loan Enrichment Smart Contract:
 
