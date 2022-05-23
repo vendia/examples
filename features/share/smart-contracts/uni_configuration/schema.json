@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://vendia.net/schemas/demos/loans.schema.json",
+  "title": "Loan Marketplace",
+  "description": "Single Source of Loan Truth",
+  "type": "object",
+  "x-vendia-acls": {
+    "LoanAcl": {
+      "type": "Loan"
+    },
+    "LoanPortfolioAcl": {
+      "type": "LoanPortfolio"
+    }
+  },
+  "properties": {
+      "Loan": {
+          "description": "Whole loans that need to be serviced, and may securitized",
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                  "loanIdentifier": {
+                      "description": "Globally unique loan identifier, set by the original lender",
+                      "type": "string",
+                      "pattern": "[0-9]{16}"
+                  },
+                  "portfolioIdentifier": {
+                      "description": "Unique identifier of the portfolio in which this Loan resides",
+                      "type": "string",
+                      "pattern": "[A-Z0-9]{8}"
+                  },
+                  "loanToValuePercent": {
+                      "description": "Current loan to value ratio, as a percentage",
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                  },
+                  "unpaidPrincipalBalance": {
+                      "description": "Current unpaid principal balance amount",
+                      "type": "number"
+                  },
+                  "interestRatePercent": {
+                      "description": "Current loan interest rate, as a percent",
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                  },
+                  "originationDate": {
+                      "description": "Date loan originated",
+                      "type": "string",
+                      "format": "date"
+                  },
+                  "borrowerCreditScore": {
+                      "description": "Credit score of borrower",
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 850
+                  },
+                  "numberOfUnits": {
+                      "description": "Number of units in the property",
+                      "type": "integer",
+                      "minimum": 0
+                  },
+                  "delinquencyStatus": {
+                      "description": "Current delinquency status of the loan, based on the current reporting period",
+                      "type": "string",
+                      "enum": ["CURRENT", "LATE", "DELINQUENT"]
+                  },
+                  "validationStatus": {
+                      "description": "The validation status of the loan",
+                      "type": "string",
+                      "enum": ["PENDING","VALID","INVALID","ERROR"]
+                  },
+                  "additionalResources": {
+                      "description": "Resources that may help the borrower address payment challenges",
+                      "type": "array",
+                      "items": {
+                          "type": "object",
+                          "properties": {
+                              "description": {
+                                  "description": "Name of the program or resource",
+                                  "type": "string"
+                              },
+                              "uri": {
+                                  "description": "Link to the program or resource",
+                                  "type": "string",
+                                  "format": "uri"
+                              }
+                          }
+                      }
+                  }
+              },
+              "required": [
+                  "loanIdentifier",
+                  "originationDate",
+                  "borrowerCreditScore",
+                  "numberOfUnits",
+                  "delinquencyStatus",
+                  "interestRatePercent",
+                  "loanToValuePercent",
+                  "unpaidPrincipalBalance"
+              ]
+          }
+      },
+      "LoanPortfolio": {
+          "description": "A collection of Loans along with metadata about the loans, modeled as a portfolio",
+          "type": "array",
+          "items": {
+              "type": "object",
+              "properties": {
+                  "portfolioIdentifier": {
+                      "description": "Unique identifier of this Loan Portfolio",
+                      "type": "string",
+                      "pattern": "[A-Z0-9]{8}"
+                  },
+                  "portfolioName": {
+                      "description": "Descriptive name of this Loan Portfolio",
+                      "type": "string"
+                  },
+                  "weightedAverageInterestRate": {
+                      "description": "The percent of currently delinquent Loans in the Loan Portfolio",
+                      "type": "number"
+                  },
+                  "delinquencyPercentage": {
+                      "description": "The percent of currently late or delinquent Loans in the Loan Portfolio",
+                      "type": "number"
+                  }
+              },
+              "required": [
+                  "portfolioIdentifier",
+                  "portfolioName"
+              ]
+          }
+      }
+  }
+}

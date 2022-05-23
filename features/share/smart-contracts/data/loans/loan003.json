@@ -1,0 +1,12 @@
+{
+  "loanIdentifier": "0000000000000003",
+  "portfolioIdentifier": "AAAA1111",
+  "loanToValuePercent": 90,
+  "unpaidPrincipalBalance": 600000,
+  "interestRatePercent": 4.25,
+  "originationDate": "2019-01-01",
+  "borrowerCreditScore": 650,
+  "numberOfUnits": 1,
+  "delinquencyStatus": "DELINQUENT",
+  "validationStatus": "PENDING"
+}
