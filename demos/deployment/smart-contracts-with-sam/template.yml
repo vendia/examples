@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Simple little smart contract - to be used for inspiration
+
+Globals:
+  Function:
+    Runtime: python3.9
+    Timeout: 30
+    Handler: index.handler
+    MemorySize: 256
+
+Resources:
+  # AWS CloudWatch Log Group to persist Function logs for
+  # a 2 week period
+  ScFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ScFunction}
+      RetentionInDays: 14
+
+  # AWS Lambda Function that acts as the Smart Contract
+  ScFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Smart Contract to do the things
+      CodeUri: ./src/
+      # AWS Lambda functions invoked by a Vendia Smart Contract must be versioned.
+      # See https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-function.html#sam-specification-generated-resources-function-autopublishalias
+      # for more information.
+      AutoPublishAlias: prod
+
+Outputs:
+  SmartContractFunctionArn:
+    Description: Smart Contract Lambda ARN - see https://www.vendia.net/docs/share/smart-contracts
+    Value: !GetAtt ScFunction.Arn
