@@ -25,6 +25,9 @@ mutation createAccountContacts {
         syncMode: ASYNC,
         aclInput: {
             acl: [
+                # Implicit ACL for the data writer - not explicitly needed
+                # but provided as a reference.
+                # {principal: { nodes: [ "JV2" ] }, operations: [ ALL, UPDATE_ACL ] }
                 {principal: { nodes: [ "JV1" ] }, operations: [ READ ] }
             ]
         }
@@ -60,6 +63,9 @@ mutation createAccountContacts {
         syncMode: ASYNC
         aclInput: {
             acl: [
+                # Implicit ACL for the data writer - not explicitly needed
+                # but provided as a reference.
+                # {principal: { nodes: [ "JV2" ] }, operations: [ ALL, UPDATE_ACL ] }
                 {principal: { nodes: [ "JV1" ] }, path: "partner", operations: [ READ ] },
                 {principal: { nodes: [ "JV1" ] }, path: "accountName", operations: [ READ ] },
                 {principal: { nodes: [ "JV1" ] }, path: "primaryContactName", operations: [ READ ] },

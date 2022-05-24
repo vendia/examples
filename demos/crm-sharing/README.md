@@ -1,4 +1,4 @@
-# Vendia Share Demo - A Real-Time Sharing of CRM Data
+# Vendia Share Demo - Sharing CRM Data in Real Time
 
 [Vendia Share](https://www.vendia.net) is the real-time data cloud for rapidly building applications that securely share data across departments, companies, clouds, and regions.  
 
@@ -16,9 +16,9 @@ This demo highlights the relative ease that business partners can share account 
 
 In this demo, two joint-venture business partners use Vendia Share to exchange account contact information. Each partner has their own account team managing customer relationships. The joint-venture partner account teams need to coordinate with each other on a regular basis.
 
-Prior to using Vendia Share, the partners struggled to maintain a consistent, shared source of truth of account contact data. The mechanism used was emailing CSVs on a regular, monthly cadence. However, account team structures change often. Since adopting Vendia Share, the partners have been able to reach counterparts in their joint-venture network on the first try, without relying on outdated information.
+Prior to using Vendia Share, the partners struggled to maintain a consistent, shared source of truth of account contact data. They shared account contact information infrequently, periodically emailing CSVs back and forth that often included outdated information. However, account team structures change much more often. The result were account teams unable to reach those they wanted to quickly and easily. Since adopting Vendia Share, the partners have been able to reach counterparts in their joint-venture network on the first try, without relying on outdated information.
 
-This demo does not make use of any specific CRM application and uses native Vendia Share tooling. You can build off of this example as a jump-off point to query a CRM and write shared data back to a CRM.
+This demo does not make use of any specific CRM application and uses only native Vendia Share capabilities. You can expand upon this example to include direct CRM integration, including the ability to read from and write to a CRM from Vendia Share.
 
 ## Demo Pre-requisites
 
