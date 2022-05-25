@@ -7,6 +7,8 @@
 exports.handler = async (event) => {
 
     let loan = {}
+    let validationStatus
+    let acls
 
     try {
         console.log("Event is", event)
@@ -26,37 +28,32 @@ exports.handler = async (event) => {
         console.log("Validation function determined the loan" + (isValid ? " IS " : " IS NOT ") + "valid");
 
         if(isValid) {
-            return {
-                id: loan._id,
-                input: {
-                    validationStatus: "VALID"
-                },
-                acl: [
-                    { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] },
-                    { principal: {nodes: "ServicerNode"}, operations: ["READ"] }
-                ]
-            }
+            validationStatus = "VALID"
+            acls = [
+                { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] },
+                { principal: {nodes: "ServicerNode"}, operations: ["READ"] }
+            ]
         } else {
-            return {
-                id: loan._id,
-                input: {
-                    validationStatus: "INVALID"
-                },
-                acl: [
-                    { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] }
-                ]
-            }
+            validationStatus = "INVALID"
+            acls = [
+                {principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"]}
+            ]
         }
     } catch (error) {
         console.error("Unexpected exception during validation", error)
+
+        validationStatus = "ERROR"
+        acls = [
+            { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] }
+        ]
+
+    } finally {
+        console.log("Returning " + validationStatus + " and " + acls + " for loan " + loan._id)
+
         return {
             id: loan._id,
-            input: {
-                validationStatus: "ERROR"
-            },
-            acl: [
-                { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] }
-            ]
+            validationStatus: validationStatus,
+            acl: acls
         }
     }
 }

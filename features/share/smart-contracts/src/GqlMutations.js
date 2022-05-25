@@ -71,7 +71,7 @@ export class GqlMutations {
   `
 
   static smartContractInvocationMutation = `
-    mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "") {
+    mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "{}") {
       invokeVendia_Contract_async(
         id: $id, 
         input: {
@@ -107,10 +107,12 @@ export class GqlMutations {
   `
 
   static validationOutputMutation = `
-    mutation ValidationOutputMutation($id: ID!,  $input: Self_Loan_UpdateInput_!, $acl: [Vendia_Acl_Input_!]) {
+    mutation ValidationOutputMutation($id: ID!,  $validationStatus: Self_Loan_validationStatusEnum!, $acl: [Vendia_Acl_Input_!]) {
       update_Loan_async(
         id: $id, 
-        input: $input,
+        input: {
+          validationStatus: $validationStatus
+        },
         aclInput: {
             acl: $acl
         }
