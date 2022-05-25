@@ -1,0 +1,30 @@
+{
+    "name": "test-<name_of_your_choice>",
+    "schema": "schema.json",
+    "nodes": [
+        {
+            "name": "JV1",
+            "userId": "you@domain.com",
+            "region": "us-east-1",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
+        },
+        {
+            "name": "JV2",
+            "userId": "you@domain.com",
+            "region": "eu-west-2",
+            "settings": {
+                "apiSettings": {
+                    "auth": {
+                        "authorizerType": "API_KEY"
+                    }
+                }
+            }
+        }
+    ]
+}
