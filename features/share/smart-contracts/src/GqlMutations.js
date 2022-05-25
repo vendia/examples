@@ -71,7 +71,7 @@ export class GqlMutations {
   `
 
   static smartContractInvocationMutation = `
-    mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "") {
+    mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "{}") {
       invokeVendia_Contract_async(
         id: $id, 
         input: {
