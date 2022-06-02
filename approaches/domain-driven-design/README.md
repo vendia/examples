@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://vendia.net/">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
+  </a>
+</p>
+
 # Domain Driven Design
 
 A software developer named Eric Evans recognized the need to understand the software domain. To introduce the DDD approach, he wrote a book called Domain-Driven Design: Tackling Complexity in the Heart of Software. In his book, Evans says, “The heart of the software is its ability to solve domain-related problems for its user. All other features, vital though they may be, support this basic purpose.”

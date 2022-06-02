@@ -1,6 +1,12 @@
-# simple-little-smart-contract
+<p align="center">
+  <a href="https://vendia.net/">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
+  </a>
+</p>
 
-This repository shows how to deploy a Lambda suitable for definition as a Vendia Share [smart contract](https://www.vendia.net/docs/share/smart-contracts). The code for the smart contract is stored in [src/index.py](./src/index.py). The code is a simple placeholder; it will need to conform to the specification to meaningfully work with a Vendia Share Uni.
+# Deploying Smart Contracts with the AWS Serverless Application Model (SAM)
+
+This repository shows how to deploy a Lambda suitable for definition as a Vendia Share [smart contract](https://www.vendia.net/docs/share/smart-contracts). The code for the smart contract is stored in [src/index.py](src/index.py). The code is a simple placeholder; it will need to conform to the specification to meaningfully work with a Vendia Share Uni.
 
 ## Pre-requisites
 
