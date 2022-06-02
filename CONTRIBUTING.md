@@ -68,7 +68,7 @@ Please refer to our [Code of Conduct](CODE_OF_CONDUCT.md) for more details.
 
 ## Security issue notifications
 
-If you discover a potential security issue in this project we ask that you notify us directly - brian@vendia.net. Please do **not** create a public github issue.
+If you discover a potential security issue in this project we ask that you notify us directly - [sa@vendia.net](mailto:sa@vendia.net). Please do **not** create a public github issue.
 
 ## Licensing
 
