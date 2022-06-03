@@ -1,4 +1,10 @@
-# Vendia Share Workshop - Optimized Food and Beverage Distribution
+<p align="center">
+  <a href="https://vendia.net/">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
+  </a>
+</p>
+
+# Optimized Food and Beverage Distribution Workshop
 
 [Vendia Share](https://www.vendia.net) is the real-time data cloud for rapidly building applications that securely share data across departments, companies, clouds, and regions.  This workshops demonstrates the ease of creating multi-party data sharing solutions using the Share platform.
 

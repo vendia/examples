@@ -122,7 +122,7 @@ Neither of these in-depth validations are feasible through the schema definition
 
 The [validation Lambda function](src/validation/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the validation rules outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by AWS Lambda will work.
 
-Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../demos/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
+Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../approaches/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
 
 **NOTE:** Vendia Smart Contracts require AWS Lambda functions be versioned. The special version `$LATEST` will not work. 
 
@@ -260,7 +260,7 @@ The Servicer will calculate two values using data from the loans recently added 
 
 The [computation Lambda function](src/computation/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the computation of loan portfolio statistics outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by Lambda will work.
 
-Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../demos/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
+Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../approaches/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
 
 **NOTE:** Vendia Smart Contracts require AWS Lambda functions be versioned. The special version `$LATEST` will not work.
 
@@ -370,7 +370,7 @@ The Lender will populate the `additionalResources` field of a non-performing loa
 
 The [enrichment Lambda function](src/enrichment/index.js) includes [Node.js](https://nodejs.dev/) source code that implements the computation of loan portfolio statistics outlined in the previous section, though any [platform and language](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) supported by Lambda will work.
 
-Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../demos/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
+Creating the Lambda function itself is outside the scope of this example.  You can use the [AWS console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html), the [AWS CLI](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-awscli.html), or more [advanced approaches](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/).  See [this example](../../../approaches/deployment/smart-contracts-with-sam) for a smart contract deployment example that using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/).
 
 **NOTE:** Vendia Smart Contracts require AWS Lambda functions be versioned. The special version `$LATEST` will not work.
 

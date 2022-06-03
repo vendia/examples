@@ -10,12 +10,14 @@ This repository contains a variety of examples that highlight the capabilities o
 ## Overview
 The top-level directory structure groups examples by type for ease of navigation.
 
-* **[/applications](applications/README.md)** - _Coming Soon!_ Full-stack sample applications, powered by Vendia Share.
-* **[/approaches](approaches/README.md)** - Architectural, design, and tooling approaches that demonstrate  ways to interact with and successfully leverage Vendia Share
-* **[/demos](demos/README.md)** - Guided, step-by-step industry and use case specific demonstrations using Vendia Share  
-* **[/features](features/README.md)** - Deeper exploration of the core features that comprise Vendia Share
-* **[/integrations](integrations/README.md)** - Deeper exploration of common ingress and egress sources to get data in to and out of Vendia Share
-* **[/workshops](workshops/README.md)** - Guided, step-by-step industry and use case specific workshops to educate those new to Vendia Share
+| Directory | Purpose |
+|:---------|:--------|
+| [/applications](applications/README.md) | _Coming Soon!_ Full-stack sample applications, powered by Vendia Share.
+| [/approaches](approaches/README.md) | Architectural, design, and tooling approaches that demonstrate  ways to interact with and successfully leverage Vendia Share
+| [/demos](demos/README.md) | Guided, step-by-step industry and use case specific demonstrations using Vendia Share  
+| [/features](features/README.md) | Deeper exploration of the core features that comprise Vendia Share
+| [/integrations](integrations/README.md) | Deeper exploration of common ingress and egress sources to get data in to and out of Vendia Share
+| [/workshops](workshops/README.md) | Guided, step-by-step industry and use case specific workshops to educate those new to Vendia Share
 
 ## Where to Begin
 Vendia Share is feature rich and broadly applicable across real-time data sharing use cases.  Finding the best place to begin or continue your Vendia Share learning journey can be a challenge.  Here are some recommendations to make getting started simple:
