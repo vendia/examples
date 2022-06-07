@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vendia.net/">
-    <img src="https://raw.githubusercontent.com/vendia/examples/main/vendia-logo.png" alt="vendia logo" width="100px">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
   </a>
 </p>
 
@@ -96,7 +96,7 @@ sam deploy --guided
 
 You will be prompted to enter several pieces of data:
 
-* *sftp-to-share* as the stack name.  If you use a different name you will need to update the `STACK_NAME` variable in the [cleanup.sh](./cleanup.sh) script.
+* *sftp-to-share* as the stack name.  If you use a different name you will need to update the `STACK_NAME` variable in the [cleanup.sh](cleanup.sh) script.
 
 * *AWS Region* should match the same region as the **Shipper** Vendia Share node
 
@@ -154,7 +154,7 @@ query listAllShipments {
 
 ## Transfer a Valid CSV File to the SFTP Server
 
-You can upload the [test-shipment-data.csv](./test-shipment-data.csv) file to your SFTP server.  This will trigger a AWS Lambda function to parse it and POST it to the **Share** GraphQL endpoint.
+You can upload the [test-shipment-data.csv](test-shipment-data.csv) file to your SFTP server.  This will trigger a AWS Lambda function to parse it and POST it to the **Share** GraphQL endpoint.
 
 You will need to use the *private* key portion of the public key specified when creating the serverless application.  For convenience, this can be done using the `ssh-add` command.
 
@@ -164,7 +164,7 @@ ssh-add /path/to/the/private/key/file
 
 **NOTE:** If you added a passphrase when you created the key you will be prompted to enter it.
 
-Once you've run the `ssh-add` command you can use the `sftp` command to transfer the [test-shipment-data.csv](./test-shipment-data.csv) file.
+Once you've run the `ssh-add` command you can use the `sftp` command to transfer the [test-shipment-data.csv](test-shipment-data.csv) file.
 
 ```bash
 brian@local sftp-to-share % sftp sftp-to-share@sftp-id.server.transfer.aws-region.amazonaws.com

@@ -7,6 +7,12 @@
 # Vendia Examples
 This repository contains a variety of examples that highlight the capabilities of [Vendia Share](https://www.vendia.net/product).
 
+## Common Prerequisites
+Each example will have its own set of detailed prerequisites.  Two prereqs that are almost always needed (so worth getting now) are:
+
+* A Vendia Share [Account](https://share.vendia.net/signup), used to access Vendia Share
+* The Vendia Share [Command Line Interface (CLI)](https://vendia.net/docs/share/cli), used to manage Unis on Vendia Share
+
 ## Overview
 The top-level directory structure groups examples by type for ease of navigation.
 

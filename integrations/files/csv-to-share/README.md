@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vendia.net/">
-    <img src="https://raw.githubusercontent.com/vendia/examples/main/vendia-logo.png" alt="vendia logo" width="100px">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
   </a>
 </p>
 
@@ -48,7 +48,7 @@ cd examples/share/csv-to-share
 
 # Deploying the Example Uni
 
-This example will create a simple shared shopping list, not unlike the Vendia Share [Shopping List Quickstart ](https://vendia.net/docs/share/quickstart/shopping-list).  The only differences are the number of parties in the Uni and the way that data is populated in the Uni.  We will not populate our Uni with `initialState` and will, instead, populate our Uni with data from [shopping_list.csv](./shopping_list.csv).
+This example will create a simple shared shopping list, not unlike the Vendia Share [Shopping List Quickstart ](https://vendia.net/docs/share/quickstart/shopping-list).  The only differences are the number of parties in the Uni and the way that data is populated in the Uni.  We will not populate our Uni with `initialState` and will, instead, populate our Uni with data from [shopping_list.csv](shopping_list.csv).
 
 If not already logged in to the share service do so by running [`share login`](https://vendia.net/docs/share/cli/commands/login):
 

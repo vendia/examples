@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# Demos
+# Features
 The `features` directory of this repo includes deeper exploration of the core features that comprise Vendia Share. Enjoy!
 
 | Example | Programming Languages | Description |

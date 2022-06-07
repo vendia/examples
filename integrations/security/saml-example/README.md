@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vendia.net/">
-    <img src="https://raw.githubusercontent.com/vendia/examples/main/vendia-logo.png" alt="vendia logo" width="100px">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
   </a>
 </p>
 
@@ -40,4 +40,4 @@ git clone https://github.com/vendia/examples.git
 cd examples/share/saml-example
 ```
 
-Now that we've cloned the repository, [let's set up Auth0 as a SAML identity provider with an Amazon Cognito user pool](./auth0-saml-provider-amazon-cup.md).
+Now that we've cloned the repository, [let's set up Auth0 as a SAML identity provider with an Amazon Cognito user pool](auth0-saml-provider-amazon-cup.md).

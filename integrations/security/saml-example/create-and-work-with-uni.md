@@ -12,7 +12,7 @@ The `share uni create` command can be used to deploy our Uni.  You will need to 
 
 First, we will Pick a unique `name` for your uni that begins with `test-` - by default all Unis share a common namespace so here is your chance to get creative.  Update the `userId` attribute of each node to reflect your Vendia Share email address.
 
-Second, update the `authorizerArn` to reflect the ARN of the Amazon Cognito user pool that we [created in our previous step](./auth0-saml-provider-amazon-cup.md).
+Second, update the `authorizerArn` to reflect the ARN of the Amazon Cognito user pool that we [created in our previous step](auth0-saml-provider-amazon-cup.md).
 
 ```bash
 cd uni_configuration
@@ -89,5 +89,5 @@ curl ${GRAPHQL_URL} \
 --compressed
 ```
 
-[Let's summarize what we did as part of this example](./summary.md).
+[Let's summarize what we did as part of this example](summary.md).
 
