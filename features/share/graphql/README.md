@@ -40,7 +40,7 @@ The GraphQL specification defines a [type system](https://spec.graphql.org/Octob
 
 GraphQL represents a change from REST APIs. Sample code in this project will demonstrate how to work with a Vendia Share Uni using the built-in GraphQL Explorer as well as several programming languages.
 
-We will explore querying and changing data in a Uni using several programming launguages. While each language will have its own nuances, each example will use standard GraphQL [queries](https://graphql.org/learn/queries/) and [mutations](https://graphql.org/learn/queries/#mutations).
+We will explore querying and changing data in a Uni using several programming languages. While each language will have its own nuances, each example will use standard GraphQL [queries](https://graphql.org/learn/queries/) and [mutations](https://graphql.org/learn/queries/#mutations).
 
 **NOTE:** [GraphQL supports a number of programming languages](https://graphql.org/code/#language-support). The ones used in this example are representative only.
 
