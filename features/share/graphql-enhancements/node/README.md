@@ -28,7 +28,7 @@ Error notifications are emitted when asynchronous transactions cannot be committ
 
 ## Reading Data with Vendia Transactions
 
-You can _read_ data using Vendia Transactions to ensure a consistent value is returned, regardless of the node that issued the query. The query is defined in the file [`transaction-query.cjs`](./transaction-query.cjs).
+You can _read_ data using Vendia Transactions to ensure a consistent value is returned, regardless of the node that issued the query. The query is defined in the file [`transaction-query.cjs`](transaction-query.cjs).
 
 ```bash
 API="warehouse_https_url" \
@@ -72,7 +72,7 @@ The command will return each of the items stored in the Uni.
 
 ## Writing Data with Vendia Transactions
 
-You can _change_ data in our Uni using Vendia Transactions as well. You will decrease the **quantity** of our **Thing 1**, **Thing 2**, and **Thing 3** items as a unit. Either all will succeed or all will fail. A condition will be used in the mutation to make sure there is a sufficient quantity available for each product. You will use the flag`--quantity` to set the desired value. The mutation is defined in the file [`transaction-mutation.cjs`](./transaction-mutation.cjs) and will use the `API` and `API_KEY` of our **Warehouse** node.
+You can _change_ data in our Uni using Vendia Transactions as well. You will decrease the **quantity** of our **Thing 1**, **Thing 2**, and **Thing 3** items as a unit. Either all will succeed or all will fail. A condition will be used in the mutation to make sure there is a sufficient quantity available for each product. You will use the flag`--quantity` to set the desired value. The mutation is defined in the file [`transaction-mutation.cjs`](transaction-mutation.cjs) and will use the `API` and `API_KEY` of our **Warehouse** node.
 
 ### Successful Transaction
 

@@ -47,8 +47,8 @@ Make note of the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will 
 
 We have three separate code examples that highlight capabilities Vendia has to improve the GraphQL developer experience.
 
-* [Vendia Transactions](./node/README.md)
+* [Vendia Transactions](node/README.md)
 
-* [Conditional Updates](./golang1.x/README.md)
+* [Conditional Updates](golang1.x/README.md)
 
-* [Examining Changes to Data](./python3/README.md)
+* [Examining Changes to Data](python3/README.md)

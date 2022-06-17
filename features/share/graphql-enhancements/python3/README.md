@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 # Querying our Uni Node
 
-[In an earlier step](../README.md) we created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use this information to get transactions associated with a given block. The query is defined in the file [`block_query.py`](./block_query.py).
+[In an earlier step](../README.md) we created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. We will use this information to get transactions associated with a given block. The query is defined in the file [`block_query.py`](block_query.py).
 
 ```bash
 API="warehouse_https_url" \

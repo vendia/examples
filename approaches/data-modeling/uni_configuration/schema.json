@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://vendia.net/examples/approaches/data-modeling",
+  "title": "ACME Co. Universal Application",
+  "description": "A model to capture ACME Company's organizational structure and office locations",
+  "type": "object",
+  "definitions": {
+    "Name" : {
+      "type": "object",
+      "properties": {
+        "firstName" : {
+          "description": "Person's first name",
+          "type": "string"
+        },
+        "lastName" : {
+          "description": "Person's first name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ]
+    },
+    "Address" : {
+      "type": "object",
+      "properties": {
+        "street" : {
+          "description": "Street address",
+          "type": "string"
+        },
+        "city" : {
+          "description": "The city",
+          "type": "string"
+        },
+        "state" : {
+          "description": "The state",
+          "type": "string"
+        },
+        "zipcode" : {
+          "description": "The zipcode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "street",
+        "city",
+        "state"
+      ]
+    }
+  },
+  "x-vendia-acls": {
+    "LoanAcl": {
+      "type": "Loan"
+    },
+    "LoanPortfolioAcl": {
+      "type": "LoanPortfolio"
+    }
+  },
+  "properties": {
+    "Employee": {
+      "description": "An ACME Co. Employee",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "employeeName": {
+            "description": "Name of the employee",
+            "type": {
+              "$ref" : "#/definitions/Name"
+            }
+          }
+        },
+        "required": [
+          "employeeName"
+        ]
+      }
+    },
+    "LoanPortfolio": {
+      "description": "A collection of Loans along with metadata about the loans, modeled as a portfolio",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "portfolioIdentifier": {
+            "description": "Unique identifier of this Loan Portfolio",
+            "type": "string",
+            "pattern": "[A-Z0-9]{8}"
+          },
+          "portfolioName": {
+            "description": "Descriptive name of this Loan Portfolio",
+            "type": "string"
+          },
+          "weightedAverageInterestRate": {
+            "description": "The percent of currently delinquent Loans in the Loan Portfolio",
+            "type": "number"
+          },
+          "delinquencyPercentage": {
+            "description": "The percent of currently late or delinquent Loans in the Loan Portfolio",
+            "type": "number"
+          }
+        },
+        "required": [
+          "portfolioIdentifier",
+          "portfolioName"
+        ]
+      }
+    }
+  }
+}
