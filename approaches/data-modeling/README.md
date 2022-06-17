@@ -134,11 +134,53 @@ The `definitions` above are referenced by Entity definitions in subsequent secti
 **NOTE:** While `definitions` was [officially replaced](https://github.com/json-schema-org/json-schema-spec/issues/512) by `$defs`, it's currently the **only keyword** to define reusable types supported by Vendia Share at this time.  Support for `$defs` is on our near-term product roadmap.
 
 ### Approach 2 - Define Access Control Lists
+Below the `definitions` section of the data model is the `x-vendia-acls` section.  More information about Vendia Share's fine-grained data access controls, expressed as Access Control List (ACL) format, can be found [here](https://www.vendia.net/docs/share/fine-grained-data-permissions) and a detailed example of using them is [here](../../features/share/access-controls/data-access-controls).
 
+The `x-vendia-acls` section defines two ACLs, one per entity - `Employee` and `Office`.
+
+<details>
+<summary>ACLs</summary>
+
+```json
+"x-vendia-acls": {
+   "EmployeeAcl": {
+     "type": "Employee"
+   },
+   "OfficeAcl": {
+     "type": "Office"
+  }
+}
+```
+</details>
+
+**NOTE:** There's nothing else to do 🙌. Vendia Share's JSON Schema-to-GraphQL compiler will generate an appropriate GraphQL type for the defined ACL and append it to the model of each entity (e.g. `Employee` and `Office`) so it is available alongside all other (explicitly defined) fields.
 
 ### Approach 3 - Define Indexes
+After `x-vendia-acls`, you'll notice a section for `x-vendia-indexes`.  This section allows you to add indexes to fields that you believe will be frequently used when filtering entities.  Using an index does require an understanding of a.) the query patterns expected by GraphQL clients (what to index?) b.) the expected size (i.e. number of) of the entities (will an index meaningfully improve retrieval performance?).
+
+The `x-vendia-indexes` places an index on the `employeeId` field of the `Employee` entity and the `officeId` of the `Office` entity.
+
+<details>
+<summary>Indexes</summary>
+
+```json
+"x-vendia-indexes": {
+  "EmployeeIdIndex": {
+    "type": "Employee",
+    "property": "employeeId"
+  },
+  "OfficeIdIndex": {
+    "type": "Office",
+    "property": "officeId"
+  }
+}
+```
+</details>
+
+Because these two fields are the unique identifier of each entity, it's highly likely they'll be used to "fetch" the entity when apply a filter to a query.  As such, index these fields makes sense in cases where the total number of entities will be large.
 
 ### Approach 4 - Leverage Types
+
 
 ### Approach 5 - Leverage Formats
 
