@@ -1,5 +1,6 @@
 #Share Environment Files
 .share.env
+.env
 *.policy.json
 
 # AWS Serverless Application Model (SAM)
@@ -34,3 +35,6 @@ node_modules
 
 #IntelliJ IDEA
 /.idea/
+
+# Salesforce CLI
+.sfdx
