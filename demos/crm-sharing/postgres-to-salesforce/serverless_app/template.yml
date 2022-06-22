@@ -1,0 +1,71 @@
+# Things to create in a serverless app
+# * Lambda function to extract out block data and persist
+#   it in Salesforce
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Publish transactions from a Vendia Share Block to Salesforce
+
+Parameters:
+  ShareUrl:
+    Type: String
+    Description: GraphQL URL value for the Uni node
+  
+  ShareApiKey:
+    Type: String
+    Description: GraphQL API Key value for the Uni node
+  
+  SalesforceUsername:
+    Type: String
+  
+  SalesforcePassword:
+    Type: String
+
+  SalesforceTokenUrl:
+    Type: String
+    Description: URL used to request a OAuth2 token in Salesforce
+    Default: https://login.salesforce.com/services/oauth2/token
+  
+  SalesforceClientId:
+    Type: String
+    Description: Client ID of the vendia_connector Connected App
+  
+  SalesforceClientSecret:
+    Type: String
+    Description: Secret of the vendia_connector Connected App
+
+Globals:
+  Function:
+    Runtime: python3.9
+    Timeout: 60
+    Handler: index.handler
+    MemorySize: 256
+
+Resources:
+  BlockProcessingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Send Vendia transactions to Salesforce
+      CodeUri: ./src/
+      Environment:
+        Variables:
+          SHARE_URL: !Ref ShareUrl
+          SHARE_API_KEY: !Ref ShareApiKey
+          SF_TOKEN_URL: !Ref SalesforceTokenUrl
+          SF_CLIENT_ID: !Ref SalesforceClientId
+          SF_CLIENT_SECRET: !Ref SalesforceClientSecret
+          SF_USERNAME: !Ref SalesforceUsername
+          SF_PASSWORD: !Ref SalesforcePassword
+
+
+  # AWS CloudWatch Log Group to persist Function logs for
+  # a 2 week period
+  BlockProcessingLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${BlockProcessingFunction}
+      RetentionInDays: 14
+    
+Outputs:
+  BlockProcessingFunctionArn:
+    Description: BlockProcessingFunction for https://www.vendia.net/docs/share/integrations#configuring-a-lambda-function-subscriber
+    Value: !GetAtt BlockProcessingFunction.Arn
