@@ -66,6 +66,7 @@ aws lambda add-permission \
 
 The **salesforce** node needs to be configured to send block notifications to your function. This can be done through the node GraphQL Explorer.
 
+```graphql
 mutation update_blockReportLambdas($notificationFunction: String!) {
   updateVendia_Settings_async(
     input: {aws: {blockReportLambdas: [$notificationFunction]}}
@@ -76,6 +77,7 @@ mutation update_blockReportLambdas($notificationFunction: String!) {
     }
   }
 }
+```
 
 You will need to set the notificationFunction value in the web application to match your block notification function ARN. You can get this value by running the following command:
 

@@ -63,9 +63,9 @@ Log in to your Salesforce instance and confirm the following contacts do _not_ e
 
 * Vikrant Kahlir: University of Arizona
 
-* James Klein: United Oil & Gas Corp
+* James Gimourginas: United Oil & Gas Corp
 
-* Francine Gimourginas: Pyramid Construction Inc
+* Francine Klein: Pyramid Construction Inc
 
 ## Adding Data to our Data Stores
 
