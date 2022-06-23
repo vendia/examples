@@ -1,0 +1,10 @@
+---
+dbname: vagrant
+dbtable: account_contact
+dbuser: vagrant
+dbpassword: vagrant
+ansible_python_interpreter: "/usr/bin/python3"
+# Postgres GraphQL URL
+share_node_url: ""
+# Postgres GraphQL API Key
+share_node_api_key: ""

@@ -1,0 +1,7 @@
+---
+- name: Create a Postgres DB server
+  hosts: postgres_servers
+  become: true
+  gather_facts: no
+  roles:
+    - postgres

@@ -1,0 +1,59 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Sharing Postgres data with Salesforce CRM",
+    "x-vendia-acls": {
+        "AccountContactAcl": {
+            "type": "AccountContact"
+        }
+    },
+    "x-vendia-indexes": {
+        "AccountContactIdIndex": [
+            {
+                "type": "AccountContact",
+                "property": "contactId"
+            }
+        ],
+        "AccountContactAccountNumberIndex": [
+            {
+                "type": "AccountContact",
+                "property": "accountNumber"
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "AccountContact": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "contactId": {
+                        "description": "Contact ID",
+                        "type": "string"
+                    },
+                    "accountNumber": {
+                        "description": "Account number",
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "description": "First name",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Last number",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email address",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "phone": {
+                        "description": "Phone number",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

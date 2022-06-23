@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <version>54.0</version>
+    <!-- Connected App -->
+    <types>
+        <name>ConnectedApp</name>
+        <members>vendia_connector</members>
+    </types>
+    <!-- Custom field on native type
+    <type>
+        <name>CustomField</name>
+        <members>Contact.SourceDatabaseUserId__c</members>
+    </type> -->
+    <!-- Profile
+    <types>
+        <name>Profile</name>
+        <members>Admin</members>
+    </types> -->
+</Package>
