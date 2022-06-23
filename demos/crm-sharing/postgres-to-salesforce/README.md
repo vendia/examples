@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vendia.net/">
-    <img width="100px" alt="vendia-logo" src="https://user-images.githubusercontent.com/71095088/155574245-01f1cfbe-63bc-464d-9450-ce0b118b39c1.png">
+    <img src="https://www.vendia.net/images/logo/black.svg" alt="vendia logo" width="250px">
   </a>
 </p>
 
@@ -12,7 +12,9 @@ This project codifies the sharing of account contact data stored in a Postgres d
 
 ### Salesforce
 
-* A new [Salesforce Connected App](https://help.salesforce.com/s/articleView?id=sf.connected_app_overview.htm&type=5) needs to exist and be properly configured. The `Consumer Key` and `Consumer Secret` are needed for API interactions.
+Salesforce is used as the destination CRM in this demo. You will interact with it programmatically.
+
+* [Salesforce Connected App](https://help.salesforce.com/s/articleView?id=sf.connected_app_overview.htm&type=5)
 
 ### Postgres
 
