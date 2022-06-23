@@ -20,11 +20,9 @@ Salesforce is used as the destination CRM in this demo. You will interact with i
 
 A sample Postgres database is deployed as a Vagrant virtual machine.
 
-* [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Docker](https://www.docker.com/products/docker-desktop/)
 
 * [Hashicorp Vagrant](https://www.vagrantup.com/downloads)
-
-* [Ansible](https://www.ansible.com/)
 
 ### Vendia Share
 
