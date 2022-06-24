@@ -3,16 +3,15 @@
   "$id": "https://vendia.net/examples/approaches/data-modeling",
   "title": "ACME Co. Universal Application",
   "description": "A model to capture ACME Company's organizational structure and office locations",
-  "type": "object",
   "definitions": {
-    "Name" : {
+    "Name": {
       "type": "object",
       "properties": {
-        "firstName" : {
+        "firstName": {
           "description": "Person's first name",
           "type": "string"
         },
-        "lastName" : {
+        "lastName": {
           "description": "Person's first name",
           "type": "string"
         }
@@ -22,23 +21,23 @@
         "lastName"
       ]
     },
-    "Address" : {
+    "Address": {
       "type": "object",
       "properties": {
-        "street" : {
+        "street": {
           "description": "Street address",
           "type": "string"
         },
-        "city" : {
+        "city": {
           "description": "The city",
           "type": "string"
         },
-        "state" : {
+        "state": {
           "description": "The state",
           "type": "string",
           "pattern": "((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))"
         },
-        "zipcode" : {
+        "zipcode": {
           "description": "The zipcode",
           "type": "string",
           "pattern": "\\d{5}"
@@ -49,6 +48,14 @@
         "city",
         "state"
       ]
+    },
+    "EmployeeId": {
+      "type": "string",
+      "pattern": "\\d{5}"
+    },
+    "OfficeId": {
+      "type": "string",
+      "pattern": "\\d{3}"
     }
   },
   "x-vendia-acls": {
@@ -60,15 +67,20 @@
     }
   },
   "x-vendia-indexes": {
-    "EmployeeIdIndex": {
-      "type": "Employee",
-      "property": "employeeId"
-    },
-    "OfficeIdIndex": {
-      "type": "Office",
-      "property": "officeId"
-    }
+    "CurrentOccupancyIndex": [
+      {
+        "type": "Office",
+        "property": "currentOccupancy"
+      }
+    ],
+    "MaxOccupancyIndex": [
+      {
+        "type": "Office",
+        "property": "maxOccupancy"
+      }
+    ]
   },
+  "type": "object",
   "properties": {
     "Employee": {
       "description": "An ACME Co. Employee",
@@ -78,25 +90,42 @@
         "properties": {
           "employeeId": {
             "description": "Unique identifier of the employee",
-            "type": "string",
-            "pattern": "\\d{5}"
+            "$ref": "#/definitions/EmployeeId"
           },
           "employeeName": {
             "description": "Name of the employee",
-            "type": {
-              "$ref" : "#/definitions/Name"
-            }
+            "$ref": "#/definitions/Name"
           },
           "employeeAddress": {
             "description": "Address of the employee",
-            "type": {
-              "$ref" : "#/definitions/Address"
+            "$ref": "#/definitions/Address"
+          },
+          "managerId": {
+            "description": "Unique identifier of the employee's manager",
+            "$ref": "#/definitions/EmployeeId"
+          },
+          "employeeIds": {
+            "description": "Unique identifier of the employees this person manages",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EmployeeId"
             }
+          },
+          "targetHours": {
+            "description": "Target hours/week for the employee",
+            "type": "integer"
+          },
+          "officeId": {
+            "description": "Office this employee is expected to work from, if applicable",
+            "$ref": "#/definitions/OfficeId"
           }
         },
         "required": [
+          "employeeId",
           "employeeName",
-          "employeeAddress"
+          "employeeAddress",
+          "managerId",
+          "officeId"
         ]
       }
     },
@@ -108,19 +137,50 @@
         "properties": {
           "officeId": {
             "description": "Unique identifier of the office",
-            "type": "string",
-            "pattern": "\\d{3}"
+            "$ref": "#/definitions/OfficeId"
           },
           "officeAddress": {
             "description": "Address of the office",
-            "type": {
-              "$ref" : "#/definitions/Address"
-            }
+            "$ref": "#/definitions/Address"
+          },
+          "maxOccupancy": {
+            "description": "Maximum number of employees allowed",
+            "type": "integer"
+          },
+          "currentOccupancy": {
+            "description": "Current number of employees reporting to this office",
+            "type": "integer"
+          },
+          "costType": {
+            "description": "Cost type for the office",
+            "type": "string",
+            "enum": [
+              "LEASE",
+              "MORTGAGE",
+              "OWN",
+              "OTHER"
+            ]
+          },
+          "monthlyCost": {
+            "description": "Cost type for the office per month, if applicable",
+            "type": "number"
+          },
+          "dateOpened": {
+            "description": "Date the office opened",
+            "type": "string",
+            "format": "date"
+          },
+          "isFull": {
+            "description": "Whether the office is at its max capacity",
+            "type": "boolean"
           }
         },
         "required": [
-          "portfolioIdentifier",
-          "portfolioName"
+          "officeId",
+          "officeAddress",
+          "maxOccupancy",
+          "costType",
+          "isFull"
         ]
       }
     }
