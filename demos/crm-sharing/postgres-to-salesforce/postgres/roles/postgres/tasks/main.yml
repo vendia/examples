@@ -1,0 +1,457 @@
+---
+- name: Ensure apt cache is up to date
+  apt: 
+    update_cache: yes
+
+- name: Ensure OS packages are installed
+  apt: 
+    name: "{{ item }}"
+  loop:
+    - software-properties-common
+    - acl
+    - libpq-dev
+    - postgresql
+    - postgresql-plpython3
+    - python3-pip
+    - python3-dev
+    - gcc
+
+- name: Ensure pip packages are installed
+  pip:
+    name: "{{ item }}"
+  loop:
+    - gql[requests]
+    - psycopg2
+
+- name: Ensure Postgres service is running
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: Ensure database is created
+  become_user: postgres
+  postgresql_db:
+    name: "{{ dbname }}"
+    template: 'template0'
+    state: present
+
+- name: Enable plpython3u extension
+  become_user: postgres
+  postgresql_ext:
+    name: plpython3u
+    db: "{{ dbname }}"
+
+- name: Make plpython3u lantrusted
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: UPDATE pg_language SET lanpltrusted = true WHERE lanname = 'plpython3u'
+
+- name: Create account_contact table
+  become_user: postgres
+  postgresql_table:
+    db: "{{ dbname }}"
+    table: "{{ dbtable }}"
+    columns:
+    - contactid text primary key
+    - accountnumber text
+    - firstname text
+    - lastname text
+    - email text
+    - phone text
+
+- name: Ensure database user exists
+  become_user: postgres
+  postgresql_user:
+    db: "{{ dbname }}"
+    name: "{{ dbuser }}"
+    password: "{{ dbpassword }}"
+    state: present
+    priv: "ALL/{{ dbtable }}:ALL"
+
+- name: Ensure user does not have unnecessary privileges
+  become_user: postgres
+  postgresql_user:
+    name: "{{ dbuser }}"
+    role_attr_flags: NOSUPERUSER,NOCREATEDB
+    state: present
+
+- name: Create function add_to_share
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE OR REPLACE FUNCTION add_to_share()
+      RETURNS trigger AS '
+        import urllib3
+
+        from gql import gql, Client
+        from gql.transport.requests import RequestsHTTPTransport
+
+        urllib3.disable_warnings()
+
+        
+        share_node_url = "{{ share_node_url }}"
+        share_node_api_key = "{{ share_node_api_key }}"
+
+        transport=RequestsHTTPTransport(
+          url=share_node_url,
+          use_json=True,
+          headers={
+            "Content-type": "application/json",
+            "Authorization": share_node_api_key
+          },
+          verify=False,
+          retries=3,
+        )
+
+        gql_client = Client(
+            transport=transport
+        )
+        
+        params = {
+          "contactId": TD["new"]["contactid"],
+          "accountNumber": TD["new"]["accountnumber"],
+          "firstName": TD["new"]["firstname"],
+          "lastName": TD["new"]["lastname"],
+          "email": TD["new"]["email"],
+          "phone": TD["new"]["phone"],
+        }
+
+        query = gql(
+          """
+          mutation addAccountContact(
+            $contactId: String!,
+            $accountNumber: String!,
+            $firstName: String!,
+            $lastName: String!,
+            $email: String!,
+            $phone: String!
+          ) {
+              add_AccountContact(
+                input: {
+                  contactId: $contactId,
+                  accountNumber: $accountNumber,
+                  firstName: $firstName,
+                  lastName: $lastName,
+                  email: $email,
+                  phone: $phone
+                },
+                syncMode: ASYNC,
+                aclInput: {
+                  acl: [
+                    { principal: { nodes: [ "salesforce" ]}, operations: [ READ ] }
+                  ]
+                }
+              ) {
+                transaction {
+                  _id
+                }
+              }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            query,
+            variable_values=params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+
+      ' LANGUAGE plpython3u;
+
+- name: Drop trigger for account_contact inserts if it already exists
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      DROP TRIGGER IF EXISTS add_to_share on {{ dbtable }};
+
+- name: Create trigger for item inserts
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE TRIGGER add_to_share
+        AFTER INSERT ON {{ dbtable }}
+        FOR EACH ROW
+        EXECUTE FUNCTION add_to_share();
+
+- name: Create function update_in_share
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE OR REPLACE FUNCTION update_in_share()
+      RETURNS trigger AS '
+        import urllib3
+
+        from gql import gql, Client
+        from gql.transport.requests import RequestsHTTPTransport
+
+        urllib3.disable_warnings()
+
+        
+        share_node_url = "{{ share_node_url }}"
+        share_node_api_key = "{{ share_node_api_key }}"
+
+        transport=RequestsHTTPTransport(
+          url=share_node_url,
+          use_json=True,
+          headers={
+            "Content-type": "application/json",
+            "Authorization": share_node_api_key
+          },
+          verify=False,
+          retries=3,
+        )
+
+        gql_client = Client(
+            transport=transport,
+            fetch_schema_from_transport=True,
+        )
+
+        search_params = {
+          "contactId": TD["new"]["contactid"]
+        }
+
+        search_query = gql(
+          """
+          query listAccountContact(
+            $contactId: String!
+          ) {
+              list_AccountContactItems(filter: {contactId: {eq: $contactId}}) {
+                _AccountContactItems {
+                  ... on Self_AccountContact {
+                    _id
+                  }
+                }
+              }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            search_query,
+            variable_values=search_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+        
+        _id = result["list_AccountContactItems"]["_AccountContactItems"][0]["_id"]
+
+        # Update the item in Vendia Share
+        update_params = {
+          "_id": _id,
+          "contactId": TD["new"]["contactid"],
+          "accountNumber": TD["new"]["accountnumber"],
+          "firstName": TD["new"]["firstname"],
+          "lastName": TD["new"]["lastname"],
+          "email": TD["new"]["email"],
+          "phone": TD["new"]["phone"],
+        }
+
+        update_query = gql(
+          """
+          mutation updateItem(
+            $_id: ID!,
+            $contactId: String!,
+            $accountNumber: String!,
+            $firstName: String!,
+            $lastName: String!,
+            $email: String!,
+            $phone: String!
+          ) {
+            update_AccountContact(
+              id: $_id,
+              input: {
+                contactId: $contactId,
+                accountNumber: $accountNumber,
+                firstName: $firstName,
+                lastName: $lastName,
+                email: $email,
+                phone: $phone
+              },
+              syncMode: ASYNC,
+              aclInput: {
+                acl: [
+                  { principal: { nodes: [ "salesforce" ]}, operations: [ READ ] }
+                ]
+              }
+            ) {
+              transaction {
+                _id
+              }
+            }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            update_query,
+            variable_values=update_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+
+      ' LANGUAGE plpython3u;
+
+- name: Drop trigger for account_contact updates if it already exists
+  become: yes
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      DROP TRIGGER IF EXISTS update_in_share on {{ dbtable }};
+
+- name: Create trigger for account_contact updates
+  become: yes
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE TRIGGER update_in_share
+        BEFORE UPDATE ON {{ dbtable }}
+        FOR EACH ROW
+        EXECUTE FUNCTION update_in_share();
+
+- name: Create function remove_from_share
+  become: yes
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE OR REPLACE FUNCTION remove_from_share()
+      RETURNS trigger AS '
+        import urllib3
+
+        from gql import gql, Client
+        from gql.transport.requests import RequestsHTTPTransport
+
+        urllib3.disable_warnings()
+
+        
+        share_node_url = "{{ share_node_url }}"
+        share_node_api_key = "{{ share_node_api_key }}"
+
+        transport=RequestsHTTPTransport(
+          url=share_node_url,
+          use_json=True,
+          headers={
+            "Content-type": "application/json",
+            "Authorization": share_node_api_key
+          },
+          verify=False,
+          retries=3,
+        )
+
+        gql_client = Client(
+            transport=transport,
+            fetch_schema_from_transport=True,
+        )
+
+        search_params = {
+          "contactId": TD["old"]["contactid"]
+        }
+
+        search_query = gql(
+          """
+          query listAccountContact(
+            $contactId: String!
+          ) {
+              list_AccountContactItems(filter: {contactId: {eq: $contactId}}) {
+                _AccountContactItems {
+                  ... on Self_AccountContact {
+                    _id
+                  }
+                }
+              }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            search_query,
+            variable_values=search_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+        
+        _id = result["list_AccountContactItems"]["_AccountContactItems"][0]["_id"]
+
+        # Remove the item from Vendia Share
+        delete_params = {
+          "_id": _id
+        }
+
+        delete_query = gql(
+          """
+          mutation removeAccountContact(
+            $_id: ID!
+          ) {
+            remove_AccountContact(id: $_id, syncMode: ASYNC) {
+              transaction {
+                _id
+              }
+            }
+          }
+          """
+        )
+
+        try:
+          result = gql_client.execute(
+            delete_query,
+            variable_values=delete_params
+          )
+        except Exception as e:
+          raise Exception(str(e))
+
+      ' LANGUAGE plpython3u;
+
+- name: Drop trigger for account_contact deletions if it already exists
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      DROP TRIGGER IF EXISTS remove_from_share on {{ dbtable }};
+
+- name: Create trigger for account_contact deletions
+  become_user: postgres
+  postgresql_query:
+    db: "{{ dbname }}"
+    query: |
+      CREATE TRIGGER remove_from_share
+        BEFORE DELETE ON {{ dbtable }}
+        FOR EACH ROW
+        EXECUTE FUNCTION remove_from_share();
+
+- name: Copy account_contact insert script to virtual machine
+  copy:
+    src: 01-insert-account-contacts.sql
+    dest:  /home/vagrant/01-insert-account-contacts.sql
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+
+- name: Copy account_contact update script to virtual machine
+  copy:
+    src: 02-update-account-contacts.sql
+    dest:  /home/vagrant/02-update-account-contacts.sql
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+
+- name: Copy account_contact remove script to virtual machine
+  copy:
+    src: 03-remove-account-contacts.sql
+    dest:  /home/vagrant/03-remove-account-contacts.sql
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+  

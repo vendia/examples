@@ -1,0 +1,11 @@
+{
+    "packageDirectories": [
+      {
+        "path": "force-app",
+        "default": true
+      }
+    ],
+    "name": "postgres-to-salesforce",
+    "namespace": "",
+    "sourceApiVersion": "54.0"
+  }

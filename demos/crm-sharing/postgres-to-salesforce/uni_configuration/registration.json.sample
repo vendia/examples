@@ -1,0 +1,30 @@
+{
+  "name": "test-postgres-to-salesforce",
+  "schema": "schema.json",
+  "nodes": [
+    {
+      "name": "Postgres",
+      "userId": "you@domain.com",
+      "region": "us-east-2",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "AUTHV2"
+          }
+        }
+      }
+    },
+    {
+      "name": "Salesforce",
+      "userId": "you@domain.com",
+      "region": "us-east-1",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "AUTHV2"
+          }
+        }
+      }
+    }
+  ]
+}
