@@ -102,8 +102,7 @@ mutation addProductWithACLs {
         {principal: {nodes: "DistributorNode"}, path: "supplier", operations: READ},
         {principal: {nodes: "DistributorNode"}, path: "price", operations: READ}    
       ]
-    }, 
-    syncMode: ASYNC) {
+    }) {
     transaction {
       _id
       _owner
@@ -148,8 +147,7 @@ mutation addProductWithACLs {
         {principal: {nodes: "DistributorNode"}, path: "supplier", operations: READ},
         {principal: {nodes: "DistributorNode"}, path: "price", operations: READ}    
       ]
-    }, 
-    syncMode: ASYNC) {
+    }) {
     transaction {
       _id
       _owner
@@ -181,8 +179,7 @@ mutation addProductWithACLs {
       acl: [
         {principal: {nodes: "DistributorNode"}, path: "*", operations: []},
       ]
-    },
-    syncMode: ASYNC) {
+    }) {
     transaction {
       _id
       _owner
@@ -350,7 +347,7 @@ The Supplier should be able to modify any field of any Product.
 Executing this mutation from the **SupplierNode** will succeed.  
 ```
 mutation updateCornTortillaPromoContent {
-  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}, syncMode: ASYNC) {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}) {
     transaction {
       _id
       _owner
@@ -365,7 +362,7 @@ mutation updateCornTortillaPromoContent {
 As will executing this mutation from the **SupplierNode**.
 ```
 mutation updateCornTortillaPrice {
-  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}, syncMode: ASYNC) {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}) {
     transaction {
       _id
       _owner
@@ -385,7 +382,7 @@ The same is not true of the Distributor. The Distributor can only modify the `pr
 Executing this mutation from the **DistributorNode** will succeed.
 ```
 mutation updateCornTortillaPromoContent {
-  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}, syncMode: ASYNC) {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {promotionalContent: "https://www.shaws.com/shop/product-details.109900162.html"}) {
     transaction {
       _id
       _owner
@@ -400,7 +397,7 @@ mutation updateCornTortillaPromoContent {
 But executing this mutation from the **DistributorNode** will fail, as expected, because of the ACLs protecting the `price` field.
 ```
 mutation updateCornTortillaPrice {
-  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}, syncMode: ASYNC) {
+  update_Product(id: "017eb396-e83c-83f1-9ae7-3e040b78de0f", input: {price: 3.99}) {
     transaction {
       _id
       _owner

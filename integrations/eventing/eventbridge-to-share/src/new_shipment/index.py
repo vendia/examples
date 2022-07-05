@@ -108,8 +108,7 @@ def add_shipment(order_date, due_date,
                     consigneeEmail: $consigneeEmail,
                     consigneeSpecialInstructions: $consigneeSpecialInstructions,
                     purchaseOrder: $purchaseOrder
-                },
-                syncMode: ASYNC) {
+                }) {
                 transaction {
                     transactionId
                 }

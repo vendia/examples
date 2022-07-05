@@ -148,7 +148,7 @@ Mutation with required `zipcode` property.
 
 ```graphql
 mutation m{
-  add_CustomerAccount(input: {customerId: "10001", firstName: "Jay", lastName: "Pipes"}, syncMode: ASYNC) {
+  add_CustomerAccount(input: {customerId: "10001", firstName: "Jay", lastName: "Pipes"}) {
       transaction {
         transactionId
       }

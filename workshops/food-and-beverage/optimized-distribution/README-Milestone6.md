@@ -117,8 +117,7 @@ func main() {
 			price: $price
 			promotionalContent: $promotionalContent
 			supplier: $supplier
-		  },
-		  syncMode: ASYNC) {
+		  }) {
 		  transaction {
 			transactionId
 		  }
@@ -239,8 +238,7 @@ func main() {
 			quantity: $quantity,
 			dateIssued: $dateIssued,
 			totalPrice: $totalPrice
-		  },
-		  syncMode: ASYNC) {
+		  }) {
 		  transaction {
 			transactionId
 		  }

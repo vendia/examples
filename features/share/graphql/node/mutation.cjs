@@ -76,7 +76,7 @@ async function setQuantity(itemId, quantity) {
 
   const mutation = gql`
     mutation updateInventory($id: ID!, $quantity: Int, $lastUpdated: String) {
-      update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastUpdated}, syncMode: ASYNC) {
+      update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastUpdated}) {
         transaction {
           transactionId
         }

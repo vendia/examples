@@ -73,8 +73,7 @@ def add_to_share(
                     quantity: $quantity,
                     tags: $tags,
                     unitPrice: $unitPrice
-                },
-                syncMode: ASYNC) {
+                }) {
                 transaction {
                     transactionId
                 }
@@ -153,7 +152,7 @@ def remove_from_share(
         mutation removeItem(
             $_id: ID!
         ) {
-            remove_Inventory(id: $_id, syncMode: ASYNC) {
+            remove_Inventory(id: $_id) {
                 transaction {
                     transactionId
                 }
@@ -258,8 +257,7 @@ def update_in_share(
                     quantity: $quantity,
                     unitPrice: $unitPrice,
                     tags: $tags
-                },
-                syncMode: ASYNC) {
+                }) {
                 transaction {
                     transactionId
                 }

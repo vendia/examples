@@ -214,7 +214,7 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
     ```graphql
     mutation AddLoanPerformance {
       add_LoanPerformance(
-        input: { lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current }, syncMode: ASYNC) {
+        input: { lastPaidInstallmentDate: "2022-04-01", loanIdentifier: "23456", monthlyReportingPeriod: "2022-05-01", servicerId: "54321", currentInterestRate: 2.75, currentUnpaidPrincipalBalance: 551000, loanDelinquencyStatus: current }) {
           transaction {
             transactionId
             _owner

@@ -3,7 +3,6 @@ export class GqlMutations {
       mutation AddLoan($input: Self_Loan_Input_!) {
         add_Loan(
           input: $input,
-          syncMode: ASYNC,
           aclInput: {
               acl: [
                   { principal: {nodes: "LenderNode"}, operations: [ALL, UPDATE_ACL] }
@@ -28,7 +27,6 @@ export class GqlMutations {
                 portfolioIdentifier: "AAAA1111",
                 portfolioName: "Loan Portfolio"
             }
-              syncMode: ASYNC
               aclInput: {
                   acl: [
                       { principal: { nodes: "ServicerNode" }, operations: [ALL, UPDATE_ACL] },
@@ -56,9 +54,7 @@ export class GqlMutations {
           inputQuery: $inputQuery,
           outputMutation: $outputMutation,
           resource: {uri: $resource}
-        }
-        syncMode: ASYNC
-      ) {
+        }) {
         transaction {
           _id
           _owner
