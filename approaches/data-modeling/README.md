@@ -49,7 +49,7 @@ To create a Uni using the Share CLI:
 1. Create your own copy of the `registration.json.sample` file, removing the `.sample` suffix
     1. `cp registration.json.sample registration.json`
 1. Edit the `registration.json` file changing
-    1. `name` - keep the `test-` prefix but make the remainder of the name unique
+    1. `name` - keep the `test-` prefix but make the remainder of the name unique, and for enterprise customers, add the applicable namespace unis.{domain}
     1. `userId` - on both nodes should match your Vendia Share `userId` (i.e. your email address)
 1. Create the Uni
     1. `share uni create --config registration.json`
