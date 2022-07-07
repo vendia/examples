@@ -166,8 +166,7 @@ def post_to_share(csv_file):
                                     recommendedLocation: $recommended_location,
                                     bought: $bought,
                                     timestampAdded: $timestamp_added
-                                }, 
-                                syncMode: ASYNC) {
+                                }) {
                                 transaction {
                                     transactionId
                                 }

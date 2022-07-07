@@ -17,8 +17,7 @@ mutation enableBlockNotificationEmails {
   updateVendia_Settings(
     input: {
       blockReportEmails: ["you@domain.com"]
-    }, 
-    syncMode: ASYNC) {
+    }) {
     transaction {
       _id
       _owner

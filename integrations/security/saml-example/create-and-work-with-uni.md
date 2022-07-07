@@ -75,7 +75,7 @@ We can issue a mutation to write data to our Uni using a similar curl command.
 curl ${GRAPHQL_URL} \
 -H 'Content-Type: application/json' \
 -H "Authorization: ${AUTHORIZATION}" \
---data-binary '{"query":"mutation newItem($itemName: String!, $itemNumber: String!, $quantity: Int!) {\n  add_InventoryItem(input: {itemName: $itemName, itemNumber: $itemNumber,  quantity: $quantity}, syncMode: ASYNC) {\n    transaction {\n      transactionId\n    }\n  }\n}","variables":{"itemName":"foo bar","itemNumber":"abc123","quantity":100}}' \
+--data-binary '{"query":"mutation newItem($itemName: String!, $itemNumber: String!, $quantity: Int!) {\n  add_InventoryItem(input: {itemName: $itemName, itemNumber: $itemNumber,  quantity: $quantity}) {\n    transaction {\n      transactionId\n    }\n  }\n}","variables":{"itemName":"foo bar","itemNumber":"abc123","quantity":100}}' \
 --compressed
 ```
 

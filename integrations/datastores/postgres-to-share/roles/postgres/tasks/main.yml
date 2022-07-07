@@ -135,8 +135,7 @@
                   itemNumber: $itemNumber,
                   quantity: $quantity,
                   lastUpdated: $lastUpdated
-                },
-                syncMode: ASYNC) {
+                }) {
                 transaction {
                   transactionId
                 }
@@ -270,8 +269,7 @@
                 itemNumber: $itemNumber,
                 quantity: $quantity,
                 lastUpdated: $lastUpdated
-              },
-              syncMode: ASYNC) {
+              }) {
               transaction {
                 transactionId
               }
@@ -388,7 +386,7 @@
           mutation removeItem(
             $_id: ID!
           ) {
-            remove_Inventory(id: $_id, syncMode: ASYNC) {
+            remove_Inventory(id: $_id) {
               transaction {
                 transactionId
               }

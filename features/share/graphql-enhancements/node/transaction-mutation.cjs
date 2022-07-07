@@ -107,8 +107,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         }
         condition: {
           quantity: {ge: $shipQuantity}
-        },
-        syncMode: ASYNC) {
+        }) {
           transaction {
             transactionId
           }
@@ -122,8 +121,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         }
         condition: {
           quantity: {ge: $shipQuantity}
-        },
-        syncMode: ASYNC) {
+        }) {
           transaction {
             transactionId
           }
@@ -137,8 +135,7 @@ async function setQuantity(thing1, thing2, thing3, ship) {
         }
         condition: {
           quantity: {ge: $shipQuantity}
-        },
-        syncMode: ASYNC) {
+        }) {
           transaction {
             transactionId
           }

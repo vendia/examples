@@ -138,7 +138,6 @@
                   email: $email,
                   phone: $phone
                 },
-                syncMode: ASYNC,
                 aclInput: {
                   acl: [
                     { principal: { nodes: [ "salesforce" ]}, operations: [ READ ] }
@@ -276,7 +275,6 @@
                 email: $email,
                 phone: $phone
               },
-              syncMode: ASYNC,
               aclInput: {
                 acl: [
                   { principal: { nodes: [ "salesforce" ]}, operations: [ READ ] }
@@ -395,7 +393,7 @@
           mutation removeAccountContact(
             $_id: ID!
           ) {
-            remove_AccountContact(id: $_id, syncMode: ASYNC) {
+            remove_AccountContact(id: $_id) {
               transaction {
                 _id
               }

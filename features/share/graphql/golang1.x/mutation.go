@@ -63,8 +63,7 @@ func main() {
 		  input: {
 			quantity: $quantity
 			lastUpdated: $lastUpdated
-		  },
-		  syncMode: ASYNC) {
+		  }) {
 		  transaction {
 			transactionId
 		  }

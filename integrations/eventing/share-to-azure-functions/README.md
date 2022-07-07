@@ -200,8 +200,7 @@ To create an Azure Function:
                 }
               ]
             }
-          }, 
-          syncMode: ASYNC) {
+          }) {
           transaction {
             _id
             _owner
@@ -297,7 +296,7 @@ configured Azure Function).
           id: "<PO_ID>",
           input: {
             expected: "2022-01-03T00:00:00Z"
-          }, syncMode: ASYNC) {
+          }) {
           transaction {
             _id
             _owner

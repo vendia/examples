@@ -15,8 +15,7 @@ mutation AddPurchaseOrders {
                 {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
                 {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -41,8 +40,7 @@ mutation AddPurchaseOrders {
                 {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
                 {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -67,8 +65,7 @@ mutation AddPurchaseOrders {
                 {principal: {nodes: "SupplierNode"}, path: "dateIssued", operations: [READ]},
                 {principal: {nodes: "SupplierNode"}, path: "status", operations: [READ, WRITE]}
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction{
             _id
             _owner

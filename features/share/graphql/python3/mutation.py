@@ -92,7 +92,7 @@ def set_quantity(itemid, quantity):
     query = gql(
         """
         mutation updateInventory($id: ID!, $quantity: Int, $lastupdated: String) {
-            update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastupdated}, syncMode: ASYNC) {
+            update_Inventory(id: $id, input: {quantity: $quantity, lastUpdated: $lastupdated}) {
                 transaction {
                     transactionId
                 }

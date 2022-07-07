@@ -67,7 +67,7 @@ Add the following mutation using the `GraphQL Explorer` of the **CRM** node..
 mutation m {
 
   put_CustomerAccount(id: "", input: {address: {zipcode: 95678}, customerId: "1001", firstName: "Jay", lastName: "Pipes"}, 
-aclInput: {acl: {principal: {nodes: "*"}, operations: READ}}, syncMode: ASYNC)
+aclInput: {acl: {principal: {nodes: "*"}, operations: READ}})
 
 
 }
@@ -81,7 +81,7 @@ Using the `Marketing` node. Add the following mutation using GraphQL explorer.
 mutation m {
 
   add_CustomerProfile(input: {DMAbyZip: "95678", Psychographic: {goals: "quit smoking", habits: "smoking", pains: "back pain"}, customerId: "1001"}, 
-aclInput: {acl: {principal: {nodes: "*"}, operations: READ}}, syncMode: ASYNC)
+aclInput: {acl: {principal: {nodes: "*"}, operations: READ}})
 
 }
 ```

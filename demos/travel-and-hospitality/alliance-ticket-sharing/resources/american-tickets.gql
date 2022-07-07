@@ -126,8 +126,7 @@ mutation createTickets {
             acl: [
                 { principal: {nodes: ["AmericanNode"]}, operations: [ALL, UPDATE_ACL] },
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -275,8 +274,7 @@ mutation createTickets {
                 { principal: {nodes: ["IberiaNode"]}, path: "taxes", operations: [READ] },
                 { principal: {nodes: ["IberiaNode"]}, path: "fees", operations: [READ] }
             ]
-        },
-        syncMode: ASYNC){
+        }){
         transaction {
             _id
             _owner

@@ -16,8 +16,7 @@ mutation AddDelivery {
                 {principal: {nodes: "DistributorNode"}, path: "actualDateTime", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "status", operations: [READ]}
             ]
-        }, 
-        syncMode: ASYNC) {
+        }) {
             transaction {
                 _id
                 _owner
