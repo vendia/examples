@@ -25,7 +25,7 @@ Error notifications are emitted when asynchronous transactions cannot be committ
 
 # Changing Data with a Conditional Update
 
-[In our previous step](../README.md) you created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. You will use this information to ship items in our inventory, but only if there are sufficient items in stock. The mutation is defined in the file [`conditional-update.go`](./conditional-update.go).
+[In our previous step](../README.md) you created a new Uni and recorded the `httpsUrl` and our `apiKey` of the **Warehouse** node. You will use this information to ship items in our inventory, but only if there are sufficient items in stock. The mutation is defined in the file [`conditional-update.go`](conditional-update.go).
 
 ## Successful Update
 

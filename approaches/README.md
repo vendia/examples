@@ -9,7 +9,8 @@ The `approaches` directory of this repo includes a collection of architectural a
 
 | Category | Description |
 |:---------|:---------|
+| [data modeling](data-modeling/README.md) | A set of [data modeling](https://www.vendia.net/docs/share/data-modeling) approaches to leverage when creating a new Vendia Share [Universal Application](https://www.vendia.net/docs/share/uni-creation). |
 | [deployment](deployment/README.md) | Highlighting ways to deploy Vendia Share and its common integration targets (e.g. [AWS Lambda](https://aws.amazon.com/lambda/)). |
-| [domain driven design](domain-driven-design/README.md) | Check out this set of Domain Driven Design inspired patterns to leverage when creating Unis on Vendia Share. |
+| [domain driven design](domain-driven-design/README.md) | A set of Domain Driven Design inspired patterns to leverage when creating Unis on Vendia Share. |
 
 

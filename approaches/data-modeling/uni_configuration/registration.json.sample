@@ -1,0 +1,19 @@
+{
+  "name": "test-<name-of-your-choice>",
+  "schema": "schema.json",
+  "initState": "initial-state.json",
+  "nodes": [
+    {
+      "name": "Node1",
+      "userId": "you@domain.com",
+      "region": "us-east-2",
+      "settings": {
+        "apiSettings": {
+          "auth": {
+            "authorizerType": "API_KEY"
+          }
+        }
+      }
+    }
+  ]
+}

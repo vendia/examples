@@ -12,7 +12,6 @@ samconfig.toml
 
 # Deployable uni artifacts
 registration.json
-init-state.json
 
 # Python
 venv

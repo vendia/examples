@@ -1,0 +1,99 @@
+{
+  "Employee": [
+    {
+      "employeeId": "00001",
+      "employeeName": {
+        "firstName": "Big",
+        "lastName" : "Boss"
+      },
+      "employeeAddress": {
+        "street": "123 Boss Lane",
+        "city": "Seattle",
+        "state": "WA"
+      },
+      "managerId": "00001",
+      "employeeIds": [
+        "00002","00003"
+      ],
+      "officeId": "001"
+    },
+    {
+      "employeeId": "00002",
+      "employeeName": {
+        "firstName": "Junior",
+        "lastName" : "Boss"
+      },
+      "employeeAddress": {
+        "street": "234 Boss Lane",
+        "city": "Seattle",
+        "state": "WA"
+      },
+      "managerId": "00001",
+      "employeeIds": [
+        "00004"
+      ],
+      "officeId": "001"
+    },
+    {
+      "employeeId": "00003",
+      "employeeName": {
+        "firstName": "Other",
+        "lastName" : "Boss"
+      },
+      "employeeAddress": {
+        "street": "345 Other Lane",
+        "city": "New York",
+        "state": "NY"
+      },
+      "managerId": "00001",
+      "employeeIds": [],
+      "officeId": "002"
+    },
+    {
+      "employeeId": "00004",
+      "employeeName": {
+        "firstName": "Worker",
+        "lastName" : "Bee"
+      },
+      "employeeAddress": {
+        "street": "456 Worker Lane",
+        "city": "New York",
+        "state": "NY"
+      },
+      "managerId": "00002",
+      "employeeIds": [],
+      "officeId": "002",
+      "targetHours": 40
+    }
+  ],
+  "Office": [
+    {
+      "officeId": "001",
+      "maxOccupancy": 2,
+      "currentOccupancy": 2,
+      "isFull": true,
+      "dateOpened": "2020-01-01",
+      "costType": "LEASE",
+      "monthlyCost": 5000.50,
+      "officeAddress": {
+        "street": "555 Office Road",
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    {
+      "officeId": "002",
+      "maxOccupancy": 10,
+      "currentOccupancy": 2,
+      "isFull": false,
+      "dateOpened": "2021-01-01",
+      "costType": "OTHER",
+      "monthlyCost": 2500.25,
+      "officeAddress": {
+        "street": "54321 Office Drive",
+        "city": "New York",
+        "state": "NY"
+      }
+    }
+  ]
+}
