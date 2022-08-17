@@ -185,7 +185,7 @@ You can add data using the GraphQL Explorer view from either node in the Uni.
    ```graphql
    mutation AddProduct {
      add_Product(
-      input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}, syncMode: ASYNC) {
+      input: {category: natural, description: "Organic", name: "Orange Juice", price: 3.99, sku: "00008", supplier: "Wild Harvest"}) {
         transaction {
             transactionId
          }
@@ -254,7 +254,7 @@ You can update data using the GraphQL Explorer view from either node in the Uni.
    mutation UpdateProduct {
      update_Product(
       id: "017f273f-6f69-4adb-e73a-a140b3ccc28f"
-      input: {price: 3.49}, syncMode: ASYNC) {
+      input: {price: 3.49}) {
          transaction {
             transactionId
          }

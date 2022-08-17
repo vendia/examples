@@ -22,7 +22,6 @@ mutation createAccountContacts {
                 }
             ]
         },
-        syncMode: ASYNC,
         aclInput: {
             acl: [
                 # Implicit ACL for the data writer - not explicitly needed
@@ -60,7 +59,6 @@ mutation createAccountContacts {
                 }
             ]
         },
-        syncMode: ASYNC
         aclInput: {
             acl: [
                 # Implicit ACL for the data writer - not explicitly needed

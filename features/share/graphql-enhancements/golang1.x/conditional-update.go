@@ -78,8 +78,7 @@ func main() {
 			}
 			condition: {
 				quantity: {ge: $shipQuantity}
-			},
-			syncMode: ASYNC) {
+			}) {
 				transaction {
 					transactionId
 				}

@@ -180,8 +180,7 @@ def post_to_share(csv_file):
                                     consigneeEmail: $consigneeEmail,
                                     location: $location,
                                     goods: $goods
-                                },
-                                syncMode: ASYNC) {
+                                }) {
                                 transaction {
                                     transactionId
                                 }

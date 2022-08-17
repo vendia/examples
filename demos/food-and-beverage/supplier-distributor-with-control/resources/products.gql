@@ -18,8 +18,7 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]},
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -47,8 +46,7 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        }, 
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -76,8 +74,7 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        }, 
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -105,8 +102,7 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]},
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -134,8 +130,7 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
@@ -163,8 +158,7 @@ mutation AddProductsWithACLs {
                 {principal: {nodes: "DistributorNode"}, path: "supplier", operations: [READ]},
                 {principal: {nodes: "DistributorNode"}, path: "category", operations: [READ]}
             ]
-        },
-        syncMode: ASYNC) {
+        }) {
         transaction {
             _id
             _owner
