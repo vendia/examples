@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://vendia.net/schemas/examples/inventory-management-system.json",
+    "title": "Inventory Management System",
+    "description": "All inventory data for a Retailer",
+    "type": "object",
+    "properties": {
+      "Inventory": {
+        "description": "Inventory",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Item name",
+              "type": "string"
+            },
+            "number": {
+              "description": "Item number",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "Available quantity of item",
+              "type": "integer"
+            },
+            "price": {
+              "description": "Price of the item",
+              "type": "number"
+            },
+            "lastUpdated": {
+              "description": "Last update timestamp",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    }
+  }

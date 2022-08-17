@@ -9,6 +9,7 @@ The `approaches` directory of this repo includes a collection of architectural a
 
 | Category | Description |
 |:---------|:---------|
+| [bulk data loading](bulk-data-loading/README.md) | Demonstrates how to batch and concurrently load a large data set into Vendia Share |
 | [data modeling](data-modeling/README.md) | A set of [data modeling](https://www.vendia.net/docs/share/data-modeling) approaches to leverage when creating a new Vendia Share [Universal Application](https://www.vendia.net/docs/share/uni-creation). |
 | [deployment](deployment/README.md) | Highlighting ways to deploy Vendia Share and its common integration targets (e.g. [AWS Lambda](https://aws.amazon.com/lambda/)). |
 | [domain driven design](domain-driven-design/README.md) | A set of Domain Driven Design inspired patterns to leverage when creating Unis on Vendia Share. |
