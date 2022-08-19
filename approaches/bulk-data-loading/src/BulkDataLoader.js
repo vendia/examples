@@ -1,101 +1,73 @@
 import dotenv from 'dotenv'
 import fs from 'fs';
-import { parse } from 'csv-parse';
-import { columns } from './Constants.js'
-import {VendiaClient} from "../../../features/share/smart-contracts/src/VendiaClient.js";
+import {parse} from 'csv-parse';
+import {batchSize, filename, parseOptions} from './Constants.js'
+import {InventoryVerifier} from "./InventoryVerifier.js";
+import {VendiaClient} from "./VendiaClient.js";
+import {createInventoryMutation} from "./GqlMutations.js";
 
 dotenv.config({path: "./.share.env"})
 
-const filename = "../data/large-data-set.csv";
-const batchSize = 10
+const vendiaClient = new VendiaClient(
+    process.env.GQL_URL,
+    { 'Authorization': process.env.GQL_APIKEY }
+)
 
 let batch = []
 let batchCount = 1;
+let errorMap = {}
 
-let vendiaClient = new VendiaClient(
-    process.env.GQL_URL,
-    { 'Authorization': process.env.GQL_APIKEY }
-);
-
-fs.createReadStream(filename)
-    .pipe(parse({
-        delimiter: ",",
-        from_line: 2,
-        columns: columns,
-        cast: true,
-        cast_date: true
-    }))
+fs
+    .createReadStream(filename)
+    .pipe(parse(parseOptions))
     .on("data", function (record) {
         batch.push(record)
-        if(batch.length == batchSize) {
-            console.log("Completing batch " + batchCount);
-            sendToShare(batch, batchCount);
-            nextBatch();
+        if(batch.length === batchSize) {
+            console.log("Batch " + batchCount + " is ready");
+            processBatch(batch, batchCount);
         }
     })
     .on("end", function () {
-        console.log("Finished processing all rows");
+        console.log("Finished processing all records");
     })
     .on("error", function (error) {
         console.log(error.message);
     });
 
-function sendToShare(batch, batchCount) {
+await new InventoryVerifier().waitForCompleteInventory();
+
+if(Object.keys(errorMap).length > 0) {
+    console.log("Error map", errorMap);
+} else {
+    console.log("No errors :)");
+}
+
+function processBatch(batch, batchCount) {
+    console.log("Processing batch " + batchCount);
+
     vendiaClient
         .invokeVendiaShare(createInventoryMutation(batch))
         .then(response => {
-            console.log("Create inventory response status", response.status)
+            console.log("Response for batch " + batchCount + " status " + response.status)
+
             if(response?.data?.errors) {
-                throw new Error("GraphQL response included errors for batch " + batchCount)
+                console.error("Invoking Vendia Share resulted in GQL errors for batch " + batchCount)
+                addToErrorMap(response.status)
             }
         })
         .catch(error => {
-            console.error("Failed to invoke Vendia Share", error)
+            console.error("Failed to invoke Vendia Share for batch " + batchCount, error)
+            addToErrorMap(error?.response?.status || "UNKNOWN")
         })
+
+    nextBatch();
 }
 
-function createInventoryMutation(batch) {
-    let variables = {}
-
-    Array.from(Array(batch.length).keys()).forEach(index => {
-        variables["input" + index] = batch[index]
-    })
-
-    return {
-        query: createMutationString(batch.length),
-        variables: variables
+function addToErrorMap(status) {
+    if(errorMap[status] == null) {
+        errorMap[status] = 0;
     }
-}
-
-function createMutationString(size) {
-    let inputs = []
-
-    Array.from(Array(size).keys()).forEach(index => {
-        inputs.push("$input" + index + ": Self_Inventory_Input_!")
-    })
-
-    let operations = []
-    Array.from(Array(size).keys()).forEach(index => {
-        operations.push(`
-            entry${index}: add_Inventory(
-                input: $input${index}, 
-                syncMode: ASYNC
-            ) {
-                transaction {
-                  transactionId
-                }
-            }
-        `)
-    })
-
-    let mutationString = `
-        mutation AddInventoryItems(
-            ${inputs.join(',')}
-        ) {
-          ${operations.join('\n')}
-        }`;
-
-    return mutationString
+    errorMap[status] = errorMap[status] + 1;
 }
 
 function nextBatch() {

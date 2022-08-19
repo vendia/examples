@@ -1,12 +1,11 @@
 import fs from 'fs';
 import { stringify } from 'csv-stringify';
 import { faker } from '@faker-js/faker';
-import { columns } from './Constants.js'
+import {columns, inventoryRecordSize} from './Constants.js'
 
 
 const filename = "../data/large-data-set.csv";
 const writableStream = fs.createWriteStream(filename);
-const numRecords = 100000
 
 const stringifier = stringify({
     header: true,
@@ -18,7 +17,7 @@ const stringifier = stringify({
     }
 });
 
-for (let count = 0; count < numRecords; count++) {
+for (let count = 0; count < inventoryRecordSize; count++) {
     console.log("Adding record ", count);
 
     stringifier.write({
