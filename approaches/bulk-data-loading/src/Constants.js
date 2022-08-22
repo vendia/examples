@@ -1,3 +1,11 @@
+export const filename = "../data/large-data-set.csv";
+
+export const inventoryRecordSize = 25000
+export const batchSize = 100;
+export const clientConcurrency = 25
+export const maxInventoryChecks = 10
+export const checkDelay = 60
+
 export const columns = [
     "name",
     "number",
@@ -5,12 +13,6 @@ export const columns = [
     "price",
     "lastUpdated"
 ];
-
-export const inventoryRecordSize = 10000
-export const maxInventoryChecks = 10
-export const checkDelay = 60
-
-export const filename = "../data/large-data-set.csv";
 
 export const parseOptions = {
     delimiter: ",",
@@ -20,6 +22,7 @@ export const parseOptions = {
     cast_date: true
 };
 
-export const batchSize = 100;
+
+
 
 

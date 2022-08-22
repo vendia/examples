@@ -1,7 +1,9 @@
-export function createInventoryListQuery() {
-    let query = `
+export class GqlMutations {
+
+    static createInventoryListQuery() {
+        let query = `
         query ListInventoryItems {
-          list_InventoryItems {
+          list_InventoryItems(readMode: NODE_COMMITTED) {
             _InventoryItems {
               _id
             }
@@ -10,16 +12,16 @@ export function createInventoryListQuery() {
         }
     `;
 
-    return {
-        query: query,
-        variables: {}
+        return {
+            query: query,
+            variables: {}
+        }
     }
-}
 
-export function createInventoryListNextPageQuery(nextToken) {
-    let query = `
+    static createInventoryListNextPageQuery(nextToken) {
+        let query = `
         query ListInventoryItems($nextToken: String) {
-          list_InventoryItems(nextToken: $nextToken) {
+          list_InventoryItems(nextToken: $nextToken, readMode: NODE_COMMITTED) {
             _InventoryItems {
               _id
             }
@@ -28,37 +30,37 @@ export function createInventoryListNextPageQuery(nextToken) {
         }
     `;
 
-    return {
-        query: query,
-        variables: {
-            nextToken: nextToken
+        return {
+            query: query,
+            variables: {
+                nextToken: nextToken
+            }
         }
     }
-}
 
-export function createInventoryMutation(batch) {
-    let variables = {}
-    let mutationParameters = []
-    let mutationOperations = []
+    static createInventoryMutation(batch) {
+        let variables = {}
+        let mutationParameters = []
+        let mutationOperations = []
 
-    batch.map((batchRecord, index) => {
-        variables["input" + index] = batchRecord
-        mutationParameters.push(createMutationParameter(index))
-        mutationOperations.push(createMutationOperation(index))
-    })
+        batch.map((batchRecord, index) => {
+            variables["input" + index] = batchRecord
+            mutationParameters.push(GqlMutations.createMutationParameter(index))
+            mutationOperations.push(GqlMutations.createMutationOperation(index))
+        })
 
-    return {
-        query: createMutationString(mutationParameters, mutationOperations),
-        variables: variables
+        return {
+            query: GqlMutations.createMutationString(mutationParameters, mutationOperations),
+            variables: variables
+        }
     }
-}
 
-function createMutationParameter(index) {
-    return "$input" + index + ": Self_Inventory_Input_!";
-}
+    static createMutationParameter(index) {
+        return "$input" + index + ": Self_Inventory_Input_!";
+    }
 
-function createMutationOperation(index) {
-    return `
+    static createMutationOperation(index) {
+        return `
         entry${index}: add_Inventory(
             input: $input${index}, 
             syncMode: ASYNC
@@ -68,14 +70,16 @@ function createMutationOperation(index) {
             }
         }
     `
-}
+    }
 
-function createMutationString(mutationParameters, mutationOperations) {
-    return `
+    static createMutationString(mutationParameters, mutationOperations) {
+        return `
         mutation AddInventoryItems(
             ${mutationParameters.join(',')}
         ) {
           ${mutationOperations.join('\n')}
         }
     `;
+    }
+
 }

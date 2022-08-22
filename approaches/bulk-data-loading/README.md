@@ -5,15 +5,16 @@
 </p>
 
 # Bulk Data Loading
-In cases where a Vendia Share [Universal Application](https://www.vendia.net/product#universal-apps) (Uni) integrates with or replaces an existing operational system, it's often necessary to load the Uni with a substantial amount of historical data.  Historical data often takes many forms, but one common form is a single, very large Comma Separated Value (CSV) file.
+In cases where a Vendia Share [Universal Application](https://www.vendia.net/product#universal-apps) (Uni) integrates with or replaces an existing operational system, it's often necessary to load the Uni with a substantial amount of historical data.  Historical data often takes many forms, but one common form is a single, large Comma Separated Value (CSV) file.
 
-This example demonstrates how to load a large data set into Vendia Share, using several techniques:
+This example assumes a Retailer wants an existing Inventory loaded as quickly and simply as possible.  It demonstrates how to generate and load a large data file into Vendia Share, using several techniques:
 
-* **Extracting Records from a Large CSV File** - Working with a small subset of a very large CSV file 
-* **Batching GQL Mutations** - Creating a [GraphQL mutation](https://graphql.org/learn/queries/#mutations) for every record in the CSV file, and combining multiple GQL mutations into a single HTTP request
-* **Concurrently Executing GQL Requests** - Invoking Vendia Share's GQL API concurrently, resulting in multiple HTTP requests each containing multiple GQL mutations
+* **Generating Inventory Records into a Large CSV File** - Not Vendia Share specific, but it's helpful to start from a known CSV file format 
+* **Extracting Inventory Records from a Large CSV File** - Taking the large CSV file and batching its contents
+* **Forming Batched GQL Mutations** - Creating a [GraphQL mutation](https://graphql.org/learn/queries/#mutations) for every record in the CSV file, and combining multiple operations into a single GQL mutation
+* **Concurrently Executing HTTP Requests** - Invoking Vendia Share's GQL API concurrently, resulting in multiple HTTP requests, each containing multiple GQL mutations per request
 
-These techniques can be applied individually or combined to address the challenge of loading a large data set into Vendia Share.  
+These techniques can be applied individually or combined to address the challenge of loading a large data set into Vendia Share.
 
 ## Step 0 - Prerequisites
 This example requires a minimal set of dependencies.  Before getting started with this example, you'll first need to:
@@ -62,9 +63,45 @@ To create a Uni using the Share CLI:
 Wait about 5 minutes for the Uni to reach a `Running` state.
 
 ## Step 2 - Create an API Key
+You'll next want to create an API Key to use to access the **Retailer** node of your Uni.
 
+This Share CLI command can be used to create an API Key (replace the `<your_uni_name>` value, and feel free to modify the other parameter values as well).
 
-## Step 3 - Examine the Data Loader Source Code
+```bash
+share node add-api-key --uni <your_uni_name> --node "Retailer" --name "bulk-load-key" --expiry "2030-01-01"
+```
 
+Make sure to save the API Key value returned, as you'll need it in the next step.
+
+## Step 3 - Create a `.share.env` file
+You'll then want to store the API Key from the previous step and the GraphQL URL for the **Retailer** node in a configuration file, which is used in subsequent steps.
+
+1. Change directories to `src`
+   1. `cd ../src`
+1. Create a `.share.env` file
+   1. `echo -e "GQL_URL=\nGQL_APIKEY=\n" >> .share.env`
+
+## Step 4 - Generate Data to Load
+With your Uni running, an API Key provisioned, and a `.share.env` file in place, you're ready to create a data set to load into Vendia Share.
+
+The [package.json](src/package.json) file contains a script that can be used to generate data that matches the Uni's schema.  The end result will be an Inventory, in CSV form, stored in a file under the `data` directory of this project.
+
+```bash
+npm run generateData
+```
+
+The values in [Constants.js](src/Constants.js) can be tuned to tune, for example, the `inventoryRecordSize` that will be generated using the command above.
 
 ## Step 4 - Execute the Data Loader
+With generated data in place, you're ready to load that data set into Vendia Share.
+
+The [package.json](src/package.json) file also contains a script that can be used to load data that matches the Uni's schema.  The end result will be a Uni populated with the Inventory generated in the previous step.
+
+```bash
+npm run loadData
+```
+
+The values in [Constants.js](src/Constants.js) can be tuned to tune, for example, the `batchSize` and `clientConcurrency` that will be used when loading the data.
+
+## Conclusion
+This example demonstrates how a large CSV file can be used as a starting point for bulk data loading a Vendia Share Uni.  The techniques applied - parsing large files, batching records, combining multiple mutations into a single GQL operation, and executing multiple HTTP requests concurrently - can be used together to replicate this same approach with a Uni and data model of your choosing.
