@@ -3,7 +3,7 @@ export class GqlMutations {
     static createInventoryListQuery() {
         let query = `
         query ListInventoryItems {
-          list_InventoryItems(readMode: NODE_COMMITTED) {
+          list_InventoryItems(readMode: NODE_LEDGERED) {
             _InventoryItems {
               _id
             }
@@ -21,7 +21,7 @@ export class GqlMutations {
     static createInventoryListNextPageQuery(nextToken) {
         let query = `
         query ListInventoryItems($nextToken: String) {
-          list_InventoryItems(nextToken: $nextToken, readMode: NODE_COMMITTED) {
+          list_InventoryItems(nextToken: $nextToken, readMode: NODE_LEDGERED) {
             _InventoryItems {
               _id
             }
