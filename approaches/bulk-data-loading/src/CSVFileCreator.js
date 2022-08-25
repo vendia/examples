@@ -24,10 +24,14 @@ export class CSVFileCreator {
 
             this.stringifier.write({
                 name: faker.commerce.productName(),
-                number: faker.random.alphaNumeric(10),
+                identifier: faker.random.alphaNumeric(10),
                 quantity: faker.random.numeric(5),
                 price: faker.commerce.price(1, 999, 2),
-                lastUpdated: faker.date.recent()
+                lastUpdated: faker.date.recent(),
+                supplier: {
+                    name: faker.company.name(),
+                    identifier: faker.random.alphaNumeric(10),
+                }
             })
         }
 

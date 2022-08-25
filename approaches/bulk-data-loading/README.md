@@ -77,9 +77,12 @@ Make sure to save the API Key value returned, as you'll need it in the next step
 You'll then want to store the API Key from the previous step and the GraphQL URL for the **Retailer** node in a configuration file, which is used in subsequent steps.
 
 1. Change directories to `src`
-   1. `cd ../src`
+    1. `cd ../src`
 1. Create a `.share.env` file
-   1. `echo -e "GQL_URL=\nGQL_APIKEY=\n" >> .share.env`
+    1. `echo -e "GQL_URL=\nGQL_APIKEY=\n" >> .share.env`
+1. Copy the API Key value from the previous step into `.share.env`'s `GQL_APIKEY=` property
+1. Copy the GraphQL URL for the **Retailer** node into `.share.env`'s `GQL_URL=` property
+    1. `share get --uni <your_uni_name>`
 
 ## Step 4 - Generate Data to Load
 With your Uni running, an API Key provisioned, and a `.share.env` file in place, you're ready to create a data set to load into Vendia Share.

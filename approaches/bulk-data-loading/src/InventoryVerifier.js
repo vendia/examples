@@ -69,13 +69,15 @@ export class InventoryVerifier {
 
             //console.log("Got itemsCount " + itemCount + " and nextToken " + nextToken);
 
-            actualInventorySize += itemCount;
+            if(!isNaN(itemCount)) {
+                actualInventorySize += itemCount;
 
-            if(nextToken == null) {
-                lastPageFound = true;
+                if(nextToken == null) {
+                    lastPageFound = true;
+                }
+
+                console.log("Calculated inventory size " + actualInventorySize + " and lastPageFound " + lastPageFound);
             }
-
-            console.log("Calculated inventory size " + actualInventorySize + " and lastPageFound " + lastPageFound);
         }
 
         console.log("Inventory Stats - Size: " + actualInventorySize + " Result Pages: " + resultPageCount);
