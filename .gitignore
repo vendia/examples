@@ -2,6 +2,7 @@
 .share.env
 .env
 *.policy.json
+.vendia/
 
 # AWS Serverless Application Model (SAM)
 .aws-sam

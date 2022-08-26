@@ -3,16 +3,16 @@ import async from "async";
 import {parse} from "csv-parse";
 import {batchSize, clientConcurrency, filename, parseOptions} from "./Constants.js";
 import {GqlMutations} from "./GqlMutations.js";
-import {VendiaClient} from "./VendiaClient.js";
 import {ErrorStore} from "./ErrorStore.js";
+import { createVendiaClient } from '@vendia/client';
 
 export class CSVFileProcessor {
 
     constructor() {
-        this.vendiaClient = new VendiaClient(
-            process.env.GQL_URL,
-            { 'Authorization': process.env.GQL_APIKEY }
-        );
+        this.vendiaClient = createVendiaClient({
+            apiUrl: process.env.GQL_URL,
+            apiKey: process.env.GQL_APIKEY
+        });
 
         this.workQueue = async.queue(async task => { return this.invokeVendiaShare(task) }, clientConcurrency);
 
@@ -55,26 +55,21 @@ export class CSVFileProcessor {
     processBatch(batch, batchCount) {
         console.log("Processing batch " + batchCount);
 
-        this.workQueue
-            .push({'batch': batch})
-            .then(response => {
-                console.log("Response for batch " + batchCount + " status " + response.status)
-
-                if(response?.data?.errors) {
-                    console.error("Invoking Vendia Share resulted in GQL errors for batch " + batchCount)
-                    this.errorStore.addError(response.status)
-                }
-            })
-            .catch(error => {
-                console.error("Failed to invoke Vendia Share for batch " + batchCount)
-                this.errorStore.addError(error?.response?.status || "UNKNOWN")
-            });
+        this.workQueue.push({'batch': batch, 'batchCount': batchCount})
 
         this.resetBatch();
     }
 
-    invokeVendiaShare(task) {
-        return this.vendiaClient.invokeVendiaShare(GqlMutations.createInventoryMutation(task.batch))
+    async invokeVendiaShare(task) {
+        let { query, variables } = GqlMutations.createInventoryMutation(task.batch);
+
+        try {
+            await this.vendiaClient.request(query, variables)
+            console.log("Successful GQL call for batch " + task.batchCount);
+        } catch(error) {
+            console.error("Unsuccessful GQL call for batch " + task.batchCount)
+            this.errorStore.addError(error?.response?.status || "UNKNOWN")
+        }
     }
 
     resetBatch() {

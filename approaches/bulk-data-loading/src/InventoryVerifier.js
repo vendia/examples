@@ -1,14 +1,13 @@
-import {GqlMutations} from "./GqlMutations.js";
-import {VendiaClient} from "./VendiaClient.js";
 import {checkDelay, inventoryRecordSize, maxInventoryChecks} from "./Constants.js";
+import { createVendiaClient } from '@vendia/client';
 
 export class InventoryVerifier {
 
     constructor() {
-        this.vendiaClient = new VendiaClient(
-            process.env.GQL_URL,
-            { 'Authorization': process.env.GQL_APIKEY }
-        );
+        this.vendiaClient = createVendiaClient({
+            apiUrl: process.env.GQL_URL,
+            apiKey: process.env.GQL_APIKEY
+        });
     }
 
     async waitForCompleteInventory() {
@@ -54,18 +53,16 @@ export class InventoryVerifier {
 
             if(nextToken == null) {
                 //console.log("Next token is null - starting a fresh query")
-                response = await this.vendiaClient.invokeVendiaShare(
-                    GqlMutations.createInventoryListQuery()
-                );
+                response = await this.vendiaClient.entities.inventory.list();
             } else {
                 //console.log("Next token is NOT null - continuing a query")
-                response = await this.vendiaClient.invokeVendiaShare(
-                    GqlMutations.createInventoryListNextPageQuery(nextToken)
-                );
+                response = await this.vendiaClient.entities.inventory.list({
+                    nextToken: nextToken
+                })
             }
 
-            let itemCount = response?.data?.data?.list_InventoryItems?._InventoryItems?.length;
-            nextToken = response?.data?.data?.list_InventoryItems?.nextToken;
+            let itemCount = response?.items?.length;
+            nextToken = response?.nextToken;
 
             //console.log("Got itemsCount " + itemCount + " and nextToken " + nextToken);
 

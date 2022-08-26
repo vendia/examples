@@ -1,43 +1,5 @@
 export class GqlMutations {
 
-    static createInventoryListQuery() {
-        let query = `
-        query ListInventoryItems {
-          list_InventoryItems(readMode: NODE_LEDGERED) {
-            _InventoryItems {
-              _id
-            }
-            nextToken
-          }
-        }
-    `;
-
-        return {
-            query: query,
-            variables: {}
-        }
-    }
-
-    static createInventoryListNextPageQuery(nextToken) {
-        let query = `
-        query ListInventoryItems($nextToken: String) {
-          list_InventoryItems(nextToken: $nextToken, readMode: NODE_LEDGERED) {
-            _InventoryItems {
-              _id
-            }
-            nextToken
-          }
-        }
-    `;
-
-        return {
-            query: query,
-            variables: {
-                nextToken: nextToken
-            }
-        }
-    }
-
     static createInventoryMutation(batch) {
         let variables = {}
         let mutationParameters = []
@@ -49,10 +11,9 @@ export class GqlMutations {
             mutationOperations.push(GqlMutations.createMutationOperation(index))
         })
 
-        return {
-            query: GqlMutations.createMutationString(mutationParameters, mutationOperations),
-            variables: variables
-        }
+        let query = GqlMutations.createMutationString(mutationParameters, mutationOperations);
+
+        return { query, variables }
     }
 
     static createMutationParameter(index) {

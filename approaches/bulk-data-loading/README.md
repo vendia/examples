@@ -84,7 +84,15 @@ You'll then want to store the API Key from the previous step and the GraphQL URL
 1. Copy the GraphQL URL for the **Retailer** node into `.share.env`'s `GQL_URL=` property
     1. `share get --uni <your_uni_name>`
 
-## Step 4 - Generate Data to Load
+## Step 4 - Generate Clients Using Vendia Client SDK
+The [Vendia Share Client SDK](https://www.vendia.net/docs/share/vendia-client-sdk) auto-generates source code based on your Uni's schema.  This makes integration with Vendia Share's GraphQL APIs extremely simple.
+
+1. Pull your Uni's schema 
+    1. `share client:pull`
+1. Install the Vendia Share Client SDK package, which also auto-generates client source code into a `.vendia` directory
+    1. `npm install @vendia/client`
+
+## Step 5 - Generate Data to Load
 With your Uni running, an API Key provisioned, and a `.share.env` file in place, you're ready to create a data set to load into Vendia Share.
 
 The [package.json](src/package.json) file contains a script that can be used to generate data that matches the Uni's schema.  The end result will be an Inventory, in CSV form, stored in a file under the `data` directory of this project.
@@ -95,7 +103,7 @@ npm run generateData
 
 The values in [Constants.js](src/Constants.js) can be tuned to tune, for example, the `inventoryRecordSize` that will be generated using the command above.
 
-## Step 4 - Execute the Data Loader
+## Step 6 - Execute the Data Loader
 With generated data in place, you're ready to load that data set into Vendia Share.
 
 The [package.json](src/package.json) file also contains a script that can be used to load data that matches the Uni's schema.  The end result will be a Uni populated with the Inventory generated in the previous step.
