@@ -2,8 +2,8 @@ export const filename = "../data/large-data-set.csv";
 
 export const inventoryRecordSize = 25000
 export const batchSize = 100;
-export const clientConcurrency = 64
-export const maxInventoryChecks = 10
+export const clientConcurrency = 8
+export const maxInventoryChecks = 15
 export const checkDelay = 60
 
 export const columns = [

@@ -44,37 +44,41 @@ export class InventoryVerifier {
         let nextToken = null;
         let lastPageFound = false;
 
-        while(actualInventorySize < inventoryRecordSize && !lastPageFound) {
-            resultPageCount++;
+        try {
+            while(actualInventorySize < inventoryRecordSize && !lastPageFound) {
+                resultPageCount++;
 
-            //console.log("Getting inventory results - page " + resultPageCount);
+                //console.log("Getting inventory results - page " + resultPageCount);
 
-            let response = null;
-
-            if(nextToken == null) {
-                //console.log("Next token is null - starting a fresh query")
-                response = await this.vendiaClient.entities.inventory.list();
-            } else {
-                //console.log("Next token is NOT null - continuing a query")
-                response = await this.vendiaClient.entities.inventory.list({
-                    nextToken: nextToken
-                })
-            }
-
-            let itemCount = response?.items?.length;
-            nextToken = response?.nextToken;
-
-            //console.log("Got itemsCount " + itemCount + " and nextToken " + nextToken);
-
-            if(!isNaN(itemCount)) {
-                actualInventorySize += itemCount;
+                let response = null;
 
                 if(nextToken == null) {
-                    lastPageFound = true;
+                    //console.log("Next token is null - starting a fresh query")
+                    response = await this.vendiaClient.entities.inventory.list();
+                } else {
+                    //console.log("Next token is NOT null - continuing a query")
+                    response = await this.vendiaClient.entities.inventory.list({
+                        nextToken: nextToken
+                    })
                 }
 
-                console.log("Calculated inventory size " + actualInventorySize + " and lastPageFound " + lastPageFound);
+                let itemCount = response?.items?.length;
+                nextToken = response?.nextToken;
+
+                //console.log("Got itemsCount " + itemCount + " and nextToken " + nextToken);
+
+                if(!isNaN(itemCount)) {
+                    actualInventorySize += itemCount;
+
+                    if(nextToken == null) {
+                        lastPageFound = true;
+                    }
+
+                    console.log("Calculated inventory size " + actualInventorySize + " and lastPageFound " + lastPageFound);
+                }
             }
+        } catch(error) {
+            console.error("Received error when getting inventory size - exiting early");
         }
 
         console.log("Inventory Stats - Size: " + actualInventorySize + " Result Pages: " + resultPageCount);
