@@ -20,7 +20,7 @@
               "type": "string"
             },
             "quantity": {
-              "description": "Available quanitity of item",
+              "description": "Available quantity of item",
               "type": "integer"
             },
             "lastUpdated": {

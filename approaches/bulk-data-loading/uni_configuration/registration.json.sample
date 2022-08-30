@@ -1,0 +1,11 @@
+{
+    "name": "test-large-inventory-example",
+    "schema": "schema.json",
+    "nodes": [
+        {
+            "name": "Retailer",
+            "userId": "me@domain.com",
+            "region": "us-east-2"
+        }
+    ]
+}
