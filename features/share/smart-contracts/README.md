@@ -83,10 +83,17 @@ The below scripts look for a file named `.share.env` within the `src` directory.
    ```shell
    echo -e "LENDER_GQL_URL=\nLENDER_GQL_APIKEY=\nSERVICER_GQL_URL=\nSERVICER_GQL_APIKEY=\nVALIDATION_LAMBDA_ARN=\nCOMPUTATION_LAMBDA_ARN=\nENRICHMENT_LAMBDA_ARN=\n" >> .share.env
    ```
-1. Insert the values for each property prefixed with `LENDER` or `SERVICER` based on the GraphQL URL and API Key information for the **OriginatorNode** and **ServicerNode**.  The remainder of the properities will be assigned values in the subsequent sections. 
+1. Insert the values for each property prefixed with `LENDER` or `SERVICER` based on the GraphQL URL information for the **LenderNode** and **ServicerNode**. 
    ```shell
-   share uni get --name <name_of_your_uni>
+   share uni get --uni <name_of_your_uni>
    ```
+1. Create an API Key for the **LenderNode** and the **ServicerNode** and insert the values for each property (i.e. `SERVICER_GQL_APOKEY` and `ORIGINATOR_GQL_APIKEY`) 
+   ```shell
+   share node add-api-key --uni <your_uni_name> --node "LenderNode" --name "lender-key" --expiry "2030-01-01"
+   share node add-api-key --uni <your_uni_name> --node "ServicerNode" --name "servicer-key" --expiry "2030-01-01"
+   ```
+
+The remainder of the `.share.env` properties will be assigned values in the subsequent sections.
 
 #### Pull Dependencies
 The Node.js scripts rely on a set of 3rd party libraries, which must be retreived before executing the scripts.
@@ -186,7 +193,7 @@ Loan `0000000000000001` is valid based on the [validation rules](README.md#defin
 ##### Using a Programmatic Client
 You can invoke the validation Smart Contract using the provided npm script.  The script takes two arguments, which are the `_id` of the Smart Contract to invoke and the `loanIdentifer` of the loan to validate.
 
-1. Run the provided npm script to invoke the validation smart contract on the **OriginatorNode**
+1. Run the provided npm script to invoke the validation smart contract on the **LenderNode**
 ```
 npm run invokeValidationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier 0000000000000001
 ```
@@ -324,7 +331,7 @@ The loan portfolio's `delinquencyPercentage` and `weightedAverageInterestRate` f
 ##### Using a Programmatic Client
 You can invoke the calculation Smart Contract using the provided npm script.  The script takes no arguments, as its hardcoded to a specific `portfolioIdentifier`.
 
-1. Run the provided npm script to invoke the validation smart contract on the **OriginatorNode**
+1. Run the provided npm script to invoke the validation smart contract on the **LenderNode**
 ```
 npm run invokeComputationSmartContract -- --smartContractId <your_smart_contract_id>
 ```

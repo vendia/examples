@@ -5,26 +5,12 @@
     {
       "name": "LenderNode",
       "userId": "you@domain.com",
-      "region": "us-east-2",
-      "settings": {
-        "apiSettings": {
-          "auth": {
-            "authorizerType": "API_KEY"
-          }
-        }
-      }
+      "region": "us-east-2"
     },
     {
       "name": "ServicerNode",
       "userId": "you@domain.com",
-      "region": "us-west-2",
-      "settings": {
-        "apiSettings": {
-          "auth": {
-            "authorizerType": "API_KEY"
-          }
-        }
-      }
+      "region": "us-west-2"
     }
   ]
 }
