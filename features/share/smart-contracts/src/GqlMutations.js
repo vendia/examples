@@ -147,7 +147,7 @@ export class GqlMutations {
 
   static computationOutputMutation = `
     mutation ValidationOutputMutation($id: ID!, $delinquencyPercentage: Float, $weightedAverageInterestRate: Float) {
-        update_LoanPortfolio_async(
+        update_LoanPortfolio(
             id: $id
             input: {
                 delinquencyPercentage: $delinquencyPercentage,
@@ -175,7 +175,7 @@ export class GqlMutations {
 
   static enrichmentOutputMutation = `
     mutation ValidationOutputMutation($id: ID!, $additionalResources: [Self_Loan_additionalResources_additionalResourcesItem_UpdateInput_]) {
-      update_Loan_async(
+      update_Loan(
         id: $id, 
         input: {
           additionalResources: $additionalResources

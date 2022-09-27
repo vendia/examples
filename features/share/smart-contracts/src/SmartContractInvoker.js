@@ -6,7 +6,7 @@ import {VendiaClient} from "./VendiaClient.js";
 dotenv.config({path: "./.share.env"})
 
 console.log(
-    "Working with environment variables" +
+    "Working with environment variables " +
     "Lender GQL Url " + process.env.LENDER_GQL_URL +
     "Lender API Key " + process.env.LENDER_GQL_APIKEY +
     "Servicer GQL Url " + process.env.SERVICER_GQL_URL +

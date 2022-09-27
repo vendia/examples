@@ -5,7 +5,7 @@
   "description": "A set of scripts to load a Uni with Loan and Loan Performance data",
   "scripts": {
     "loadData" : "node DataLoader.js",
-    "createComuptationSmartContract" : "node SmartContractCreator.js --type computation",
+    "createComputationSmartContract" : "node SmartContractCreator.js --type computation",
     "createEnrichmentSmartContract" : "node SmartContractCreator.js --type enrichment",
     "createValidationSmartContract" : "node SmartContractCreator.js --type validation",
     "invokeComputationSmartContract" : "node SmartContractInvoker.js --type computation",
