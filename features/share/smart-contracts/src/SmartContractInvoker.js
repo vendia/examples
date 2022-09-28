@@ -6,11 +6,11 @@ import {VendiaClient} from "./VendiaClient.js";
 dotenv.config({path: "./.share.env"})
 
 console.log(
-    "Working with environment variables" +
+    "Working with environment variables " +
     "Lender GQL Url " + process.env.LENDER_GQL_URL +
     "Lender API Key " + process.env.LENDER_GQL_APIKEY +
-    "Servicer GQL Url" + process.env.SERVICER_GQL_URL +
-    "Servicer API Key" + process.env.SERVICER_GQL_APIKEY
+    "Servicer GQL Url " + process.env.SERVICER_GQL_URL +
+    "Servicer API Key " + process.env.SERVICER_GQL_APIKEY
 );
 
 let parser = new ArgumentParser({
@@ -43,7 +43,7 @@ function invokeValidationSmartContract(smartContractId, loanId) {
     console.debug("Invoking validation smart contract " + smartContractId + " for loan " + loanId)
     let lenderClient = new VendiaClient(
         process.env.LENDER_GQL_URL,
-        {'x-api-key': process.env.LENDER_GQL_APIKEY}
+        {'Authorization': process.env.LENDER_GQL_APIKEY}
     )
     lenderClient
         .invokeVendiaShare(createValidationSmartContractPayload(smartContractId, loanId))
@@ -63,7 +63,7 @@ function invokeComputationSmartContract(smartContractId, loanId) {
     console.debug("Invoking computation smart contract " + smartContractId)
     let servicerClient = new VendiaClient(
         process.env.SERVICER_GQL_URL,
-        {'x-api-key': process.env.SERVICER_GQL_APIKEY}
+        {'Authorization': process.env.SERVICER_GQL_APIKEY}
     )
     servicerClient
         .invokeVendiaShare(createComputationSmartContractPayload(smartContractId))
@@ -83,7 +83,7 @@ function invokeEnrichmentSmartContract(smartContractId, loanId) {
     console.debug("Invoking validation smart contract " + smartContractId + " for loan " + loanId)
     let lenderClient = new VendiaClient(
         process.env.LENDER_GQL_URL,
-        {'x-api-key': process.env.LENDER_GQL_APIKEY}
+        {'Authorization': process.env.LENDER_GQL_APIKEY}
     )
     lenderClient
         .invokeVendiaShare(createEnrichmentSmartContractPayload(smartContractId, loanId))

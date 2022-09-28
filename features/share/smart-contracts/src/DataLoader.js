@@ -6,11 +6,11 @@ import {VendiaClient} from "./VendiaClient.js";
 dotenv.config({path: "./.share.env"})
 
 console.log(
-    "Working with environment variables" +
+    "Working with environment variables " +
     "Lender GQL Url " + process.env.LENDER_GQL_URL +
     "Lender API Key " + process.env.LENDER_GQL_APIKEY +
-    "Servicer GQL Url" + process.env.SERVICER_GQL_URL +
-    "Servicer API Key" + process.env.SERVICER_GQL_APIKEY
+    "Servicer GQL Url " + process.env.SERVICER_GQL_URL +
+    "Servicer API Key " + process.env.SERVICER_GQL_APIKEY
 );
 
 const fsPromises = fs.promises;
@@ -18,12 +18,12 @@ const loanDirPath = '../data/loans/';
 
 let lenderClient = new VendiaClient(
     process.env.LENDER_GQL_URL,
-    { 'x-api-key': process.env.LENDER_GQL_APIKEY }
+    { 'Authorization': process.env.LENDER_GQL_APIKEY }
 );
 
 let servicerClient = new VendiaClient(
     process.env.SERVICER_GQL_URL,
-    { 'x-api-key': process.env.SERVICER_GQL_APIKEY }
+    { 'Authorization': process.env.SERVICER_GQL_APIKEY }
 );
 
 fsPromises

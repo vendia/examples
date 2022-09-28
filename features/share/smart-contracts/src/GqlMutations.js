@@ -7,7 +7,8 @@ export class GqlMutations {
               acl: [
                   { principal: {nodes: "LenderNode"}, operations: [ALL, UPDATE_ACL] }
               ]
-          }
+          },
+          syncMode: ASYNC
         ) {
           transaction {
             _id
@@ -26,13 +27,14 @@ export class GqlMutations {
               input: {
                 portfolioIdentifier: "AAAA1111",
                 portfolioName: "Loan Portfolio"
-            }
+            },
               aclInput: {
                   acl: [
                       { principal: { nodes: "ServicerNode" }, operations: [ALL, UPDATE_ACL] },
                       { principal: {nodes: "LenderNode"}, operations: [READ] }
                   ]
-              }
+              },
+              syncMode: ASYNC
           ) {
               transaction {
                   _id
@@ -54,7 +56,9 @@ export class GqlMutations {
           inputQuery: $inputQuery,
           outputMutation: $outputMutation,
           resource: {uri: $resource}
-        }) {
+        },
+        syncMode: ASYNC
+        ) {
         transaction {
           _id
           _owner
@@ -68,14 +72,15 @@ export class GqlMutations {
 
   static smartContractInvocationMutation = `
     mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "{}") {
-      invokeVendia_Contract_async(
+      invokeVendia_Contract(
         id: $id, 
         input: {
           queryArgs: $queryArgs,
           invokeArgs: $invokeArgs
-        }
+        },
+        syncMode: ASYNC
       ) {
-        result {
+        transaction {
           _id
           _owner
           submissionTime
@@ -104,16 +109,17 @@ export class GqlMutations {
 
   static validationOutputMutation = `
     mutation ValidationOutputMutation($id: ID!,  $validationStatus: Self_Loan_validationStatusEnum!, $acl: [Vendia_Acl_Input_!]) {
-      update_Loan_async(
+      update_Loan(
         id: $id, 
         input: {
           validationStatus: $validationStatus
         },
         aclInput: {
             acl: $acl
-        }
+        },
+        syncMode: ASYNC
       ) {
-        error
+        __typename
       }
     }
   `
@@ -141,15 +147,16 @@ export class GqlMutations {
 
   static computationOutputMutation = `
     mutation ValidationOutputMutation($id: ID!, $delinquencyPercentage: Float, $weightedAverageInterestRate: Float) {
-        update_LoanPortfolio_async(
+        update_LoanPortfolio(
             id: $id
             input: {
                 delinquencyPercentage: $delinquencyPercentage,
                 weightedAverageInterestRate: $weightedAverageInterestRate
-            }
+            },
+            syncMode: ASYNC
         ) {
-            error
-        }
+        __typename
+      }
     }
   `
 
@@ -168,13 +175,14 @@ export class GqlMutations {
 
   static enrichmentOutputMutation = `
     mutation ValidationOutputMutation($id: ID!, $additionalResources: [Self_Loan_additionalResources_additionalResourcesItem_UpdateInput_]) {
-      update_Loan_async(
+      update_Loan(
         id: $id, 
         input: {
           additionalResources: $additionalResources
-        }
+        },
+        syncMode: ASYNC
       ) {
-        error
+        __typename
       }
     }
   `

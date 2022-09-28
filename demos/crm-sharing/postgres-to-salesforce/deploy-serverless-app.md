@@ -68,10 +68,9 @@ The **salesforce** node needs to be configured to send block notifications to yo
 
 ```graphql
 mutation update_blockReportLambdas($notificationFunction: String!) {
-  updateVendia_Settings_async(
+  updateVendia_Settings(
     input: {aws: {blockReportLambdas: [$notificationFunction]}}
   ) {
-    error
     result {
       _id
     }
