@@ -96,7 +96,7 @@ The below scripts look for a file named `.share.env` within the `src` directory.
 The remainder of the `.share.env` properties will be assigned values in the subsequent sections.
 
 #### Pull Dependencies
-The Node.js scripts rely on a set of 3rd party libraries, which must be retreived before executing the scripts.
+The Node.js scripts rely on a set of 3rd party libraries, which must be retrieved before executing the scripts.
 
 ```shell
 npm i
