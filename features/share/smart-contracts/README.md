@@ -87,7 +87,7 @@ The below scripts look for a file named `.share.env` within the `src` directory.
    ```shell
    share uni get --uni <name_of_your_uni>
    ```
-1. Create an API Key for the **LenderNode** and the **ServicerNode** and insert the values for each property (i.e. `SERVICER_GQL_APOKEY` and `ORIGINATOR_GQL_APIKEY`) 
+1. Create an API Key for the **LenderNode** and the **ServicerNode** and insert the values for each property (i.e. `SERVICER_GQL_APIKEY` and `LENDER_GQL_APIKEY`) 
    ```shell
    share node add-api-key --uni <your_uni_name> --node "LenderNode" --name "lender-key" --expiry "2030-01-01"
    share node add-api-key --uni <your_uni_name> --node "ServicerNode" --name "servicer-key" --expiry "2030-01-01"

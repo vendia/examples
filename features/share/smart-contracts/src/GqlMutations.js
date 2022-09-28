@@ -27,7 +27,7 @@ export class GqlMutations {
               input: {
                 portfolioIdentifier: "AAAA1111",
                 portfolioName: "Loan Portfolio"
-            }.
+            },
               aclInput: {
                   acl: [
                       { principal: { nodes: "ServicerNode" }, operations: [ALL, UPDATE_ACL] },
