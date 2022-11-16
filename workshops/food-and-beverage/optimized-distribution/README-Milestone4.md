@@ -49,7 +49,7 @@ You will now create a delivery that references the recently submitted purchase o
 
 * Open the `GraphQL Explorer` of the **SupplierNode**. Remove any existing content from the middle pane.
 
-First, confirm the purchase orders submitted to the **DistributorNode** are in fact also avaiable from the **SupplierNode**.  
+First, confirm the purchase orders submitted to the **DistributorNode** are in fact also available from the **SupplierNode**.  
 
 * Copy and paste the query below and then execute it to see all purchase orders.
  
@@ -87,7 +87,7 @@ First, confirm the purchase orders submitted to the **DistributorNode** are in f
   }
   ```
   
-Finally, confirm the newly created delivery is stred on the **DistributorNode**.  
+Finally, confirm the newly created delivery is shared on the **DistributorNode**.  
 
 * Open the `GraphQL Explorer` of the **DistributorNode**.  Remove any existing content from the middle pane.
 * Copy and paste the query below and then execute it to see all deliveries.
