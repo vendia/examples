@@ -72,7 +72,7 @@ Now attempt to update one of the files.  You should not be able to upload a new 
 * From the `File Explorer` of the **DistributorNode**
 * Click on the `...` link under the `Action` column of the `All Files` table
 * You should not see the `Edit file` option, which is only available to the **SupplierNode**
-  * **Note:** The inability to edit the files from teh **DistributorNode** is not just a user interface protection.  The GraphQL API of the **DistributorNode** will also reject any requests to modify the files.
+  * **Note:** The inability to edit the files from the **DistributorNode** is not just a user interface protection.  The GraphQL API of the **DistributorNode** will also reject any requests to modify the files.
 
 ## Key Takeaways
 Congratulations.  You've successfully reached Milestone 3!
