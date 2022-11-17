@@ -19,8 +19,6 @@ Monitor your email for a Uni invitation.  Once received, click on the provided l
   * **Node name** - Enter `DistributorNode`
   * **Cloud Service Provider** - Enter `AWS`.  For now, let's keep things simple.
   * **Node region** - Free choice.  Something that **isn't** `us-east-1` gives you a multi-region Uni that may help with resilience goals
-  * **Auth option** - Enter `API Key`.  For now, let's keep things simple.
-    * You'll also need to check the acknowledgment box regarding the limitations for API Keys.  Fortunately, Vendia Share also supports [many other authorization options](https://www.vendia.net/docs/share/node-access-control).
 * Click `Register Node` to add this new node to your existing Uni
 
 Once you're back to the Uni detail view, you'll notice the status of the Uni has changed to `Adding node`.  This will last about 5 minutes, after which your multi-node, multi-region will be ready for use.
@@ -74,7 +72,7 @@ Now attempt to update one of the files.  You should not be able to upload a new 
 * From the `File Explorer` of the **DistributorNode**
 * Click on the `...` link under the `Action` column of the `All Files` table
 * You should not see the `Edit file` option, which is only available to the **SupplierNode**
-  * **Note:** The inability to edit the files from teh **DistributorNode** is not just a user interface protection.  The GraphQL API of the **DistributorNode** will also reject any requests to modify the files.
+  * **Note:** The inability to edit the files from the **DistributorNode** is not just a user interface protection.  The GraphQL API of the **DistributorNode** will also reject any requests to modify the files.
 
 ## Key Takeaways
 Congratulations.  You've successfully reached Milestone 3!
