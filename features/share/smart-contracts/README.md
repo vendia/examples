@@ -195,7 +195,7 @@ You can invoke the validation Smart Contract using the provided npm script.  The
 
 1. Run the provided npm script to invoke the validation smart contract on the **LenderNode**
 ```
-npm run invokeValidationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier 0000000000000001
+npm run invokeValidationSmartContract -- --smartContractId <your_smart_contract_id> --loanIdentifier 0000000000000001  # your contract id looks like: vrn:LenderNode:smart-contract:validation-smart-contract, Also called as Vendia resource name.
 ```
 
 ##### Using the Share Web App
@@ -331,7 +331,7 @@ The loan portfolio's `delinquencyPercentage` and `weightedAverageInterestRate` f
 ##### Using a Programmatic Client
 You can invoke the calculation Smart Contract using the provided npm script.  The script takes no arguments, as its hardcoded to a specific `portfolioIdentifier`.
 
-1. Run the provided npm script to invoke the validation smart contract on the **LenderNode**
+1. Run the provided npm script to invoke the validation smart contract on the **ServicerNode**
 ```
 npm run invokeComputationSmartContract -- --smartContractId <your_smart_contract_id>
 ```

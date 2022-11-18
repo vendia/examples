@@ -43,7 +43,7 @@ git clone git@github.com:vendia/examples.git
 * Change to the `uni_configuration` directory
 
 ```bash
-cd examples/demos/crm-sharing/uni_configuration
+cd examples/demos/crm-sharing/console-experience/uni_configuration
 ```
 
 * Create your own copy of the `registration.json.sample` file, removing the `.sample` suffix
