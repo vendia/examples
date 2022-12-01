@@ -1,0 +1,16 @@
+{
+  "name": "test-<name-of-your-choice>",
+  "schema": "schema.json",
+  "nodes": [
+    {
+      "name": "PrimaryNode",
+      "userId": "you@domain.com",
+      "region": "us-east-2"
+    },
+    {
+      "name": "SecondaryNode",
+      "userId": "you@domain.com",
+      "region": "us-west-2"
+    }
+  ]
+}
