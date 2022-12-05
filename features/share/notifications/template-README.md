@@ -18,6 +18,23 @@ Fill in why we are writing this.
 * \<requirement>
 
 ## UI Setup
+1. Click on the Uni you created. If you created according to previous guide, it should be named something like this `test-<your-uni-name>`
+![click-test-uni](../../image/re-usable/click-test-uni.png)
+
+2. Click on the Node you need notification for. In this case, let's choose `PrimaryNode`.
+![click-primary-node](../../image/re-usable/click-primary-node.png)
+
+3. On Node detail page, click on `Manage Node`
+![click-manage-node](../../image/re-usable/click-manage-node.png)
+
+4. On `Manage Node` page, click on `Success Nofitifications` tab:
+
+![click-success-notification](../../image/success/click-success-notification.png)
+
+4. On `Manage Node` page, click on `Error Nofitifications` tab:
+
+![click-error-notification](../../image/error/click-error-notification.png)
+
 1. \<steps 1 - x> setting things up in UI
 2. \<steps x - n> subscription confirmation piece that can be in both UI and GraphQL
 3. Your notification setup is completed. Now let's [VALIDATE](#notification-validation) it's working properly.
