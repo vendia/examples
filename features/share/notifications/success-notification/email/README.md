@@ -98,7 +98,7 @@ mutation MyMutation {
 ![email-notification](../../image/success/email/e-mail-block-notification.png)
 
 
-4. You are able to use mutation to get more information and use this notification to trigger other activities. But that will be outside the scope of this guide. Enjoy your data sharing journey!
+4. You are able to use mutation id to get more information and use this notification to trigger other activities. But that will be outside the scope of this guide. Enjoy your data sharing journey!
 
 # Additional Resources
 
