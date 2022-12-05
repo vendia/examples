@@ -101,6 +101,7 @@ mutation MyMutation {
 3. Check your e-mail and find subject in this format: `Dead Letter Notification`. The e-mail content looks like below: 
 ![email-notification](../../image/error/email/e-mail-error-notification.png)
 
+* Note: Unlike success notification, error notifications takes longer to be triggered. If you don't get anything after 20-30 minutes. Report it to Vendia.
 
 4. You can use this error message to plan for error handling. Enjoy your data sharing journey!
 

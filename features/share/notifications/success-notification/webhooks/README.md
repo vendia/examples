@@ -29,11 +29,11 @@ This is a guide on on how to set up success notifications to webhooks.
 ![click-success-notification](../../image/success/click-success-notification.png)
 
 5. On `Success Notification` tab, paste your webhook url copied from last step as below and click on `Save settings`:
-![add-email](../../image/success/webhook/success-webhook-setting.png)
+![add-webhook](../../image/success/webhook/success-webhook-setting.png)
 
 
 6. Wait for a few seconds and check your [webhook.site](https://webhook.site). A `POST` request should come in for subscription confirmation. You will have to subscript by going to the `SubscribeURL` link within the request body.
-![confirmation-email](../../image/success/webhook/subscribe-message.png)
+![subscription-link](../../image/success/webhook/subscribe-message.png)
 
 7. After going to the URL, you should see a subscription confirmation like this:
 ![subscription-confirmation](../../image/success/webhook/confirmation-message.png)
@@ -62,7 +62,7 @@ mutation MyMutation {
 
 ```
 * You should get response that looks like this:
-![graphql-e-mail-result](../../image/success/webhook/subscribe-message.png)
+![graphql-e-mail-result](../../image/success/webhook/graphql-add-webhook.png)
 
 3. Wait for a few seconds and check your [webhook.site](https://webhook.site). A `POST` request should come in for subscription confirmation. You will have to subscript by going to the `SubscribeURL` link within the request body.
 ![confirmation-email](../../image/success/webhook/subscribe-message.png)
