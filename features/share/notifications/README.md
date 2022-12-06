@@ -22,17 +22,24 @@ Unis can be created through both [Vendia Share UI](https://share.vendia.net/) or
 ## Creation Through UI
 1. login to [Vendia share](https://share.vendia.net).
 2. Click on + Create Universal Application bottom.
+
 ![create-uni](image/re-usable/create-uni.png)
+
 3. For the purpose of this demo, choose Product database.
+
 ![uni-proudct](image/re-usable/uni-product-database.png)
+
 4. Enter your uni name in the format `test-<your-uni-name>` and click next.
+
 ![uni-input-name](image/re-usable/uni-input-name.png)
 5. Enter your node info as follows:
 - Name first node `PrimaryNode`, pick AWS as your cloud provider, choose node regio to be `us-east-2(Ohio)`, and then click "add another node" at the bottom.
 - Name second node `SecondaryNode`, pick AWS as your cloud provider, choose node region to be `us-west-2(Oregon)`, and then click `Next`.
 ![uni-proudct](image/re-usable/primary-secondary-node.png)
 6. Use the default schema generated for Product database and Click `Create`.
+
 ![uni-proudct](image/re-usable/product-database-schema.png)
+
 It takes about 5 minutes for your environment to be ready. Once you see the status of your nodes become `Running`, you can then proceed to the next steps. 
 
 ## Creation Through CLI
