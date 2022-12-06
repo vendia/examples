@@ -39,7 +39,7 @@ def lambda_handler(event, context):
 
 4. Copy the SNS Topic ARN for later use:
 
-![dlq-ARN](../../image/error/lambda/dlq-arn.png)
+![dlq-ARN](../../image/re-usable/dlq-arn.png)
 
 5. Add permission to your lambda function using your AWS CLI:
 ```

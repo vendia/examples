@@ -40,7 +40,7 @@ def lambda_handler(event, context):
 
 4. Copy the SNS Topic ARN for later use:
 
-![block-ARN](../../image/success/lambda/block-arn.png)
+![block-ARN](../../image/re-usable/block-arn.png)
 
 5. Add permission to your lambda function using your AWS CLI:
 ```
@@ -89,7 +89,7 @@ Fielding explained:
 
 ![ui-add-lambda](../../image/success/lambda/ui-add-lambda.png)
 
-8. Subscrib to the topic from your AWS CLI:
+8. Subscribe to the topic from your AWS CLI:
 
 ```
 aws sns subscribe \
