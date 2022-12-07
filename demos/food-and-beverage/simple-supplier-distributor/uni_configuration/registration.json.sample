@@ -6,26 +6,12 @@
         {
             "name": "SupplierNode",
             "userId": "you@domain.com",
-            "region": "us-east-1",
-            "settings": {
-                "apiSettings": {
-                    "auth": {
-                        "authorizerType": "API_KEY"
-                    }
-                }
-            }
+            "region": "us-east-1"
         },
         {
             "name": "DistributorNode",
             "userId": "you@domain.com",
-            "region": "us-east-1",
-            "settings": {
-                "apiSettings": {
-                    "auth": {
-                        "authorizerType": "API_KEY"
-                    }
-                }
-            }
+            "region": "us-east-1"
         }
     ]
 }
