@@ -7,40 +7,19 @@
       "name": "SupplierNode",
       "userId": "you@domain.com",
       "csp": "aws",
-      "region": "us-east-2",
-      "settings": {
-        "apiSettings": {
-          "auth": {
-            "authorizerType": "API_KEY"
-          }
-        }
-      }
+      "region": "us-east-2"
     },
     {
       "name": "DistributorNode",
       "userId": "you@domain.com",
       "csp": "aws",
-      "region": "us-west-2",
-      "settings": {
-        "apiSettings": {
-          "auth": {
-            "authorizerType": "API_KEY"
-          }
-        }
-      }
+      "region": "us-west-2"
     },
     {
       "name": "RetailerNode",
       "userId": "you@domain.com",
       "csp": "azure",
-      "region": "eastus",
-      "settings": {
-        "apiSettings": {
-          "auth": {
-            "authorizerType": "API_KEY"
-          }
-        }
-      }
+      "region": "eastus"
     }
   ]
 }

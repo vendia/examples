@@ -6,14 +6,7 @@
     {
       "name": "Node1",
       "userId": "you@domain.com",
-      "region": "us-east-2",
-      "settings": {
-        "apiSettings": {
-          "auth": {
-            "authorizerType": "API_KEY"
-          }
-        }
-      }
+      "region": "us-east-2"
     }
   ]
 }
