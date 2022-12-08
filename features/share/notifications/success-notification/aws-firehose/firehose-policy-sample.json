@@ -1,0 +1,187 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "firehose:ListDeliveryStreams",
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "aws:SourceArn": "<your-vendia-SNS-topic-ARN>"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "glue:GetSchemaVersion",
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "kafka-cluster:DescribeTopicDynamicConfiguration",
+                "kafka-cluster:ReadData",
+                "kafka-cluster:DescribeTopic",
+                "glue:GetSchemaByDefinition"
+            ],
+            "Resource": [
+                "arn:aws:kafka:us-east-1:520626504024:topic/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+                "arn:aws:glue:us-east-1:520626504024:registry/*",
+                "arn:aws:glue:us-east-1:520626504024:schema/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": "kafka-cluster:DescribeGroup",
+            "Resource": "arn:aws:kafka:us-east-1:520626504024:group/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/*"
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt",
+                "kms:GenerateDataKey"
+            ],
+            "Resource": "arn:aws:kms:us-east-1:520626504024:key/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+            "Condition": {
+                "StringEquals": {
+                    "kms:ViaService": "s3.us-east-1.amazonaws.com"
+                },
+                "StringLike": {
+                    "kms:EncryptionContext:aws:s3:arn": [
+                        "arn:aws:s3:::%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/*",
+                        "arn:aws:s3:::%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor5",
+            "Effect": "Allow",
+            "Action": "kms:Decrypt",
+            "Resource": "arn:aws:kms:us-east-1:520626504024:key/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+            "Condition": {
+                "StringEquals": {
+                    "kms:ViaService": "kinesis.us-east-1.amazonaws.com"
+                },
+                "StringLike": {
+                    "kms:EncryptionContext:aws:kinesis:arn": "arn:aws:kinesis:us-east-1:520626504024:stream/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor6",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucketMultipartUploads",
+                "glue:GetTableVersions",
+                "lambda:InvokeFunction",
+                "kinesis:GetShardIterator",
+                "kinesis:DescribeStream",
+                "s3:ListBucket",
+                "lambda:GetFunctionConfiguration",
+                "logs:PutLogEvents",
+                "glue:GetTable",
+                "s3:PutObject",
+                "s3:GetObject",
+                "glue:GetTableVersion",
+                "s3:AbortMultipartUpload",
+                "kinesis:GetRecords",
+                "kafka-cluster:Connect",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:glue:us-east-1:520626504024:catalog",
+                "arn:aws:glue:us-east-1:520626504024:database/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+                "arn:aws:glue:us-east-1:520626504024:table/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+                "arn:aws:kafka:us-east-1:520626504024:cluster/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+                "arn:aws:kinesis:us-east-1:520626504024:stream/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%",
+                "arn:aws:s3:::li-vendia-firehose-destination",
+                "arn:aws:s3:::li-vendia-firehose-destination/*",
+                "arn:aws:logs:us-east-1:520626504024:log-group:%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%:log-stream:*",
+                "arn:aws:logs:us-east-1:520626504024:log-group:/aws/kinesisfirehose/vendia-notification:log-stream:*",
+                "arn:aws:lambda:us-east-1:520626504024:function:%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%"
+            ]
+        },
+        {
+            "Sid": "VisualEditor7",
+            "Effect": "Allow",
+            "Action": [
+                "sns:ListTopics",
+                "sns:Unsubscribe",
+                "sns:CreatePlatformEndpoint",
+                "sns:OptInPhoneNumber",
+                "sns:CheckIfPhoneNumberIsOptedOut",
+                "sns:ListEndpointsByPlatformApplication",
+                "sns:SetEndpointAttributes",
+                "sns:DeletePlatformApplication",
+                "sns:SetPlatformApplicationAttributes",
+                "sns:VerifySMSSandboxPhoneNumber",
+                "sns:DeleteSMSSandboxPhoneNumber",
+                "sns:ListSMSSandboxPhoneNumbers",
+                "sns:CreatePlatformApplication",
+                "sns:SetSMSAttributes",
+                "sns:GetPlatformApplicationAttributes",
+                "sns:GetSubscriptionAttributes",
+                "sns:ListSubscriptions",
+                "sns:ListOriginationNumbers",
+                "sns:DeleteEndpoint",
+                "sns:ListPhoneNumbersOptedOut",
+                "sns:GetEndpointAttributes",
+                "sns:SetSubscriptionAttributes",
+                "sns:GetSMSSandboxAccountStatus",
+                "sns:CreateSMSSandboxPhoneNumber",
+                "sns:ListPlatformApplications",
+                "sns:GetSMSAttributes"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "aws:SourceArn": "<your-vendia-SNS-topic-ARN>"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor8",
+            "Effect": "Allow",
+            "Action": "sns:*",
+            "Resource": "<your-vendia-SNS-topic-ARN>",
+            "Condition": {
+                "ArnLike": {
+                    "aws:SourceArn": "<your-vendia-SNS-topic-ARN>"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor9",
+            "Effect": "Allow",
+            "Action": "firehose:*",
+            "Resource": "arn:aws:firehose:us-east-1:520626504024:deliverystream/vendia-notification",
+            "Condition": {
+                "ArnLike": {
+                    "aws:SourceArn": "<your-vendia-SNS-topic-ARN>"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor10",
+            "Effect": "Allow",
+            "Action": [
+                "kafka:DescribeClusterV2",
+                "kafka:DescribeCluster",
+                "kafka:GetBootstrapBrokers"
+            ],
+            "Resource": "arn:aws:kafka:us-east-1:520626504024:cluster/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%"
+        },
+        {
+            "Sid": "VisualEditor11",
+            "Effect": "Allow",
+            "Action": "kinesis:ListShards",
+            "Resource": "arn:aws:kinesis:us-east-1:520626504024:stream/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%"
+        }
+    ]
+}

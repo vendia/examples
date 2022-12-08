@@ -121,7 +121,7 @@ mutation MyMutation {
 
 3. On your AWS sqs page, you should see there's a message coming in:
 
-![aws-sqs-sub-message](../../image/success/sqs/sqs-subscribe-message.png)
+![aws-sqs-sub-message](../../image/re-usable/sqs-subscribe-message.png)
 
 4. Open up the message and check it's body. You should see a field that says `SubscribeURL`. Copy & paste this URL on your browser:
 
@@ -165,7 +165,7 @@ mutation MyMutation {
 
 ![block-notification-content](../../image/success/sqs/block-notification-content.png)
 
-4. You are able to use mutation id to get more information and use this notification to trigger other activities. But that will be outside the scope of this guide. Enjoy your data sharing journey!
+5. You are able to use mutation id to get more information and use this notification to trigger other activities. But that will be outside the scope of this guide. Enjoy your data sharing journey!
 
 # Additional Resources
 
