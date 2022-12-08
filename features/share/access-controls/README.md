@@ -13,7 +13,7 @@ Access controls have been built into multiple levels of the Vendia Share archite
 
 * [User Management Access Controls](https://www.vendia.net/docs/share/rbac#user-actions) - Protect Vendia Share user account management operations
 * [Uni Management Access Controls](https://www.vendia.net/docs/share/rbac#uni-actions) - Protect Vendia Share Uni management operations
-* [Node Access Controls](https://www.vendia.net/docs/share/node-access-control) - Protects a node's GraphQL API
+* [Node Access Controls](https://www.vendia.com/docs/share/node-authentication) - Protects a node's GraphQL API
 * [Data Access Controls](https://www.vendia.net/docs/share/fine-grained-data-permissions) - Protects the data stored in a Uni
 
 <figure>
