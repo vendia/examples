@@ -5,7 +5,9 @@
 </p>
 
 # Purpose
-This README.md is meant to help you setup your environment to test out all of the notification options Vendia Share offers. **Please complete all the prerequisites before going to each example links**.
+This README.md is meant to help you setup your environment to test out all of the notification options Vendia Share offers.
+
+**Please complete all the prerequisites before going to each example links**.
 
 # Prerequisites
 * Know what Vendia Notifications do. Or check our docs [here](https://www.vendia.com/docs/share/integrations#outbound)
