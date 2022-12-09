@@ -72,21 +72,21 @@ Once all the notes are in `running` status, choose one of the examples below and
 ## Success Notifications
 Notifications emitted when the node commits a new block. Includes a summary of the transactions included in the block.
 
-| Example                                                          | Programming Languages | Description                                                   |
-| :--------------------------------------------------------------- | :-------------------- | :------------------------------------------------------------ |
-| [Email](success-notification/email/README.md)                    | GraphGL               | Setting up e-mail notifications using both the UI and GraphQL |
-| [Kinesis Firehoses](success-notification/aws-firehose/README.md) | GraphQL               | Receive notifications through Kinese Firehoses                |
-| [Lambda Functions](success-notification/aws-lambda/README.md)    | JavaScript, GraphQL   | Handle notifications using Lambda Functions                   |
-| [SQS Queues](success-notification/aws-sqs/README.md)             | GraphQL               | Putting notification messages into SQS queues                 |
-| [Webhooks](success-notification/webhooks/README.md)              | GraphQL               | Integrate notification with webhooks                          |
+| Example                                                          | Description                                 |
+|:-----------------------------------------------------------------|:--------------------------------------------|
+| [Email](success-notification/email/README.md)                    | Receive notifications with e-mail           |
+| [Kinesis Firehoses](success-notification/aws-firehose/README.md) | Receive notifications with Kinese Firehoses |
+| [Lambda Functions](success-notification/aws-lambda/README.md)    | Receive notifications with Lambda Functions |
+| [SQS Queues](success-notification/aws-sqs/README.md)             | Receive notification with SQS queues        |
+| [Webhooks](success-notification/webhooks/README.md)              | Receive notification with Webhooks          |
         
 
 ## Error Notifications
 Notifications emitted when an asynchronous transaction cannot be committed within the retry policy. Includes the full details of the original transaction.
 
-| Example                                                     | Programming Languages | Description                                                   |
-| :---------------------------------------------------------- | :-------------------- | :------------------------------------------------------------ |
-| [Email](error-notification/email/README.md)                 | GraphGL               | Setting up e-mail notifications using both the UI and GraphQL |
-| [Lambda Functions](error-notification/aws-lambda/README.md) | JavaScript, GraphQL   | Handle notifications using Lambda Functions                   |
-| [SQS Queues](error-notification/aws-sqs/README.md)          | GraphQL               | Putting notification messages into SQS queues                 |
-| [Webhooks](error-notification/webhooks/README.md)           | GraphQL               | Integrate notification with webhooks                          |
+| Example                                                     | Description                        |
+|:------------------------------------------------------------|:-----------------------------------|
+| [Email](error-notification/email/README.md)                 | Receive notification with e-mail   |
+| [Lambda Functions](error-notification/aws-lambda/README.md) | Receive notification with Lambda   |
+| [SQS Queues](error-notification/aws-sqs/README.md)          | Receive notification with SQS      |
+| [Webhooks](error-notification/webhooks/README.md)           | Receive notification with Webhooks |
