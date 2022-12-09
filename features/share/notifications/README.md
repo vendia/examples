@@ -19,7 +19,7 @@ This README.md is meant to help you setup your environment to test out all of th
 
 # Uni Creation
 
-Unis can be created through both [Vendia Share UI](https://share.vendia.net/) or our [Share CLI](https://www.vendia.com/docs/share/cli).
+Unis can be created through both the [Vendia Share UI](https://share.vendia.net/) or the [Vendia Share CLI](https://www.vendia.com/docs/share/cli).
 
 ## Creation Through UI
 1. login to [Vendia share](https://share.vendia.net).
