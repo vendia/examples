@@ -22,7 +22,7 @@ This README.md is meant to help you setup your environment to test out all of th
 Unis can be created through both the [Vendia Share UI](https://share.vendia.net/) or the [Vendia Share CLI](https://www.vendia.com/docs/share/cli).
 
 ## Creation Through UI
-1. login to [Vendia share](https://share.vendia.net).
+1. Log in to [Vendia share](https://share.vendia.net).
 2. Click on + Create Universal Application bottom.
 
 ![create-uni](image/re-usable/create-uni.png)
