@@ -10,7 +10,7 @@ This README.md is meant to help you setup your environment to test out all of th
 **Please complete all the prerequisites before going to each example links**.
 
 # Prerequisites
-* Know what Vendia Notifications do. Or check our docs [here](https://www.vendia.com/docs/share/integrations#outbound)
+* Know what Vendia Notifications do. Check out the [docs] (https://www.vendia.com/docs/share/integrations#outbound)
 * Create a [Vendia Share account](https://share.vendia.net/)
 * Create a [Amazon Web Services account](https://aws.amazon.com/free)
 * Install [Node.js](https://nodejs.org/en/download/)
