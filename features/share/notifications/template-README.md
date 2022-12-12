@@ -19,21 +19,21 @@ This is a guide on how to set up success/error notifications to <tool-name>. Not
 
 ## UI Setup
 1. Click on the Uni you created. If you created according to previous guide, it should be named something like this `test-<your-uni-name>`
-![click-test-uni](../../image/re-usable/click-test-uni.png)
+![click-test-uni](../../img/re-usable/click-test-uni.png)
 
 2. Click on the Node you need notification for. In this case, let's choose `PrimaryNode`.
-![click-primary-node](../../image/re-usable/click-primary-node.png)
+![click-primary-node](../../img/re-usable/click-primary-node.png)
 
 3. On Node detail page, click on `Manage Node`
-![click-manage-node](../../image/re-usable/click-manage-node.png)
+![click-manage-node](../../img/re-usable/click-manage-node.png)
 
 4. On `Manage Node` page, click on `Success Nofitifications` tab:
 
-![click-success-notification](../../image/success/click-success-notification.png)
+![click-success-notification](../../img/success/click-success-notification.png)
 
 4. On `Manage Node` page, click on `Error Nofitifications` tab:
 
-![click-error-notification](../../image/error/click-error-notification.png)
+![click-error-notification](../../img/error/click-error-notification.png)
 
 1. \<steps 1 - x> setting things up in UI
 2. \<steps x - n> subscription confirmation piece that can be in both UI and GraphQL
@@ -43,7 +43,7 @@ This is a guide on how to set up success/error notifications to <tool-name>. Not
 
 1. Go to `PrimaryNode`'s detail page and click on `GraphQL Explorer`: 
 
-![click-graphql](../../image/re-usable/click-grahql-explorer.png)
+![click-graphql](../../img/re-usable/click-grahql-explorer.png)
 
 2. Clear your GraphQL explorer editor. Copy this piece of GraphQL code, replace `<change-this-to-fit-blow-snippet>` to your info, and paste it into the editor. Then click the start button.
 
@@ -58,7 +58,7 @@ To ensure our notification is working properly, we just have to create a new blo
 
 1. Go to `PrimaryNode`'s detail page and click on `GraphQL Explorer`: 
 
-![click-graphql](../../image/re-usable/click-grahql-explorer.png)
+![click-graphql](../../img/re-usable/click-grahql-explorer.png)
 
 <!-- Two step 2s are provided for success and error cases respectively -->
 
@@ -77,7 +77,7 @@ mutation MyMutation {
 ```
 * It should look like this:
 
-![graphql-mutation-result](../../image/re-usable/create-new-block.png)
+![graphql-mutation-result](../../img/re-usable/create-new-block.png)
 
 2. Clear your GraphQL explorer editor. Copy this piece of GraphQL code and paste it into the editor. Then click the start button.
 ```
@@ -98,7 +98,7 @@ mutation MyMutation {
 ```
 * It should look like this:
 
-![graphql-mutation-result](../../image/re-usable/create-new-error.png)
+![graphql-mutation-result](../../img/re-usable/create-new-error.png)
 
 <!-- Step 3 will be unique to each section and depends on the tools you use. -->
 3. \<write what needs to be done at tool level to see if things are working>

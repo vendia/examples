@@ -18,25 +18,25 @@ This is a guide on how to set up success notifications on aws firehose. Note tha
 
 ## UI Setup
 1. Click on the Uni you created. If you created according to previous guide, it should be named something like this `test-<your-uni-name>`
-![click-test-uni](../../image/re-usable/click-test-uni.png)
+![click-test-uni](../../img/re-usable/click-test-uni.png)
 
 2. Click on the Node you need notification for. In this case, let's choose `PrimaryNode`.
-![click-primary-node](../../image/re-usable/click-primary-node.png)
+![click-primary-node](../../img/re-usable/click-primary-node.png)
 
 3. On Node detail page, click on `Manage Node`
-![click-manage-node](../../image/re-usable/click-manage-node.png)
+![click-manage-node](../../img/re-usable/click-manage-node.png)
 
 4. Copy the SNS Topic ARN for later use:
 
-![block-ARN](../../image/re-usable/block-arn.png)
+![block-ARN](../../img/re-usable/block-arn.png)
 
 5. On `Manage Node` page, click on `Success Nofitifications` tab:
 
-![click-success-notification](../../image/success/click-success-notification.png)
+![click-success-notification](../../img/success/click-success-notification.png)
 
 6. Add your firehose arn in success notification tab.
 
-![ui-add-firehose](../../image/success/firehose/ui-add-firehose.png)
+![ui-add-firehose](../../img/success/firehose/ui-add-firehose.png)
 
 7. Before you subscribe to Vendia's SNS, you are going to need to create a AWS subscription role for next step. Use below sample policies to create the role.
 * [Permission Policy](subscription-permission-policy.json)
@@ -65,7 +65,7 @@ aws sns subscribe
 
 1. Go to `PrimaryNode`'s detail page and click on `GraphQL Explorer`: 
 
-![click-graphql](../../image/re-usable/click-grahql-explorer.png)
+![click-graphql](../../img/re-usable/click-grahql-explorer.png)
 
 2. 
 
@@ -85,7 +85,7 @@ mutation MyMutation {
 
 * You should get response that looks like this:
 
-![graphql-add-firehose](../../image/success/firehose/graphql-add-firehose.png)
+![graphql-add-firehose](../../img/success/firehose/graphql-add-firehose.png)
 
 3. Before you subscribe to Vendia's SNS, you are going to need to create a AWS subscription role for next step. Use below sample policies to create the role.
 * [Permission Policy](subscription-permission-policy.json)
@@ -117,7 +117,7 @@ To ensure our notification is working properly, we just have to create a new blo
 
 1. Go to `PrimaryNode`'s detail page and click on `GraphQL Explorer`: 
 
-![click-graphql](../../image/re-usable/click-grahql-explorer.png)
+![click-graphql](../../img/re-usable/click-grahql-explorer.png)
 
 <!-- Two step 2s are provided for success and error cases respectively -->
 
@@ -136,15 +136,15 @@ mutation MyMutation {
 ```
 * It should look like this:
 
-![graphql-mutation-result](../../image/re-usable/create-new-block.png)
+![graphql-mutation-result](../../img/re-usable/create-new-block.png)
 
 3. Since we chose our firehose destination as S3, go to S3 to see if any files are recieved. A successful result looks like this:
 
-![firehose-s3-validation](../../image/success/firehose/s3-file-result.png)
+![firehose-s3-validation](../../img/success/firehose/s3-file-result.png)
 
 4. Here's a sample file content:
 
-![s3-file-content](../../image/success/firehose/s3-file-content.png)
+![s3-file-content](../../img/success/firehose/s3-file-content.png)
 
 
 5. You are able to use mutation id to get more information and use this notification to trigger other activities. But that will be outside the scope of this guide. Enjoy your data sharing journey!

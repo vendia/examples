@@ -63,38 +63,38 @@ Fields Expalined:
 
 ```
 Circled is `<vendia-node-aws-account>`. Note that `<vendia-node-aws-account>` is also in side this string. In this case it's `76599164149`.
-![vendia-resource-detail](../../image/re-usable/block-arn.png)
+![vendia-resource-detail](../../img/re-usable/block-arn.png)
 
 
 ## UI Setup
 1. Click on the Uni you created. If you created according to previous guide, it should be named something like this `test-<your-uni-name>`
-![click-test-uni](../../image/re-usable/click-test-uni.png)
+![click-test-uni](../../img/re-usable/click-test-uni.png)
 
 2. Click on the Node you need notification for. In this case, let's choose `PrimaryNode`.
-![click-primary-node](../../image/re-usable/click-primary-node.png)
+![click-primary-node](../../img/re-usable/click-primary-node.png)
 
 3. On Node detail page, click on `Manage Node`
-![click-manage-node](../../image/re-usable/click-manage-node.png)
+![click-manage-node](../../img/re-usable/click-manage-node.png)
 
 4. On `Manage Node` page, click on `Success Nofitifications` tab:
 
-![click-success-notification](../../image/success/click-success-notification.png)
+![click-success-notification](../../img/success/click-success-notification.png)
 
 5. Add your AWS sqs ARN in success notification tab and save settings.
 
-![ui-add-lambda](../../image/success/sqs/ui-add-sqs.png)
+![ui-add-lambda](../../img/success/sqs/ui-add-sqs.png)
 
 6. On your AWS sqs page, you should see there's a message coming in:
 
-![aws-sqs-sub-message](../../image/re-usable/sqs-subscribe-message.png)
+![aws-sqs-sub-message](../../img/re-usable/sqs-subscribe-message.png)
 
 7. Open up the message and check it's body. You should see a field that says `SubscribeURL`. Copy & paste this URL on your browser:
 
-![aws-sqs-sub-message-body](../../image/success/sqs/sqs-subscribe-message-body.png)
+![aws-sqs-sub-message-body](../../img/success/sqs/sqs-subscribe-message-body.png)
 
 8. After going to the URL, you should see a subscription confirmation like this:
 
-![subscription-confirmation](../../image/success/webhook/confirmation-message.png)
+![subscription-confirmation](../../img/success/webhook/confirmation-message.png)
 
 9. Your notification setup is completed. Now let's [VALIDATE](#notification-validation) it's working properly.
 
@@ -102,7 +102,7 @@ Circled is `<vendia-node-aws-account>`. Note that `<vendia-node-aws-account>` is
 
 1. Go to `PrimaryNode`'s detail page and click on `GraphQL Explorer`: 
 
-![click-graphql](../../image/re-usable/click-grahql-explorer.png)
+![click-graphql](../../img/re-usable/click-grahql-explorer.png)
 
 2. Clear your GraphQL explorer editor. Copy this piece of GraphQL code, replace `<your-sqs-arn>` to your info, and paste it into the editor. Then click the start button.
 
@@ -121,15 +121,15 @@ mutation MyMutation {
 
 3. On your AWS sqs page, you should see there's a message coming in:
 
-![aws-sqs-sub-message](../../image/re-usable/sqs-subscribe-message.png)
+![aws-sqs-sub-message](../../img/re-usable/sqs-subscribe-message.png)
 
 4. Open up the message and check it's body. You should see a field that says `SubscribeURL`. Copy & paste this URL on your browser:
 
-![aws-sqs-sub-message-body](../../image/success/sqs/sqs-subscribe-message-body.png)
+![aws-sqs-sub-message-body](../../img/success/sqs/sqs-subscribe-message-body.png)
 
 5. After going to the URL, you should see a subscription confirmation like this:
 
-![subscription-confirmation](../../image/success/webhook/confirmation-message.png)
+![subscription-confirmation](../../img/success/webhook/confirmation-message.png)
 
 6. Your notification setup is completed. Now let's [VALIDATE](#notification-validation) it's working properly.
 
@@ -138,7 +138,7 @@ To ensure our notification is working properly, we just have to create a new blo
 
 1. Go to `PrimaryNode`'s detail page and click on `GraphQL Explorer`: 
 
-![click-graphql](../../image/re-usable/click-grahql-explorer.png)
+![click-graphql](../../img/re-usable/click-grahql-explorer.png)
 
 2. Clear your GraphQL explorer editor. Copy this piece of GraphQL code and paste it into the editor. Then click the start button.
 ```
@@ -155,15 +155,15 @@ mutation MyMutation {
 ```
 * It should look like this:
 
-![graphql-mutation-result](../../image/re-usable/create-new-block.png)
+![graphql-mutation-result](../../img/re-usable/create-new-block.png)
 
 3. You should see more messages came in on your AWS sqs queue:
 
-![polled-again](../../image/re-usable/polled-again.png)
+![polled-again](../../img/re-usable/polled-again.png)
 
 4. Click on the newest message and you should see the body of the message shows is about mutation.
 
-![block-notification-content](../../image/success/sqs/block-notification-content.png)
+![block-notification-content](../../img/success/sqs/block-notification-content.png)
 
 5. You are able to use mutation id to get more information and use this notification to trigger other activities. But that will be outside the scope of this guide. Enjoy your data sharing journey!
 
