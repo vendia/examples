@@ -13,7 +13,7 @@ This is a guide on how to set up success notifications on Amazon Kinesis Data Fi
 * Completed the setup in accordance with this [README.md](../../README.md)
 * AWS account with enough access to create firehose and adding subscription for SNS
 * AWS CLI v2.8.7 Note: Versions are not hard requirement but could potentially cause issues.
-* Basic knowledge of AWS firehose, S3, and IAM.
+* Basic knowledge of Amazon Kinesis Data Firehose, S3, and IAM.
 * A firehose delivery stream created with Source: `Direct Put` and Destination: `Amazon S3`. A working policy sample can be found [here](firehose-policy-sample.json). The Vendia source ARN in the Json file can be found in step 4.
 
 ## UI Setup
