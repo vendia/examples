@@ -75,7 +75,7 @@ Notifications emitted when the node commits a new block. Includes a summary of t
 | Example                                                          | Description                                 |
 |:-----------------------------------------------------------------|:--------------------------------------------|
 | [Email](success-notification/email/README.md)                    | Receive notifications with e-mail           |
-| [Kinesis Firehoses](success-notification/aws-firehose/README.md) | Receive notifications with Kinese Firehoses |
+| [Kinesis Data Firehose](success-notification/aws-firehose/README.md) | Receive notifications with Kinesis Data Firehose |
 | [Lambda Functions](success-notification/aws-lambda/README.md)    | Receive notifications with Lambda Functions |
 | [SQS Queues](success-notification/aws-sqs/README.md)             | Receive notification with SQS queues        |
 | [Webhooks](success-notification/webhooks/README.md)              | Receive notification with Webhooks          |
