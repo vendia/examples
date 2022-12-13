@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# Receive Success Notifications Through Kinese Firehoses
+# Receive Success Notifications Through Kinesis Data Firehose
 
 ## Purpose
 This is a guide on how to set up success notifications on aws firehose. Note that all notification examples include 2 parts: UI Setup & GraphQL setup. Readers don't have to go through both cases.
