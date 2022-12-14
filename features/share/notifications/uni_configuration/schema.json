@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://vendia.net/schemas/demos/product.json",
+  "title": "Product",
+  "description": "Product information",
+  "type": "object",
+  "properties": {
+    "Product": {
+      "description": "Product information",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Product name",
+            "type": "string"
+          },
+          "sku": {
+            "description": "Product SKU",
+            "type": "string"
+          },
+          "description": {
+            "description": "Product description",
+            "type": "string"
+          },
+          "price": {
+            "description": "Product price",
+            "type": "number"
+          },
+          "tags": {
+            "description": "Product tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "size": {
+            "description": "Product size",
+            "type": "string",
+            "enum": [
+              "S",
+              "M",
+              "L",
+              "XL"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
