@@ -61,7 +61,7 @@ Next, if you are not already logged in to the Vendia Share [Command Line Interfa
 share login
 ```
 
-After that, you're ready to creat your Vendia Share Uni.
+After that, you're ready to create your Vendia Share Uni.
 
 ```
 cd uni_configuration
