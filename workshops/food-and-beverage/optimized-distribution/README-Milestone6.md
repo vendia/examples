@@ -1,16 +1,96 @@
-# Milestone 6 - Use a Custom GraphQL Client
-In this section, you will use a custom GraphQL client, driven from the command line, to add more products and purchase orders and list products stored in your Uni.
+# Milestone 6 - Interact with GraphQL URLs
+In this section, you will use a 3rd party tool, driven from the command line, to add more products and purchase orders and list products stored in your Uni.
 
-# Download Your Binaries
-It's time to interact with your Uni using something that isn't included in the Vendia web app. We have created binaries across several platforms that will allow you to interact with you Uni. The binaries were written using [Golang](https://go.dev/).
+# Using cURL
 
-|  Function | Binaries |
-|:---------|:--------|
-| addProduct | [windows_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addProduct_windows_amd64.exe) / [darwin_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addProduct_darwin_amd64) / [darwin_arm64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addProduct_darwin_arm64) / [linux_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addProduct_linux_amd64) |
-| addPurchaseOrder | [windows_amd64.exe](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_windows_amd64.exe) / [darwin_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_darwin_amd64) / [darwin_arm64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_darwin_arm64) / [linux_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/addPurchaseOrder_linux_amd64) |
-| listProducts | [windows_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_windows_amd64.exe) / [darwin_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_darwin_amd64) / [darwin_arm64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_darwin_arm64) / [linux_amd64](https://vendia-workshop-artifacts.s3.amazonaws.com/food-and-beverage/optimized-distribution/listProducts_linux_amd64) | 
+cURL is one of the most popular command line tools used to quickly test out endpoints. For the purpose of this milestone, we will use cURL command to interact with our endpoint.
 
-Each of the binaries depends upon two environment variables - `API` and `API_KEY`. This is how you'll specify the node you'll read from and write to.
+## Get Programmatic Access
+On Vendia UI, go to the node you plan to interact with, and go to the authentication tab. Create yourself a API key by click on `Add API Key`.
+
+You should also get a piece of sample curl command that looks this:
+```
+  curl 'https:<graphql-url>' \
+    -H 'Authorization: <your-api-key>' \
+    -H 'content-type: application/json' \
+    -H 'accept: application/json' \
+    --data-raw '{"query":"query blocksQuery {  listVendia_BlockItems {    Vendia_BlockItems {      blockId      blockHash    }  }}","variables":null,"operationName":"blocksQuery"}' \
+    --compressed
+```
+
+## Adding a New Product
+
+Let's try to add a product on our node with below Curl command. Make sure you replace the place holders.
+
+```
+curl -g \
+    -X POST \
+    '<your-graphql-endpoint>' \
+    -H 'Authorization: <your-api-token>' \
+    -H 'content-type: application/json' \
+    -H 'accept: application/json' \
+    --data-raw '{ "query": "mutation MyMutation { add_Product(input: {name: \"Your Product\", price: 19.99, description: \"Your Favorite Product\"}) { result { _id } }}" }' \
+    --compressed
+```
+
+You should see a response like this:
+
+```
+{"data": {"add_Product": {"result": {"_id": "01852c6d-02f6-7fda-c5cc-47e0933300f1"}}}}%
+```
+
+## Adding a New Purchase Order
+
+Let's try to add a new purchase order on our node with below Curl command. Make sure you replace the place holders.
+
+```
+curl -g \
+    -X POST \
+    '<your-graphql-endpoint>' \
+    -H 'Authorization: <your-api-token>' \
+    -H 'content-type: application/json' \
+    -H 'accept: application/json' \
+    --data-raw '{ "query": "mutation MyMutation { add_PurchaseOrder(input: {quantity: \"5\", sku: \"abc\", totalPrice: 15.99}) { result { _id } }}" }' \
+    --compressed
+```
+
+You should see a response like this:
+```
+{"data": {"add_PurchaseOrder": {"result": {"_id": "01852dbd-ed4a-fdd5-afb6-597c4fa1ffa6"}}}}%
+```
+
+## Listing All Products
+
+```
+curl -g \
+    -X POST \
+    '<your-graphql-endpoint>' \
+    -H 'Authorization: <your-api-token>' \
+    -H 'content-type: application/json' \
+    -H 'accept: application/json' \
+    --data-raw '{ "query": "query MyQuery { list_ProductItems(limit: 2) { _ProductItems { _id _owner category description name price } }}"}' \
+    --compressed
+```
+
+You should see a response like this:
+
+```
+{"data": {"list_ProductItems": {"_ProductItems": [{"_id": "01852bab-00dc-7052-b3c8-e02c6841a99f", "_owner": "SupplierNode", "category": "natural", "description": "Organic and delicious", "name": "Blue Corn Tortillas Chips", "price": 1.99}, {"_id": "01852bab-020e-0b20-5975-db29d4ad354b", "_owner": "SupplierNode", "category": "specialty", "description": "Imported from Greece", "name": "Sheep's Milk Feta", "price": 2.19}]}}}%
+```
+
+## Key Takeaways
+Congratulations.  You've successfully reached Milestone 6!
+
+In this portion of the workshop you interacted with your node's GraphQL API using a CLI utility. Vendia is not opinionated about how you interact with data in your Uni. Similar http requests can be written in [Node.js](https://github.com/vendia/examples/tree/main/features/share/graphql/node) or [Python](https://github.com/vendia/examples/tree/main/features/share/graphql/python3) - or a host of [other programming languages](https://graphql.org/code/#language-support). Ultimately, your application is simply interacting with a GraphQL API. We recommend using [Vendia SDK](https://www.vendia.com/docs/share/vendia-client-sdk) for production grade applications.
+
+In this section you:
+
+* Created products using cURL with a node's GraphQL API
+* Created a purchase order using cURL interacting with a node's GraphQL API
+* Listed all products using cURL interacting with a node's GraphQL API
+
+
+# GO sample codes (Optional)
 
 ## Adding a New Product
 
@@ -371,7 +451,7 @@ func main() {
 
 
 ## Key Takeaways
-Congratulations.  You've successfully reached Milestone 6!
+Congratulations.  You've successfully reached Milestone 6 Optional section!
 
 In this portion of the workshop you interacted with your node's GraphQL API using a CLI utility. Vendia is not opinionated about how you interact with data in your Uni. The CLI utility was written in golang but could just as easily have been written in [Node.js](https://github.com/vendia/examples/tree/main/features/share/graphql/node) or [Python](https://github.com/vendia/examples/tree/main/features/share/graphql/python3) - or a host of [other programming languages](https://graphql.org/code/#language-support). Ultimately, your application is simply interacting with a GraphQL API.
 
