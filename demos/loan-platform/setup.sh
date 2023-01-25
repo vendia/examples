@@ -9,8 +9,8 @@ err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
 
-if ! $?; then
-  err "Unable to do_something"
+if $?; then
+  err "Initial catch."
   exit 1
 fi
 
@@ -20,7 +20,7 @@ fi
 echo "Getting your username.."
 user_name=$(share auth whoami | grep @vendia.net | awk '{print $5}')
 
-if ! $?; then
+if $?; then
   err "failed to get user name."
   exit 1
 fi
@@ -29,24 +29,41 @@ echo "Your username is: " "$user_name" "Your nodes will be created under this us
 
 echo "Copy sample file and replacing all user ids to above user id."
 
-cp ./uni_configuration/registration.json.sample ./uni_configuration/registration.json
-sed -i -e "s/you@vendia.net/$user_name/g" ./uni_configuration/registration.json
 
-if ! $?; then
+
+## Copy the sample files and replace the user ids.
+cp ./uni_configuration/registration.json.sample ./uni_configuration/registration.json
+
+### replace user id
+sed -i '' -e "s/you@vendia.net/$user_name/g" ./uni_configuration/registration.json
+
+if $?; then
   err "failed to generate registration files."
   exit 1
 fi
 
+### replace uni name
+
+echo "Enter a uni name to be created:"
+
+read uni_name
+
+sed -i '' -e "s/test-loan-platform/$uni_name/g" ./uni_configuration/registration.json
+
+if $?; then
+  err "failed to swap out uni name."
+  exit 1
+fi
+
+## Creating the uni and nodes
 share uni create --config ./uni_configuration/registration.json
 
-if ! $?; then
+if $?; then
   err "failed to create uni."
   exit 1
 fi
 
 ## Ensure the uni is ready
-
-uni_name=$(jq -r .name ./uni_configuration/registration.json)
 
 while [ "$uni_status" != "RUNNING" ]
 do
@@ -56,7 +73,7 @@ do
         exit 1
     fi
     echo "Waiting for uni to be ready... Current status is: " "$uni_status"
-    sleep 10
+    sleep 20
 done
 
 echo "uni creation completed!"
@@ -66,11 +83,13 @@ echo "uni creation completed!"
 ### Save json output
 uni_info=$(share uni get --uni "$uni_name" --json)
 
+### Note that all jq results are sorted to guarantee we are getting the right thing in right order.
 ### Save node names
-read -A nodes_names < <(echo $(echo $uni_info | jq -r '.nodes[] | .name'))
+read -A nodes_names < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) | .[].name'))
 ### Save graphql API endpoints
-read -A graphqlAPI < <(echo $(echo $uni_info | jq -r '.nodes[].resources.graphqlApi.httpsUrl'))
-
+read -A graphqlAPI < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) | .[].resources.graphqlApi.httpsUrl'))
+### Save smart contract info
+read -A smart_contract_arn < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) | .[].resources.smartContracts.aws_Role'))
 
 ### Create api keys for all nodes
 
@@ -85,27 +104,38 @@ done
 ### Generate .share.env file
 ### This will not work if in the future order of the returned nodes changes.
 
-echo -e > .share.env \
-"JPMC_GQL_URL=${graphqlAPI[1]}
-JPMC_GQL_APIKEY=${node_keys[1]}
-COOP_GQL_URL=${graphqlAPI[2]}
-COOP_GQL_APIKEY=${node_keys[2]}
-PHH_GQL_URL=${graphqlAPI[3]}
-PHH_GQL_APIKEY=${node_keys[3]}
-FNMA_GQL_URL=${graphqlAPI[4]}
-FNMA_GQL_APIKEY=${node_keys[4]}
-CSS_GQL_URL=${graphqlAPI[5]}
-CSS_GQL_APIKEY=${node_keys[5]}"
+echo -e > ./src/.share.env \
+"COOP_GQL_URL=${graphqlAPI[1]}
+COOP_GQL_APIKEY=${node_keys[1]}
+CSS_GQL_URL=${graphqlAPI[2]}
+CSS_GQL_APIKEY=${node_keys[2]}
+FNMA_GQL_URL=${graphqlAPI[3]}
+FNMA_GQL_APIKEY=${node_keys[3]}
+JPMC_GQL_URL=${graphqlAPI[4]}
+JPMC_GQL_APIKEY=${node_keys[4]}
+PHH_GQL_URL=${graphqlAPI[5]}
+PHH_GQL_APIKEY=${node_keys[5]}"
 
 # 2. AWS lambda functions
 
 # Get all configuration information we need
 # <vendia-smart-contract-arn> in main.tf needs to be replaced
-# 
+# <fnman-vendia-smart-contract-arn>
+sed -i '' -e "s|<fnman-vendia-smart-contract-arn>|${smart_contract_arn[3]}|g" ./src/terraform/main.tf
+if $?; then
+  err "failed to modify terraform main.tf file for fnman smart contract arn."
+  exit 1
+fi
+
+# <css-vendia-smart-contract-arn>
+sed -i '' -e "s|<css-vendia-smart-contract-arn>|${smart_contract_arn[2]}|g" ./src/terraform/main.tf
+if $?; then
+  err "failed to modify terraform main.tf file for css smart contract arn."
+  exit 1
+fi
 
 
-# 3. AWS roles that is meant to be attached to lambda functions
-# To be filled
+(cd src/terraform; terraform init; terraform apply)
 
 # 4. Share smart contracts created dependent on step 3)
 # To be filled

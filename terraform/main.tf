@@ -40,7 +40,7 @@ data "local_file" "lambda_role" {
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
-  assume_role_policy =  assume_role_policy = data.local_file.lambda_role.content
+  assume_role_policy =  data.local_file.lambda_role.content
 }
 
 # Creating an lambda function.
