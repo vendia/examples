@@ -1,0 +1,11 @@
+mutation DelinquencyMutation($id: ID!, $delinquentPercent: Float, $latePercent: Float) {
+    update_LoanPortfolio_async(
+        id: $id
+        input: {
+            delinquentPercent: $delinquentPercent,
+            latePercent: $latePercent
+        }
+    ) {
+        error
+    }
+}

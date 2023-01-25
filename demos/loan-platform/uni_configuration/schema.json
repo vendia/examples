@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://vendia.net/schemas/css/schema.json",
+  "title": "Complete Loan Platform",
+  "description": "Provide full chain of custody of a loan from its origination, to servicing, to securitization",
+  "type": "object",
+  "x-vendia-acls": {
+    "LoanAcl": {
+      "type": "Loan"
+    },
+    "LoanPortfolioAcl": {
+      "type": "LoanPortfolio"
+    },
+    "PaymentAcl": {
+      "type": "Payment"
+    },
+    "SingleClassSecurityAcl": {
+      "type": "SingleClassSecurity"
+    },
+    "DisclosureAcl": {
+      "type": "Disclosure"
+    }
+  },
+  "properties": {
+    "Loan": {
+      "description": "Whole loans that need to be serviced, and may securitized",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "loanIdentifier": {
+            "description": "Globally unique loan identifier, set by the original lender",
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "loanCollaborators": {
+            "type": "object",
+            "properties": {
+              "ownerIdentifier": {
+                "description": "Identifier of the loan owner",
+                "type": "string"
+              },
+              "lenderIdentifier": {
+                "description": "Identifier of the lender",
+                "type": "string"
+              },
+              "servicerIdentifier": {
+                "description": "Identifier of the servicer",
+                "type": "string"
+              },
+              "securitizerIdentifier": {
+                "description": "Identifier of the securitizer",
+                "type": "string"
+              }
+            }
+          },
+          "portfolioIdentifier": {
+            "description": "Unique identifier of the portfolio in which this Loan resides",
+            "type": "string",
+            "pattern": "[A-Z0-9]{8}"
+          },
+          "securityIdentifier": {
+            "description": "Unique identifier of the associated security",
+            "type": "string",
+            "pattern": "[A-Z0-9]{9}"
+          },
+          "loanToValuePercent": {
+            "description": "Current loan to value ratio, as a percentage",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "unpaidPrincipalBalance": {
+            "description": "Current unpaid principal balance amount",
+            "type": "number"
+          },
+          "interestRatePercent": {
+            "description": "Current loan interest rate, as a percent",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "originationDate": {
+            "description": "Date loan originated",
+            "type": "string",
+            "format": "date"
+          },
+          "borrowerCreditScore": {
+            "description": "Credit score of borrower",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 850
+          },
+          "numberOfUnits": {
+            "description": "Number of units in the property",
+            "type": "integer",
+            "minimum": 0
+          },
+          "delinquencyStatus": {
+            "description": "Current delinquency status of the loan, based on the current reporting period",
+            "type": "string",
+            "enum": ["CURRENT", "LATE", "DELINQUENT"]
+          },
+          "relatedDocuments": {
+            "description": "Documents associated with the loan",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "documentName": {
+                  "description": "Name of the document",
+                  "type": "string"
+                },
+                "documentUri": {
+                  "description": "Name of the document",
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "LoanPortfolio": {
+      "description": "A collection of Loans along with metadata about the loans, modeled as a portfolio",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "portfolioIdentifier": {
+            "description": "Unique identifier of this Loan Portfolio",
+            "type": "string",
+            "pattern": "[A-Z0-9]{8}"
+          },
+          "portfolioName": {
+            "description": "Descriptive name of this Loan Portfolio",
+            "type": "string"
+          },
+          "delinquentPercent": {
+            "description": "The percent of currently delinquent Loans in the Loan Portfolio",
+            "type": "number"
+          },
+          "latePercent": {
+            "description": "The percent of currently late Loans in the Loan Portfolio",
+            "type": "number"
+          }
+        }
+      }
+    },
+    "Payment": {
+      "description": "Monthly payment information for a given Loan",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "loanIdentifier": {
+            "description": "Globally unique loan identifier, set by the original lender",
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "principalAndInterestPaymentAmount": {
+            "description": "Payment amount, including principal and interest",
+            "type": "number",
+            "minimum": 0
+          },
+          "principalDistributionAmount": {
+            "description": "Amount from principalAndInterestPaymentAmount applied to principal",
+            "type": "number",
+            "minimum": 0
+          },
+          "effectiveDate": {
+            "description": "Payment effective date",
+            "type": "string",
+            "format": "date"
+          },
+          "reportingPeriod": {
+            "description": "Reporting period year month",
+            "type": "string",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])"
+          }
+        }
+      }
+    },
+    "SingleClassSecurity": {
+      "description": "Single class (Level 1) securities, used to create a pool of Loans",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "securityIdentifier": {
+            "description": "Unique identifier (CUSIP) of this L1 security",
+            "type": "string",
+            "pattern": "[A-Z0-9]{9}"
+          },
+          "poolIdentifier": {
+            "description": "Unique identifier of the pool created by this L1 security",
+            "type": "string",
+            "pattern": "[A-Z0-9]{6}"
+          },
+          "issuerIdentifier": {
+            "description": "Unique identifier for the issuer",
+            "type": "string",
+            "pattern": "[0-9]{6}"
+          },
+          "trustIdentifier": {
+            "description": "Unique identifier for the trust",
+            "type": "string"
+          },
+          "issueDate": {
+            "description": "Issuance date",
+            "type": "string",
+            "format": "date"
+          },
+          "issueAmount": {
+            "description": "Issuance amount",
+            "type": "integer",
+            "minimum": 0
+          },
+          "maturityDate": {
+            "description": "Maturity date",
+            "type": "string",
+            "format": "date"
+          },
+          "parMinimumAmount": {
+            "description": "Par minimum amount",
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "Disclosure": {
+      "description": "A disclosure calculation for a given security, either Level 1 or Level 2",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "securityIdentifier": {
+            "description": "Unique identifier (CUSIP) of this security",
+            "type": "string",
+            "pattern": "[A-Z0-9]{9}"
+          },
+          "reportingPeriod": {
+            "description": "Reporting period",
+            "type": "string",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])"
+          },
+          "securityType": {
+            "description": "The type of security, either L1 or L2",
+            "type": "string",
+            "enum": ["L1", "L2"]
+          },
+          "disclosureType": {
+            "description": "The type of disclosure, one per calculation",
+            "type": "string",
+            "enum": [
+              "WeightedAverageInterestRatePercent",
+              "WeightedAverageLoanAge"
+            ]
+          },
+          "disclosureValue": {
+            "description": "The value of the disclosure",
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

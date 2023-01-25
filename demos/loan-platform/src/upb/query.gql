@@ -1,0 +1,19 @@
+query UPBQuery($loanIdentifier: String) {
+    list_LoanItems(filter: {loanIdentifier: {eq: $loanIdentifier}}) {
+        _LoanItems {
+            ... on Self_Loan {
+                _id
+                unpaidPrincipalBalance
+            }
+        }
+    }
+    list_PaymentItems(
+        filter: {loanIdentifier: {eq: $loanIdentifier}}
+    ) {
+        _PaymentItems {
+            ... on Self_Payment {
+                principalDistributionAmount
+            }
+        }
+    }
+}

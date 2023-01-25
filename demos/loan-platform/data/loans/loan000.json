@@ -1,0 +1,13 @@
+{
+  "loanIdentifier": "0000000000000000",
+  "loanCollaborators": {
+    "ownerIdentifier": "FNMANode",
+    "lenderIdentifier": "JPMCNode"
+  },
+  "borrowerCreditScore": 602,
+  "interestRatePercent": 6.2,
+  "loanToValuePercent": 68,
+  "numberOfUnits": 4,
+  "originationDate": "2021-04-18",
+  "unpaidPrincipalBalance": 248232
+}

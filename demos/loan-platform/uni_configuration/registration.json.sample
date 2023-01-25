@@ -1,0 +1,31 @@
+{
+  "name": "test-loan-platform",
+  "schema": "schema.json",
+  "nodes": [
+    {
+      "name": "JPMCLenderNode",
+      "userId": "you@vendia.net",
+      "region": "us-east-1"
+    },
+    {
+      "name": "COOPServicingNode",
+      "userId": "you@vendia.net",
+      "region": "us-east-1"
+    },
+    {
+      "name": "PHHServicingNode",
+      "userId": "you@vendia.net",
+      "region": "us-east-1"
+    },
+    {
+      "name": "FNMANode",
+      "userId": "you@vendia.net",
+      "region": "us-east-1"
+    },
+    {
+      "name": "CSSNode",
+      "userId": "you@vendia.net",
+      "region": "us-east-1"
+    }
+  ]
+}

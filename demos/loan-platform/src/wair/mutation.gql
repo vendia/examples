@@ -1,0 +1,13 @@
+mutation AddDisclosure($input: Self_Disclosure_Input_!) {
+    add_Disclosure_async(
+        input: $input
+        aclInput: {
+            acl: [
+                { principal: { nodes: "CSSNode" }, operations: [ALL, UPDATE_ACL] }
+                { principal: { nodes: "FNMANode" }, operations: [READ] }
+            ]
+        }
+    ) {
+        error
+    }
+}

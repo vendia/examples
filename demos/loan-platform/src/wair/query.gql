@@ -1,0 +1,12 @@
+query ListLoans($securityIdentifier: String) {
+    list_LoanItems(filter: {securityIdentifier: {eq: $securityIdentifier}}) {
+        _LoanItems {
+            ... on Self_Loan {
+                loanIdentifier
+                securityIdentifier
+                interestRatePercent
+                unpaidPrincipalBalance
+            }
+        }
+    }
+}
