@@ -1,4 +1,149 @@
 export class GqlMutations {
+    static upbInputQuery = `
+        query UPBQuery($loanIdentifier: String) {
+            list_LoanItems(filter: {loanIdentifier: {eq: $loanIdentifier}}) {
+                _LoanItems {
+                    ... on Self_Loan {
+                        _id
+                        unpaidPrincipalBalance
+                    }
+                }
+            }
+            list_PaymentItems(
+                filter: {loanIdentifier: {eq: $loanIdentifier}}
+            ) {
+                _PaymentItems {
+                    ... on Self_Payment {
+                        principalDistributionAmount
+                    }
+                }
+            }
+        }    
+    `
+    static upbOutputMutation = `
+        mutation UPBMutation($id: ID!, $unpaidPrincipalBalance: Float) {
+            loan1: update_Loan(
+                id: $id
+                input: {
+                    unpaidPrincipalBalance: $unpaidPrincipalBalance
+                }
+                syncMode: ASYNC
+            ) {
+                __typename
+            }
+        }    
+    `
+
+    static delingquentInputQuery = `
+        query ListDelinquencyStatus($portfolioIdentifier: String) {
+            list_LoanItems(filter: {portfolioIdentifier: {eq: $portfolioIdentifier}}) {
+                _LoanItems {
+                    ... on Self_Loan {
+                        delinquencyStatus
+                    }
+                }
+            }
+            list_LoanPortfolioItems(filter: {portfolioIdentifier: {eq: $portfolioIdentifier}}) {
+                _LoanPortfolioItems {
+                    ... on Self_LoanPortfolio {
+                        _id
+                    }
+                }
+            }
+        }    
+    `
+
+    static delingquentOutputMutation = `
+        mutation DelinquencyMutation($id: ID!, $delinquentPercent: Float, $latePercent: Float) {
+            update_LoanPortfolio(
+                id: $id
+                input: {
+                    delinquentPercent: $delinquentPercent,
+                    latePercent: $latePercent
+                }
+                syncMode: ASYNC
+            ) {
+                __typename
+            }
+        }
+    `
+
+    static wairInputQuery = `
+        query ListLoans($securityIdentifier: String) {
+            list_LoanItems(filter: {securityIdentifier: {eq: $securityIdentifier}}) {
+                _LoanItems {
+                    ... on Self_Loan {
+                        loanIdentifier
+                        securityIdentifier
+                        interestRatePercent
+                        unpaidPrincipalBalance
+                    }
+                }
+            }
+        }    
+    `
+
+    static wairOutputMutation = `
+        mutation AddDisclosure($input: Self_Disclosure_Input_!) {
+            add_Disclosure(
+                input: $input
+                aclInput: {
+                    acl: [
+                        { principal: { nodes: "CSSNode" }, operations: [ALL, UPDATE_ACL] }
+                        { principal: { nodes: "FNMANode" }, operations: [READ] }
+                    ]
+                }
+                syncMode: ASYNC
+            ) {
+                __typename
+            }
+        }
+    `
+
+    static smartContractCreationMutation = `
+        mutation CreateSmartContract($name: String!, $description: String, $inputQuery: String, $outputMutation: String!, $resource: String!) {
+            addVendia_Contract(
+                input: {
+                    name: $name, 
+                    description: $description,
+                    inputQuery: $inputQuery,
+                    outputMutation: $outputMutation,
+                    resource: {uri: $resource}
+                },
+                    syncMode: ASYNC
+                ) {
+                transaction {
+                    _id
+                    _owner
+                    submissionTime
+                    transactionId
+                    version
+                }
+            }
+        }
+    `
+
+    static smartContractInvocationMutation = `
+        mutation InvokeSmartContract($id: ID!, $queryArgs: String!, $invokeArgs: String = "{}") {
+            invokeVendia_Contract(
+                    id: $id, 
+                    input: {
+                    queryArgs: $queryArgs,
+                    invokeArgs: $invokeArgs
+                },
+                    syncMode: ASYNC
+                ) {
+                transaction {
+                    _id
+                    _owner
+                    submissionTime
+                    transactionId
+                    version
+                }
+            }
+        }
+    `
+
     static addLoanMutation = `
         mutation AddLoan($input: Self_Loan_Input_!) {
             add_Loan(

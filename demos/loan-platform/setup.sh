@@ -9,7 +9,8 @@ err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
 
-if $?; then
+if [[ $? -ne 0 ]] 
+then
   err "Initial catch."
   exit 1
 fi
@@ -20,7 +21,8 @@ fi
 echo "Getting your username.."
 user_name=$(share auth whoami | grep @vendia.net | awk '{print $5}')
 
-if $?; then
+if [[ $? -ne 0 ]] 
+then
   err "failed to get user name."
   exit 1
 fi
@@ -37,7 +39,8 @@ cp ./uni_configuration/registration.json.sample ./uni_configuration/registration
 ### replace user id
 sed -i '' -e "s/you@vendia.net/$user_name/g" ./uni_configuration/registration.json
 
-if $?; then
+if [[ $? -ne 0 ]] 
+then
   err "failed to generate registration files."
   exit 1
 fi
@@ -50,7 +53,8 @@ read uni_name
 
 sed -i '' -e "s/test-loan-platform/$uni_name/g" ./uni_configuration/registration.json
 
-if $?; then
+if [[ $? -ne 0 ]] 
+then
   err "failed to swap out uni name."
   exit 1
 fi
@@ -58,7 +62,8 @@ fi
 ## Creating the uni and nodes
 share uni create --config ./uni_configuration/registration.json
 
-if $?; then
+if [[ $? -ne 0 ]] 
+then
   err "failed to create uni."
   exit 1
 fi
@@ -101,6 +106,41 @@ do
         node_keys+=$(share node add-api-key --uni ${uni_name} --node ${node} --name ${node:l}-key --expiry 9999 | awk '{print $3}')
 done
 
+
+
+# 2. AWS lambda functions
+
+# copy the main.tf.template file, so re-running the script is fine.
+cp ./src/terraform/main.tf.template ./src/terraform/main.tf
+
+# Get all configuration information we need
+# <vendia-smart-contract-arn> in main.tf needs to be replaced
+# <fnman-vendia-smart-contract-arn>
+sed -i '' -e "s|<fnman-vendia-smart-contract-arn>|${smart_contract_arn[3]}|g" ./src/terraform/main.tf
+if [[ $? -ne 0 ]] 
+then
+  err "failed to modify terraform main.tf file for fnman smart contract arn."
+  exit 1
+fi
+
+# <css-vendia-smart-contract-arn>
+sed -i '' -e "s|<css-vendia-smart-contract-arn>|${smart_contract_arn[2]}|g" ./src/terraform/main.tf
+if [[ $? -ne 0 ]] 
+then
+  err "failed to modify terraform main.tf file for css smart contract arn."
+  exit 1
+fi
+
+
+(cd src/terraform; terraform init; terraform apply -auto-approve)
+
+# 4. Share smart contracts created dependent on step 3)
+
+# Get all lambda arns to create .share.env file
+delinquent_lambda_arn=$(cd src/terraform; terraform output --raw lambda_delinquent_output)
+upb_lambda_arn=$(cd src/terraform; terraform output --raw lambda_upb_output)
+wair_lambda_arn=$(cd src/terraform; terraform output --raw lambda_wair_output)
+
 ### Generate .share.env file
 ### This will not work if in the future order of the returned nodes changes.
 
@@ -114,28 +154,33 @@ FNMA_GQL_APIKEY=${node_keys[3]}
 JPMC_GQL_URL=${graphqlAPI[4]}
 JPMC_GQL_APIKEY=${node_keys[4]}
 PHH_GQL_URL=${graphqlAPI[5]}
-PHH_GQL_APIKEY=${node_keys[5]}"
+PHH_GQL_APIKEY=${node_keys[5]}
+UPB_LAMBDA_ARN=${upb_lambda_arn}
+DELINQUENT_LAMBDA_ARN=${delinquent_lambda_arn}
+WAIR_LAMBDA_ARN=${wair_lambda_arn}"
 
-# 2. AWS lambda functions
+# Run npm to create all the smart contracts
 
-# Get all configuration information we need
-# <vendia-smart-contract-arn> in main.tf needs to be replaced
-# <fnman-vendia-smart-contract-arn>
-sed -i '' -e "s|<fnman-vendia-smart-contract-arn>|${smart_contract_arn[3]}|g" ./src/terraform/main.tf
-if $?; then
-  err "failed to modify terraform main.tf file for fnman smart contract arn."
-  exit 1
-fi
-
-# <css-vendia-smart-contract-arn>
-sed -i '' -e "s|<css-vendia-smart-contract-arn>|${smart_contract_arn[2]}|g" ./src/terraform/main.tf
-if $?; then
-  err "failed to modify terraform main.tf file for css smart contract arn."
+(cd src; npm i; npm run createUpbSmartContract;)
+if [[ $? -ne 0 ]] 
+then
+  err "failed to create upb smart contract."
   exit 1
 fi
 
 
-(cd src/terraform; terraform init; terraform apply)
+(cd src; npm run createDelinquentSmartContract;)
+if [[ $? -ne 0 ]] 
+then
+  err "failed to create delingquent smart contract."
+  exit 1
+fi
 
-# 4. Share smart contracts created dependent on step 3)
-# To be filled
+(cd src; npm run createWairSmartContract;)
+if [[ $? -ne 0 ]] 
+then
+  err "failed to create wair smart contract."
+  exit 1
+fi
+
+echo "All resources are created!"

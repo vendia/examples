@@ -12,10 +12,14 @@
     "assignForServicing": "node LoanServicingAssigner.js",
     "generateLoans" : "node LoanGenerator.js",
     "generatePayments" : "node PaymentGenerator.js",
-    "updateLoanStatus": "node LoanStatusUpdater.js"
+    "updateLoanStatus": "node LoanStatusUpdater.js",
+    "createUpbSmartContract": "node SmartContractCreator.js --type upb",
+    "createDelinquentSmartContract": "node SmartContractCreator.js --type delinquent",
+    "createWairSmartContract": "node SmartContractCreator.js --type wair"
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "argparse": "^2.0.1",
     "dotenv": "^16.0.0",
     "json-templates": "^4.2.0"
   }
