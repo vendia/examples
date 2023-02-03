@@ -95,6 +95,8 @@ read -A nodes_names < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) |
 read -A graphqlAPI < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) | .[].resources.graphqlApi.httpsUrl'))
 ### Save smart contract info
 read -A smart_contract_arn < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) | .[].resources.smartContracts.aws_Role'))
+### Save websocket url info
+read -A websocket_url < <(echo $(echo $uni_info | jq -r '.nodes | sort_by(.name) | .[].resources.graphqlApi.websocketUrl'))
 
 ### Create api keys for all nodes
 
@@ -159,6 +161,7 @@ UPB_LAMBDA_ARN=${upb_lambda_arn}
 DELINQUENT_LAMBDA_ARN=${delinquent_lambda_arn}
 WAIR_LAMBDA_ARN=${wair_lambda_arn}"
 
+
 # Run npm to create all the smart contracts
 
 (cd src; npm i; npm run createUpbSmartContract;)
@@ -183,4 +186,77 @@ then
   exit 1
 fi
 
+## Create empty folders for sample data
+
+mkdir data
+mkdir data/payments
+mkdir data/loans
+
+(cd src; npm run generatePayments;)
+(cd src; npm run generateLoans;)
+
 echo "All resources are created!"
+
+# 5. Run Front end app
+
+echo -e > ./src/app/src/__config.tsx \
+"import { ClientOptions } from '@vendia/client';
+
+type Config = Record<string, ClientOptions>;
+
+export const config: Config = {
+  FNMANode: {
+    apiUrl: '${graphqlAPI[3]}',
+    websocketUrl:
+      '${websocket_url[3]}',
+    apiKey: '${node_keys[3]}',
+    debug: true,
+  },
+  COOPServicingNode: {
+    apiUrl: '${graphqlAPI[1]}',
+    websocketUrl:
+      '${websocket_url[1]}',
+    apiKey: '${node_keys[1]}',
+    debug: true,
+  },
+  PHHServicingNode: {
+    apiUrl: '${graphqlAPI[5]}',
+    websocketUrl:
+      '${websocket_url[5]}',
+    apiKey: '${node_keys[5]}',
+    debug: true,
+  },
+};
+
+export const nodes = Object.keys(config);"
+
+if [[ $? -ne 0 ]] 
+then
+  err "failed to create __config.tsx file."
+  exit 1
+fi
+
+## install vendia module and dependencies
+(cd src/app; share client:pull;)
+
+if [[ $? -ne 0 ]] 
+then
+  err "failed to pull vendia dependency."
+  exit 1
+fi
+
+## install npm dependencies
+(cd src/app; npm i;)
+if [[ $? -ne 0 ]] 
+then
+  err "failed to install node dependencies."
+  exit 1
+fi
+
+## run front end
+(cd src/app; npm run dev;)
+if [[ $? -ne 0 ]] 
+then
+  err "failed to run front end app."
+  exit 1
+fi
