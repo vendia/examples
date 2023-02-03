@@ -1,5 +1,5 @@
 mutation AddDisclosure($input: Self_Disclosure_Input_!) {
-    add_Disclosure_async(
+    add_Disclosure(
         input: $input
         aclInput: {
             acl: [
@@ -7,7 +7,8 @@ mutation AddDisclosure($input: Self_Disclosure_Input_!) {
                 { principal: { nodes: "FNMANode" }, operations: [READ] }
             ]
         }
+        syncMode: ASYNC
     ) {
-        error
+        __typename
     }
 }

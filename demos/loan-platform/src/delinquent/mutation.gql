@@ -1,11 +1,12 @@
 mutation DelinquencyMutation($id: ID!, $delinquentPercent: Float, $latePercent: Float) {
-    update_LoanPortfolio_async(
+    update_LoanPortfolio(
         id: $id
         input: {
             delinquentPercent: $delinquentPercent,
             latePercent: $latePercent
         }
+        syncMode: ASYNC
     ) {
-        error
+        __typename
     }
 }
