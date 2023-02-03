@@ -17,6 +17,11 @@ This demo heavily uses the Share CLI and the GraphQL Explorer so all pre-reqs li
 
 # Setting up
 
+Have your aws credentials in your environment variable. This is needed for the terraform script.
+```
+export AWS_ACCESS_KEY_ID=<your-aws-access-token>
+export AWS_SECRET_ACCESS_KEY=<your-aws-accee-token-secret>
+```
 Assuming All above pre-requisites are met. At your terminal:
 ```
 ./setup.sh
