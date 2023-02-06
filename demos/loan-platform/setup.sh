@@ -237,7 +237,7 @@ then
 fi
 
 ## install vendia module and dependencies
-(cd src/app; share client:pull;)
+(cd src/app; printf "y" | share client:pull --uni $uni_name --node $nodes_names[4];)
 
 if [[ $? -ne 0 ]] 
 then
