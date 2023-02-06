@@ -1,0 +1,11 @@
+mutation UPBMutation($id: ID!, $unpaidPrincipalBalance: Float) {
+    loan1: update_Loan(
+        id: $id
+        input: {
+            unpaidPrincipalBalance: $unpaidPrincipalBalance
+        }
+        syncMode: ASYNC
+    ) {
+        __typename
+    }
+}    

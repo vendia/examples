@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Daisy UI style tweaks */
+
+* {
+  --btn-text-case: none;
+}
+
+.btn {
+  font-weight: initial;
+}
+
+.table :where(thead, tfoot) :where(th, td) {
+  text-transform: none;
+  background-color: inherit;
+  font-size: inherit;
+}
+
+.table :where(:first-child) :where(:first-child) :where(th, td):first-child {
+  border-top-left-radius: 0 !important;
+}
+
+.table :where(:first-child) :where(:first-child) :where(th, td):last-child {
+  border-top-right-radius: 0 !important;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "ts-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build && next export",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.6.0",
+    "@heroicons/react": "^1.0.6",
+    "@vendia/client": "^0.8.1",
+    "next": "12.1.6",
+    "punycode": "^2.1.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-query": "^4.0.0-beta.3",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "devDependencies": {
+    "@types/debug": "4.1.7",
+    "@types/node": "17.0.31",
+    "@types/react": "18.0.8",
+    "@types/react-dom": "18.0.3",
+    "autoprefixer": "^10.4.2",
+    "daisyui": "^2.6.0",
+    "eslint": "8.14.0",
+    "eslint-config-next": "12.1.6",
+    "postcss": "^8.4.7",
+    "prettier": "^2.6.2",
+    "tailwindcss": "^3.0.23",
+    "typescript": "4.6.4"
+  }
+}

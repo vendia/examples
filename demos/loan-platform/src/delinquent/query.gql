@@ -1,0 +1,16 @@
+query ListDelinquencyStatus($portfolioIdentifier: String) {
+    list_LoanItems(filter: {portfolioIdentifier: {eq: $portfolioIdentifier}}) {
+        _LoanItems {
+            ... on Self_Loan {
+                delinquencyStatus
+            }
+        }
+    }
+    list_LoanPortfolioItems(filter: {portfolioIdentifier: {eq: $portfolioIdentifier}}) {
+        _LoanPortfolioItems {
+            ... on Self_LoanPortfolio {
+                _id
+            }
+        }
+    }
+}

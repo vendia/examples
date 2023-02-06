@@ -2,7 +2,7 @@
 .share.env
 .env
 *.policy.json
-.vendia/
+**/.vendia/
 
 # AWS Serverless Application Model (SAM)
 .aws-sam
@@ -28,7 +28,8 @@ venv
 **/.vagrant/*
 
 #Node
-node_modules
+**/node_modules
+**/package-lock.json
 
 #OS X
 .DS_Store
@@ -38,3 +39,9 @@ node_modules
 
 # Salesforce CLI
 .sfdx
+
+# Terraform States
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/.terraform
