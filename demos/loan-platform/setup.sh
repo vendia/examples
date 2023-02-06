@@ -236,6 +236,9 @@ then
   exit 1
 fi
 
+## cleanning up hidden folder to avoid incorrect info;
+(rm -rf src/app/.vendia;)
+
 ## install vendia module and dependencies
 (cd src/app; printf "y" | share client:pull --uni $uni_name --node $nodes_names[4];)
 
