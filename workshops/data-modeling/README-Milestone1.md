@@ -3,6 +3,8 @@
 ## Goal
 For our first milestone, let's understand and try to use as many types as possible. Then understand when to use each type.
 
+## JSON schema types
+
 Here's a list of all available JSON schema types:
 * string - a piece of text
 * integer - whole number
