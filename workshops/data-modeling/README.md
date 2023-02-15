@@ -32,8 +32,12 @@ git clone https://github.com/vendia/examples.git
 
 # Workshop Milestones
 
-We will go through all the basics of Data Modeling in GraphQL.
+We will go through all the basics of Data Modeling with Vendia Share.
 You'll incrementally create a multi-party application through a series of Milestones.  Each Milestone builds on the previous, so they should be executed in order.
+
+## Imaginary Background
+
+In this workshop, we will aim to create a ticketing system for an airline. As we go through each milestone, we will continuously improve our data model.
 
 ## Foundational
 * [Milestone 1 - Choose Appropriate Types](README-Milestone1.md)
