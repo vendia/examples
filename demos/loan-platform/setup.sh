@@ -9,6 +9,40 @@ err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
 }
 
+is_valid_email() {
+  local email="$1"
+  if [[ "$email" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$ ]]; then
+    # Email is valid
+    return 0
+  else
+    # Email is invalid
+    return 1
+  fi
+}
+
+extract_email() {
+  local input_str="$1"
+  local email=""
+  local regex='Currently logged in as (.+@.+)'
+  [[ ${input_str} =~ $regex ]] && email=${BASH_REMATCH[1]}
+  echo "$email"
+}
+
+get_share_user_name() {
+  local who_am_i="$(share auth whoami)"
+  local user_name="$(extract_email "${who_am_i}")"
+  echo "$user_name"
+}
+
+is_share_loggedin() {
+  local user_name="$(get_share_user_name)"
+  if is_valid_email "${user_name}"; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 if [[ $? -ne 0 ]] 
 then
   err "Initial catch."
@@ -18,20 +52,24 @@ fi
 
 # 1. All Vendia share nodes
 
-echo "Getting your username.."
-user_name=$(share auth whoami | grep @vendia.net | awk '{print $5}')
+echo "Verifying share login.."
 
-if [[ $? -ne 0 ]] 
-then
-  err "failed to get user name."
-  exit 1
+if ! is_share_loggedin; then
+  share login
 fi
 
-echo "Your username is: " "$user_name" "Your nodes will be created under this username."
+user_name="$(get_share_user_name)"
+if [ -z "${user_name}" ]; then
+  err "Failed to retrieve share username"
+  exit 3
+elif ! is_valid_email "${user_name}"; then
+    err "Share username is not a valid email"
+    exit 3
+fi
 
-echo "Copy sample file and replacing all user ids to above user id."
+echo "Your username is: '$user_name' Your nodes will be created under this username."
 
-
+echo "Copying sample file and replacing all user ids to above user id."
 
 ## Copy the sample files and replace the user ids.
 cp ./uni_configuration/registration.json.sample ./uni_configuration/registration.json
