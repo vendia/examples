@@ -1,4 +1,4 @@
-# Milestone 7 - Define Pattern with Regex
+# Milestone 7 - Define Re-usable Types
 
 ## Goal
 

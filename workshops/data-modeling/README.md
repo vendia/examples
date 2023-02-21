@@ -44,13 +44,11 @@ In this workshop, we will aim to create a ticketing system for an airline. As we
 * [Milestone 2 - Choose Appropriate Formats](README-Milestone2.md)
 * [Milestone 3 - Define Required Fields](README-Milestone3.md)
 * [Milestone 4 - Define Indices](README-Milestone4.md)
-* [Milestone 5 - Define Aggregation](README-Milestone5.md)
 
 ## Advanced
-* [Milestone 6 - Define Access Control List](README-Milestone6.md)
-* [Milestone 7 - Define Pattern with Regex](README-Milestone7.md)
-* [Milestone 8 - Define Re-usable Types](README-Milestone8.md)
-* [Milestone 9 - Define Parent/Child Relationship](README-Milestone9.md)
+* [Milestone 5 - Define Access Control List](README-Milestone5.md)
+* [Milestone 6 - Define Pattern with Regex](README-Milestone6.md)
+* [Milestone 7 - Define Re-usable Types](README-Milestone7.md)
 
 ## Optional
-* [Milestone 10 - Schema Evolution](README-Milestone10.md)
+* [Milestone 8 - Schema Evolution](README-Milestone9.md)

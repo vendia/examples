@@ -1,8 +1,9 @@
-# Milestone 5 - Define Aggregation
+# Milestone 5 - Define Access Control List
 
 ## Goal
+In this milestone, we will walkthrough Vendia's ACL(Access Control List) for our schema. To ensure data can only be accessed by participants who have access to them.
 
-## <Milestone Content>
+## Vendia's Fine Grained Access Control
 
 ## Do it on your own
 

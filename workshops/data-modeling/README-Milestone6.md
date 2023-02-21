@@ -1,4 +1,4 @@
-# Milestone 6 - Define Access Control List
+# Milestone 6 - Define Pattern with Regex
 
 ## Goal
 
