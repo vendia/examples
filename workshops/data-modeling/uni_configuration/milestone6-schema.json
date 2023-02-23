@@ -1,0 +1,93 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Data Model Workshop milestone 1",
+    "description": "This schema is for data model workshop milestone 1",
+    "type": "object",
+    "x-vendia-acls": {
+        "TicketAcl": {
+          "type": "Ticket"
+        }
+    },
+    "x-vendia-indexes": {
+        "TicketPaymentIndex": [
+          {
+            "type": "Ticket",
+            "property": "ticketNumber"
+          },
+          {
+            "type": "Ticket",
+            "property": "price"
+          }
+        ]
+    },
+    "properties": {
+        "Ticket": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "passengerNameRecordCode": {
+                        "type": "string",
+                        "description": "A unique passenger record, represented by a 6-digit alphanumeric value"
+                    },
+                    "passenger": {
+                        "description": "Information about the passenger",
+                        "type": "object",
+                        "properties": {
+                            "firstName": {
+                                "description": "Passenger's first name",
+                                "type": "string"
+                            },
+                            "lastName": {
+                                "description": "Passenger's last name",
+                                "type": "string"
+                            },
+                            "birthDate": {
+                                "description": "Passenger's birthday",
+                                "type": "string",
+                                "format": "date"
+                            },
+                            "email": {
+                                "description": "Passenger's email address",
+                                "type": "string",
+                                "format": "email"
+                            }
+                        },
+                        "required": ["firstName", "lastName"]
+                    },
+                    "airlineCode": {
+                        "type": "string",
+                        "description": "The 2-letter code of the issuing airline",
+                        "pattern": "[A-Z]{2}"
+                    },
+                    "ticketNumber": {
+                        "type": "string",
+                        "description": "A unique ticket number, represented as a 3-digit airline code followed by a 4-digit form number followed by a 6-digit serial number",
+                        "pattern": "[0-9]{13}"
+                    },
+                    "dateOfIssue": {
+                        "type": "string",
+                        "description": "The date and time this ticket was issued, in the format YYYY-MM-DD",
+                        "format": "date"
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "Ticket price"
+                    },
+                    "payment": {
+                        "type": "array",
+                        "items": {
+                            "type": "number",
+                            "description": "payments made"
+                        }
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "description": "is the ticket confirmed?"
+                    }
+                },
+                "required": ["passenger", "ticketNumber"]
+            }
+        }
+    }
+}
