@@ -1,7 +1,7 @@
 # Milestone 8 - Schema Evolution
 
-So far, we've gone through multiple schema evolutions and faced no issues.
-The reason is because we made additive changes to our previous schemas:
+So far, we've gone through multiple schema changes. But in real world, it will not change our schema like we did in milestones as the changes we made are not all evolvable in a uni in the orders we made them. 
+Here are the limitations to schema evolution:
 * New types and their associated properties can be added
 * New properties of an existing type can be added
 * New enum values of an existing property can be added
@@ -12,6 +12,7 @@ Vendia currently do not support destructive or breaking changes of schema:
 * Type changes to existing properties cannot be changed
 * Required flag for an existing property cannot be changed
 
+Knowing these is very important so we can better plan ahead on how we might evolve our schemas.
 
 ## Try it out
 
