@@ -35,4 +35,4 @@ We will explore querying and changing data in a Uni using several programming la
 
 **NOTE:** [GraphQL supports a number of programming languages](https://graphql.org/code/#language-support). The ones used in this example are representative only.
 
-[Now let's see how Vendia Share looks at GraphQL](./creating-our-uni.md).
+[Now let's see how Vendia Share looks at GraphQL](./README-milestone2.md).
