@@ -9,7 +9,7 @@ Here are a few examples to help you get started.  Feel free to build your own qu
 
 Open the `GraphQL Explorer` of the **SupplierNode**. To do this from the Share UI, select the meatball button on the right in the row pertaining to the node you want to access. An image is included below.
 
-![GraphQL Share View](/img/GraphQL_Share_UI.png)
+![GraphQL Share View](img/GraphQL_Share_UI.png)
 
 Once the GraphQL Explorer is open for the Supplier Node, remove any existing content from the middle pane.  Copy and paste the query below and then execute the query.
 
