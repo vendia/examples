@@ -65,9 +65,9 @@ You can now reference the file path in the `promotionalContent` field of each pr
 
 The association made allows, for example, an application capable of displaying file content to retrieve both the product data and promotional file from the same Vendia Share GraphQL interface.
 
-### __Adding Files Programmatically__
+### __Adding Files Programmatically (Optional)__
 
-Files can also be added via a GraphQL mutation, though this requires multiple steps and an external AWS S3 Bucket. 
+Files can also be added via a GraphQL mutation, though this requires multiple steps and an external AWS S3 Bucket. If you don't have access to AWS 
 
 The first step is getting your Vendia Account Name, which can be found via executing the following query and extracing the `accountId` value.
 
