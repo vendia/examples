@@ -113,7 +113,7 @@ Here, we add some Rocky Road Ice Cream to the list of Products. The `result` por
 
 Lets use the Entity Explorer to see the status of the Rocky Road ice cream inside of the Node. Pay attention to the unique ID which is contained in the red rectangle in the image below, we'll need it for later. __This is a unique ID for every transaction - remember to copy your unique one!__
 
-![Rocky Road Entity view](/img/Rocky_Road_Entity.png)
+![Rocky Road Entity view](img/Rocky_Road_Entity.png)
 
 We see that we have the Rocky Road Ice Cream accounted for and present, but that we're missing a few fields. Important to note that unless the data schema you're using notes something as a mandatory field, you're able to partially fill in data.
 
