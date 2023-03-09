@@ -17,9 +17,9 @@ If you have already spun-up the Supplier and Distributor Uni, no need to do so a
 To complete this workshop, you'll need the following:
 
 * [Git Client](https://git-scm.com/downloads)
-* [Node.js](https://nodejs.org/en/download/)
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
 * [Vendia Share Account](https://share.vendia.net/signup)
+* [AWS Account with S3 Access](https://aws.amazon.com/console/) (Optional)
 
 Optionally, you'll need:
 * Your code editor of choice
