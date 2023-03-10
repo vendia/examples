@@ -17,15 +17,16 @@ Once the GraphQL Explorer is open for the Supplier Node, remove any existing con
 query listProducts {
   list_ProductItems {
     _ProductItems {
-      _id
-      _owner
-      category
-      description
-      name
-      price
-      sku
-      supplier
-      promotionalContent
+      ... on Self_Product {
+      	_id
+     		_owner
+      	category
+      	description
+      	name
+      	price
+      	sku
+      	supplier
+      }
     }
   }
 }
