@@ -19,7 +19,7 @@ query listProducts {
     _ProductItems {
       ... on Self_Product {
       	_id
-     		_owner
+        _owner
       	category
       	description
       	name
