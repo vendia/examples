@@ -126,13 +126,10 @@ Finally, with the bucket policy set up, you can run the following mutation to fe
 ```
 addVendia_File(
   input: {
-    sourceBucket: <bucket>,
-    sourceKey: <key>,
-    sourceRegion: <region>,
-    destinationKey: <key>,
-    copyStrategy: <strategy>,
-    read: [List of Nodes],
-    write: [List of Nodes]
+    sourceBucket: <bucket>, #cloud bucket name
+    sourceKey: <key>, #file name in cloud storage
+    sourceRegion: <region>, #cloud region where file is hosted
+    destinationKey: <key>, #file name in vendia
   },
   syncMode: ASYNC
 ) { transaction { _id } }
