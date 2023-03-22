@@ -4,46 +4,50 @@
   </a>
 </p>
 
-# Vendia Examples
-This repository contains a variety of examples that highlight the capabilities of [Vendia Share](https://www.vendia.net/product).
+# Intro to GraphQL with Vendia
 
-## Common Prerequisites
-Each example will have its own set of detailed prerequisites.  Two prereqs that are almost always needed (so worth getting now) are:
+[Vendia Share](https://www.vendia.net) is the real-time data cloud for rapidly building applications that securely share data across departments, companies, clouds, and regions.  This workshop walks you through the basics of GraphQL and interacting with the Share platform programmatically.
 
-* A Vendia Share [Account](https://share.vendia.net/signup), used to access Vendia Share
-* The Vendia Share [Command Line Interface (CLI)](https://vendia.net/docs/share/cli), used to manage Unis on Vendia Share
+The workshop will involve us spinning up our [Supplier and Distributor](https://github.com/vendia/examples/tree/main/demos/food-and-beverage/simple-supplier-distributor) demo and interacting with the Uni programmatically, covering the basics of GraphQL queries and mutations as well as Vendia's own advanced features.
 
-## Overview
-The top-level directory structure groups examples by type for ease of navigation.
+If you have already spun-up the Supplier and Distributor Uni, no need to do so again for the purpose of this demo. 
 
-| Directory | Purpose |
-|:---------|:--------|
-| [/applications](applications/README.md) | _Coming Soon!_ Full-stack sample applications, powered by Vendia Share.
-| [/approaches](approaches/README.md) | Architectural, design, and tooling approaches that demonstrate  ways to interact with and successfully leverage Vendia Share
-| [/demos](demos/README.md) | Guided, step-by-step industry and use case specific demonstrations using Vendia Share  
-| [/features](features/README.md) | Deeper exploration of the core features that comprise Vendia Share
-| [/integrations](integrations/README.md) | Deeper exploration of common ingress and egress sources to get data in to and out of Vendia Share
-| [/workshops](workshops/README.md) | Guided, step-by-step industry and use case specific workshops to educate those new to Vendia Share
+# Pre-requisites
 
-## Where to Begin
-Vendia Share is feature rich and broadly applicable across real-time data sharing use cases.  Finding the best place to begin or continue your Vendia Share learning journey can be a challenge.  Here are some recommendations to make getting started simple:
+To complete this workshop, you'll need the following:
 
-* _**Brand new to Vendia Share?**_  Try one of the [/workshops](workshops/README.md).
-* _**Want to experience the ease of setting up a multi-node Universal Application (Uni) to solve a real-world use case?**_  See these helpful [/demos](demos/README.md). 
-* _**New to GraphQL, Fine-Grained Data Access Control, Smart Contracts, or other core Vendia Share capabilities?**_  Take a deep dive into one or more [/features](features/README.md).   
-* _**Curious about getting data in to or out of Share?**_  Browse our growing catalog of [/integrations](integrations/README.md).
-* _**Looking for best practices and recommendations?**_  These [/approaches](approaches/README.md) can help guide you in the right direction. 
+* [Git Client](https://git-scm.com/downloads)
+* [Node.js](https://nodejs.org/en/download/)
+* [Vendia Share CLI](https://vendia.net/docs/share/cli)
+* [Vendia Share Account](https://share.vendia.net/signup)
 
-## Additional Resources
-* Check out the Vendia Share [docs](https://vendia.net/docs)
-* Sign up for a Vendia Share [account](https://share.vendia.net/)
-* Learn more about Vendia and Vendia Share on our [blog](https://vendia.net/blog)
-* Keep up to date with the [latest features](https://vendia.net/releases)
-* Engage with the Vendia Share [community](https://community.vendia.net/)
+Optionally, you'll need:
+* Your code editor of choice
 
-## Contributing
-Before engaging through GitHub, please review our [contributing guidelines](CONTRIBUTING.md).
+In addition, you'll also need to clone this respository.
 
-Interested in sharing an example?  [Submit a PR](https://github.com/vendia/examples/pulls).
+### Clone with SSH
 
-Have an idea for a future application, demo, or workshop?  [Open an issue](https://github.com/vendia/examples/issues).
+```bash
+git clone git@github.com:vendia/examples.git
+```
+
+### Clone with HTTPS
+
+```bash
+git clone https://github.com/vendia/examples.git
+```
+
+# Workshop Milestones
+You'll incrementally create a multi-party application through a series of Milestones.  Each Milestone builds on the previous, so they should be executed in order.
+
+## Setup
+* [Milestone 0 - Set up Universal Application](README-Milestone0.md)
+
+## GraphQL Intro
+* [Milestone 1 - GraphQL Introduction](README-Milestone1.md)
+* [Milestone 2 - GraphQL in Vendia Share](README-Milestone2.md)
+
+## GraphQL Utilization
+* [Milestone 3 - Queries and Mutations](README-Milestone3.md)
+* [Milestone 4 - Vendia & GraphQL](README-Milestone4.md)
