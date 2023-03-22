@@ -17,9 +17,9 @@ If you have already spun-up the Supplier and Distributor Uni, no need to do so a
 To complete this workshop, you'll need the following:
 
 * [Git Client](https://git-scm.com/downloads)
+* [Node.js](https://nodejs.org/en/download/)
 * [Vendia Share CLI](https://vendia.net/docs/share/cli)
 * [Vendia Share Account](https://share.vendia.net/signup)
-* [AWS Account with S3 Access](https://aws.amazon.com/console/) (Optional)
 
 Optionally, you'll need:
 * Your code editor of choice
@@ -44,11 +44,10 @@ You'll incrementally create a multi-party application through a series of Milest
 ## Setup
 * [Milestone 0 - Set up Universal Application](README-Milestone0.md)
 
-## GraphQL Foundations
+## GraphQL Intro
 * [Milestone 1 - GraphQL Introduction](README-Milestone1.md)
 * [Milestone 2 - GraphQL in Vendia Share](README-Milestone2.md)
-* [Milestone 3 - Queries and Mutations](README-Milestone3.md)
 
-## Advanced Features
+## GraphQL Utilization
+* [Milestone 3 - Queries and Mutations](README-Milestone3.md)
 * [Milestone 4 - Vendia & GraphQL](README-Milestone4.md)
-* [Milestone 5 - Examples of Advanced Queries](README-Milestone5.md)

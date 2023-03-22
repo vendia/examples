@@ -1,6 +1,6 @@
 # Milestone 4 - Vendia & GraphQL
 
-In the previous section, we went over the basics of GraphQL in Vendia, covering how to query and how to add and modify data. In this section, we'll go a bit further, outlining how Vendia uses GraphQL to help you share data more effectively. We will be picking up where we left off in the Supplier and Distributor example, and cover how to think about Data Freshness and File Sharing.
+In the previous section, we went over the basics of GraphQL in Vendia, covering how to query and how to add and modify data. In this section, we'll go a bit further, outlining how Vendia uses GraphQL to help you share data more effectively. We will be picking up where we left off in the Supplier and Distributor example, and cover how to think about Data Freshness, File Sharing, and Tracability.
 
 ## Caching and Data Freshness
 
@@ -65,9 +65,9 @@ You can now reference the file path in the `promotionalContent` field of each pr
 
 The association made allows, for example, an application capable of displaying file content to retrieve both the product data and promotional file from the same Vendia Share GraphQL interface.
 
-### __Adding Files Programmatically (Optional)__
+### __Adding Files Programmatically__
 
-Files can also be added via a GraphQL mutation, though this requires multiple steps and an external AWS S3 Bucket. If you don't have access to AWS 
+Files can also be added via a GraphQL mutation, though this requires multiple steps and an external AWS S3 Bucket. 
 
 The first step is getting your Vendia Account Name, which can be found via executing the following query and extracing the `accountId` value.
 
@@ -126,14 +126,68 @@ Finally, with the bucket policy set up, you can run the following mutation to fe
 ```
 addVendia_File(
   input: {
-    sourceBucket: <bucket>, #cloud bucket name
-    sourceKey: <key>, #file name in cloud storage
-    sourceRegion: <region>, #cloud region where file is hosted
-    destinationKey: <key>, #file name in vendia
+    sourceBucket: <bucket>,
+    sourceKey: <key>,
+    sourceRegion: <region>,
+    destinationKey: <key>,
+    copyStrategy: <strategy>,
+    read: [List of Nodes],
+    write: [List of Nodes]
   },
   syncMode: ASYNC
 ) { transaction { _id } }
 ```
+
+## Tracability
+
+One of the major benefits of a private ledger is that tracibility is built into platform as a core feature. In this example, we'll take a look at pulling the version history of an item and exaimining the block information of the item.
+
+Lets go to the Entity Explorer in the DistributorNode and pick out our `Rocky Road Ice Cream`. Lets then change the margin to `3` instead of `2`. Finally, before we leave this view, copy the ID - we'll need it for our next query.
+
+Open up the GraphQL Explorer for the DistributorNode, and run the following:
+
+```
+query RockyRoadHistory {
+  list_ProductVersions(id: [YOUR ID GOES HERE], limit: 5) {
+    versions {
+      block
+      transactions{
+        _id
+        _owner
+        submissionTime
+      }
+    }
+  }
+}
+```
+
+A couple of things are going on here in this query.
+
+* We set our `limit` to 3, so we'll only see 3 transactions on the chain here. 
+    * Crawling through the transaction results on a single object with a lot of mutations, especially from different Node owners, can get complicated fast. We will cover paginating through results later on in this section. 
+
+* We are pulling 3 *versions* of the `Rocky Road Ice Cream` object. For each version, we are pulling the *block* and the *transaction*.
+
+* For each *transaction*, we are pulling the ID of that specific transaction, as well as who initiated the transaction.
+    * Filtering on *_owner* or *submissionTime* are two easy ways to narrow down tracability depending on the situation. 
+
+Lets try querying by block ID instead of object ID. Take a look at your results returned and pick a block to use in your query. 
+
+Run the following query, substituing in your block number.
+
+```
+query BlockyRoadHistory {
+  getVendia_Block(id: [BLOCK ID GOES HERE]) {
+    blockId
+    commitTime
+    status
+  }
+}
+```
+
+Taking a look at the result, we have our blockID returned back at us for posterity. We also see when the block was commited, and we see the status of the block as discussed in the previous milestone.
+
+Tracability is a core feature of Vendia, and the ability to work backwards through your data's history to uncover key insights in a few keystrokes is a remarkably powerful tool.
 
 A more in-depth look at the File API and what the features and limits are can be found in the [Vendia Docs](https://www.vendia.com/docs/share/file-api), including how to set up directories inside of Vendia.
 
