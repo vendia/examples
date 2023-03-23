@@ -17,7 +17,7 @@ There are several advantages of using GraphQL. Lets take a look at some of these
 
 To do this from the Share UI, select the meatball button on the right in the row pertaining to the node you want to access. An image is included below. Keep this explorer open in a window while we continue along with our workshop.
 
-![GraphQL Share View](/img/GraphQL_Share_UI.png)
+![GraphQL Share View](img/GraphQL_Share_UI.png)
 
 ### __Get Precise Data__
 
