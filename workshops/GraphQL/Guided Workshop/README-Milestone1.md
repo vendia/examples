@@ -106,6 +106,8 @@ Notice that when we execute this query, we get the following error.
 ```
 There are other ways to verify data (for example, utilizing [Vendia Smart Contracts](https://www.vendia.com/docs/share/smart-contracts)), but type enforcement provides a solid 'first line of defense' against mislabeled data.
 
+**NOTE:** Errors returned by Vendia are HTTP code 200 responses. In order to handle errors, you will need to read the response body to determine if the operation was successful.
+
 
 # Working with GraphQL APIs
 
