@@ -1,0 +1,17 @@
+{
+  "name": "test-<name-of-your-choice>",
+  "schema": "schema.json",
+  "initState": "initial-state.json",
+  "nodes": [
+    {
+      "name": "LenderNode",
+      "userId": "you@domain.com",
+      "region": "us-east-2"
+    },
+    {
+      "name": "ServicerNode",
+      "userId": "you@domain.com",
+      "region": "us-west-2"
+    }
+  ]
+}

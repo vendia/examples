@@ -1,0 +1,64 @@
+{
+    "Loan": [
+        {
+            "loanIdentifier": "0000000000000001",
+            "portfolioIdentifier": "AAAA1111",
+            "loanToValuePercent": 72,
+            "unpaidPrincipalBalance": 352108,
+            "interestRatePercent": 5.2,
+            "originationDate": "2021-04-11",
+            "borrowerCreditScore": 760,
+            "numberOfUnits": 2,
+            "delinquencyStatus": "CURRENT",
+            "validationStatus": "PENDING"
+          },
+          {
+            "loanIdentifier": "0000000000000002",
+            "portfolioIdentifier": "AAAA1111",
+            "loanToValuePercent": 52,
+            "unpaidPrincipalBalance": 445000,
+            "interestRatePercent": 9.2,
+            "originationDate": "2031-04-11",
+            "borrowerCreditScore": 750,
+            "numberOfUnits": 1,
+            "delinquencyStatus": "CURRENT",
+            "validationStatus": "PENDING"
+          },
+          {
+            "loanIdentifier": "0000000000000003",
+            "portfolioIdentifier": "AAAA1111",
+            "loanToValuePercent": 90,
+            "unpaidPrincipalBalance": 600000,
+            "interestRatePercent": 4.25,
+            "originationDate": "2019-01-01",
+            "borrowerCreditScore": 650,
+            "numberOfUnits": 1,
+            "delinquencyStatus": "DELINQUENT",
+            "validationStatus": "PENDING"
+          },
+          {
+            "loanIdentifier": "0000000000000004",
+            "portfolioIdentifier": "AAAA1111",
+            "loanToValuePercent": 66,
+            "unpaidPrincipalBalance": 800000,
+            "interestRatePercent": 2.99,
+            "originationDate": "2020-07-04",
+            "borrowerCreditScore": 850,
+            "numberOfUnits": 1,
+            "delinquencyStatus": "CURRENT",
+            "validationStatus": "PENDING"
+          },
+          {
+            "loanIdentifier": "0000000000000005",
+            "portfolioIdentifier": "AAAA1111",
+            "loanToValuePercent": 50,
+            "unpaidPrincipalBalance": 500000,
+            "interestRatePercent": 5.00,
+            "originationDate": "2021-05-05",
+            "borrowerCreditScore": 550,
+            "numberOfUnits": 1,
+            "delinquencyStatus": "CURRENT",
+            "validationStatus": "PENDING"
+          }
+    ]
+}
