@@ -147,29 +147,33 @@ do
 done
 
 
+echo -e > ./src/terraform/terraform.tfvars \
+"css_node_smart_contract_iam_role=\"${smart_contract_arn[2]}\"
+fnma_node_smart_contract_iam_role=\"${smart_contract_arn[3]}\""
 
 # 2. AWS lambda functions
 
 # copy the main.tf.template file, so re-running the script is fine.
-cp ./src/terraform/main.tf.template ./src/terraform/main.tf
+# cp ./src/terraform/main.tf.template ./src/terraform/main.tf
 
-# Get all configuration information we need
-# <vendia-smart-contract-arn> in main.tf needs to be replaced
-# <fnman-vendia-smart-contract-arn>
-sed -i '' -e "s|<fnman-vendia-smart-contract-arn>|${smart_contract_arn[3]}|g" ./src/terraform/main.tf
-if [[ $? -ne 0 ]] 
-then
-  err "failed to modify terraform main.tf file for fnman smart contract arn."
-  exit 1
-fi
 
-# <css-vendia-smart-contract-arn>
-sed -i '' -e "s|<css-vendia-smart-contract-arn>|${smart_contract_arn[2]}|g" ./src/terraform/main.tf
-if [[ $? -ne 0 ]] 
-then
-  err "failed to modify terraform main.tf file for css smart contract arn."
-  exit 1
-fi
+# # Get all configuration information we need
+# # <vendia-smart-contract-arn> in main.tf needs to be replaced
+# # <fnman-vendia-smart-contract-arn>
+# sed -i '' -e "s|<fnman-vendia-smart-contract-arn>|${smart_contract_arn[3]}|g" ./src/terraform/main.tf
+# if [[ $? -ne 0 ]] 
+# then
+#   err "failed to modify terraform main.tf file for fnman smart contract arn."
+#   exit 1
+# fi
+
+# # <css-vendia-smart-contract-arn>
+# sed -i '' -e "s|<css-vendia-smart-contract-arn>|${smart_contract_arn[2]}|g" ./src/terraform/main.tf
+# if [[ $? -ne 0 ]] 
+# then
+#   err "failed to modify terraform main.tf file for css smart contract arn."
+#   exit 1
+# fi
 
 
 (cd src/terraform; terraform init; terraform apply -auto-approve)

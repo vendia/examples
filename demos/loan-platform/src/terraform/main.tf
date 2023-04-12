@@ -18,7 +18,7 @@ resource "aws_lambda_permission" "upb_allow_vendia_smart_contract_invoke" {
   statement_id  = "AllowVendiaInvokeFunction"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.upb_lambda.function_name
-  principal     = "<fnman-vendia-smart-contract-arn>"
+  principal     = var.fnma_node_smart_contract_iam_role
   qualifier     = aws_lambda_function.upb_lambda.version
 }
 
@@ -26,7 +26,7 @@ resource "aws_lambda_permission" "upb_allow_vendia_smart_contract_get_config" {
   statement_id  = "AllowVendiaGetFunctionConfiguration"
   action        = "lambda:GetFunctionConfiguration"
   function_name = aws_lambda_function.upb_lambda.function_name
-  principal     = "<fnman-vendia-smart-contract-arn>"
+  principal     = var.fnma_node_smart_contract_iam_role
   qualifier     = aws_lambda_function.upb_lambda.version
 }
 
@@ -35,7 +35,7 @@ resource "aws_lambda_permission" "delinquent_allow_vendia_smart_contract_invoke"
   statement_id  = "AllowVendiaInvokeFunction"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.delinquent_lambda.function_name
-  principal     = "<fnman-vendia-smart-contract-arn>"
+  principal     = var.fnma_node_smart_contract_iam_role
   qualifier     = aws_lambda_function.delinquent_lambda.version
 }
 
@@ -43,7 +43,7 @@ resource "aws_lambda_permission" "delinquent_allow_vendia_smart_contract_get_con
   statement_id  = "AllowVendiaGetFunctionConfiguration"
   action        = "lambda:GetFunctionConfiguration"
   function_name = aws_lambda_function.delinquent_lambda.function_name
-  principal     = "<fnman-vendia-smart-contract-arn>"
+  principal     = var.fnma_node_smart_contract_iam_role
   qualifier     = aws_lambda_function.delinquent_lambda.version
 }
 
@@ -52,7 +52,7 @@ resource "aws_lambda_permission" "wair_allow_vendia_smart_contract_invoke" {
   statement_id  = "AllowVendiaInvokeFunction"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.wair_lambda.function_name
-  principal     = "<css-vendia-smart-contract-arn>"
+  principal     = var.css_node_smart_contract_iam_role
   qualifier     = aws_lambda_function.wair_lambda.version
 }
 
@@ -60,7 +60,7 @@ resource "aws_lambda_permission" "wair_allow_vendia_smart_contract_get_config" {
   statement_id  = "AllowVendiaGetFunctionConfiguration"
   action        = "lambda:GetFunctionConfiguration"
   function_name = aws_lambda_function.wair_lambda.function_name
-  principal     = "<css-vendia-smart-contract-arn>"
+  principal     = var.css_node_smart_contract_iam_role
   qualifier     = aws_lambda_function.wair_lambda.version
 }
 
