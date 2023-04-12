@@ -21,12 +21,17 @@ is_valid_email() {
 }
 
 extract_email() {
-  local input_str="$1"
-  local email=""
-  local regex='Currently logged in as (.+@.+)'
-  [[ ${input_str} =~ $regex ]] && email=${BASH_REMATCH[1]}
-  echo "$email"
+  local email_regex='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+  echo $1 | grep -E -o $email_regex
 }
+
+# extract_email() {
+#   local input_str="$1"
+#   local email=""
+#   local regex='Currently logged in as (.+@.+)'
+#   [[ ${input_str} =~ $regex ]] && email=${BASH_REMATCH[1]}
+#   echo "$email"
+# }
 
 get_share_user_name() {
   local who_am_i="$(share auth whoami)"
@@ -146,7 +151,6 @@ do
         node_keys+=$(share node add-api-key --uni ${uni_name} --node ${node} --name ${node:l}-key --expiry 9999 | awk '{print $3}')
 done
 
-
 echo -e > ./src/terraform/terraform.tfvars \
 "css_node_smart_contract_iam_role=\"${smart_contract_arn[2]}\"
 fnma_node_smart_contract_iam_role=\"${smart_contract_arn[3]}\""
@@ -175,7 +179,10 @@ fnma_node_smart_contract_iam_role=\"${smart_contract_arn[3]}\""
 #   exit 1
 # fi
 
-
+if [ ! -f "./src/terraform/terraform.tfvars" ]; then
+  err "failed to generate terraform variable file"
+  exit 3
+fi
 (cd src/terraform; terraform init; terraform apply -auto-approve)
 
 # 4. Share smart contracts created dependent on step 3)
