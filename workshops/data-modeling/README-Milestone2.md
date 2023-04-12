@@ -7,8 +7,8 @@ We talked about in most cases, `string` can be used as a type. But having a `str
 Luckily, there are many useful built-in formats within JSON Schema. So we don't have to rebuild these wheels. For a comprehensive list of available JSON Schema formats, refer to [JSON Schema Formats](https://json-schema.org/understanding-json-schema/reference/string.html#built-in-formats). 
 
 For the purpose of this workshop, we will only pick couple formats that we need for our ticketing system:
-* `email`
-* `date`
+* `email` - Format as per [RFC 5321, section 4.1.2](http://tools.ietf.org/html/rfc5321#section-4.1.2)
+* `date` - Format in YYYY-MM-DD
 
 For one of the field that we had previously:
 

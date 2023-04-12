@@ -1,13 +1,12 @@
-# Milestone 5 - Define Access Control List
+# Milestone 5 - Define Access Control List (ACL)
 
 ## Goal
 In this milestone, we will briefly go through the requirements to set up ACLs in Vendia Share. As ACLs are not part of `Data Model`, we will not go deeper than what we need. For more comprehensive Vendia ACL documentations, check our official [documentation](https://www.vendia.com/docs/share/fine-grained-data-permissions) and [ACL repo](../../features/share/access-controls/data-access-controls/README.md).
 
 ## Vendia's Fine Grained Access Control
-Vendia Share's ACL is not defined in the very beginning. They are defined when `mutation` is being made. So there are 2 things needed:
-
-1. `x-vendia-acls` at top level of your schema
-2. `mutation` being made with acl definitions in them
+To add fine-grained permissions, the access control lists (or ACLs) must be defined in two places:
+1. Schema definition - set one time, upon creation of the uni, to highlight which entities can be controlled by ACLs
+2. Active mutations - ongoing, when mutations occur, ACLs are added to define which nodes can do what operations to what attributes.
 
 For this workshop, we will only do 1. For 2., refer to above links shared under "Goal" section.
 
