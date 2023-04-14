@@ -3,7 +3,7 @@
 ## Query Solution
 
 ```
-query HardCodedQuery($limit: Int, $loanIdentifier: String) {
+query VariableQuery($limit: Int, $loanIdentifier: String) {
   list_LoanItems(
     limit: $limit
     readMode: CACHED
