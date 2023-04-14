@@ -69,15 +69,15 @@ Once your Uni is ready, let's start with [Milestone 0](README-Milestone0.md).
 * [Milestone 5 - Create Smart Contraction on Vendia](README-Milestone5.md)
 
 ## Main Use Cases
-* [Milestone 6a - Enrichment Input Query & Ouput Mutation](README-Milestone6c.md)
-* [Milestone 6b - Enrichment Business Logic in Lambda](README-Milestone6a.md)
-* [Milestone 6c - Enrichment Test Case](README-Milestone6b.md)
-* [Milestone 7a - Validation Input Query & Ouput Mutation](README-Milestone7c.md)
-* [Milestone 7b - Validation Business Logic in Lambda](README-Milestone7a.md)
-* [Milestone 7c - Validation Test Case](README-Milestone7b.md)
-* [Milestone 8a - Computation Input Query & Ouput Mutation](README-Milestone8c.md)
-* [Milestone 8b - Computation Business Logic in Lambda](README-Milestone8a.md)
-* [Milestone 8c - Computation Test Case](README-Milestone8b.md)
+* [Milestone 6a - Enrichment Input Query & Ouput Mutation](README-Milestone6a.md)
+* [Milestone 6b - Enrichment Business Logic in Lambda](README-Milestone6b.md)
+* [Milestone 6c - Enrichment Test Case](README-Milestone6c.md)
+* [Milestone 7a - Validation Input Query & Ouput Mutation](README-Milestone7a.md)
+* [Milestone 7b - Validation Business Logic in Lambda](README-Milestone7b.md)
+* [Milestone 7c - Validation Test Case](README-Milestone7c.md)
+* [Milestone 8a - Computation Input Query & Ouput Mutation](README-Milestone8a.md)
+* [Milestone 8b - Computation Business Logic in Lambda](README-Milestone8b.md)
+* [Milestone 8c - Computation Test Case](README-Milestone8c.md)
 
 ## Optional Infrastructure Management Using Terraform
 * [Milestone 9 - Additional Pre-requisites](README-Milestone9.md)
