@@ -35,6 +35,8 @@ exports.handler = async (event) => {
 
 Examining the above code snippet, we can see that it doesn't do anything fancy but only getting the loan `id` and retrieve invocation arguments and return them as a variable JSON.
 
+Now let's create our lambda function. If you don't remember how to do that, refer to [milestone 3](./README-Milestone3.md).
+
 ## Testing Your Understanding
 
 * Is invokeArgs the only way to enrich data? If not, what else?

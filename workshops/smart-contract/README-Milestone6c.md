@@ -29,7 +29,7 @@ If you don't remember how to create a test case for lambda function, refer to [m
 
 Now we have everything we need to create our enrichment smart contract. Let's create it on Vendia Share. If you don't remember how to do that, refer to [milestone 5](README-Milestone5.md).
 
-Note: Do not forget that we need appropriate permissions to create them. Refer to [milestone 4](README-Milestone4.md) is you don't remember.
+Note: Do not forget that we need appropriate permissions to create them. Refer to [milestone 4](README-Milestone4.md) if you don't remember.
 
 ## Testing Your Understanding
 
