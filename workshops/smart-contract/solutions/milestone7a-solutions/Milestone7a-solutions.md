@@ -1,4 +1,4 @@
-# Milestone 6a - Enrichment Input Query & Ouput Mutation
+# Milestone 7a - Validation Input Query & Ouput Mutation
 
 ## Answer to Questions
 
@@ -8,6 +8,9 @@
 ```
 {
   "id": "0000000000000100",
-  "additionalResources": {}
+  "validationStatus": "VALID",
+  "acl": [
+            { principal: {nodes: "LenderNode"}, operations: ["ALL", "UPDATE_ACL"] }
+        ]
 }
 ```
