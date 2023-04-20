@@ -25,7 +25,7 @@ Now that we have our lambda function in our last milestone, we must make sure it
 
 If you don't remember how to create a test case for lambda function, refer to [milestone 3](README-Milestone3.md).
 
-## Deploy Enrichment Smart Contract
+## Deploy Validation Smart Contract
 
 Now we have everything we need to create our validation smart contract. Let's create it on Vendia Share. If you don't remember how to do that, refer to [milestone 5](README-Milestone5.md).
 
