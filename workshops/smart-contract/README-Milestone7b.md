@@ -12,7 +12,7 @@ We will use below code snippet for our validation smart contract.
  * @param event that contains a loan to be validated, among other fields
  * @returns Promise of an object that contains the validation results and ACL modifications, as expected by the associated smart contract's outputMutation
  */
-exports.handler = async (event) => {
+export const handler = async (event) => {
 
     let loan = {}
     let validationStatus
