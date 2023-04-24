@@ -11,7 +11,7 @@ We will use below code snippet for our enrichment smart contract.
  * @param event that includes a loan (to be modified) and invokeArgs (whose value should be used to enrich a loan)
  * @returns Promise of an object that contains the enrichment results, as expected by the associated smart contract's outputMutation
  */
-exports.handler = async (event) => {
+export const handler = async (event) => {
 
         console.log("Event is", event)
 
