@@ -14,7 +14,7 @@ The GraphQL API that provides access to the serverless distributed ledger availa
   <figcaption><b>Figure 1</b> - <i>Node Access Controls in the Vendia Share Data Plane</i></figcaption>
 </figure>
 
-Figure 1 depicts a two-node Uni, each with different [authorization settings](https://www.vendia.net/docs/share/node-access-control#api-access) configured.
+Figure 1 depicts a two-node Uni, each with different [authorization settings](https://www.vendia.com/docs/share/node-authentication) configured.
 
 In this example, you will interact with nodes protected by several available authorizer types.
 
