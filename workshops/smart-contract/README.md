@@ -35,7 +35,7 @@ git clone https://github.com/vendia/examples.git
 
 We will go through the process of creating smart contracts on Vendia Share. Also, we'll discuss the mostly used patterns of smart contract: **Enrichment**, **Validation**, and **Computation**.
 
-## Imaginary Background
+## Workshop Context
 
 In this workshop, we will pretend we are a financial institution. And we have to do enrichment, computation, and validation to our loans. Our setting has all the necessary nodes and mock data setup. The main purpose of this workshop will be setting up smart contracts accordingly,
 
