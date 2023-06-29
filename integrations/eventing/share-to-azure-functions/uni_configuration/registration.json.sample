@@ -7,19 +7,19 @@
       "name": "SupplierNode",
       "userId": "you@domain.com",
       "csp": "aws",
-            "region": "us-east-2"
+      "region": "us-east-2"
     },
     {
       "name": "DistributorNode",
       "userId": "you@domain.com",
       "csp": "aws",
-            "region": "us-west-2"
+      "region": "us-west-2"
     },
     {
       "name": "RetailerNode",
       "userId": "you@domain.com",
       "csp": "azure",
-            "region": "eastus"
+      "region": "eastus"
     }
   ]
 }
