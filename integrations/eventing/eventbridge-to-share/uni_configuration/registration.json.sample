@@ -5,11 +5,13 @@
         {
             "name": "Consignee",
             "userId": "me@domain.com",
+            "csp": "aws",
             "region": "us-west-2"
         },
         {
             "name": "Carrier",
             "userId": "me@domain.com",
+            "csp": "aws",
             "region": "us-west-2"
         }
     ]

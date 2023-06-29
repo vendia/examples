@@ -5,6 +5,7 @@
         {
             "name": "Retailer",
             "userId": "me@domain.com",
+            "csp": "aws",
             "region": "us-east-2"
         }
     ]

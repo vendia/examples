@@ -5,6 +5,7 @@
     {
       "name": "Postgres",
       "userId": "you@domain.com",
+      "csp": "aws",
       "region": "us-east-2",
       "settings": {
         "apiSettings": {
@@ -17,6 +18,7 @@
     {
       "name": "Salesforce",
       "userId": "you@domain.com",
+      "csp": "aws",
       "region": "us-east-1",
       "settings": {
         "apiSettings": {

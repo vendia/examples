@@ -5,11 +5,13 @@
         {
             "name": "DistributionCenter",
             "userId": "me@domain.com",
+            "csp": "aws",
             "region": "us-east-2"
         },
         {
             "name": "Retailer1",
             "userId": "me@domain.com",
+            "csp": "aws",
             "region": "us-west-2"
         }
     ]
