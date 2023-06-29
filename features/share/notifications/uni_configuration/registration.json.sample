@@ -5,11 +5,13 @@
     {
       "name": "PrimaryNode",
       "userId": "you@domain.com",
+      "csp": "aws",
       "region": "us-east-2"
     },
     {
       "name": "SecondaryNode",
       "userId": "you@domain.com",
+      "csp": "aws",
       "region": "us-west-2"
     }
   ]
