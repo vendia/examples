@@ -5,11 +5,13 @@
         {
             "name": "JV1",
             "userId": "you@domain.com",
+            "csp": "aws",
             "region": "us-east-1"
         },
         {
             "name": "JV2",
             "userId": "you@domain.com",
+            "csp": "aws",
             "region": "eu-west-2"
         }
     ]

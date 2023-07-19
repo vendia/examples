@@ -5,11 +5,13 @@
         {
             "name": "SupplierNode",
             "userId": "you@domain.com",
+            "csp": "aws",
             "region": "us-east-1"
         },
         {
             "name": "DistributorNode",
             "userId": "you@domain.com",
+            "csp": "aws",
             "region": "us-west-2"
     ]
 }
