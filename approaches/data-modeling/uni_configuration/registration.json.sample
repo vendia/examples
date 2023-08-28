@@ -6,6 +6,7 @@
     {
       "name": "Node1",
       "userId": "you@domain.com",
+      "csp": "aws",
       "region": "us-east-2"
     }
   ]

@@ -51,4 +51,4 @@ In this workshop, we will aim to create a ticketing system for an airline. As we
 * [Milestone 7 - Define Re-usable Types](README-Milestone7.md)
 
 ## Optional
-* [Milestone 8 - Schema Evolution](README-Milestone9.md)
+* [Milestone 8 - Schema Evolution](README-Milestone8.md)

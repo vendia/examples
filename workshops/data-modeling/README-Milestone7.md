@@ -50,7 +50,7 @@ We then change the original passenger section of our schema and make it refer to
 And we are done!
 
 ## Do it on your own
-Say we have to create another entity called `Booking`. And within `Booking`, we need passenger information as well. How should we do that?
+Say we have to create another entity called `Booking`. And within `Booking`, we need passenger information as well. How do we achieve that by re-using passenger definition made above?
 
 Tips: 
 There are 2 parts to this problem. One is that we must create a Booking entity at the same level as Ticket. Two is to create a passenger field that refers to `passenger` we created.

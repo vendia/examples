@@ -5,11 +5,13 @@
         {
             "name": "ParentalUnit1",
             "userId": "me@vendia.net",
+            "csp": "aws",
             "region": "us-west-2"
         },
         {
             "name": "ParentalUnit2",
             "userId": "me@vendia.net",
+            "csp": "aws",
             "region": "us-west-2"
         }
     ]

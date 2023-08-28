@@ -1,0 +1,19 @@
+{
+  "name": "test-<name-of-your-choice>",
+  "schema": "schema.json",
+  "initState": "initial-state.json",
+  "nodes": [
+    {
+      "name": "LenderNode",
+      "userId": "you@domain.com",
+      "csp": "aws",
+      "region": "us-east-2"
+    },
+    {
+      "name": "ServicerNode",
+      "userId": "you@domain.com",
+      "csp": "aws",
+      "region": "us-west-2"
+    }
+  ]
+}

@@ -5,11 +5,13 @@
         {
             "name": "AmericanNode",
             "userId": "you@domain.com",
+            "csp": "aws",
             "region": "us-east-1"
         },
         {
             "name": "IberiaNode",
             "userId": "you@domain.com",
+            "csp": "aws",
             "region": "eu-west-2"
         }
     ]
