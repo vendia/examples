@@ -30,15 +30,15 @@ This is a guide on how to quickly create a Uni on Vendia Share UI.
 
 ![create-uni-2](./img/create-uni-2.png)
 
-5. For a quick start session, choose any of the pre-set templates at the bottom. Our example chose `Track and Trace`. Then click `Next`.
+5. For a quick start session, choose any of the pre-set templates at the bottom. Our example chose Track and Trace. Then click `Next`.
 
 ![create-uni-3a](./img/create-uni-3a.png)
 
-6. You can see the schema of the preset template you chose. No need to make changes and click `Next`.
+6. You can preview the schema you selected.Then click `Next`.
 
 ![create-uni-3a-1](./img/create-uni-3a-1.png)
 
-7. You'll have a choice whether or not invite your partner at the creation of the Uni. For a quick start guide, that's not needed. Click `Finish`.
+7. You can invite partners at any time. For this guide, we are skipping this step. Click `Finish`.
 
 ![create-uni-4](./img/create-uni-4.png)
 
@@ -78,15 +78,15 @@ This is a guide on how to quickly create a Uni on Vendia Share UI.
 
 ![create-uni-3b-3](./img/create-uni-3b-3.png)
 
-9. You'll get a pop up to set your attribute. For simplicity of this guide, we chose a number as our data type. click `Save` once ready.
+9. You'll get a pop up to set your attribute. For simplicity of this guide, we chose a number as our data type. Then click `Save`.
 
 ![create-uni-3b-4](./img/create-uni-3b-4.png)
 
-10. you should see your attributed added. Add any other attributes you'd like to test out different options. Once ready, click `Next`.
+10. You should see your attributed added. Add any other attributes you'd like to test out different options. Then click `Next`.
 
 ![create-uni-3b-4](./img/create-uni-3b-5.png)
 
-11. You'll have a choice whether or not invite your partner at the creation of the Uni. For a quick start guide, that's not needed. Click `Finish`.
+11. You can invite partners at any time. For this guide, we are skipping this step. Click `Finish`.
 
 ![create-uni-4](./img/create-uni-4.png)
 
