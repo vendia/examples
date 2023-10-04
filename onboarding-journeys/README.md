@@ -14,4 +14,4 @@ The `Onboarding Journey` directory of this repo includes a collection of step-by
 | [Put/Update/Delete Data In Your New Node](./entity-explorer/README.md) | Beginner | Now that your first Uni is created, it’s time for you to do your basic data actions on them. Without writing any code, you are able to add entities to your defined Uni with access control defined. 
 | [File Sharing](./file-explorer/README.md) | Beginner | Vendia Share also offers file sharing between Nodes. Once you have a Uni, you can share files at your node level by going to File Explorer.
 | [Using the GraphQL Explorer](./graphql-explorer/README.md) | Beginner | Vendia Share has a built-in GraphQL UI tool that is a great resource for learning how to structure queries and mutations.
-
+| [RBAC Basic](./rbac-basic/README.md) | Beginner | Vendia Share has a built-in role based access control to enable you assign your teammates appropriate access.
