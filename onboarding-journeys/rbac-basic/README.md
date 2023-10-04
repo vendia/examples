@@ -43,19 +43,19 @@ This is a guide to show the basics of Vendia Share RBAC system.
    
 ![assign-1](./img/assign-1.png)
 
-3. Click on `Manage role assignment`
+2. Click on `Manage role assignment`
 
 ![assign-2](./img/assign-2.png)
 
-4. Mark the check box of the users you would like to have this role and then click `Save changes`.
+3. Mark the check box of the users you would like to have this role and then click `Save changes`.
 
 ![assign-3](./img/assign-3.png)
 
-5. When prompted, click `Save changes`.
+4. When prompted, click `Save changes`.
 
 ![assign-4](./img/assign-4.png)
 
-6. Finally, you will see any member who's been assigned this role under the role itself.
+5. Finally, you will see any member who's been assigned this role under the role itself.
 
 ![assign-5](./img/assign-5.png)
 
